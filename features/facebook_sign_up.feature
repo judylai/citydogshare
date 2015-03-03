@@ -1,6 +1,6 @@
 Feature: New user can sign up with City Dog Share using a facebook account
   As a new CityDogUser user
-  So that I can quickly sing up and fin a dog-sitter
+  So that I can quickly sing up and find a dog-sitter
   I want to sign up with City Dog Share using my facebook account
 
 Background:
