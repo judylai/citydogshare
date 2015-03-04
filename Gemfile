@@ -1,16 +1,30 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.2.16'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'omniauth-facebook', '~> 1.4.1'
+gem 'railroady'
+gem 'devise'
 
 group :development, :test do
+  gem 'debugger'
+  gem 'jasmine-rails'
+end
+
+group :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails', '~> 2.14.0'
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails-training-wheels'
+  gem 'autotest-rails'
+  gem 'factory_girl_rails'
+  gem 'metric_fu'
 end
 
 # Gems used only for assets and not required
