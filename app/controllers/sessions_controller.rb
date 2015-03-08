@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
-  def create
-    user = User.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = user.id
-    redirect_to root_path
+
+  def handle_login  
+    session[:fb] = "login"
+    redirect_to '/auth/facebook'
   end
 
-  def destroy
-    session[:user_id] = nil
-    redirect_to root_path
+  def handle_auth
+    session[:fb] = "logginn"
+    uid = request.env["omniauth.auth"][:uid]
+    @user = User.find_by_uid(uid)
+    render 'sessions/create.html.erb'
   end
+      
 end

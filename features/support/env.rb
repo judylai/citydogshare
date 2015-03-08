@@ -56,6 +56,7 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# Snub out calls to facebook authentication and replace with mock hash
 Before('@facebook_test') do
   OmniAuth.config.test_mode = true
   Capybara.default_host = 'http://facebook.com'

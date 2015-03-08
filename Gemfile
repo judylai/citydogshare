@@ -12,6 +12,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'sqlite3'
   gem 'cucumber-rails-training-wheels'
+  gem 'simplecov'
 end
 
 group :production do
@@ -32,6 +33,7 @@ end
 
 gem 'jquery-rails'
 gem 'omniauth-facebook', '~> 1.4.1'
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
