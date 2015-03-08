@@ -11,6 +11,7 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails', '~> 2.14.0'
   gem 'sqlite3'
+  gem 'cucumber-rails-training-wheels'
 end
 
 group :production do
