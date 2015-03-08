@@ -3,14 +3,13 @@ require 'spec_helper'
 describe SessionsController, :type => :controller do
   describe 'logging in as an existing user' do
     it 'should store the correct login flag in the sessions hash' do
-      get :handle_login
+      get :login
       session[:fb].should == "login" 
     end
     it 'should call the find by uid user model method' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       User.should_receive(:find_by_uid).with(request.env["omniauth.auth"][:uid])
-      visit '/auth/facebook/callback'
-      session[:fb].should == "logginn"
+      visit "/auth/facebook"
     end 
     it 'should call the update user model method' do
       user1 = FactoryGirl.create(:user, :uid => 12345, :id => 1)

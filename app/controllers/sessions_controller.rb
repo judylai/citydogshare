@@ -1,15 +1,14 @@
 class SessionsController < ApplicationController
 
-  def handle_login  
+  def login 
     session[:fb] = "login"
     redirect_to '/auth/facebook'
   end
 
-  def handle_auth
-    session[:fb] = "logginn"
+  def handle_auth 
     uid = request.env["omniauth.auth"][:uid]
     @user = User.find_by_uid(uid)
-    render 'sessions/create.html.erb'
+    #render 'sessions/create.html.erb'
   end
       
 end
