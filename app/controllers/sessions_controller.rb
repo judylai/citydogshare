@@ -27,6 +27,23 @@ class SessionsController < ApplicationController
         redirect_to root_path() and return
 
       end
+    elsif request.env["omniauth.params"]["type"] == "signup"
+
+      if @user
+        @user.oauth_token = request.env["omniauth.auth"][:credentials][:token]
+        @user.oauth_expires_at= request.env["omniauth.auth"][:credentials][:expires_at]
+        @user.uid = request.env["omniauth.auth"][:uid]
+        @user.save
+
+        session[:user_id] = request.env["omniauth.auth"][:uid]
+
+        flash[:notice] = "A user already exists with this facebook account."
+        redirect_to user_path(@user) and return
+      else
+        session[:user_id] = request.env["omniauth.auth"][:uid]
+        session[:user_info] = request.env["omniauth.auth"][:info]
+        redirect_to '/users/new' and return
+      end
     end
     redirect_to root_path() and return
   end

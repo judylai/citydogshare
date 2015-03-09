@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<h2>Create an Account With Facebook</h2>
+<div><div> <div id="picture" class="required"><img src=<%="#{session[:user_info][:image]}"%>></div></div></div>
+<div><div > <h4>First Name:</h4> <span id="first_name" class="required"><%= "#{session[:user_info][:first_name]}"%></div></span></div>
+<div><div> <h4> Last Name: </h4> <div id="last_name" class="required"><%= "#{session[:user_info][:last_name]}"%></div></div></div>
+<div><div> <h4> Email: </h4> <div id="email" class="required"><%= "#{session[:user_info][:email]}"%></div></div></div>
+<h4>Gender</h4>Male <%= radio_button 'gender', "Male", "Male" %> Female <%= radio_button 'gender', "Female", "Female" %>
+<h4>Location</h4> <%= text_field_tag 'location' %>
+<h4>Phone Number</h4> <%= text_field_tag 'phone_number' %>
+<h4>Status</h4><%= select_tag 'status', options_for_select(["Looking", "Sharing"]) %>
+<h4>Description</h4> <%= text_field_tag 'description' %>
+<h4>Availability</h4> <%= text_field_tag 'availability' %>
+<p><input id='create_user_button' type="submit" value="Submit" name="create_user_button" class='btn info' /></p>
+
+</body>
+</html>
