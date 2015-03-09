@@ -13,6 +13,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'cucumber-rails-training-wheels'
   gem 'simplecov'
+  gem 'autotest-rails'
 end
 
 group :production do

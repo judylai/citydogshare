@@ -6,6 +6,8 @@ Citydogshare::Application.routes.draw do
     get 'signout', to: 'sessions#destroy', as: 'signout'
 
     resources :sessions, only: [:create, :destroy]
-    resources :user
+    resources :users
+   
+    root :to => 'welcome#index'
 
 end

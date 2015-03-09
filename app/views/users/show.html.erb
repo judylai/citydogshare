@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>City Dog Share</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+   <%= csrf_meta_tags %>
+ </head>
+ <body>
+ <div>
+   <% if current_user %>
+     Signed in as <strong><%= current_user.name %></strong>! you logged in!
+   <% else %>
+     <%= link_to "Log In With Facebook", "/auth/facebook/?type=login", id: "sign_in" %>
+   <% end %>
+ </div>
+ <%= yield %>
+ 
+ </body>
+ </html>
+

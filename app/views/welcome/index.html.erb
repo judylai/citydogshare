@@ -12,7 +12,7 @@
     Signed in as <strong><%= current_user.name %></strong>!
     <%= link_to "Sign Out", signout_path, id: "sign_out" %>
   <% else %>
-    <%= link_to "Log In With Facebook", "/sessions/login", id: "sign_in" %>
+    <%= link_to "Log In With Facebook", "/auth/facebook/?type=login", id: "sign_in" %>
   <% end %>
 </div>
 <%= yield %>
