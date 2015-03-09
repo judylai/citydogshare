@@ -1,5 +1,10 @@
 class SessionsController < ApplicationController
 
+  def handle_failure
+    flash[:notice] = "Something went wrong with the authentication. Please try again."
+    redirect_to root_path() and return
+  end
+
   def handle_auth 
 
     uid = request.env["omniauth.auth"][:uid]
@@ -14,7 +19,7 @@ class SessionsController < ApplicationController
         @user.save
 
         session[:user_id] = request.env["omniauth.auth"][:uid]
-        redirect_to user_path(@user, :user => @user) and return
+        redirect_to user_path(@user) and return
 
       else
 
@@ -26,7 +31,8 @@ class SessionsController < ApplicationController
     redirect_to root_path() and return
   end
  
-  def signout
+  def destroy
     session[:user_id] = nil
+    redirect_to root_path() and return
   end 
 end

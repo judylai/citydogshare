@@ -29,32 +29,36 @@ describe SessionsController, :type => :controller do
 
   end
   describe 'logging in as a new user' do
-    it 'should store the correct login flag in the sessions hash' do
+    before (:each) do
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
+    end 
+
+    it 'should try to find the user' do
+      User.should_receive(:find_by_uid).with(request.env["omniauth.auth"][:uid])
+      visit "/auth/facebook?type=login"
+    end 
+
+    it 'should redirect to the home page' do
+       visit "/auth/facebook?type=login"
+       response.should render_template("/")
     end
-    it 'should redirect to the handle_auth method and receive the facebook hash' do
-    end
-    it 'should select the home page for rendering' do
-    end
-    it 'should make the error message available for display' do
-    end
+
   end
-  describe 'authentication fails' do
-    it 'should store the correct login flag in the sessions hash' do
-    end
-    it 'should redirect to the handle_failure methods' do
-    end
-    it 'should select the home page for rendering' do
-    end
-    it 'should make the error message available for display' do
+
+  describe 'authentication fails' do 
+    it 'should redirect to the home page' do
+       request.env["omniauth.auth"] = :invalid_credentials
+       visit "/auth/facebook?type=login"
+       response.should render_template("/")
     end
   end
   
   describe 'signing out' do
-    it 'should call the destroy method' do
-    end
-    it 'should remove the user id from the sessions hash' do
-    end
-    it 'should select the home page for rendering' do
+    it 'should redirect to the home page' do
+       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
+       visit "/auth/facebook?type=login"
+       visit "/signout"
+       response.should render_template("/")
     end
   end
 end

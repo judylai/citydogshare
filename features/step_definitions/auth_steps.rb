@@ -11,5 +11,9 @@ end
 
 
 Given /^I am logged in$/ do  
-  visit "/auth/facebook"
+  visit "/auth/facebook?type=login"
 end  
+
+Given /^my authentication fails$/ do
+  visit "/auth/failure"
+end
