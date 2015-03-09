@@ -325,6 +325,7 @@ DEPENDENCIES
   omniauth-facebook (~> 1.4.1)
   railroady
   rails (= 3.2.16)
+  rake
   rspec-rails (~> 2.14.0)
   sass-rails (~> 3.2.3)
   simplecov

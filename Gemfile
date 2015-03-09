@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'omniauth-facebook', '~> 1.4.1'
 gem 'railroady'
 gem 'devise'
+gem 'rake'
 
 group :development, :test do
   gem 'debugger'
