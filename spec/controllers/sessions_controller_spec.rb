@@ -3,17 +3,17 @@ require 'spec_helper'
 describe SessionsController, :type => :controller do
 
   describe 'logging in as an existing user' do
-
+    before (:each) do
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
+    end 
 
     it 'should find the user' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       User.should_receive(:find_by_uid).with(request.env["omniauth.auth"][:uid])
       visit "/auth/facebook?type=login"
     end 
 
     it 'should update their credentials' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      user1 = User.create(:uid => "12345")
+      user1 = User.create(:uid => "12345", :name => "Batman")
       User.should_receive(:find_by_uid).with(request.env["omniauth.auth"][:uid]).and_return(user1)
       visit "/auth/facebook?type=login"
       user1.oauth_token.should == request.env["omniauth.auth"][:credentials][:token]
@@ -21,21 +21,12 @@ describe SessionsController, :type => :controller do
     end 
 
     it 'should redirect to the user profile page' do 
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       user1 = User.create(:uid => "12345")
       User.should_receive(:find_by_uid).with(request.env["omniauth.auth"][:uid]).and_return(user1)
       visit "/auth/facebook?type=login"
-      response.should redirect_to user_path(user1.id)
+      response.should render_template("users/show")
     end
 
-
-    it 'should make the user name available for display' do
-      #request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      #fake_result = double('user1')
-      #User.should_receive(:find_by_uid).with(request.env["omniauth.auth"]["uid"]).and_return(fake_result)
-      #get :login
-      #assigns(current_user).should == fake_result 
-    end
   end
   describe 'logging in as a new user' do
     it 'should store the correct login flag in the sessions hash' do

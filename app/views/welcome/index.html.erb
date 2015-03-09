@@ -8,14 +8,17 @@
 </head>
 <body>
 <div>
-  <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>!
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if @current_user %>
+    Signed in as <strong><%= @current_user.name %></strong>!
     <%= link_to "Sign Out", signout_path, id: "sign_out" %>
   <% else %>
-    <%= link_to "Log In With Facebook", "/auth/facebook/?type=login", id: "sign_in" %>
+    <%= link_to "Log In With Facebook", "/auth/facebook/?type=login", id: "log_in" %>
+    <%= link_to "Sign Up With Facebook", "/auth/facebook/?type=signup", id: "sign_up" %>
   <% end %>
 </div>
-<%= yield %>
 
 </body>
 </html>
