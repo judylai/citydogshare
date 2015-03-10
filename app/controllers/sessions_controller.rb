@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
         @user.oauth_token = request.env["omniauth.auth"][:credentials][:token]
         @user.oauth_expires_at= request.env["omniauth.auth"][:credentials][:expires_at]
         @user.uid = request.env["omniauth.auth"][:uid]
-        @user.save
+        #@user.save
 
         session[:user_id] = request.env["omniauth.auth"][:uid]
 
