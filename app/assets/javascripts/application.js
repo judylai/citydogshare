@@ -16,3 +16,4 @@
 //= require semantic-ui
 //= require semantic-ui/modal
 //= require semantic-ui/dropdown
+//= require foundation
