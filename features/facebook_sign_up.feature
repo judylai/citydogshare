@@ -27,3 +27,4 @@ Scenario: Sign up authentication fails
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."
+
