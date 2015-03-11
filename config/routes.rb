@@ -1,6 +1,8 @@
 Citydogshare::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
+  match 'dashboard' => 'welcome#dashboard'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
