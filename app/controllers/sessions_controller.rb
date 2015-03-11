@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
         @user.update_credentials(request.env["omniauth.auth"][:credentials])
         redirect_to :controller => 'sessions', :action => 'create', :user => @user, :uid => @user.uid
       else
-        flash[:notice] = "User does not exist"
+        flash[:notice] = "User does not exist. Please sign up."
         redirect_to root_path()
       end
 
