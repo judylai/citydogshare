@@ -2,17 +2,20 @@
 <html>
 <head>
 <h2>Create an Account With Facebook</h2>
-<div><div> <div id="picture" class="required"><img src=<%="#{session[:user_info][:image]}"[0..-7]+'large'%>></div></div></div>
-<div><div > <h4>First Name:</h4> <span id="first_name" class="required"><%= "#{session[:user_info][:first_name]}"%></div></span></div>
-<div><div> <h4> Last Name: </h4> <div id="last_name" class="required"><%= "#{session[:user_info][:last_name]}"%></div></div></div>
-<div><div> <h4> Email: </h4> <div id="email" class="required"><%= "#{session[:user_info][:email]}"%></div></div></div>
+<div><div> <div id="picture" class="required"><img src=<%="#{params[:user_info][:info][:image]}"%>></div></div></div>
+<div><div > <h4>First Name:</h4> <span id="first_name" class="required"><%= "#{params[:user_info][:info][:first_name]}"%></div></span></div>
+<div><div> <h4> Last Name: </h4> <div id="last_name" class="required"><%= "#{params[:user_info][:info][:last_name]}"%></div></div></div>
+<div><div> <h4> Email: </h4> <div id="email" class="required"><%= "#{params[:user_info][:info][:email]}"%></div></div></div>
 
 <%= form_tag(controller: "users", action: "create", method: "post") do %>
-	<%= radio_button(:user, :gender, "Male", checked: false) %>
-	<%= label_tag(:gender_male, "Male") %>
-	<%= radio_button(:user, :gender, "Female", checked: false) %>
-	<%= label_tag(:gender_female, "Female") %>
-
+        <%= hidden_field(:user, :uid, :value => params[:user_info][:uid]) %>
+        <%= hidden_field(:user, :first_name, :value => params[:user_info][:info][:first_name]) %>
+        <%= hidden_field(:user, :last_name, :value => params[:user_info][:info][:last_name]) %>
+        <%= hidden_field(:user, :email, :value => params[:user_info][:info][:email]) %>
+        <%= hidden_field(:user, :image, :value => params[:user_info][:info][:image]) %>
+        <%= hidden_field(:user, :gender, :value => params[:user_info][:info][:gender]) %>
+        <%= hidden_field(:credentials, :token, :value => params[:user_info][:credentials][:token]) %>
+        <%= hidden_field(:credentials, :expires_at, :value => params[:user_info][:credentials][:expires_at]) %>
 	
 	<h4>Location</h4> <%= text_field(:user, :location) %>
 	<h4>Phone Number</h4> <%= telephone_field(:user, :phone_number) %>
@@ -22,7 +25,8 @@
 
 	<h4>Description</h4> <%= text_field(:user,:description) %>
 	<h4>Availability</h4> <%= text_field(:user,:availability) %>
-	<p><input id='create_user_button' type="submit" value="Submit" name="create_user_button" class='btn info' /></p>
+	<p><input id='create_user_button' type="submit" value="Create Account" name="create_user_button" class='btn info' /></p>
+	<p><input id='cancel_user_button' type="submit" value="Cancel" name="cancel_user_button" class='btn info' /></p>
 <% end %>
 </body>
 </html>

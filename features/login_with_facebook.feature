@@ -1,19 +1,16 @@
 @facebook_test
 Feature: User can log in using facebook
   As a City Dog Share user
-  In order to access my user information
+  In order to access my account
   I want to log in to City Dog Share
 
-Scenario: log in when I already have an account  
+Scenario: Log in when I already have an account  
   Given the following users exist:
   | uid   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability | oauth_token     | oauth_expires_at   |
   | 12345 | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | ABCDEF... | 372015171602 |
-
-
   And I am on the home page
   When I follow "Log In With Facebook"
   Then I should be on the users page for "Batman"
-  And I should see "Welcome Bruce" 
 
 Scenario: log in when account does not exist
   Given I am on the home page
@@ -22,7 +19,7 @@ Scenario: log in when account does not exist
   And I should see "User does not exist"
 
 
-Scenario: log out when logged in to the site
+Scenario: Log out when logged in to the site
   Given the following users exist:
   | uid   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability | oauth_token     | oauth_expires_at   |
   | 12345 | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | ABCDEF... | 372015171602 |
@@ -33,7 +30,7 @@ Scenario: log out when logged in to the site
   Then I should be on the home page
   And I should see "Log In With Facebook"
 
-Scenario: log in authentication fails
+Scenario: Log in authentication fails
   Given I am on the homepage
   And I follow "Log In With Facebook"
   And my authentication fails

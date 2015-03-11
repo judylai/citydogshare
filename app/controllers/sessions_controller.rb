@@ -1,8 +1,19 @@
 class SessionsController < ApplicationController
 
+
+  def create 
+    session[:user_id] = params[:uid]
+    redirect_to user_path(params[:user])
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path()
+  end 
+
   def handle_failure
     flash[:notice] = "Something went wrong with the authentication. Please try again."
-    redirect_to root_path() and return
+    redirect_to root_path()
   end
 
   def handle_auth 
@@ -10,46 +21,28 @@ class SessionsController < ApplicationController
     uid = request.env["omniauth.auth"][:uid]
     @user = User.find_by_uid(uid)
 
+    # Get large version of profile picture
+    request.env["omniauth.auth"][:info][:image] = request.env["omniauth.auth"][:info][:image][0..-7] + "large"
+
     if request.env["omniauth.params"]["type"] == "login"
 
       if @user
-        @user.oauth_token = request.env["omniauth.auth"][:credentials][:token]
-        @user.oauth_expires_at= request.env["omniauth.auth"][:credentials][:expires_at]
-        @user.uid = request.env["omniauth.auth"][:uid]
-        @user.save
-
-        session[:user_id] = request.env["omniauth.auth"][:uid]
-        redirect_to user_path(@user) and return
-
+        @user.update_credentials(request.env["omniauth.auth"][:credentials])
+        redirect_to :controller => 'sessions', :action => 'create', :user => @user, :uid => @user.uid
       else
-
         flash[:notice] = "User does not exist"
-        redirect_to root_path() and return
-
+        redirect_to root_path()
       end
+
     elsif request.env["omniauth.params"]["type"] == "signup"
 
       if @user
-        @user.oauth_token = request.env["omniauth.auth"][:credentials][:token]
-        @user.oauth_expires_at= request.env["omniauth.auth"][:credentials][:expires_at]
-        @user.uid = request.env["omniauth.auth"][:uid]
-        #@user.save
-
-        session[:user_id] = request.env["omniauth.auth"][:uid]
-
         flash[:notice] = "A user already exists with this facebook account."
-        redirect_to user_path(@user) and return
+        redirect_to root_path()
       else
-        session[:user_id] = request.env["omniauth.auth"][:uid]
-        session[:user_info] = request.env["omniauth.auth"][:info]
-        redirect_to '/users/new' and return
+        redirect_to :controller => 'users', :action => 'new', :user_info => request.env["omniauth.auth"]
       end
     end
-    redirect_to root_path() and return
   end
  
-  def destroy
-    session[:user_id] = nil
-    redirect_to root_path() and return
-  end 
 end
