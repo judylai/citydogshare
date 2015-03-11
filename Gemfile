@@ -21,11 +21,17 @@ group :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails', '~> 2.14.0'
+  gem 'sqlite3'
+  gem 'simplecov'
+  gem 'autotest-rails'
   gem 'simplecov', :require => false
   gem 'cucumber-rails-training-wheels'
-  gem 'autotest-rails'
   gem 'factory_girl_rails'
   gem 'metric_fu'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Gems used only for assets and not required
@@ -33,6 +39,7 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -41,6 +48,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'omniauth-facebook', '~> 1.4.1'
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

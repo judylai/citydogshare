@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>City Dog Share</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+        <div class="row">
+        <!-- <div class="large-3 columns">
+          <h1>City Dog Share</h1>
+        </div> -->
+        <div class="large-12 columns">
+          <!-- <div class="4 fluid medium ui buttons">
+            <div class="ui button"><a href="#">About</a></div>
+            <div class="ui button"><a href="#">Contact</a></div>
+            <div class="ui button"><a href="#">Share</a></div>
+            <div class="ui button"><a href="#">Log In</a></div>
+          </div> -->
+          <div class="ui secondary pointing menu">
+            <a class="item" href="#">My Profile</a>
+            <a class="item" href="#">Find a Dog</a>
+            <a class="item" href="#">Share a Dog</a>
+            <a class="item" href="#">Sign Out</a>
+          </div>
+        </div>
+       </div>
+      
+     <!-- THIS IS FROM THE SIGN UP BRANCH NEEAD THIS CODE -->
+     <div>
+      <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
+      <%= link_to "Log In With Facebook", "/auth/facebook/?type=login", id: "log_in" %>
+      <%= link_to "Sign Up With Facebook", "/auth/facebook/?type=signup", id: "sign_up" %>
+    </div>
+     
+     
+      <div class="row">
+        <div class="large-12 columns">
+        <div style="max-height:300px; overflow:hidden; ">
+          <img src="http://cdn2.hubspot.net/hub/330158/file-2028558523-jpg/dogs-playing-dog_park.jpg?t=1424370082031" style="position:relative; opacity:0.8; width:100%"/>
+          <h1 style="position:absolute; top:-80px; color:white; right:300px; font-size:100px;">City Dog Share</h1>
+        </div>
+
+
+            <div class="ui large facebook button"><i class="facebook icon"></i>Sign Up with Facebook</div>
+        
+        <hr/>
+        </div>
+      </div>
+      
+     
+     
+      <div class="row">
+        <div class="large-4 columns">
+          <img src="http://placehold.it/400x300&text=[img]"/>
+          <h4>This is a content section.</h4>
+          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+        </div>
+        
+        <div class="large-4 columns">
+          <img src="http://placehold.it/400x300&text=[img]"/>
+          <h4>This is a content section.</h4>
+          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+        </div>
+        
+        <div class="large-4 columns">
+          <img src="http://placehold.it/400x300&text=[img]"/>
+          <h4>This is a content section.</h4>
+          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+        </div>
+      
+        </div>
+        
+     
+    <div class="row">
+        <div class="large-12 columns">
+        
+          <div class="panel">
+            <h4>Get in touch!</h4>
+                
+            <div class="row">
+              <div class="large-9 columns">
+                <p>We'd love to hear from you, you attractive person you.</p>
+              </div>
+              <div class="large-3 columns">
+                <a href="#" class="radius button right">Contact Us</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+     
+       
+      
+      <footer class="row">
+        <div class="large-12 columns">
+          <hr/>
+          <div class="row">
+            <div class="large-6 columns">
+              <p>© Copyright no one at all. Go to town.</p>
+            </div>
+            <div class="large-6 columns">
+              <ul class="inline-list right">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+                <li><a href="#">Link 4</a></li>
+              </ul>
+            </div>
+          </div>
+        </div> 
+      </footer>
+    
+
+</body>
+</html>
