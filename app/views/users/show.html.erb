@@ -2,4 +2,17 @@
 <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 <%= "Welcome #{@current_user.first_name}" %>
-<%= link_to "Sign Out", signout_path, id: "sign_out" %>
+<p><%= link_to "Sign Out", signout_path, id: "sign_out" %></p> 
+<p><input id='edit_user_button' type="submit" value="Edit" name="edit_user_button" class='btn info' /></p>
+<div id="user_info"><div id="picture"><img src=<%= @current_user.image %>></div>
+    <div id="name"><h2><%= @current_user.first_name + " " + @current_user.last_name %></h2></div>
+    <div id="gender"><h4>Gender:</h4><%= @current_user.gender %></div>
+    <div id="location"><h4>Location:</h4><%= @current_user.location %></div>
+    <div id="status"><h4>Status:</h4><%= @current_user.status %></div>
+    <div id="email"><h4>Email:</h4><%= @current_user.email %></div>
+    <div id="phone_number"><h4>Status:</h4><%= @current_user.phone_number %></div>
+</div>
+<div id="user_description"><div id="description"><h4>Description:</h4><%= @current_user.description %></div></div>
+<div id="availability"><h4>Availability:</h4><%= @current_user.availability %></div>
+<div id="dogs"><h4>Dogs:</h4> <input id='add_dog_button' type="submit" value="Add Dog" name="add_dog_button" class='btn info' /></div>
+
