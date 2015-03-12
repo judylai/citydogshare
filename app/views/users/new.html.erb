@@ -1,10 +1,26 @@
 <h2>Create an Account With Facebook</h2>
-<div><div> <div id="picture" class="required"><img src=<%="#{params[:user_info][:info][:image]}"%>></div></div></div>
-<div><div > <h4>First Name:</h4> <span id="first_name" class="required"><%= "#{params[:user_info][:info][:first_name]}"%></div></span></div>
-<div><div> <h4> Last Name: </h4> <div id="last_name" class="required"><%= "#{params[:user_info][:info][:last_name]}"%></div></div></div>
-<div><div> <h4> Email: </h4> <div id="email" class="required"><%= "#{params[:user_info][:info][:email]}"%></div></div></div>
+<div class="ui form">
 
-<%= form_tag(controller: "users", action: "create", method: "post", :class => "ui form") do %>
+    <div class="field">
+      <div id="picture" class="required ui medium circular image"><img src=<%="#{params[:user_info][:info][:image]}"%>></div>
+    </div>
+
+    <div class="field">
+      <label>First Name</label>
+      <div id="first_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:first_name]}"%></div>
+    </div>
+
+    <div class="field">
+      <label>Last Name</label>
+      <div id="last_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:last_name]}"%></div>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <div id="email" class="required ui fluid segment"><%= "#{params[:user_info][:info][:email]}"%></div>
+    </div>
+
+  <%= form_tag(controller: "users", action: "create", method: "post") do %>
         <%= hidden_field(:user, :uid, :value => params[:user_info][:uid]) %>
         <%= hidden_field(:user, :first_name, :value => params[:user_info][:info][:first_name]) %>
         <%= hidden_field(:user, :last_name, :value => params[:user_info][:info][:last_name]) %>
@@ -13,36 +29,17 @@
         <%= hidden_field(:user, :gender, :value => params[:user_info][:info][:gender]) %>
         <%= hidden_field(:credentials, :token, :value => params[:user_info][:credentials][:token]) %>
         <%= hidden_field(:credentials, :expires_at, :value => params[:user_info][:credentials][:expires_at]) %>
-	
-	<h4>Location</h4> <div class="field"><%= text_field(:user, :location) %></div>
-	<h4>Phone Number</h4> <%= telephone_field(:user, :phone_number) %>
+  
+  <div class="field"><label>Location</label><%= text_field(:user, :location, :placeholder => 'City, State') %></div>
+  <div class="field"><label>Phone Number</label><%= telephone_field(:user, :phone_number, :placeholder => '(xxx) xxx-xxxx') %></div>
 
-<h4>Status</h4><%= select_tag(:user, :status, ["Looking", "Sharing"]) %>
+  <div class="field"><label>Status</label><%= select(:user, :status, ["Looking", "Sharing"]) %></div>
 
- <div class="field">
+  <div class="field"><label>Description</label> <%= text_field(:user,:description, :placeholder => 'Tell City Dog Share more about yourself.') %></div>
+  <div class="field"><label>Availability</label> <%= text_field(:user,:availability, :placeholder => 'What is your availability for dog sitting, if applicable?') %></div>
+  <div class="ui primary button transparent input"><input id='create_user_button' type="submit" value="Create Account" name="create_user_button" class='btn info' /></div>
+  <div class="ui button transparent input"><input id='cancel_user_button' type="submit" value="Cancel" name="cancel_user_button" class='btn info' /></div>
 
-<!-- 	 <h4>Status</h4>
-	 <%= select(:user, :status, options_for_select, {:class => "menu"}) %>
- -->
+  <% end %>
 
 </div>
-
-	<div class="field">
-      <label>Status</label>
-      <div class="ui selection dropdown">
-        <input type="hidden" name="status">
-        <div class="default text">Status</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item" data-value="looking">Looking</div>
-          <div class="item" data-value="sharing">Sharing</div>
-        </div>
-      </div>
-    </div>
-
-
-	<h4>Description</h4> <%= text_field(:user,:description) %>
-	<h4>Availability</h4> <%= text_field(:user,:availability) %>
-	<p><input id='create_user_button' type="submit" value="Create Account" name="create_user_button" class='btn info' /></p>
-	<p><input id='cancel_user_button' type="submit" value="Cancel" name="cancel_user_button" class='btn info' /></p>
-<% end %>
