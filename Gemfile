@@ -17,16 +17,17 @@ group :development, :test do
   gem 'debugger'
   gem 'jasmine-rails'
   gem 'rspec-rails', '~> 3.2.0'
-end
-
-group :test do
-  gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'autotest-rails'
   gem 'simplecov', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'factory_girl_rails'
   gem 'metric_fu'
+  gem 'minitest'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :production do

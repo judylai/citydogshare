@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 
-
   def create 
-    session[:user_id] = params[:uid]
-    redirect_to user_path(params[:user])
+    @user = User.find(params[:user])
+    session[:user_id] = @user.uid
+    redirect_to user_path(@user)
   end
 
   def destroy
@@ -16,8 +16,31 @@ class SessionsController < ApplicationController
     redirect_to root_path()
   end
 
-  def handle_auth 
+  def login
+    if params[:user]
+      @user = User.find(params[:user])
+      @user.update_credentials(params[:credentials])
+      redirect_to create_session_path(:user => @user)
+    else
+      flash[:notice] = "User does not exist. Please sign up."
+      redirect_to root_path()
+    end   
+  end 
+ 
+  def signup
+    if params[:user]
+      flash[:notice] = "A user already exists with this facebook account."
+      redirect_to root_path()
+    else
+      @user = User.create()
+      @user.update_credentials(params[:auth][:credentials])
+      @user.facebook_info_update(params[:auth])
+      redirect_to create_session_path(:user => @user)
+    end
+  end
+      
 
+  def handle_auth 
     uid = request.env["omniauth.auth"][:uid]
     @user = User.find_by_uid(uid)
 
@@ -25,23 +48,9 @@ class SessionsController < ApplicationController
     request.env["omniauth.auth"][:info][:image] = request.env["omniauth.auth"][:info][:image][0..-7] + "large"
 
     if request.env["omniauth.params"]["type"] == "login"
-
-      if @user
-        @user.update_credentials(request.env["omniauth.auth"][:credentials])
-        redirect_to :controller => 'sessions', :action => 'create', :user => @user, :uid => @user.uid
-      else
-        flash[:notice] = "User does not exist. Please sign up."
-        redirect_to root_path()
-      end
-
+      redirect_to login_path(:user => @user, :credentials => request.env["omniauth.auth"][:credentials])
     elsif request.env["omniauth.params"]["type"] == "signup"
-
-      if @user
-        flash[:notice] = "A user already exists with this facebook account."
-        redirect_to root_path()
-      else
-        redirect_to :controller => 'users', :action => 'new', :user_info => request.env["omniauth.auth"]
-      end
+      redirect_to signup_path(:user => @user, :auth => request.env["omniauth.auth"])
     end
   end
  
