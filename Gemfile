@@ -16,12 +16,12 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'debugger'
   gem 'jasmine-rails'
+  gem 'rspec-rails', '~> 3.2.0'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
-  gem 'rspec-rails', '~> 2.14.0'
   gem 'autotest-rails'
   gem 'simplecov', :require => false
   gem 'cucumber-rails-training-wheels'
