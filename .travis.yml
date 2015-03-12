@@ -3,6 +3,6 @@ rvm:
   - 1.9.3
 cache: bundler
 before_filter:
-	- rake db:test:prepare
+  - rake db:test:prepare
 notifications:  
   email: false
