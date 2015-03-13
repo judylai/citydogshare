@@ -11,7 +11,7 @@ Citydogshare::Application.routes.draw do
   get 'signup', to: 'sessions#signup', as: 'signup' 
   
   ## User Routes ##
-  resources :users
+  resources :users, only: [:show, :edit, :update, :destroy, :index]
 
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
