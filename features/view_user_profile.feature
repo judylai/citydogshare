@@ -1,3 +1,4 @@
+@facebook_test
 Feature: Users should be able to view their profile.
 
 As a personal user
