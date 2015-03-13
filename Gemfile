@@ -23,7 +23,7 @@ group :development, :test do
   gem 'cucumber-rails-training-wheels'
   gem 'factory_girl_rails'
   gem 'metric_fu'
-  gem 'minitest'
+  gem 'minitest', '~>4.7.5'
 end
 
 group :test do

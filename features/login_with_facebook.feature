@@ -6,33 +6,32 @@ Feature: User can log in using facebook
 
 Scenario: Log in when I already have an account  
   Given the following users exist:
-  | uid   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability | oauth_token     | oauth_expires_at   |
-  | 12345 | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | ABCDEF... | 372015171602 |
+  | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability |
+  | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   |
   And I am on the home page
-  When I follow "Log In With Facebook"
+  When I follow "Log In"
   Then I should be on the users page for "Batman"
 
 Scenario: log in when account does not exist
   Given I am on the home page
-  When I follow "Log In With Facebook"
+  When I follow "Log In"
   Then I should be on the home page
   And I should see "User does not exist"
 
 
 Scenario: Log out when logged in to the site
   Given the following users exist:
-  | uid   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability | oauth_token     | oauth_expires_at   |
-  | 12345 | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | ABCDEF... | 372015171602 |
-  
+  | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability |
+  | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | 
   And I am logged in
   And I am on the users page for "Batman"
   When I follow "Sign Out"
   Then I should be on the home page
-  And I should see "Log In With Facebook"
+  And I should see "Log In"
 
 Scenario: Log in authentication fails
   Given I am on the homepage
-  And I follow "Log In With Facebook"
+  And I follow "Log In"
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."

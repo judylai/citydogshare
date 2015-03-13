@@ -2,10 +2,10 @@
 <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 <%= "Welcome #{@current_user.first_name}" %>
-<p><%= link_to "Sign Out", signout_path, id: "sign_out" %></p> 
+<p><%= link_to "Sign Out", signout_path, {method: :delete}, id: "sign_out" %></p> 
 <p><input id='edit_user_button' type="submit" value="Edit" name="edit_user_button" class='btn info' /></p>
 <div id="user_info"><div id="picture"><img src=<%= @current_user.image %>></div>
-    <div id="name"><h2><%= @current_user.first_name + " " + @current_user.last_name %></h2></div>
+    <div id="name"><h2><%= @current_user.full_name %></h2></div>
     <div id="gender"><h4>Gender:</h4><%= @current_user.gender %></div>
     <div id="location"><h4>Location:</h4><%= @current_user.location %></div>
     <div id="status"><h4>Status:</h4><%= @current_user.status %></div>

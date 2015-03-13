@@ -1,10 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'rspec/autorun'
 require 'simplecov'
 SimpleCov.start 'rails'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -32,7 +31,9 @@ OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
     :token => 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
     :expires_at => 1321747205, # when the access token expires (it always will)
     :expires => true # this will always be true
-   }
+   },
+   
+  :extra => { :gender => "Male"}
 })
 
 RSpec.configure do |config|

@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'simplecov'
+SimpleCov.start
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -79,7 +81,9 @@ Before('@facebook_test') do
       :token => 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
       :expires_at => 1321747205, # when the access token expires (it always will)
       :expires => true # this will always be true
-     }
+     },
+
+     :extra => {:gender => "Male"}
   })
 end
 
