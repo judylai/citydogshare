@@ -1,95 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>City Dog Share</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body style="background-color:#f7f7f7">
-
-
   <div class="row">
     <div class="large-12 columns">
-
-    <!-- <div class="large-3 columns">
-      <h1>City Dog Share</h1>
-    </div> -->
-
-    <p></p>
-
-
-      <div class="large-7 columns">
-        <img src="http://protectiondogss.com/images/dog.png" width="100%"/>
-      </div>
-
-      <div class="large-5 columns">
-        <h1 class="ui center aligned teal header" style="font-size:70px">Here's <em>woofing</em> at you, kid!</h1>
-        <div class="fluid ui large facebook button"><i class="facebook icon"></i><%= link_to "Sign Up With Facebook", "/auth/facebook/?type=signup", id: "sign_up"%></div>
-
-          <div class="ui horizontal divider">
-            Or
-          </div>
-
-        <h2 class="ui center aligned header"><%= link_to "Log In", "/auth/facebook/?type=login", id: "log_in" %></h2>
-
-        <% if flash[:notice] %>
+      <% if flash[:notice] %>
           <div class="ui warning message"><i class="warning icon"></i><%= flash[:notice] %></div>
         <% end %>
-      </div>
+        <img src="http://citydogshare.org/wp-content/uploads/2013/12/cropped-header_website20143.jpg" width="100%"/>
     </div>
   </div>
-      
-     
+
   <div class="row">
-    <p></p>
-    <div class="ui section divider"></div>
+    <!-- <div class="ui section divider"></div> -->
 
         <div class="large-4 columns">
-          <img src="http://placehold.it/400x300&text=[img]"/>
-          <h4>This is a content section.</h4>
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+          <h2><i class="paw icon"></i> We're dog lovers.</h2>
+          <p>We believe that creating a healthy, supportive, active, and thriving community of dog lovers is the best way to care for dogs, protect them, educate about their needs, make new friends, and get the rest of them adopted into loving homes.</p>
         </div>
         
         <div class="large-4 columns">
-          <img src="http://placehold.it/400x300&text=[img]"/>
-          <h4>This is a content section.</h4>
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+          <h2><i class="world icon"></i> We're local.</h2>
+          <p>Whether you have a dog or not, start making new friends in the SF Bay Area, Los Angeles, Humboldt County, Greater Portland, and Seattle Metro. Some of our newest groups have opened in SLO, SD, Boston, Brooklyn, Tuscon, Denver, and Vancouver.</p>
         </div>
         
         <div class="large-4 columns">
-          <img src="http://placehold.it/400x300&text=[img]"/>
-          <h4>This is a content section.</h4>
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
-        </div>
-      
-  </div>
-      
-      <footer class="row">
-        <div class="large-12 columns">
-          <p></p>
-          <div class="ui teal inverted segment">
-            
-
-          <div class="row">
-            <div class="large-6 columns">
-              <p>© City Dog Share 2015.</p>
-            </div>
-            <div class="large-6 columns">
-              <div class="ui horizontal list">
-                <div class="item"><a href="#">Link 1</a></div>
-                <div class="item"><a href="#">Link 1</a></div>
-                <div class="item"><a href="#">Link 1</a></div>
-                <div class="item"><a href="#">Link 1</a></div>
-              </div>
-            </div>
-          </div>
-
-
-          </div>
+          <h2><i class="heart icon"></i> We're nonprofit.</h2>
+          <p>Unlike other dog-sharing companies, City Dog Share is a federal 501c3 nonprofit charity. We exist to connect people and dogs, as well as aid dog shelters and other animal charities. Any donations are 100% tax deductible and help the entire City Dog Share community.</p>
         </div> 
-      </footer>
-    
-
-</body>
-</html>
+  </div>
