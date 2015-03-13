@@ -49,7 +49,7 @@ class SessionsController < ApplicationController
 
     if request.env["omniauth.params"]["type"] == "login"
       redirect_to login_path(:user => @user, :credentials => request.env["omniauth.auth"][:credentials])
-    elsif request.env["omniauth.params"]["type"] == "signup"
+    else
       redirect_to signup_path(:user => @user, :auth => request.env["omniauth.auth"])
     end
   end
