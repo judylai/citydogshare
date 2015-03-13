@@ -1,45 +1,84 @@
-<h2>Create an Account With Facebook</h2>
-<div class="ui form">
+<div class="row">
+  <div class="large-3 columns">
+    <div class="ui fluid vertical steps">
+      <div class="step">
+        <i class="facebook square icon"></i>
+        <div class="content">
+          <div class="title">Connect</div>
+          <div class="description">Sign up with your Facebook account</div>
+        </div>
+      </div>
+      <div class="active step">
+        <i class="write icon"></i>
+        <div class="content">
+          <div class="title">Profile</div>
+          <div class="description">Fill in all your profile information</div>
+        </div>
+      </div>
+      <div class="disabled step">
+        <i class="paw icon"></i>
+        <div class="content">
+          <div class="title">Share</div>
+          <div class="description">Start finding and sharing dogs</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div class="field">
-      <div id="picture" class="required ui medium circular image"><img src=<%="#{params[:user_info][:info][:image]}"%>></div>
+  <div class="large-9 columns">
+    <h2>Create an Account With Facebook</h2>
+    <div class="ui form">
+
+        <div class="field">
+          <div id="picture" class="required ui medium circular image"><img src=<%="#{params[:user_info][:info][:image]}"%>></div>
+        </div>
+
+        <div class="field">
+          <label>First Name</label>
+          <div id="first_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:first_name]}"%></div>
+        </div>
+
+        <div class="field">
+          <label>Last Name</label>
+          <div id="last_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:last_name]}"%></div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <div id="email" class="required ui fluid segment"><%= "#{params[:user_info][:info][:email]}"%></div>
+        </div>
+
+      <%= form_tag(controller: "users", action: "create", method: "post") do %>
+            <%= hidden_field(:user, :uid, :value => params[:user_info][:uid]) %>
+            <%= hidden_field(:user, :first_name, :value => params[:user_info][:info][:first_name]) %>
+            <%= hidden_field(:user, :last_name, :value => params[:user_info][:info][:last_name]) %>
+            <%= hidden_field(:user, :email, :value => params[:user_info][:info][:email]) %>
+            <%= hidden_field(:user, :image, :value => params[:user_info][:info][:image]) %>
+            <%= hidden_field(:user, :gender, :value => params[:user_info][:info][:gender]) %>
+            <%= hidden_field(:credentials, :token, :value => params[:user_info][:credentials][:token]) %>
+            <%= hidden_field(:credentials, :expires_at, :value => params[:user_info][:credentials][:expires_at]) %>
+      
+      <div class="field"><label>Location</label><%= text_field(:user, :location, :placeholder => 'City, State') %></div>
+      <div class="field"><label>Phone Number</label><%= telephone_field(:user, :phone_number, :placeholder => '(xxx) xxx-xxxx') %></div>
+
+      <div class="field"><label>Status</label><%= select(:user, :status, ["Looking", "Sharing"]) %></div>
+
+      <div class="field"><label>Description</label> <%= text_field(:user,:description, :placeholder => 'Tell City Dog Share more about yourself.') %></div>
+      <div class="field"><label>Availability</label> <%= text_field(:user,:availability, :placeholder => 'What is your availability for dog sitting, if applicable?') %></div>
+
+
+    <div class="ui buttons">
+      <div class="ui primary button">
+        <input id='create_user_button' type="submit" value="Create Account" name="create_user_button" class='btn info' style="background-color: transparent; border:0px;"/>
+      </div>
+      <div class="or"></div>
+      <div class="ui button">
+        <input id='cancel_user_button' type="submit" value="Cancel" name="cancel_user_button" class='btn info' style="background-color: transparent; border:0px"/>
+      </div>
     </div>
 
-    <div class="field">
-      <label>First Name</label>
-      <div id="first_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:first_name]}"%></div>
+      <% end %>
+
     </div>
-
-    <div class="field">
-      <label>Last Name</label>
-      <div id="last_name" class="required ui fluid segment"><%= "#{params[:user_info][:info][:last_name]}"%></div>
-    </div>
-
-    <div class="field">
-      <label>Email</label>
-      <div id="email" class="required ui fluid segment"><%= "#{params[:user_info][:info][:email]}"%></div>
-    </div>
-
-  <%= form_tag(controller: "users", action: "create", method: "post") do %>
-        <%= hidden_field(:user, :uid, :value => params[:user_info][:uid]) %>
-        <%= hidden_field(:user, :first_name, :value => params[:user_info][:info][:first_name]) %>
-        <%= hidden_field(:user, :last_name, :value => params[:user_info][:info][:last_name]) %>
-        <%= hidden_field(:user, :email, :value => params[:user_info][:info][:email]) %>
-        <%= hidden_field(:user, :image, :value => params[:user_info][:info][:image]) %>
-        <%= hidden_field(:user, :gender, :value => params[:user_info][:info][:gender]) %>
-        <%= hidden_field(:credentials, :token, :value => params[:user_info][:credentials][:token]) %>
-        <%= hidden_field(:credentials, :expires_at, :value => params[:user_info][:credentials][:expires_at]) %>
-  
-  <div class="field"><label>Location</label><%= text_field(:user, :location, :placeholder => 'City, State') %></div>
-  <div class="field"><label>Phone Number</label><%= telephone_field(:user, :phone_number, :placeholder => '(xxx) xxx-xxxx') %></div>
-
-  <div class="field"><label>Status</label><%= select(:user, :status, ["Looking", "Sharing"]) %></div>
-
-  <div class="field"><label>Description</label> <%= text_field(:user,:description, :placeholder => 'Tell City Dog Share more about yourself.') %></div>
-  <div class="field"><label>Availability</label> <%= text_field(:user,:availability, :placeholder => 'What is your availability for dog sitting, if applicable?') %></div>
-  <div class="ui primary button transparent input"><input id='create_user_button' type="submit" value="Create Account" name="create_user_button" class='btn info' /></div>
-  <div class="ui button transparent input"><input id='cancel_user_button' type="submit" value="Cancel" name="cancel_user_button" class='btn info' /></div>
-
-  <% end %>
-
+  </div>
 </div>

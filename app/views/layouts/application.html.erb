@@ -13,8 +13,8 @@
     <div class="large-12 columns">
       <div class="ui raised segment large menu" style="position:fixed; top:0; left:0; width:100%; z-index:100;">
 
-        <% if current_user != nil %> <!-- THIS MAY NOT WORK, FIX IT, SHOULD SHOW USER IS SIGNED IN -->
-          <a class="header item">City Dog Share</a>
+        <% if @current_user != nil %> <!-- THIS MAY NOT WORK, FIX IT, SHOULD SHOW USER IS SIGNED IN -->
+          <a href ="/" class="header item">City Dog Share</a>
           <a class="item">Find a Dog</a>
           <a class="item">Share a Dog</a>
           <div class="right menu">
@@ -24,7 +24,7 @@
 
         <% else %>
 
-          <a class="header item">City Dog Share</a>
+          <a href ="/" class="header item">City Dog Share</a>
           <div class="right menu">
             <div class="item">
               <div class="ui facebook button"><i class="facebook icon"></i> <%= link_to "Sign Up","/auth/facebook/?type=signup", id: 'sign_up' %></div>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="ui raised segment large-12 columns">
+    <div class="ui raised segment large-12 columns" style="padding-top:40px">
       <%= yield %>
     </div>
 
