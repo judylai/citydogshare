@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
     self.gender = auth[:extra][:gender]
     self.first_name = auth[:info][:first_name]
     self.last_name = auth[:info][:last_name]
-    self.image = auth[:info][:image]
+    self.image = auth[:info][:image][0..-7] + "large"
     self.location = auth[:info][:location]
     self.email = auth[:info][:email]
   end

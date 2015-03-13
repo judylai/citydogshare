@@ -44,9 +44,6 @@ class SessionsController < ApplicationController
     uid = request.env["omniauth.auth"][:uid]
     @user = User.find_by_uid(uid)
 
-    # Get large version of profile picture
-    request.env["omniauth.auth"][:info][:image] = request.env["omniauth.auth"][:info][:image][0..-7] + "large"
-
     if request.env["omniauth.params"]["type"] == "login"
       redirect_to login_path(:user => @user, :credentials => request.env["omniauth.auth"][:credentials])
     else

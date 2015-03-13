@@ -39,12 +39,6 @@ describe SessionsController, :type => :controller do
       expect(User).to receive(:find_by_uid).with(request.env["omniauth.auth"][:uid])
       visit "auth/facebook?type=login"
     end 
-    it 'should retrieve the large profile picture' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      User.stub(:find_by_uid)
-      visit "auth/facebook?type=login"
-      expect(request.env["omniauth.auth"][:info][:image]).to match(/large$/)
-    end
     it 'should redirect to signup if signing up' do 
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       request.env["omniauth.params"] = {"type" => "signup"}
