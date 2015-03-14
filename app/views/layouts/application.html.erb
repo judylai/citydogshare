@@ -8,28 +8,46 @@
 </head>
 <body style="background-color:#f7f7f7">
 
-	<div class="row">
-		<div class="large-12 columns">
-			<div class="ui top teal inverted large menu">
-			  <a class="item">Find a Dog</a>
-			  <a class="item">Share a Dog</a>
-			  <div class="right menu">
-			    <a class="item">My Profile</a>
-			    <a class="item">Sign Out</a>
-			  </div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
 
-	<div class="row" style="background-color:#ffffff; padding-top:10px">
-		<!-- <div class="large-5 columns">
-		</div> -->
+    <div class="large-12 columns">
+      <div class="ui raised segment large menu" style="position:fixed; top:0; left:0; width:100%; z-index:100;">
 
-		<div class="large-7 large-centered columns">
-			<%= yield %>
-		</div>
+        <% if @current_user != nil %> <!-- THIS MAY NOT WORK, FIX IT, SHOULD SHOW USER IS SIGNED IN -->
+          <a href ="/" class="header item">City Dog Share</a>
+          <a class="item">Find a Dog</a>
+          <a class="item">Share a Dog</a>
+          <div class="right menu">
+            <a class="item">My Profile</a>
+            <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>
+          </div>
 
-	</div>
+        <% else %>
+
+          <a href ="/" class="header item">City Dog Share</a>
+          <div class="right menu">
+            <div class="item">
+              <div class="ui facebook button"><i class="facebook icon"></i> <%= link_to "Sign Up","/auth/facebook/?type=signup", id: 'sign_up' %></div>
+            </div>
+            <div class="item">
+              <div class="ui button"><%= link_to "Log In", "/auth/facebook/?type=login", id: 'log_in' %></div>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="ui raised segment large-12 columns" style="padding-top:40px">
+      <%= yield %>
+    </div>
+
+    <div class="ui secondary raised segment large-12 columns">
+        <p>&copy; City Dog Share 2015.</p>
+      </div>
+
+  </div>
 
 </body>
 </html>

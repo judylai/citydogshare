@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     self.image = auth[:info][:image][0..-7] + "large"
     self.location = auth[:info][:location]
     self.email = auth[:info][:email]
+    self.save
   end
 
   def full_name
