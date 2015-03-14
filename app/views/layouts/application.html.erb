@@ -18,7 +18,7 @@
           <a class="item">Find a Dog</a>
           <a class="item">Share a Dog</a>
           <div class="right menu">
-            <a class="item">My Profile</a>
+            <%= link_to "My Profile", user_path(current_user), {:class => "item"}%>
             <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>
           </div>
 
