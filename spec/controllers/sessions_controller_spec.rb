@@ -61,11 +61,6 @@ describe SessionsController, :type => :controller do
       @user1 = User.create()
       @user1.uid = "12345"
     end
-    it 'should update their credentials' do
-      get(:login, :user => @user1, :credentials => request.env["omniauth.auth"][:credentials])
-      assert_equal request.env["omniauth.auth"][:credentials][:token], assigns(:user).oauth_token
-      assert_equal request.env["omniauth.auth"][:credentials][:expires_at], assigns(:user).oauth_expires_at
-    end 
     it 'should redirect to the user profile page' do 
       get(:login, :user => @user1, :credentials => request.env["omniauth.auth"][:credentials])
       expect(response).to redirect_to create_session_path(:user => "1")

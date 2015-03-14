@@ -11,7 +11,7 @@ describe User do
   it 'should update credentials correctly' do
     @user.update_credentials({:token => "CBADEF...", :expires_at => 1321747205})
     assert_equal @user.oauth_token, "CBADEF..."
-    assert_equal @user.oauth_expires_at, 1321747205
+    assert_equal @user.oauth_expires_at, Time.at(1321747205)
   end
   it 'should update with information from Facebook' do
     @user.facebook_info_update({:uid => "54321", :extra => {:gender => "male"}, :info => {:first_name => "Bruce", :last_name => "Wayne", :image => "http://tinyurl.com/opnc38n", :location => "Bat Cave, Gotham", :email => "not_batman@wayneenterprises.com"}})
