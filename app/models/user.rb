@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   def update_credentials(credentials)
     self.oauth_token = credentials[:token]
-    self.oauth_expires_at = credentials[:expires_at].to_i
+    self.oauth_expires_at = Time.at(credentials[:expires_at].to_i)
     self.save 
   end
 
