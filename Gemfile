@@ -8,7 +8,6 @@ gem 'rails', '3.2.16'
 
 gem 'omniauth-facebook', '~> 1.4.1'
 gem 'railroady'
-gem 'devise'
 gem 'rake'
 gem 'jquery-rails'
 
@@ -34,6 +33,15 @@ group :production do
   gem 'pg'
 end
 
+group :test do
+  gem 'database_cleaner'
+end
+
+group :production do
+  gem 'pg'
+end
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -41,6 +49,7 @@ group :assets do
   gem 'sass', '~> 3.2.0'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
+
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
