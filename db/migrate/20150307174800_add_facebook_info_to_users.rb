@@ -10,6 +10,6 @@ class AddFacebookInfoToUsers < ActiveRecord::Migration
 		add_column :users, :email, :string
 		add_column :users, :description, :string
 		add_column :users, :availability, :string
-		remove_column :users, :provider, :string
+		remove_column :users, :provider
 	end
 end
