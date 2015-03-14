@@ -17,11 +17,23 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'rspec-rails', '~> 3.2.0'
   gem 'cucumber-rails', :require => false
+<<<<<<< HEAD
+=======
+  gem 'autotest-rails'
+>>>>>>> 1310ff3f2c71e3c39e7434df1c0ca6c1ad76b3d5
   gem 'simplecov', :require => false
   gem 'cucumber-rails-training-wheels'
-  gem 'autotest-rails'
   gem 'factory_girl_rails'
   gem 'metric_fu'
+  gem 'minitest', '~>4.7.5'
+end
+
+group :test do
+  gem 'database_cleaner'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do
@@ -39,7 +51,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1310ff3f2c71e3c39e7434df1c0ca6c1ad76b3d5
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

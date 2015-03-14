@@ -2,7 +2,8 @@ language: ruby
 rvm:
   - 1.9.3
 cache: bundler
-before_filter:
-  - rake db:test:prepare
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
 notifications:  
   email: false

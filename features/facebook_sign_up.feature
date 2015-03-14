@@ -1,25 +1,29 @@
+@facebook_test
 Feature: New user can sign up with City Dog Share using a facebook account
-  As a new CityDogUser user
-  So that I can quickly sing up and find a dog-sitter
-  I want to sign up with City Dog Share using my facebook account
+  As a new City Dog Share user
+  So that I can use City Dog Share
+  I want to sign up for City Dog Share using my facebook account
 
 Background:
-	Given I am on the CityDogShare home page 
+  Given I am on the home page
 	
-#Scenario: sign up with facebook if I have not sign in to Facebook
-#	When I fill in "Email" and "Password"
-#	And I press "Log in"
-#	Then I should be on the CityDogShare home page
-#	And I should see "Signed in as" "user_name" on Facebook
+Scenario: Sign up with facebook if I am a new user
+  When I follow "Sign Up"
+  Then I should be on the users page for "Batman"
 
-Scenario: sign up with facebook if I have sign in to Facebook
-	And I press "Sign up with Facebook"
-	And Facebook authorizes me
-	Then I should be on the account creation page
 
-Scenario: sign up with facebook if I already have an account
-	And I press "Sign up with Facebook"
-	And Facebook authorizes me
-	Then I should see "You already have an account on City Dog Share."
-	And I should be on the CityDogShare home page
-	And I should see "Signed in as"
+Scenario: Sign up with facebook if I am an existing user
+  Given the following users exist:
+  | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability |
+  | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   |
+  When I follow "Sign Up"
+  Then I should be on the home page
+  And I should see "A user already exists with this facebook account."
+
+Scenario: Sign up authentication fails
+  Given I am on the homepage
+  When I follow "Sign Up"
+  And my authentication fails
+  Then I should be on the home page
+  And I should see "Something went wrong with the authentication. Please try again."
+
