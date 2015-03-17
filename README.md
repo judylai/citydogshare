@@ -12,4 +12,4 @@ CodeClimate Badge
 [![Code Climate](https://codeclimate.com/github/sfstanley/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
 
 CodelClimate Test Coverage
-[![Code Climate](https://codeclimate.com/github/sfstanley/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
+[![Test Coverage](https://codeclimate.com/github/sfstanley/citydogshare/badges/coverage.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
