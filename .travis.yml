@@ -5,7 +5,9 @@ env:
   - DB=sqlite
 before_script:
   - bundle exec rake db:migrate
-script:
   - bundle exec rake db:test:prepare
+addons:
+  code_climate:
+    repo_token: 1e30b11f64e44b2c54ad00ebcd0387535e5c616856f4e614302631784e55b1fe bundle exec rake
 notifications:  
   email: false
