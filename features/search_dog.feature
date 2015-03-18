@@ -25,7 +25,7 @@ Scenario: Search for a dog
   And I choose "Gender" as "Male"
   And I choose "Mix" as "Corgi"
   And I fill out "Zipcode" with "94103"
-  Adn I choose "Range" as "5"
+  And I choose "Range" as "5"
   And I choose "Energy Level" as "sleeps all day" 
   And I choose "likes" as "adventure"
   Then I should see the dog profile for "Spock"
