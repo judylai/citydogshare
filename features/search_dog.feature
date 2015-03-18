@@ -19,14 +19,13 @@ Background: user has been added to the database and logged in
   When I search for a dog
   Then I should see "Search for a Dog"
 
-
 Scenario: Search for a dog 
   When I fill out "Age" with "3"
   And I choose "Size" as "small"
   And I choose "Gender" as "Male"
   And I choose "Mix" as "Corgi"
   And I fill out "Zipcode" with "94103"
-  Adn I choose "Range" ad "5 miles"
+  Adn I choose "Range" as "5 miles"
   And I choose "Energy Level" as "sleeps all day" 
   And I choose "likes" as "adventure"
   Then I should see the dog profile for "Spock"

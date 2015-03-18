@@ -44,7 +44,7 @@ Scenario: create dog profile
   And I fill out "Healthy notes" as "none"
   And I choose "Fixed" as "Yes"
   And I fill out "Description" with "Very normal."
-  And I fill out "Likes" with "Playing fetch"
+  And I fill out "Likes" with "Playing fetch"d
   And I fill out "Dislikes" with "Cats"
   And I fill out "energy_level" with "high energy"
   And I fill out "location" with "1234 Berkeley"
