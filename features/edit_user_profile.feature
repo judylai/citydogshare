@@ -4,7 +4,7 @@ As a user
 In order to change my information
 I want to edit my profile
 
-Background: User is not in the database but some other users and dogs are
+Background: User and other users are in database
   Given the following users exist:
     | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   |
     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     |
