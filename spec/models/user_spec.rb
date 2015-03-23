@@ -26,4 +26,22 @@ describe User do
   it 'should correctly show full name' do
     assert_equal @user.full_name, "John Smith"
   end
+
+  it 'should not save on invalid phone formats' do
+    @user.phone_number = "abcd"
+    @user.valid?
+    @user.errors.should have_key(:phone_number)
+  end
+
+  it 'should save on valid phone format 1' do
+    @user.phone_number = "(510)123-1234"
+    @user.valid?
+    @user.errors.should be_empty
+  end
+
+  it 'should save on valid phone format 2' do
+    @user.phone_number = "(510) 123-1234"
+    @user.valid?
+    @user.errors.should be_empty
+  end
 end

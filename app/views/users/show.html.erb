@@ -5,7 +5,9 @@
 <div class="ui success message">
   <div class="content">
 <div class="header"><%= "Welcome #{@current_user.first_name}!" %></div>
-<p><input id='edit_user_button' type="submit" value="Edit" name="edit_user_button" class='ui inverted green button' /</p>
+<p>
+  <%= button_to "Edit", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "ui inverted green button", :method => :get %>
+</p>
   </div>
 </div>
 
@@ -27,7 +29,7 @@
   <p> </p>
   <div id="email"><h4 class = "ui teal label">Email:</h4>&nbsp;&nbsp;<%= @current_user.email %></div>
   <p> </p>
-  <div id="phone_number"><h4 class = "ui teal label">Status:</h4>&nbsp;&nbsp;<%= @current_user.phone_number %></div>
+  <div id="phone_number"><h4 class = "ui teal label">Phone Number:</h4>&nbsp;&nbsp;<%= @current_user.phone_number %></div>
   <p> </p>
 
   <div id="user_description">

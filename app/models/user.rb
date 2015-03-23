@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description
+  validates :phone_number, format: { with: /\(\d{3}\)(\ ?)\d{3}-\d{4}/, message: "Bad format for phone number." }, :allow_blank => true
 
   def update_credentials(credentials)
     self.oauth_token = credentials[:token]

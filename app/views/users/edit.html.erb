@@ -1,0 +1,80 @@
+<% if current_user.errors.any? %>
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% current_user.errors.messages.each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+<h2>Edit Your Profile</h2>
+<%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %>
+    <div class="field">
+      <div id="picture" class="ui medium circular centered image"><img src=<%="#{current_user.image}"%>></div>
+    </div>
+
+ <div class="field">
+      <label>First Name</label>
+      <div id="first_name" class="required ui fluid segment"><%= "#{current_user.first_name}"%></div>
+    </div>
+
+    <div class="field">
+      <label>Last Name</label>
+      <div id="last_name" class="required ui fluid segment"><%= "#{current_user.last_name}"%></div>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <div id="email" class="required ui fluid segment"><%= "#{current_user.email}"%></div>
+    </div>
+<%= form_tag(controller: "users", action: "edit", method: "post") do %>
+<div class="ui form">  
+
+  <div class="field"><label>Location</label>
+  <% if current_user.location != nil && current_user.location != ""%>
+  <%= text_field(:user, :location, :value => current_user.location) %>
+  <%else%>
+  <%= text_field(:user, :location, :placeholder => 'City, State') %>
+  <%end %>
+  </div>
+
+  <div class="field"><label>Phone Number</label>
+  <% if current_user.phone_number != nil && current_user.phone_number != ""%>
+  <%= telephone_field(:user, :phone_number, :value => current_user.phone_number) %>
+  <%else%>
+  <%= telephone_field(:user, :phone_number, :placeholder => '(xxx)xxx-xxxx') %>
+  <% end %>
+  </div>
+
+  <div class="field"><label>Status</label>
+  <% if current_user.status != nil %>
+  <%= select(:user, :status, ["Looking", "Sharing"], :selected => current_user.status) %>
+  <% else %>
+  <%= select(:user, :status, ["Looking", "Sharing"])%>
+  <%end%>
+  </div>
+
+
+  <div class="field"><label>Description</label>
+  <% if current_user.description != nil && current_user.description != ""%>
+    <%= text_field(:user,:description, :value => current_user.description) %>
+  <% else %>
+    <%= text_field(:user,:description, :placeholder => 'Tell City Dog Share more about yourself.') %>
+  <%end%>
+  </div>
+
+  <div class="field"><label>Availability</label>
+  <% if current_user.availability != nil && current_user.availability != ""%>
+   <%= text_field(:user,:availability, :value => current_user.availability)%>
+ <%else%>
+   <%= text_field(:user,:availability, :placeholder => 'What is your availability for dog sitting, if applicable?')%>
+ <%end%>
+ </div>
+
+<div class="ui primary button transparent input"><input id='update_user_button' type="submit" value="Save Changes" name="update_user_button" class='btn info' /></div>
+
+<% end %>
+
+<%= button_to "Cancel Changes", user_path(@current_user.id), :id => "cancel_user_button", :class => "ui button transparent input", :method => :get %>
+
+
+</div>

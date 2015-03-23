@@ -13,21 +13,46 @@ Background: User and other users are in database
   And I am on the users page for "Batman"
   And I press "Edit"
 
-Scenario: Page shows error when required fields are made blank
-  When I fill out "Location" with ""
-  And I fill out "Availability" with ""
-  And I press "Save Changes"
-  Then I should see "Please fill out all required fields"
-  And I should see "Location" and "Availability" highlighted
+Scenario: Page shows error when phone number is wrong format
+  When I fill in "user_phone_number" with "1235"
+  When I press "Save Changes"
+  Then I should see "Bad format for phone number."
 
-Scenario: Sucessfully update profile
-  When I fill out "Location" with "San Francisco, California"
-  And I fill out "Status" with "Sharing"
-  And I fill out "Description" with "I think I should make City Bat Share."
-  And I fill out "Availability" with "Never"
+Scenario: Sucessfully update some of profile
+  And I select "Sharing" from "user_status"
+  And I fill in "user_description" with "I think I should make City Bat Share."
+  And I press "Save Changes"
+  Then I should be on the users page for "Batman"
+  And I should see "Bat Cave, Gotham City"
+  And I should see "(555)228-6261"
+  And I should see "Sharing"
+  And I should see "I think I should make City Bat Share."
+  And I should see "not nights"
+
+Scenario: Sucessfully update all of profile
+  When I fill in "user_location" with "San Francisco, California"
+  And I select "Sharing" from "user_status"
+  And I fill in "user_phone_number" with "(510)123-1234"
+  And I fill in "user_description" with "I think I should make City Bat Share."
+  And I fill in "user_availability" with "Never"
   And I press "Save Changes"
   Then I should be on the users page for "Batman"
   And I should see "San Francisco, California"
-  And I shuld see "Sharing"
+  And I should see "Sharing"
+  And I should see "(510)123-1234"
   And I should see "I think I should make City Bat Share."
   And I should see "Never"
+
+Scenario: No changes made when changes canceled
+  When I fill in "user_location" with "San Francisco, California"
+  And I select "Sharing" from "user_status"
+  And I fill in "user_phone_number" with "(510)123-1234"
+  And I fill in "user_description" with "I think I should make City Bat Share."
+  And I fill in "user_availability" with "Never"
+  And I press "Cancel Changes"
+  Then I should be on the users page for "Batman"
+  And I should see "Bat Cave, Gotham City"
+  And I should see "looking"
+  And I should see "(555)228-6261"
+  And I should see "I love bats"
+  And I should see "not nights"
