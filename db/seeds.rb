@@ -546,8 +546,8 @@ likes_list = [
   "children"
 ]
 
-likes_list.each do |type|
-  Like.create(item: item)
+likes_list.each do |item|
+  Like.create(thing: item)
 end
 
 sizes_list = [

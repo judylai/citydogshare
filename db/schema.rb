@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150329141111) do
+ActiveRecord::Schema.define(:version => 20150329142250) do
 
   create_table "dogs", :force => true do |t|
     t.string   "name"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20150329141111) do
     t.string   "gender"
   end
 
-  create_table "energy_level", :force => true do |t|
+  create_table "energy_levels", :force => true do |t|
     t.string "level"
   end
 
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20150329141111) do
     t.string "name"
   end
 
-  create_table "personality", :force => true do |t|
+  create_table "personalities", :force => true do |t|
     t.string "type"
   end
 
