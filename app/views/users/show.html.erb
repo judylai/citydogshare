@@ -43,5 +43,5 @@
   <p> </p>
   <div id="dogs"><h4 class = "ui teal label">Dogs:</h4>&nbsp;&nbsp;
   <p> </p> <br />
-  <input id='add_dog_button' type="submit" value="Add Dog" name="add_dog_button" class='ui primary button' /></div>
+  <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
 </div>

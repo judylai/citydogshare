@@ -1,5 +1,9 @@
 {
   "result": {
+<<<<<<< HEAD
     "covered_percent": 94.74
+=======
+    "covered_percent": 100.0
+>>>>>>> added dog routes and add dog button
   }
 }

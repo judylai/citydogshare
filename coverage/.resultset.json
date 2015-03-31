@@ -31,6 +31,30 @@
         1,
         null
       ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/dogs_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/layouts_controller.rb": [
         1,
         null
@@ -155,6 +179,7 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog.rb": [
         1,
         1,
@@ -191,6 +216,8 @@
         1,
         null
       ],
+=======
+>>>>>>> added dog routes and add dog button
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/energy_level.rb": [
         1,
         1,
@@ -225,7 +252,11 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1427869275
+=======
+    "timestamp": 1427836480
+>>>>>>> added dog routes and add dog button
   },
   "Cucumber Features": {
     "coverage": {
