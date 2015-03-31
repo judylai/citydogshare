@@ -11,7 +11,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150307174800) do
+ActiveRecord::Schema.define(:version => 20150329142250) do
+
+  create_table "dogs", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.datetime "dob"
+    t.integer  "weight"
+    t.string   "description"
+    t.string   "motto"
+    t.boolean  "fixed"
+    t.string   "health"
+    t.string   "comments"
+    t.string   "contact"
+    t.string   "availability"
+    t.string   "size"
+    t.string   "gender"
+  end
+
+  create_table "energy_levels", :force => true do |t|
+    t.string "level"
+  end
+
+  create_table "likes", :force => true do |t|
+    t.string "thing"
+  end
+
+  create_table "mixes", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "personalities", :force => true do |t|
+    t.string "type"
+  end
+
+  create_table "sizes", :force => true do |t|
+    t.string "range"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "uid"

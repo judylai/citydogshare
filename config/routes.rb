@@ -14,6 +14,9 @@ Citydogshare::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy, :index]
   post 'users/:id/edit', to: 'users#edit'
 
+  ## Dog Routes ##
+  resources :dogs, only: [:show, :edit, :update, :destroy, :index]
+
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   match 'dashboard' => 'welcome#dashboard'
