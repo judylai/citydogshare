@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name :image :dob :gender :description :motto :fixed :health :comments :contact :availability
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability
 
   belongs_to :user
   has_many :mixes

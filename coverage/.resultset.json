@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/application_controller.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/application_controller.rb": [
         1,
         1,
         1,
@@ -11,31 +11,31 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/application_helper.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/home_helper.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/helpers/home_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/layouts_helper.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/helpers/layouts_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/sessions_helper.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/welcome_helper.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/helpers/welcome_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/layouts_controller.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/layouts_controller.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/sessions_controller.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/sessions_controller.rb": [
         1,
         null,
         1,
@@ -91,7 +91,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/users_controller.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/users_controller.rb": [
         1,
         null,
         1,
@@ -100,8 +100,10 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/user.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/user.rb": [
         1,
+        1,
+        null,
         1,
         null,
         1,
@@ -127,7 +129,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/welcome_controller.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/controllers/welcome_controller.rb": [
         1,
         1,
         null,
@@ -137,14 +139,59 @@
         null,
         null,
         null,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/energy_level.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/like.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/mix.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/personality.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/size.rb": [
+        1,
+        1,
+        1,
         null
       ]
     },
-    "timestamp": 1426297513
+    "timestamp": 1427773181
   },
   "Cucumber Features": {
     "coverage": {
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/support/paths.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/features/support/paths.rb": [
         null,
         null,
         null,
@@ -187,7 +234,7 @@
         null,
         1
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/support/selectors.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/features/support/selectors.rb": [
         null,
         null,
         null,
@@ -233,7 +280,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/auth_steps.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/features/step_definitions/auth_steps.rb": [
         null,
         1,
         1,
@@ -285,7 +332,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/web_steps.rb": [
+      "/Users/sydneestanley/Documents/CS169/citydogshare/features/step_definitions/web_steps.rb": [
         null,
         null,
         null,
@@ -542,6 +589,6 @@
         null
       ]
     },
-    "timestamp": 1426671049
+    "timestamp": 1427773197
   }
 }
