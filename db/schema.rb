@@ -11,13 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150329142250) do
+ActiveRecord::Schema.define(:version => 20150401051531) do
+
+  create_table "dog_like_linkers", :force => true do |t|
+    t.integer "dog_id"
+    t.integer "like_id"
+  end
+
+  create_table "dog_mix_linkers", :force => true do |t|
+    t.integer "dog_id"
+    t.integer "mix_id"
+  end
+
+  create_table "dog_personality_linkers", :force => true do |t|
+    t.integer "dog_id"
+    t.integer "personality_id"
+  end
 
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.string   "image"
     t.datetime "dob"
-    t.integer  "weight"
     t.string   "description"
     t.string   "motto"
     t.boolean  "fixed"
@@ -25,8 +39,10 @@ ActiveRecord::Schema.define(:version => 20150329142250) do
     t.string   "comments"
     t.string   "contact"
     t.string   "availability"
-    t.string   "size"
     t.string   "gender"
+    t.integer  "size_id"
+    t.integer  "energy_level_id"
+    t.integer  "user_id"
   end
 
   create_table "energy_levels", :force => true do |t|
@@ -42,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20150329142250) do
   end
 
   create_table "personalities", :force => true do |t|
-    t.string "type"
+    t.string "name"
   end
 
   create_table "sizes", :force => true do |t|
