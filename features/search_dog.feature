@@ -6,7 +6,6 @@ I would like to search for dogs to sit
 
 Background: user has been added to the database and logged in
   Given the following users exist:
-  Given the following users exist:
     | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   |
     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     |
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   |

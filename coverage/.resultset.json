@@ -165,9 +165,30 @@
         1,
         1,
         1,
+        1,
+        1,
+        1,
         null,
         null,
         null,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog_like_linker.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog_mix_linker.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/dog_personality_linker.rb": [
+        1,
+        1,
+        1,
         null
       ],
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/energy_level.rb": [
@@ -180,15 +201,18 @@
         1,
         1,
         1,
+        1,
         null
       ],
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/mix.rb": [
         1,
         1,
         1,
+        1,
         null
       ],
       "/Users/sydneestanley/Documents/CS169/citydogshare/app/models/personality.rb": [
+        1,
         1,
         1,
         1,
@@ -201,8 +225,7 @@
         null
       ]
     },
-
-    "timestamp": 1427773181
+    "timestamp": 1427869275
   },
   "Cucumber Features": {
     "coverage": {
@@ -220,12 +243,12 @@
         null,
         null,
         1,
-        2,
+        18,
         null,
         null,
-        1,
+        13,
         null,
-        1,
+        5,
         null,
         null,
         null,
@@ -303,30 +326,30 @@
         1,
         null,
         1,
-        1,
+        8,
+        null,
+        null,
+        12,
+        12,
+        12,
+        null,
+        null,
         null,
         null,
         1,
-        1,
-        1,
-        null,
-        null,
+        4,
         null,
         null,
         1,
-        1,
+        2,
         null,
         null,
         1,
-        0,
+        10,
         null,
         null,
         1,
-        1,
-        null,
-        null,
-        1,
-        1,
+        8,
         null,
         null,
         1,
@@ -338,17 +361,17 @@
         null,
         null,
         1,
-        1,
-        1,
+        14,
+        14,
         null,
         0,
         null,
         null,
         null,
         1,
-        1,
-        1,
-        1,
+        8,
+        8,
+        8,
         null,
         0,
         null,
@@ -615,6 +638,6 @@
         null
       ]
     },
-    "timestamp": 1427773197
+    "timestamp": 1427869370
   }
 }
