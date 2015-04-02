@@ -2,7 +2,7 @@ class DogsController < ApplicationController
 
   def index
 
-    @dogs = Dog.all()
+    @dogs = Dog.where(gender: ["Male", "Female"])
 
     ## Genders
     @all_genders = ['Male', 'Female']
@@ -10,6 +10,10 @@ class DogsController < ApplicationController
       @selected_genders = params[:gender].keys()
     else
       @selected_genders = 'all genders'
+    end
+    
+    if @selected_genders != 'all genders'
+      @dogs = @dogs.where(gender: @selected_genders)
     end
  
     ## Personalities
