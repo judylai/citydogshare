@@ -3,23 +3,48 @@
 Gender:
 <br />
 <% @all_genders.each do |gender| %>
-<%= gender %> 
 <%= check_box_tag "gender[#{gender}]", 1, @selected_genders.include?(gender) %>
-<br />
+<%= gender %> 
 <% end %>
 <br />
+
 Personality:
 <br />
 <% @all_personalities.each do |p| %>
-<%= p %> 
 <%= check_box_tag "personality[#{p}]", 1, @selected_personalities.include?(p) %>
-<br />
+<%= p %> 
 <% end %>
 <br />
+
 Mix:
 <%= select_tag 'mix_id', options_for_select(@all_mixes, @mix) %>
-<%= submit_tag 'Search Dogs', :id => 'dog_search_submit' %>
+<br />
 
+Size:
+<br />
+<% @all_sizes.each do |s| %>
+<%= check_box_tag "size[#{s}]", 1, @selected_sizes.include?(s) %>
+<%= s %> 
+<% end %>
+<br />
+
+Likes:
+<br />
+<% @all_likes.each do |l| %>
+<%= check_box_tag "like[#{l}]", 1, @selected_likes.include?(l) %>
+<%= l %> 
+<% end %>
+<br />
+
+Energy Level:
+<br />
+<% @all_energies.each do |e| %>
+<%= check_box_tag "energy[#{e}]", 1, @selected_energies.include?(e) %>
+<%= e %> 
+<% end %>
+<br />
+
+<%= submit_tag 'Search Dogs', :id => 'dog_search_submit' %>
 <% end %>
 
 <% @dogs.each do |dog| %>
