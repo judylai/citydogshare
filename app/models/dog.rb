@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_levels, :size
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -11,7 +11,10 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
-  
+  def age
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
 
 
 end

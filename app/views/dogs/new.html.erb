@@ -27,7 +27,7 @@
 
 <h2>Edit Your Dog's Profile</h2>
 
-<%= form_tag(controller: "dogs", action: "new", method: "get") do %>
+<%= form_tag(controller: "dogs", action: "create", method: "post") do %>
 <div class="ui form">  
 
   <div class="field"><label>Name</label>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="field"><label>Birthdate</label>
-    <!-- insert month day and year input here -->
+    <%= date_select :dog, :dob %>
   </div>
 
   <div class="field"><label>Gender</label>
@@ -43,14 +43,13 @@
   </div>
 
   <div class="field"><label>Mix</label>
-    <!-- insert Jquery for tags here -->
     <ul id="myTags">
     </ul>
   </div>
 
   <div class="field"><label>Size</label>
     <% size_options = options_from_collection_for_select(Size.all, 'id', 'range') %>
-    <%= select :dog, :size,  size_options %>
+    <%= select :dog, :size, size_options %> 
   </div>
 
   <div class="field"><label>Motto</label>
@@ -63,15 +62,14 @@
 
   <div class="field"><label>Energy Level</label>
     <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'level') %>
-    <%= select :dog, :size, energy_options %>
+    <%= select :dog, :energy_level, energy_options %>
   </div>
   
   <div class="field"><label>Likes</label>
-    <% Like.find_each do |like| %>
-      <ul>
-        <%= check_box_tag :dog, like.id %>  <!-- NOT SURE IF SAVING AS RIGHT THING!!! -->
-        <%= like.thing %>
-      </ul>
+    <% @likes.each do |like| %>
+        <%= check_box_tag "likes[#{like}]", "1" %>  <!-- FIX THIS -->
+        <%= like %>
+        <br>
     <% end %>
   </div>
 
@@ -80,11 +78,14 @@
   </div>
 
   <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
-    <%= radio_button_tag(:dog, :fixed, ["Yes", "No"]) %> <!-- Radio button not working -->
+    <%= label :fixed, "Yes", :value => "true"  %>
+    <%= radio_button :dog, :fixed, true %>
+    <%= label :fixed, "No", :value => "false" %>
+    <%= radio_button :dog, :fixed, false, :checked => true %>
   </div>
 
 
-
+<!-- IMAGE UPLOADING -->
 
 
 
