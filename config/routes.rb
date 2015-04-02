@@ -17,6 +17,12 @@ Citydogshare::Application.routes.draw do
   ## Dog Routes ##
   resources :dogs
 
+  resources :mixes, :only => [:index, :show] do
+    collection do
+      get :autocomplete
+    end
+  end
+
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   match 'dashboard' => 'welcome#dashboard'

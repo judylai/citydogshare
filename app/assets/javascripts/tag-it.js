@@ -29,7 +29,7 @@
     $.widget('ui.tagit', {
         options: {
             allowDuplicates   : false,
-            caseSensitive     : false,
+            caseSensitive     : true,
             fieldName         : 'tags',
             placeholderText   : null,   // Sets `placeholder` attr on input field.
             readOnly          : false,  // Disables editing.
@@ -37,7 +37,7 @@
             tagLimit          : null,   // Max number of tags allowed (null for unlimited).
 
             // Used for autocomplete, unless you override `autocomplete.source`.
-           // availableTags     : 
+            availableTags     : [],
 
             // Use to override or add any options to the autocomplete widget.
             //
@@ -49,7 +49,7 @@
             showAutocompleteOnFocus: true,
 
             // When enabled, quotes are unneccesary for inputting multi-word tags.
-            allowSpaces: true,
+            allowSpaces: false,
 
             // The below options are for using a single field instead of several
             // for our form values.

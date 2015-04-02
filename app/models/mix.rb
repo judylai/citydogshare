@@ -11,4 +11,13 @@ class Mix < ActiveRecord::Base
   	self.select('name').to_json
   end
 
+  def self.autocomplete(q)
+    q = "%#{q}%"
+    where("mixes.name LIKE ?", q).order('name ASC').limit(5)
+  end
+  
+  def self.autocomplete_data(q)
+    Mix.autocomplete(q).map(&:name)
+  end
+
 end

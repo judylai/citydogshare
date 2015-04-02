@@ -7,13 +7,21 @@
 
 <!-- move this out of html -->
 <script type="text/javascript">
-    $(document).ready(function() {
-        var array = <%= @mix_array %>;
-        $("#myTags").tagit({
-          availableTags: array
+  $(document).ready(function() {
+    $("#myTags").tagit({
+      tagSource: function(search, showChoices) {
+        var that = this;
+        $.ajax({
+          url: "/mixes/autocomplete.json",
+          data: {q: search.term},
+          success: function(choices) {
+            showChoices(that._subtractArray(choices, that.assignedTags()));
+          }
         });
+      },
 
     });
+  });
 </script>
 
 
