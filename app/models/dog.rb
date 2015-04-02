@@ -16,9 +16,4 @@ class Dog < ActiveRecord::Base
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
-  # def personalities
-  #   #personalities
-  #   #personalities.map{|personality| personality.name}
-  # end
-
 end

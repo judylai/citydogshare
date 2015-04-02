@@ -22,14 +22,4 @@ describe Dog do
     assert_equal @dog.age, 2
   end
 
-  it 'should list the right personality names' do
-    @dog = Dog.create(:name => "Fido", :gender => "Male")
-    @dog.personalities << Personality.find_by_id(1)
-        #@pl = DogPersonalityLinker.create(:personality => Personality.find_by_id(1))
-    #@dog.personalities << DogPersonalityLinker.create(:personality => Personality.find_by_id(1))
-    #@dog.personalities << Personality.find_by_id(8)
-    @dog.save
-    #assert_equal @dog.personalities, ["anxious", "still a puppy"]
-  end
-
 end
