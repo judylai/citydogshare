@@ -1,0 +1,94 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<%= javascript_include_tag 'tag-it.js' %>
+
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<%= stylesheet_link_tag 'jquery.tagit.css' %>
+
+<!-- move this out of html -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        var array = <%= @mix_array %>;
+        $("#myTags").tagit({
+          availableTags: array
+        });
+
+    });
+</script>
+
+
+<h2>Edit Your Dog's Profile</h2>
+
+<%= form_tag(controller: "dogs", action: "new", method: "get") do %>
+<div class="ui form">  
+
+  <div class="field"><label>Name</label>
+    <%= text_field(:dog, :name) %>
+  </div>
+
+  <div class="field"><label>Birthdate</label>
+    <!-- insert month day and year input here -->
+  </div>
+
+  <div class="field"><label>Gender</label>
+    <%= select :dog, :gender, ["Male", "Female"] %>
+  </div>
+
+  <div class="field"><label>Mix</label>
+    <!-- insert Jquery for tags here -->
+    <ul id="myTags">
+    </ul>
+  </div>
+
+  <div class="field"><label>Size</label>
+    <% size_options = options_from_collection_for_select(Size.all, 'id', 'range') %>
+    <%= select :dog, :size,  size_options %>
+  </div>
+
+  <div class="field"><label>Motto</label>
+    <%= text_field(:dog, :motto) %>
+  </div>
+
+  <div class="field"><label>Description</label>
+    <%= text_area(:dog, :description) %>
+  </div>
+
+  <div class="field"><label>Energy Level</label>
+    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'level') %>
+    <%= select :dog, :size, energy_options %>
+  </div>
+  
+  <div class="field"><label>Likes</label>
+    <% Like.find_each do |like| %>
+      <ul>
+        <%= check_box_tag :dog, like.id %>  <!-- NOT SURE IF SAVING AS RIGHT THING!!! -->
+        <%= like.thing %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="field"><label>Health Notes</label>
+    <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?") %>
+  </div>
+
+  <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
+    <%= radio_button_tag(:dog, :fixed, ["Yes", "No"]) %> <!-- Radio button not working -->
+  </div>
+
+
+
+
+
+
+
+  <div class="field"><label>
+
+
+<div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
+
+<% end %>
+
+<%= button_to "Cancel Changes", root_path, :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
+
+
+</div>
