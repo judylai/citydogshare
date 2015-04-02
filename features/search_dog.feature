@@ -28,3 +28,7 @@ Scenario: Search for a dog
   And I choose "Energy Level" as "sleeps all day" 
   And I choose "likes" as "adventure"
   Then I should see the dog profile for "Spock"
+
+Scenario: Search for a nonexistent dog
+  When I fill out "Age" with "5"
+  Then I should see "No Dogs Match Your Search Criteria"
