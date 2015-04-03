@@ -84,6 +84,16 @@
     <%= radio_button :dog, :fixed, false, :checked => true %>
   </div>
 
+  <div class="field"><label>Availability</label>
+    <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
+  </div>
+
+
+  <div class="field"><label>Comments</label>
+    <%=text_area(:dog, :comments, :placeholder => "Is there anything else people should know about your dog?") %>
+  </div>
+
+
 
 <!-- IMAGE UPLOADING -->
 
@@ -99,5 +109,6 @@
 
 <%= button_to "Cancel Changes", root_path, :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
 
+<% @list %>
 
 </div>

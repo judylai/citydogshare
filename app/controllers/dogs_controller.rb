@@ -7,10 +7,10 @@ class DogsController < ApplicationController
 
   def create
     #likes fucks everything up right now
-    #@dog = Dog.create(attributes_list(params))
+    @dog = Dog.create(attributes_list(params))
 
 
-    redirect_to @current_user
+    redirect_to root_path
   end
 
   def get_mix_array(params)
@@ -26,14 +26,14 @@ class DogsController < ApplicationController
     EnergyLevel.find(dog_attributes['energy_level'])
   end
 
-  def get_likes_array(dog_attributes)
-    dog_attributes['likes'].keys.map { |like| Like.find_by_thing(like) }
+  def get_likes_array(params)
+    params['likes'].keys.map { |like| Like.find_by_thing(like) }
   end
 
   def get_birthday(dog_attributes)
-    year = dog_attributes['dob(1i)']
-    month = dog_attributes['dob(2i)']
-    day = dog_attributes['dob(3i)']
+    year = dog_attributes['dob(1i)'].to_i
+    month = dog_attributes['dob(2i)'].to_i
+    day = dog_attributes['dob(3i)'].to_i
 
     DateTime.new(year, month, day)
   end
@@ -44,8 +44,11 @@ class DogsController < ApplicationController
     dog_attributes[:mixes] = get_mix_array(params) #make sure mix is not empty
     dog_attributes[:size] = get_size_object(dog_attributes)
     dog_attributes[:energy_level] = get_energy_object(dog_attributes)
-    dog_attributes[:likes] = get_likes_array(dog_attributes)
-    dog_attributes[:dob] = DateTime.new(year, month, day)
+    dog_attributes[:likes] = get_likes_array(params)
+    dog_attributes[:dob] = get_birthday(dog_attributes)
+    return dog_attributes
   end
 
 end
+
+

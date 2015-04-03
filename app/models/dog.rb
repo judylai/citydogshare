@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_levels, :size
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size
 
   belongs_to :user
   has_many :dog_mix_linkers
