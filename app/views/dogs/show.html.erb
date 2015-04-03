@@ -4,11 +4,11 @@
 
 <div class="ui success message">
   <div class="content">
-<div class="header"><%= "Hi #{@current_user.first_name}!" %></div>
+<div class="header"><%= "Hi, I'm  #{@dog.name}!" %></div>
   </div>
 </div>
 
-<div class = "small-4 columns">
+<div class = "small-8 columns">
   <div id="user_info">
     <!-- insert image tag here -->
   <div id="ui-segment">
@@ -20,11 +20,19 @@
   <p> </p>
   <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @dog.gender %></div>
   <p> </p>
-  <div id="birthday"><h4 class = "ui teal label">Birthday:</h4>&nbsp;&nbsp;<%= @dog.age %></div>
+  <div id="mix"><h4 class = "ui teal label">Mix:</h4>&nbsp;&nbsp;<%= @dog.mixes.pluck(:name).join(", ") %></div>
+  <p> </p>
+  <div id="birthday"><h4 class = "ui teal label">Age:</h4>&nbsp;&nbsp;<%= @dog.age %></div>
+  <p> </p>
+  <div id="size"><h4 class = "ui teal label">Size:</h4>&nbsp;&nbsp;<%= @dog.size.range %></div>
+  <p> </p>
+  <div id="energy"><h4 class = "ui teal label">Energy Level:</h4>&nbsp;&nbsp;<%= @dog.energy_level.level %></div>
+  <p> </p>
+  <div id="personality"><h4 class = "ui teal label">Personality:</h4>&nbsp;&nbsp;<%= @dog.personalities.pluck(:name).join(",") %></div>
   <p> </p>
   <div id="description"><h4 class = "ui teal label">Health Notes:</h4>&nbsp;&nbsp;<%= @dog.health %></div>
   <p> </p>
- <div id="fixed"><h4 class = "ui teal label">Fixed:</h4>&nbsp;&nbsp;<%= @dog.fixed %></div>
+  <div id="fixed"><h4 class = "ui teal label">Fixed:</h4>&nbsp;&nbsp;<%= @dog.fixed %></div>
   <p> </p>
   <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
   <p> </p>

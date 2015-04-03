@@ -114,7 +114,7 @@
                 this.tagList = this.element.find('ul, ol').andSelf().last();
             }
 
-            this._tagInput = $('<input type="text" id="mix_input" />').addClass('ui-widget-content');
+            this._tagInput = $('<input type="text" id="dog_mix" name="dog[mix]" />').addClass('ui-widget-content');
             this._hintOverlay = $('<li></li>').addClass('tagit-hint ui-widget-content').text(this.element.attr('title')||"");
 
             if (this.options.tabIndex) {
