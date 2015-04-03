@@ -11,9 +11,7 @@ class DogsController < ApplicationController
     filter_by_likes()
     filter_by_age()
 
-    if @dogs.empty?
-      flash[:notice] = "No Dogs Found"
-    end
+    @no_dogs = @dogs.empty?
 
   end
 

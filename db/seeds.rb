@@ -566,19 +566,19 @@ dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1, :energy_lev
 dob_list = [[2001, 2], [2010, 3], [2014, 4]]
 
 index = 0
-dogs_list.each do |dog|
-  dog = Dog.create(:name => dog[:name], :gender => dog[:gender], :motto => dog[:motto], :availability => dog[:availability])
-  dog.size_id = index + 1
-  dog.energy_level_id = index + 1
-  dog.personalities << Personality.new(:name => personality_list[index])
-  dog.personalities << Personality.new(:name => personality_list[index + 1])
-  dog.mixes << Mix.new(:name => mix_list[index])
-  dog.likes << Like.new(:thing => likes_list[index])
-  dog.likes << Like.new(:thing => likes_list[index + 1])
-  dog.dob = DateTime.new(dob_list[index][0], dob_list[index][1])
-  dog.save 
-  index += 1
-end
+#dogs_list.each do |dog|
+#  dog = Dog.create(:name => dog[:name], :gender => dog[:gender], :motto => dog[:motto], :availability => dog[:availability])
+#  dog.size_id = index + 1
+#  dog.energy_level_id = index + 1
+#  dog.personalities << Personality.new(:name => personality_list[index])
+#  dog.personalities << Personality.new(:name => personality_list[index + 1])
+#  dog.mixes << Mix.new(:name => mix_list[index])
+#  dog.likes << Like.new(:thing => likes_list[index])
+#  dog.likes << Like.new(:thing => likes_list[index + 1])
+#  dog.dob = DateTime.new(dob_list[index][0], dob_list[index][1])
+#  dog.save 
+#  index += 1
+#end
 
 
 

@@ -96,6 +96,9 @@
 
   <div class="large-7 columns">
     <div class="ui segment" id="dog_search_results">
+    <% if @no_dogs %>
+      <h1> No Dogs Found </h1>
+    <% end %>
     <% @dogs.each do |dog| %>
     <div class="ui vertical segment">
 
