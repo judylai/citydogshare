@@ -16,7 +16,7 @@ When /^I create a new dog "([^"]*)"$/ do |name|
 end
 
 And /^I fill in the mix box with "([^"]*)"$/ do |text|
-  page.find(:css, "input#dog_mix.ui-widget-content.ui-autocomplete-input")
+  page.find(:css, "dog_mix")
 end
 
 Then /^wait$/ do
