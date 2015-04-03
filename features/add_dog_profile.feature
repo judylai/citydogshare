@@ -25,26 +25,27 @@ Scenario: page shows error when some required fields are not filled
 
 Scenario: create dog profile
   When I fill in "dog_name" with "Spock"
-  And I choose "Mix" as "Corgi"
-  #And I fill in "Age" with "2"
-  And I select "Small" as "Small"
-  And I fill out "Status" with "Live long and play fetch."
-  And I choose "Gender" as "Male"
-  And I fill out "Healthy notes" as "none"
-  And I choose "Fixed" as "Yes"
-  And I fill out "Description" with "Very normal."
-  And I fill out "Likes" with "Playing fetch"d
-  And I fill out "Dislikes" with "Cats"
-  And I fill out "energy_level" with "high energy"
-  And I fill out "location" with "1234 Berkeley"
-  And I fill out "pics" with "doggy1.png"
+  #And I fill in "mix_input" with "Labr" #this isn't working
+  #And I select "Labrador" and press enter
+  And I select "2010" from "dog_dob_1i"
+  And I select "December" from "dog_dob_2i"
+  And I select "4" from "dog_dob_3i"
+  And I select "Male" from "dog_gender"
+  And I select "medium (16-40)" from "dog_size"
+  And I check "personality_curious"
+  And I fill in "dog_motto" with "Live long and play fetch."
+  And I fill in "dog_description" with "Spock is out of this world. He even speaks Klingon"
+  And I select "good" from "dog_energy_level"
+  And I check "likes_cats"
+  And I fill in "dog_health" with "none"
+  And I choose "dog_fixed_true"
+  And I fill in "dog_availability" with "Mondays and Weekends!"
+  #And I fill out "pics" with "doggy1.png"
   And I press "Save Changes"
-  Then I should see the dog profile for "Spock"
+  Then I should be on the users page for "Batman"
 
 Scenario: make sure new dog shows up in user profile
   When I create a new dog "Spock"
-  And I should see "Parents"
-  When I click on "Juan"
-  Then I should see the user profile for "Juan"
+  And I am on the users page for "Batman"
   And I should see "Spock"
 

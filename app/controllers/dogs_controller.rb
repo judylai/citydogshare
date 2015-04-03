@@ -10,7 +10,7 @@ class DogsController < ApplicationController
     @dog = Dog.new(attributes_list(params))
     @dog.user_id = @current_user.id
     if @dog.save
-      redirect_to root_path
+      redirect_to user_path(@current_user)
     else
       flash[:notice] = @dog.errors.messages
       redirect_to new_dog_path

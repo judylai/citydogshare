@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :dog do
-    name "Batman"
+    name "Spock"
     gender "Male"
     dob Date.new(2010, 2, 3)
     mixes { [Mix.find(1)] }

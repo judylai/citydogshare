@@ -14,27 +14,27 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-03T00:56:45-07:00">2015-04-03T00:56:45-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-03T10:28:48-07:00">2015-04-03T10:28:48-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">83.33%</span></span>
+    (<span class="covered_percent"><span class="yellow">88.41%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         9.96
+         9.04
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>60</b> relevant lines. 
-    <span class="green"><b>50</b> lines covered</span> and
-    <span class="red"><b>10</b> lines missed </span>
+    <b>69</b> relevant lines. 
+    <span class="green"><b>61</b> lines covered</span> and
+    <span class="red"><b>8</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,22 +62,22 @@
       
       <tr>
         <td class="strong"><a href="#3d93b3928cbe6a9555a0d6c60947c74142eeb4d7" class="src_link" title="features/step_definitions/auth_steps.rb">features/step_definitions/auth_steps.rb</a></td>
-        <td class="red strong">75.0 %</td>
+        <td class="yellow strong">87.5 %</td>
         <td>61</td>
         <td>32</td>
-        <td>24</td>
-        <td>8</td>
-        <td>1.8</td>
+        <td>28</td>
+        <td>4</td>
+        <td>2.3</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#7a029ada78eccbf032c4cfb905caa6496046df4e" class="src_link" title="features/step_definitions/dog_steps.rb">features/step_definitions/dog_steps.rb</a></td>
-        <td class="red strong">50.0 %</td>
+        <td class="red strong">72.73 %</td>
+        <td>20</td>
+        <td>11</td>
+        <td>8</td>
         <td>3</td>
-        <td>2</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0.5</td>
+        <td>0.8</td>
       </tr>
       
       <tr>
@@ -97,7 +97,7 @@
         <td>6</td>
         <td>5</td>
         <td>1</td>
-        <td>1.8</td>
+        <td>2.2</td>
       </tr>
       
       <tr>
@@ -3561,11 +3561,11 @@
         <div class="source_table" id="3d93b3928cbe6a9555a0d6c60947c74142eeb4d7">
   <div class="header">
     <h3>features/step_definitions/auth_steps.rb</h3>
-    <h4><span class="red">75.0 %</span> covered</h4>
+    <h4><span class="yellow">87.5 %</span> covered</h4>
     <div>
       <b>32</b> relevant lines. 
-      <span class="green"><b>24</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <span class="green"><b>28</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
   
@@ -3776,8 +3776,8 @@
           <code class="ruby">When /^(?:|I )press &quot;([^&quot;]*)&quot;$/ do |button|</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="35">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="7" data-linenumber="35">
+          <span class="hits">7</span>
           
           <code class="ruby">  click_button(button)</code>
         </li>
@@ -3800,8 +3800,8 @@
           <code class="ruby">When /^(?:|I )fill in &quot;([^&quot;]*)&quot; with &quot;([^&quot;]*)&quot;$/ do |field, value|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="39">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="39">
+          <span class="hits">6</span>
           
           <code class="ruby">  fill_in(field, :with =&gt; value)</code>
         </li>
@@ -3824,14 +3824,14 @@
           <code class="ruby">Then /^(?:|I )should see &quot;([^&quot;]*)&quot;$/ do |text|</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="43">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="7" data-linenumber="43">
+          <span class="hits">7</span>
           
           <code class="ruby">  if page.respond_to? :should</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="44">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="7" data-linenumber="44">
+          <span class="hits">7</span>
           
           <code class="ruby">    page.should have_content(text)</code>
         </li>
@@ -3872,20 +3872,20 @@
           <code class="ruby">Then /^(?:|I )should be on (.+)$/ do |page_name|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="51">
-          
+        <li class="covered" data-hits="1" data-linenumber="51">
+          <span class="hits">1</span>
           
           <code class="ruby">  current_path = URI.parse(current_url).path</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="52">
-          
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
           
           <code class="ruby">  if current_path.respond_to? :should</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="53">
-          
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
           
           <code class="ruby">    current_path.should == path_to(page_name)</code>
         </li>
@@ -3926,10 +3926,10 @@
           <code class="ruby">When /^(?:|I )select &quot;([^&quot;]*)&quot; from &quot;([^&quot;]*)&quot;$/ do |value, field|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="60">
+        <li class="covered" data-hits="6" data-linenumber="60">
+          <span class="hits">6</span>
           
-          
-          <code class="ruby">  select(value, :from =&gt; field)</code>
+          <code class="ruby">  select(value, :from =&gt; field, match: :first)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
@@ -3945,11 +3945,11 @@
         <div class="source_table" id="7a029ada78eccbf032c4cfb905caa6496046df4e">
   <div class="header">
     <h3>features/step_definitions/dog_steps.rb</h3>
-    <h4><span class="red">50.0 %</span> covered</h4>
+    <h4><span class="red">72.73 %</span> covered</h4>
     <div>
-      <b>2</b> relevant lines. 
-      <span class="green"><b>1</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>11</b> relevant lines. 
+      <span class="green"><b>8</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
   
@@ -3965,10 +3965,112 @@
         <li class="missed" data-hits="0" data-linenumber="2">
           
           
-          <code class="ruby">	FactoryGirl.create(:dog)</code>
+          <code class="ruby">  FactoryGirl.create(:dog)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">When /^(?:|I )choose &quot;([^&quot;]*)&quot;$/ do |field|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  choose(field, match: :first)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">When /^(?:|I )check &quot;([^&quot;]*)&quot;$/ do |field|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="10">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  check(field, match: :first)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">And /^And I select &quot;([^&quot;]*)&quot; and press enter$/ do |mix|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="14">
+          
+          
+          <code class="ruby">  page.driver.browser.key_down(:arrow_left).key_up(:arrow_left).perform</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="15">
+          
+          
+          <code class="ruby">  page.driver.browser.key_down(:enter).key_up(:enter).perform</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">When /^I create a new dog &quot;([^&quot;]*)&quot;$/ do |name|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  FactoryGirl.create(:dog)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby">end</code>
@@ -5612,8 +5714,8 @@
           <code class="ruby">  def path_to(page_name)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="14">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="14">
+          <span class="hits">5</span>
           
           <code class="ruby">    case page_name</code>
         </li>
@@ -5642,8 +5744,8 @@
           <code class="ruby">    when /^the users page for &quot;Batman&quot;$/</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="19">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="19">
+          <span class="hits">5</span>
           
           <code class="ruby">      '/users/1'</code>
         </li>

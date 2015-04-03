@@ -57,5 +57,5 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
 end
 
 When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
-  select(value, :from => field)
+  select(value, :from => field, match: :first)
 end
