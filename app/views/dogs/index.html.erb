@@ -44,11 +44,20 @@ Energy Level:
 <% end %>
 <br />
 
+Age:
+<br />
+<% 4.times do |i| %>
+<%= check_box_tag "age[#{i}]", 1, @selected_ranges.include?(i.to_s) %>
+<%= @age_ranges[i]  %> 
+<% end %>
+<br />
+
 <%= submit_tag 'Search Dogs', :id => 'dog_search_submit' %>
 <% end %>
 
 <% @dogs.each do |dog| %>
 <%= dog.name %>
+<%= dog.age %>
 <br />
 <% end %>
 
