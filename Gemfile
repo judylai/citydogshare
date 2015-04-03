@@ -10,6 +10,7 @@ gem 'omniauth-facebook', '~> 1.4.1'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
+gem 'rails_secret_token_env'
 
 group :development, :test do
   gem 'sqlite3'

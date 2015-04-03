@@ -229,6 +229,8 @@ GEM
       json
       require_all
       ruby-progressbar
+    rails_secret_token_env (0.4)
+      railties
     railties (3.2.16)
       actionpack (= 3.2.16)
       activesupport (= 3.2.16)
@@ -331,6 +333,7 @@ DEPENDENCIES
   pg
   railroady
   rails (= 3.2.16)
+  rails_secret_token_env
   rake
   rspec-rails (~> 3.2.0)
   sass (~> 3.2.0)
