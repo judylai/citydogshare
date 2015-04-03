@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.9.0/application.js' type='text/javascript'></script>    
     <link href='./assets/0.9.0/application.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" type="image/png" href="./assets/0.9.0/favicon_red.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.9.0/favicon_yellow.png" />
     <link rel="icon" type="image/png" href="./assets/0.9.0/favicon.png" />
   </head>
   
@@ -14,27 +14,27 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-03T11:09:52-07:00">2015-04-03T11:09:52-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-03T11:26:16-07:00">2015-04-03T11:26:16-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">76.0%</span></span>
+    (<span class="covered_percent"><span class="yellow">81.69%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.18
+         8.65
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>75</b> relevant lines. 
-    <span class="green"><b>57</b> lines covered</span> and
-    <span class="red"><b>18</b> lines missed </span>
+    <b>71</b> relevant lines. 
+    <span class="green"><b>58</b> lines covered</span> and
+    <span class="red"><b>13</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -72,12 +72,12 @@
       
       <tr>
         <td class="strong"><a href="#7a029ada78eccbf032c4cfb905caa6496046df4e" class="src_link" title="features/step_definitions/dog_steps.rb">features/step_definitions/dog_steps.rb</a></td>
-        <td class="red strong">47.06 %</td>
-        <td>28</td>
-        <td>17</td>
-        <td>8</td>
+        <td class="red strong">69.23 %</td>
+        <td>24</td>
+        <td>13</td>
         <td>9</td>
-        <td>0.5</td>
+        <td>4</td>
+        <td>0.7</td>
       </tr>
       
       <tr>
@@ -3800,8 +3800,8 @@
           <code class="ruby">When /^(?:|I )fill in &quot;([^&quot;]*)&quot; with &quot;([^&quot;]*)&quot;$/ do |field, value|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="39">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="39">
+          <span class="hits">2</span>
           
           <code class="ruby">  fill_in(field, :with =&gt; value)</code>
         </li>
@@ -3945,11 +3945,11 @@
         <div class="source_table" id="7a029ada78eccbf032c4cfb905caa6496046df4e">
   <div class="header">
     <h3>features/step_definitions/dog_steps.rb</h3>
-    <h4><span class="red">47.06 %</span> covered</h4>
+    <h4><span class="red">69.23 %</span> covered</h4>
     <div>
-      <b>17</b> relevant lines. 
-      <span class="green"><b>8</b> lines covered</span> and
-      <span class="red"><b>9</b> lines missed.</span>
+      <b>13</b> relevant lines. 
+      <span class="green"><b>9</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
   
@@ -4061,64 +4061,40 @@
         <li class="covered" data-hits="1" data-linenumber="18">
           <span class="hits">1</span>
           
-          <code class="ruby">When /^I type in &quot;([^\&quot;]*)&quot; into autocomplete list &quot;([^\&quot;]*)&quot; and I choose &quot;([^\&quot;]*)&quot;$/ do |typed, input_name,should_select|</code>
+          <code class="ruby">And /^I fill in the mix box with &quot;([^&quot;]*)&quot;$/ do |text|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="19">
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">   page.driver.browser.execute_script %Q{ $('input[data-autocomplete]').trigger(&quot;focus&quot;) }</code>
+          <code class="ruby">  page.find(:css, &quot;input#dog_mix.ui-widget-content.ui-autocomplete-input&quot;)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="20">
-          
-          
-          <code class="ruby">   fill_in(&quot;#{input_name}&quot;,:with =&gt; typed)</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="21">
-          
-          
-          <code class="ruby">   page.driver.browser.execute_script %Q{ $('input[data-autocomplete]').trigger(&quot;keydown&quot;) }</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="22">
-          
-          
-          <code class="ruby">   sleep 1</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="23">
-          
-          
-          <code class="ruby">   page.driver.browser.execute_script %Q{ $('.ui-menu-item a:contains(&quot;#{should_select}&quot;)').trigger(&quot;mouseenter&quot;).trigger(&quot;click&quot;); }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby">end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="25">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="26">
+        <li class="covered" data-hits="1" data-linenumber="22">
           <span class="hits">1</span>
           
           <code class="ruby">Then /^wait$/ do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="27">
+        <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
           <code class="ruby">  sleep 2</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="never" data-hits="" data-linenumber="24">
           
           
           <code class="ruby">end</code>

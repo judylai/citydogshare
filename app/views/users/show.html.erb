@@ -48,7 +48,7 @@
    <ul>
    <% @current_user.dogs.each do |dog| %>
    <li>
-                <%= link_to dog.name, dog_path(), :method => :get %>
+                <%= link_to dog.name, dog_path(dog.id), :method => :get %>
                 </li>
 <% end %>
 </ul>

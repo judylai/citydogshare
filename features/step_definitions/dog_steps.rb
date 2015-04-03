@@ -15,12 +15,8 @@ When /^I create a new dog "([^"]*)"$/ do |name|
   FactoryGirl.create(:dog)
 end
 
-When /^I type in "([^\"]*)" into autocomplete list "([^\"]*)" and I choose "([^\"]*)"$/ do |typed, input_name,should_select|
-   page.driver.browser.execute_script %Q{ $('input[data-autocomplete]').trigger("focus") }
-   fill_in("#{input_name}",:with => typed)
-   page.driver.browser.execute_script %Q{ $('input[data-autocomplete]').trigger("keydown") }
-   sleep 1
-   page.driver.browser.execute_script %Q{ $('.ui-menu-item a:contains("#{should_select}")').trigger("mouseenter").trigger("click"); }
+And /^I fill in the mix box with "([^"]*)"$/ do |text|
+  page.find(:css, "input#dog_mix.ui-widget-content.ui-autocomplete-input")
 end
 
 Then /^wait$/ do

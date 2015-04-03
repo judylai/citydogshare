@@ -15,8 +15,9 @@
   </div>
 </div>
 
-<div class = "small-8 columns">
   <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
+  <p> </p>
+  <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
   <p> </p>
   <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @dog.gender %></div>
   <p> </p>
@@ -34,7 +35,7 @@
   <p> </p>
   <div id="fixed"><h4 class = "ui teal label">Fixed:</h4>&nbsp;&nbsp;<%= @dog.fixed %></div>
   <p> </p>
-  <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
+  <div id="likes"><h4 class = "ui teal label">Likes:</h4>&nbsp;&nbsp;<%= @dog.likes.pluck(:thing).join(", ") %></div>
   <p> </p>
 
 
@@ -48,5 +49,4 @@
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
   <p> </p>
 
-</div>
 
