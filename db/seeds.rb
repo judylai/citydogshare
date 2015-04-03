@@ -561,12 +561,20 @@ sizes_list.each do |size|
   Size.create(range: size)
 end
 
-dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1, :motto => "YOLO", :availability => "Monday, Wednesday, Friday"}, {:name => "Fido", :gender => "Male", :size_id => 3, :motto => "HOWDY EVERYONE. I AM A DOG. I LIKE SQUIRRELS. HIIIIIIIIIII!", :availability => "Weekend afternoons, Monday nights, Tuesday mornings, Thursday lunchtimes"}, {:name => "Batman", :gender => "Female", :size_id => 2, :motto => "I am Batman.", :availability => "When the bat signal calls me"}]
+dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1, :energy_level_id => 1, :motto => "YOLO", :availability => "Monday, Wednesday, Friday", :energy_level_id => 2}, {:name => "Fido", :gender => "Male", :size_id => 3, :motto => "HOWDY EVERYONE. I AM A DOG. I LIKE SQUIRRELS. HIIIIIIIIIII!", :availability => "Weekend afternoons, Monday nights, Tuesday mornings, Thursday lunchtimes"}, {:name => "Batman", :gender => "Female", :size_id => 2, :motto => "I am Batman.", :availability => "When the bat signal calls me", :energy_level_id => 3}]
 
+index = 0
 dogs_list.each do |dog|
   dog = Dog.create(:name => dog[:name], :gender => dog[:gender], :motto => dog[:motto], :availability => dog[:availability])
-  dog.size_id = dog[:size_id]
+  dog.size_id = index + 1
+  dog.energy_level_id = index + 1
+  dog.personalities << Personality.new(:name => personality_list[index])
+  dog.personalities << Personality.new(:name => personality_list[index + 1])
+  dog.mixes << Mix.new(:name => mix_list[index])
+  dog.likes << Like.new(:thing => likes_list[index])
+  dog.likes << Like.new(:thing => likes_list[index + 1])
   dog.save 
+  index += 1
 end
 
 
