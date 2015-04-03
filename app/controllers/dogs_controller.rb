@@ -27,7 +27,11 @@ class DogsController < ApplicationController
   end
 
   def get_likes_array(params)
-    params['likes'].keys.map { |like| Like.find_by_thing(like) }
+    if params['likes'] != nil
+      params['likes'].keys.map { |like| Like.find_by_thing(like) }
+    else
+      return []
+    end
   end
 
   def get_birthday(dog_attributes)

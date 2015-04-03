@@ -11,6 +11,8 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
+  validates :name, :mixes, presence: true
+
   def age
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
