@@ -103,7 +103,7 @@ describe DogsController, :type => :controller do
       params = {}
       params[:size] = {"xl(101+)" => 1}
       get :index, params
-      expect(flash[:notice]).to eq("No Dogs Found")
+      expect(assigns(:no_dogs)).to eq(true)
     end
   end
 
