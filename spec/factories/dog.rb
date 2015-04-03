@@ -8,7 +8,6 @@ FactoryGirl.define do
     motto ""
     fixed false
     health ""
-    comments ""
     contact nil 
     availability ""
     size { Size.find(1) }
