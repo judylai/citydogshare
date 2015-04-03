@@ -26,9 +26,8 @@ Scenario: page shows error when some required fields are not filled
 Scenario: create dog profile
   When I fill in "dog_name" with "Spock"
   Then wait
-  #And I type in "Labr" into autocomplete list "mix_input" and I choose "Labrador"
-  And I fill in the mix box with "Labr"
-  #And I select "Labrador" and press enter
+  And I fill in "myTags" with "Labrador"
+  And I select "Labrador" and press enter
   And I select "2010" from "dog_dob_1i"
   And I select "December" from "dog_dob_2i"
   And I select "4" from "dog_dob_3i"

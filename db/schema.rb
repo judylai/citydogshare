@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150307174800) do
+ActiveRecord::Schema.define(:version => 20150403121700) do
 
   create_table "dog_like_linkers", :force => true do |t|
     t.integer "dog_id"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(:version => 20150307174800) do
     t.integer  "size_id"
     t.integer  "energy_level_id"
     t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "energy_levels", :force => true do |t|

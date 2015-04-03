@@ -35,11 +35,15 @@
 
 <h2>Edit Your Dog's Profile</h2>
 
-<%= form_tag(controller: "dogs", action: "create", method: "post") do %>
+<%= form_tag({controller: :dogs, action: :create}, method: :post, :multipart => true) do %>
 <div class="ui form">  
 
   <div class="field"><label>Name</label>
     <%= text_field(:dog, :name) %>
+  </div>
+
+  <div class="field"><label>Photo</label>
+    <%= file_field(:dog, :photo) %>
   </div>
 
   <div class="field"><label>Birthdate</label>
@@ -51,6 +55,7 @@
   </div>
 
   <div class="field"><label>Mix</label>
+    <!--<input id="myTags" > -->
     <ul id="myTags">
     </ul>
   </div>
@@ -104,6 +109,7 @@
   <div class="field"><label>Availability</label>
     <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
   </div>
+
 
 
 <!-- IMAGE UPLOADING -->

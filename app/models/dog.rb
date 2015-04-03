@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -11,8 +11,19 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
+  has_attached_file :photo, :styles => { :small => "150x150>" },
+                  :url  => "/assets/dogs/:id/:style/:basename.:extension",
+                  :path => ":rails_root/public/assets/dogs/:id/:style/:basename.:extension"
+
   validates :name, :presence => {:message => "Name can't be blank"}
   validates :mixes, :presence => {:message => "Mix can't be blank"}
+  validates_attachment_presence :photo
+  validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
+
+
+
+
 
   def age
     now = Time.now.utc.to_date

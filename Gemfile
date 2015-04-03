@@ -24,6 +24,8 @@ group :development, :test do
   gem 'metric_fu'
   gem 'minitest', '~>4.7.5'
   gem 'selenium-webdriver'
+  gem 'paperclip', "~> 4.2"
+  gem 'rmagick'
 end
 
 group :test do
