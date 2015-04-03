@@ -1,21 +1,28 @@
 class DogsController < ApplicationController
 
   def new
-    #dog.mixes.append(Mix.find_by_name("Labrador"))
     @likes = Like.pluck(:thing)
+    @personalities = Personality.pluck(:name)
   end
 
   def create
-    #likes fucks everything up right now
-    @dog = Dog.create(attributes_list(params))
-
-
-    redirect_to root_path
+    @dog = Dog.new(attributes_list(params))
+    @dog.user_id = current_user
+    if @dog.save
+      redirect_to root_path
+    else
+      flash[:notice] = @dog.errors.messages
+      redirect_to new_dog_path
+    end
   end
 
   def get_mix_array(params)
-    tags = params['item']['tags']
-    tags.map{ |tag| Mix.find_by_name(tag) }
+    if params['item']
+      tags = params['item']['tags']
+      tags.map{ |tag| Mix.find_by_name(tag) }
+    else
+      return []
+    end
   end
 
   def get_size_object(dog_attributes)
@@ -34,6 +41,15 @@ class DogsController < ApplicationController
     end
   end
 
+  def get_personalities_array(params)
+    if params['personalities'] != nil
+      params['personalities'].keys.map {|personality| Personality.find_by_type(personality)}
+    else
+      return []
+    end
+  end
+
+
   def get_birthday(dog_attributes)
     year = dog_attributes['dob(1i)'].to_i
     month = dog_attributes['dob(2i)'].to_i
@@ -43,14 +59,11 @@ class DogsController < ApplicationController
   end
 
   def attributes_list(params)
-    dog_attributes = params[:dog] #some things in params have string accessors
-
-    dog_attributes[:mixes] = get_mix_array(params) #make sure mix is not empty
-    dog_attributes[:size] = get_size_object(dog_attributes)
-    dog_attributes[:energy_level] = get_energy_object(dog_attributes)
-    dog_attributes[:likes] = get_likes_array(params)
-    dog_attributes[:dob] = get_birthday(dog_attributes)
-    return dog_attributes
+    dog_attributes = params[:dog]
+    new_attrs = {:mixes => get_mix_array(params), :size => get_size_object(dog_attributes), 
+      :energy_level => get_energy_object(dog_attributes), :likes => get_likes_array(params),
+      :dob => get_birthday(dog_attributes), :personalities => get_personalities_array(params) }
+    dog_attributes.merge(new_attrs)
   end
 
 end

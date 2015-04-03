@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -11,7 +11,8 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
-  validates :name, :mixes, presence: true
+  validates :name, :presence => {:message => "Name can't be blank"}
+  validates :mixes, :presence => {:message => "Mix can't be blank"}
 
   def age
     now = Time.now.utc.to_date

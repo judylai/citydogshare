@@ -24,6 +24,15 @@
   });
 </script>
 
+<% if flash[:notice] %> <!-- what does this need to be? -->
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% flash[:notice].each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
 <h2>Edit Your Dog's Profile</h2>
 
 <%= form_tag(controller: "dogs", action: "create", method: "post") do %>
@@ -51,9 +60,18 @@
     <%= select :dog, :size, size_options %> 
   </div>
 
+  <div class="field"><label>Personality</label>
+    <% @personalities.each do |personality| %>
+        <%= check_box_tag "personality[#{personality}]", "1" %>  <!-- FIX THIS -->
+        <%= personality %>
+        <br>
+    <% end %>
+  </div>
+
   <div class="field"><label>Motto</label>
     <%= text_field(:dog, :motto) %>
   </div>
+
 
   <div class="field"><label>Description</label>
     <%= text_area(:dog, :description) %>
@@ -93,7 +111,6 @@
   </div>
 
 
-
 <!-- IMAGE UPLOADING -->
 
 
@@ -107,7 +124,5 @@
 <% end %>
 
 <%= button_to "Cancel Changes", root_path, :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-
-<% @list %>
 
 </div>
