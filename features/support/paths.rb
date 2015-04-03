@@ -17,6 +17,8 @@ module NavigationHelpers
       '/'
     when /^the users page for "Batman"$/
       '/users/1'
+    when /^the search dogs page$/
+      '/dogs'
 
 
     # Add more mappings here.

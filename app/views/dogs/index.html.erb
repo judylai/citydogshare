@@ -1,0 +1,165 @@
+<div class="large-12 columns">
+  <%= form_tag dogs_path, :method => :get do %>
+
+  <div class="large-12 columns">
+    <div class="large-2 columns">
+      Gender:
+      <br />
+      <div class="tiny ui vertical buttons">
+      <% @all_genders.each do |gender| %>
+      <div class="ui button">
+      <%= check_box_tag "gender[#{gender}]", 1, @selected_genders.include?(gender), :class => "check" %>
+      <%= label(:gender, gender.tr(" ", "_"), gender) %>
+      </div>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="large-10 columns">
+      Mix:
+      <%= select_tag 'mix_id', options_for_select(@all_mixes, @mix), :class => "ui dropdown" %>
+
+      <div class="right floated ui primary button transparent input">
+        <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "btn info" %>
+      </div>
+
+      <br />
+
+      Personality:
+      <br />
+      <div class="tiny ui buttons">
+      <% @all_personalities.each do |p| %>
+      <div class="ui button">
+        <%= check_box_tag "personality[#{p}]", 1, @selected_personalities.include?(p), :class => "check" %>
+        <%= label(:personality, p.tr(" ", "_"), p) %>
+      </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="large-12 columns">
+    <div class="large-2 columns">
+      Size:
+      <br />
+      <div class="mini ui vertical buttons">
+      <% @all_sizes.each do |s| %>
+      <div class="ui button">
+      <%= check_box_tag "size[#{s}]", 1, @selected_sizes.include?(s), :class => "check" %>
+      <%= label(:size, s.tr(" ", "_"), s) %>
+      </div>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="large-2 columns">
+      Age:
+      <br />
+      <div class="mini ui vertical buttons">
+      <% 4.times do |i| %>
+      <div class="ui button">
+      <%= check_box_tag "age[#{i}]", 1, @selected_ranges.include?(i.to_s), :class => "check" %>
+      <%= label(:age, i, @age_ranges[i]) %>
+      </div>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="large-8 columns">
+      Likes:
+      <br />
+      <div class="tiny ui buttons">
+      <% @all_likes.each do |l| %>
+      <div class="ui button">
+      <%= check_box_tag "like[#{l}]", 1, @selected_likes.include?(l), :class => "check" %>
+      <%= label(:like, l.tr(" ", "_"), l) %>
+      </div>
+      <% end %>
+      </div>
+      
+      <p></p>
+
+      Energy Level:
+      <br />
+      <div class="tiny ui buttons">
+      <% @all_energies.each do |e| %>
+      <div class="ui button">
+      <%= check_box_tag "energy[#{e}]", 1, @selected_energies.include?(e), :class => "check" %>
+      <%= label(:energy, e.tr(" ", "_"), e) %>
+      </div>
+      <% end %>
+      </div>
+      <br /><br />
+    </div>
+  </div>
+  <% end %>
+
+  <div class="large-7 columns">
+    <div class="ui segment" id="dog_search_results">
+    <% if @no_dogs %>
+      <h1> No Dogs Found </h1>
+    <% end %>
+    <% @dogs.each do |dog| %>
+    <div class="ui vertical segment">
+
+      <div class="large-3 columns">
+        <span class="image">
+          <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTq-JrbDxIqJCQm0mds0iyAamCDFYdNr1h3_r6Ekt7SNsWMboFE" style="height:100%; width:100%">
+        </span>
+      </div>
+
+      <div class="large-9 columns">
+        <div class="content">
+          <div class="ui medium header">
+            <%= link_to dog.name, dog_path(dog) %>
+          </div>
+          <div class="description">
+            <%= dog.motto %> 
+          </div>
+        </div>
+        <div class="extra content">
+          <i class="wait icon"></i>
+          <%= dog.availability %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="large-5 columns" id="map">
+    <div class="ui sticky">
+      <img src="http://www.digicution.com/wp-content/uploads/2012/06/HTML5-Repsonsive-Google-Maps-Tutorial-1.png" style="height:100%; width:100%">
+    </div>
+  </div>
+
+</div>
+<script>
+$(document).ready(function(){
+  $('.ui.sticky')
+  .sticky({
+    offset: 50,
+    context: '#dog_search_results'
+  });
+
+  $('select.dropdown').dropdown();
+
+  $.each($(':checked'), function( index, value ) {
+    $(value).parent().addClass('active');
+  });
+
+  $('.ui.button').on('click', function(){
+    $(this).toggleClass('active');
+    var $this_checkbox = $(this).children();
+    if ($this_checkbox.is(':checked')){
+      $this_checkbox.prop('checked', false);
+    } else {
+      $this_checkbox.prop('checked', true);
+    }
+  });
+
+  $('.check').on('click', function(){
+    $(this).parent().toggleClass('active');
+  });
+});
+</script>

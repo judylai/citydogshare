@@ -16,4 +16,28 @@ class Dog < ActiveRecord::Base
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
+  def energy_level
+    EnergyLevel.find(self.energy_level_id).level
+  end
+
+  def size
+    Size.find(self.size_id).range
+  end
+
+  def owner
+    User.find(self.user_id)
+  end
+
+  def readable_mixes
+    self.mixes.map {|m| m.name}
+  end
+
+  def readable_likes
+    self.likes.map {|l| l.thing}
+  end
+
+  def readable_personalities
+    self.personalities.map {|p| p.name}
+  end
+
 end
