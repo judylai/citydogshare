@@ -18,3 +18,5 @@ input[type=checkbox] + label {
     /*background-color: #e7e7e7;*/
     /*border-color: #ddd;*/
 }
+
+#map-canvas { height: 100%; margin: 0; padding: 0;}

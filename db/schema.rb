@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(:version => 20150307174800) do
     t.integer  "size_id"
     t.integer  "energy_level_id"
     t.integer  "user_id"
-    t.integer "personality_id"
   end
 
   create_table "energy_levels", :force => true do |t|
