@@ -9,8 +9,7 @@
 =begin
 users = [ {:uid => '12345', :last_name => 'Wayne', :first_name => 'Bruce', :location => 'Bat Cave, Gotham City', :gender => 'Male', :image => 'http://tinyurl.com/opnc38n', :status => 'looking',
            :phone_number => '(555)228-6261', :email => 'not_batman@wayneenterprises.com', :description => 'I love bats', :availability => 'not nights', :oauth_token => 'ABCDEF...', :oauth_expires_at => '12-Jun-1981'},
-  	    ]
-
+        ]
 users.each do |user|
   User.create!(user)
 end
@@ -533,7 +532,7 @@ personality_list = [
 ]
 
 personality_list.each do |type|
-  Personality.create(type: type)
+  Personality.create(name: type)
 end
 
 
@@ -561,14 +560,10 @@ sizes_list.each do |size|
   Size.create(range: size)
 end
 
+dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1}, {:name => "Fido", :gender => "Male", :size_id => 3}, {:name => "Batman", :gender => "Female", :size_id => 2}]
 
-
-
-
-
-
-
-
-
-
-
+dogs_list.each do |dog|
+  dog = Dog.create(:name => dog[:name], :gender => dog[:gender])
+  dog.size_id = dog[:size_id]
+  dog.save 
+end

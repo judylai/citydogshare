@@ -1,4 +1,5 @@
 class DogsController < ApplicationController
+  before_filter :current_user
 
   def new
     @likes = Like.pluck(:thing)
@@ -7,7 +8,7 @@ class DogsController < ApplicationController
 
   def create
     @dog = Dog.new(attributes_list(params))
-    @dog.user_id = current_user
+    @dog.user_id = @current_user.id
     if @dog.save
       redirect_to root_path
     else

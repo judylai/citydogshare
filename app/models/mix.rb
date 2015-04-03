@@ -3,6 +3,7 @@ class Mix < ActiveRecord::Base
   has_many :dog_mix_linkers
   has_many :dogs, :through => :dog_mix_linkers
 
+
   def self.autocomplete(q)
     q = "%#{q}%"
     where("mixes.name LIKE ?", q).order('name ASC').limit(5)
