@@ -1,29 +1,73 @@
-<%= form_tag dogs_path, :method => :get do %>
+<div class="large-12 columns">
+  <%= form_tag dogs_path, :method => :get do %>
 
-Gender:
-<br />
-<% @all_genders.each do |gender| %>
-<%= gender %> 
-<%= check_box_tag "gender[#{gender}]", 1, @selected_genders.include?(gender) %>
-<br />
-<% end %>
-<br />
-Personality:
-<br />
-<% @all_personalities.each do |p| %>
-<%= p %> 
-<%= check_box_tag "personality[#{p}]", 1, @selected_personalities.include?(p) %>
-<br />
-<% end %>
-<br />
-Mix:
-<%= select_tag 'mix_id', options_for_select(@all_mixes, @mix) %>
-<%= submit_tag 'Search Dogs', :id => 'dog_search_submit' %>
+    Gender:
+    <br />
+    <% @all_genders.each do |gender| %>
+    <%= gender %> 
+    <%= check_box_tag "gender[#{gender}]", 1, @selected_genders.include?(gender) %>
+    <br />
+    <% end %>
+    <br />
+    Personality:
+    <br />
+    <% @all_personalities.each do |p| %>
+    <%= p %> 
+    <%= check_box_tag "personality[#{p}]", 1, @selected_personalities.include?(p) %>
+    <br />
+    <% end %>
+    <br />
+    Mix:
+    <%= select_tag 'mix_id', options_for_select(@all_mixes, @mix) %>
+    <%= submit_tag 'Search Dogs', :id => 'dog_search_submit' %>
 
-<% end %>
+  <% end %>
+  <br/>
+</div>
 
-<% @dogs.each do |dog| %>
-<%= dog.name %>
-<br />
-<% end %>
+<div class="large-7 columns">
+  <div class="ui segment" id="dog_search_results">
+  <% @dogs.each do |dog| %>
+  <div class="ui vertical segment">
 
+    <div class="large-3 columns">
+      <span class="image">
+        <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg" style="height:100%; width:100%">
+      </span>
+    </div>
+
+    <div class="large-9 columns">
+      <div class="content">
+        <a class="header"><%= dog.name %></a>
+        <div class="meta">
+          <span class="date">Alaska</span>
+        </div>
+        <div class="description">
+          <%= dog.motto %> 
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="wait icon"></i>
+          <%= dog.availability %>
+        </a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+</div>
+<div class="large-5 columns" id="map">
+  <div class="ui sticky">
+    <img src="http://www.digicution.com/wp-content/uploads/2012/06/HTML5-Repsonsive-Google-Maps-Tutorial-1.png" style="height:100%; width:100%">
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('.ui.sticky')
+  .sticky({
+    offset: 50,
+    context: '#dog_search_results'
+  });
+});
+</script>

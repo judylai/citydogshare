@@ -561,10 +561,10 @@ sizes_list.each do |size|
   Size.create(range: size)
 end
 
-dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1}, {:name => "Fido", :gender => "Male", :size_id => 3}, {:name => "Batman", :gender => "Female", :size_id => 2}]
+dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1, :motto => "YOLO", :availability => "Monday, Wednesday, Friday"}, {:name => "Fido", :gender => "Male", :size_id => 3, :motto => "HOWDY EVERYONE. I AM A DOG. I LIKE SQUIRRELS. HIIIIIIIIIII!", :availability => "Weekend afternoons, Monday nights, Tuesday mornings, Thursday lunchtimes"}, {:name => "Batman", :gender => "Female", :size_id => 2, :motto => "I am Batman.", :availability => "When the bat signal calls me"}]
 
 dogs_list.each do |dog|
-  dog = Dog.create(:name => dog[:name], :gender => dog[:gender])
+  dog = Dog.create(:name => dog[:name], :gender => dog[:gender], :motto => dog[:motto], :availability => dog[:availability])
   dog.size_id = dog[:size_id]
   dog.save 
 end
