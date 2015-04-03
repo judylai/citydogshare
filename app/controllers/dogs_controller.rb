@@ -6,6 +6,11 @@ class DogsController < ApplicationController
     @personalities = Personality.pluck(:name)
   end
 
+  def show
+    id = params[:id]
+    @dog = Dog.find(id)
+  end
+
   def create
     @dog = Dog.new(attributes_list(params))
     @dog.user_id = @current_user.id

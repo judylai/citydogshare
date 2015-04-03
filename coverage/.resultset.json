@@ -586,12 +586,12 @@
         null,
         null,
         1,
-        5,
+        6,
         null,
         null,
         0,
         null,
-        5,
+        6,
         null,
         null,
         null,
@@ -688,7 +688,7 @@
         null,
         null,
         1,
-        4,
+        5,
         null,
         null,
         1,
@@ -704,8 +704,8 @@
         null,
         null,
         1,
-        7,
-        7,
+        8,
+        8,
         null,
         0,
         null,
@@ -725,10 +725,6 @@
         null
       ],
       "/Users/sydneestanley/Documents/CS169/citydogshare/features/step_definitions/dog_steps.rb": [
-        1,
-        0,
-        null,
-        null,
         1,
         1,
         null,
@@ -1003,6 +999,6 @@
         null
       ]
     },
-    "timestamp": 1428082128
+    "timestamp": 1428082500
   }
 }

@@ -8,10 +8,10 @@ FactoryGirl.define do
     motto ""
     fixed false
     health ""
-    contact nil 
     availability ""
-    size { Size.find(1) }
+    size_id { Size.find(1) }
     energy_level { EnergyLevel.find(1) }
-    personalities { Personality.find(1) }
+    personalities { [Personality.find(1)] }
+    user_id { 1 }
   end
 end
