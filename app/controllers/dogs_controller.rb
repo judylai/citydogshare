@@ -137,17 +137,9 @@ class DogsController < ApplicationController
     EnergyLevel.find(dog_attributes['energy_level'])
   end
 
-  def get_likes_array(params)
-    if params['likes'] != nil
-      params['likes'].keys.map { |like| Like.find_by_thing(like) }
-    else
-      return []
-    end
-  end
-
-  def get_personalities_array(params)
-    if params['personalities'] != nil
-      params['personalities'].keys.map {|personality| Personality.find_by_name(personality)}
+  def get_attribute_array(params, things)
+    if params[things] != nil
+      params[things].keys.map { |thing| Like.find_by_thing(thing) }
     else
       return []
     end
@@ -173,8 +165,8 @@ class DogsController < ApplicationController
   def attributes_list(params)
     dog_attributes = params["dog"]
     new_attrs = {:mixes => get_mix_array(params), :size => get_size_object(dog_attributes), 
-      :energy_level => get_energy_object(dog_attributes), :likes => get_likes_array(params),
-      :dob => get_birthday(dog_attributes), :personalities => get_personalities_array(params) }
+      :energy_level => get_energy_object(dog_attributes), :likes => get_attribute_array(params, 'likes'),
+      :dob => get_birthday(dog_attributes), :personalities => get_attribute_array(params, 'personalities') }
     dog_attributes.merge(new_attrs)
   end
 
