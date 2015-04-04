@@ -5,7 +5,7 @@ FactoryGirl.define do
     dob Date.new(2010, 2, 3)
     mixes { [Mix.find(1)] }
     description ""
-    motto ""
+    motto "Live long and play fetch."
     fixed false
     health ""
     availability ""

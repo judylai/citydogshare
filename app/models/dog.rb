@@ -21,7 +21,11 @@ class Dog < ActiveRecord::Base
   #validates_attachment_size :photo, :less_than => 5.megabytes, :message => "Photo cannot be larger than 5MB"
   #validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png'], :message => "Please upload photo as a .jpeg or .png"
 
+  validate :validate_dob
 
+  def validate_dob
+    errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
+  end
 
 
 
