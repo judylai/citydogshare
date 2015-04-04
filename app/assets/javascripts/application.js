@@ -17,4 +17,6 @@
 //= require semantic-ui/modal
 //= require semantic-ui/dropdown
 //= require foundation
-
+//= require checkboxes
+//= require tag-it
+//= require jquery-ui
