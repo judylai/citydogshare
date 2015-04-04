@@ -30,7 +30,7 @@ Scenario: create dog profile
   And I select "4" from "dog_dob_3i"
   And I select "Male" from "dog_gender"
   And I select "medium (16-40)" from "dog_size"
-  And I check "personality_curious"
+  And I check "personalities_curious"
   And I fill in "dog_motto" with "Live long and play fetch."
   And I fill in "dog_description" with "Spock is out of this world. He even speaks Klingon"
   And I select "good" from "dog_energy_level"

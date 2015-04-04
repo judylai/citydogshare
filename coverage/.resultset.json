@@ -1032,7 +1032,7 @@
         null
       ]
     },
-    "timestamp": 1428124533
+    "timestamp": 1428125716
   },
   "RSpec": {
     "coverage": {
@@ -1215,7 +1215,11 @@
         null,
         1,
         8,
+        4,
         11,
+        null,
+        0,
+        null,
         null,
         4,
         null,
@@ -1529,6 +1533,6 @@
         null
       ]
     },
-    "timestamp": 1428124549
+    "timestamp": 1428125629
   }
 }
