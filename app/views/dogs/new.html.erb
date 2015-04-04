@@ -42,9 +42,9 @@
     <%= text_field(:dog, :name) %>
   </div>
 
-  <div class="field"><label>Photo</label>
-    <%= file_field(:dog, :photo) %>
-  </div>
+  <!-- <div class="field"><label>Photo</label> -->
+    <%#= file_field(:dog, :photo) %>
+  <!-- </div> -->
 
   <div class="field"><label>Birthdate</label>
     <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year} %>
@@ -55,7 +55,6 @@
   </div>
 
   <div class="field"><label>Mix</label>
-    <!--<input id="myTags" > -->
     <ul id="myTags">
     </ul>
   </div>

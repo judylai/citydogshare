@@ -4,6 +4,5 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by_uid(session[:user_id]) if session[:user_id]
-    @dog = Dog.find_by_user_id(@current_user.id)
   end
 end

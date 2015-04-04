@@ -25,9 +25,6 @@ Scenario: page shows error when some required fields are not filled
 
 Scenario: create dog profile
   When I fill in "dog_name" with "Spock"
-  Then wait
-  And I fill in "myTags" with "Labrador"
-  And I select "Labrador" and press enter
   And I select "2010" from "dog_dob_1i"
   And I select "December" from "dog_dob_2i"
   And I select "4" from "dog_dob_3i"
@@ -41,8 +38,7 @@ Scenario: create dog profile
   And I fill in "dog_health" with "none"
   And I choose "dog_fixed_true"
   And I fill in "dog_availability" with "Mondays and Weekends!"
-  #And I fill out "pics" with "doggy1.png"
-  And I press "Save Changes"
+  And I push "Save Changes"
   Then I should be on the users page for "Batman"
 
 Scenario: make sure new dog shows up in user profile

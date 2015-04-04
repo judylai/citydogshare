@@ -11,15 +11,15 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
-  has_attached_file :photo, :styles => { :small => "150x150>" },
-                  :url  => "/assets/dogs/:id/:style/:basename.:extension",
-                  :path => ":rails_root/public/assets/dogs/:id/:style/:basename.:extension"
+  #has_attached_file :photo, :styles => { :small => "150x150>" },
+  #                :url  => "/assets/dogs/:id/:style/:basename.:extension",
+  #                :path => ":rails_root/public/assets/dogs/:id/:style/:basename.:extension"
 
   validates :name, :presence => {:message => "Name can't be blank"}
   validates :mixes, :presence => {:message => "Mix can't be blank"}
-  validates_attachment_presence :photo
-  validates_attachment_size :photo, :less_than => 5.megabytes
-  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
+  #validates_attachment_presence :photo, :message => "Please attach a photo"
+  #validates_attachment_size :photo, :less_than => 5.megabytes, :message => "Photo cannot be larger than 5MB"
+  #validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png'], :message => "Please upload photo as a .jpeg or .png"
 
 
 

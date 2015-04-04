@@ -23,7 +23,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'metric_fu'
   gem 'minitest', '~>4.7.5'
-  gem 'selenium-webdriver'
   gem 'paperclip', "~> 4.2"
   gem 'rmagick'
 end
@@ -31,6 +30,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: nil
+
 end
 
 group :production do
