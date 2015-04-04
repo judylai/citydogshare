@@ -6,11 +6,11 @@ class DogsController < ApplicationController
 
     @dogs = Dog.all()
     filter_by_gender()
-    filter_by_personality()
+    filter_by('personality')
+    filter_by('like')
     filter_by_size()
     filter_by_mix()
     filter_by_energy()
-    filter_by_likes()
     filter_by_age()
 
     @no_dogs = @dogs.empty?
@@ -29,9 +29,9 @@ class DogsController < ApplicationController
 
   def create
     @dog = Dog.new(attributes_list(params))
-    @dog.user_id = @current_user.id
+    @dog.user_id = current_user.id
     if @dog.save
-      redirect_to user_path(@current_user)
+      redirect_to user_path(current_user)
     else
       flash[:notice] = @dog.errors.messages
       redirect_to new_dog_path
@@ -65,28 +65,22 @@ class DogsController < ApplicationController
       @dogs = @dogs.select {|dog| @selected_energies.include? dog.energy_level}
     end
   end
-  
-  def filter_by_likes
-    @all_likes = Like.pluck('DISTINCT thing')
-    @selected_likes = get_checkbox_selections(:like)
 
-    unless @selected_likes.empty?
+   def filter_by(arg)
+    if arg == "like"
+      @all_likes = Like.pluck('DISTINCT thing')
+    elsif arg == "personality"
+      @all_personalities = Personality.pluck('DISTINCT name')
+    end
+    instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg.to_sym))
+
+    method_name = "readable_#{arg.pluralize}"
+    unless instance_variable_get("@" + "selected_#{arg.pluralize}").empty?
       @dogs = @dogs.select do |dog|
-        (dog.readable_likes - @selected_likes).length < dog.readable_likes.length
+        (dog.public_send(method_name) - instance_variable_get("@" + "selected_#{arg.pluralize}")).length < dog.public_send(method_name).length  if dog.respond_to? method_name
       end
     end
-  end
-
-  def filter_by_personality
-    @all_personalities = Personality.pluck('DISTINCT name')
-    @selected_personalities = get_checkbox_selections(:personality)
-
-    unless @selected_personalities.empty?
-      @dogs = @dogs.select do |dog|
-        (dog.readable_personalities - @selected_personalities).length < dog.readable_personalities.length
-      end
-    end
-  end
+  end 
 
   def filter_by_size
     @all_sizes= Size.pluck('DISTINCT range')
@@ -177,7 +171,7 @@ class DogsController < ApplicationController
   end
 
   def attributes_list(params)
-    dog_attributes = params[:dog]
+    dog_attributes = params["dog"]
     new_attrs = {:mixes => get_mix_array(params), :size => get_size_object(dog_attributes), 
       :energy_level => get_energy_object(dog_attributes), :likes => get_likes_array(params),
       :dob => get_birthday(dog_attributes), :personalities => get_personalities_array(params) }

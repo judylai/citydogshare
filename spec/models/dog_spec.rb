@@ -34,4 +34,10 @@ describe Dog do
     @dog.save
     @dog.errors.should have_key(:name)
   end
+
+  it 'should not save profile with empty mix' do
+    @dog.mixes = []
+    @dog.save
+    @dog.errors.should have_key(:mixes)
+  end
 end
