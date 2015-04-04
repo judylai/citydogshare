@@ -66,7 +66,7 @@
 
   <div class="field"><label>Personality</label>
     <% @personalities.each do |personality| %>
-        <%= check_box_tag "personality[#{personality}]", "1" %>  <!-- FIX THIS -->
+        <%= check_box_tag "personality[#{personality}]", "1", 0 %>  <!-- FIX THIS -->
         <%= personality %>
         <br>
     <% end %>
@@ -87,11 +87,14 @@
   </div>
   
   <div class="field"><label>Likes</label>
-    <% @likes.each do |like| %>
-        <%= check_box_tag "likes[#{like}]", "1" %>  <!-- FIX THIS -->
-        <%= like %>
-        <br>
+    <div class="ui buttons">
+    <% @likes.each do |like| %> 
+        <div class="ui button">
+        <%= check_box_tag "likes[#{like}]", 1, false, :class => "check" %>
+        <%= label(:likes, like.tr(" ", "_"), like) %>
+        </div>
     <% end %>
+    </div>
   </div>
 
   <div class="field"><label>Health Notes</label>
@@ -126,3 +129,27 @@
 <%= button_to "Cancel Changes", root_path, :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
 
 </div>
+
+<script>
+ $(document).ready(function(){
+
+   $.each($(':checked'), function( index, value ) {
+     $(value).parent().addClass('active');
+   });
+  
+   $('.ui.button').on('click', function(){
+     $(this).toggleClass('active');
+     var $this_checkbox = $(this).children();
+     if ($this_checkbox.is(':checked')){
+       $this_checkbox.prop('checked', false);
+     } else {
+       $this_checkbox.prop('checked', true);
+     }
+   });
+  
+   $('.check').on('click', function(){
+     $(this).parent().toggleClass('active');
+   });
+
+ });
+ </script>

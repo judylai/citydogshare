@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150307174800) do
+ActiveRecord::Schema.define(:version => 20150403121700) do
 
   create_table "dog_like_linkers", :force => true do |t|
     t.integer "dog_id"

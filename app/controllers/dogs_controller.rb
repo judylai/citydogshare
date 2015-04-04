@@ -46,10 +46,14 @@ class DogsController < ApplicationController
     unless @selected_ranges.empty?
       valid_dogs = []
       @selected_ranges.each do |i|
-        valid_dogs += @dogs.select {|dog| dog.age >= @age_pairs[i.to_i][0] && dog.age <= @age_pairs[i.to_i][1]}
+        valid_dogs += @dogs.select {|dog| validate_dog_age?(dog, i.to_i)}
       end 
       @dogs = valid_dogs
     end
+  end
+
+  def validate_dog_age?(dog, i)
+    dog.age >- @age_pairs[i][0] && dog.age <= @age_pairs[i][1]
   end
 
   
@@ -149,7 +153,7 @@ class DogsController < ApplicationController
 
   def get_personalities_array(params)
     if params['personalities'] != nil
-      params['personalities'].keys.map {|personality| Personality.find_by_type(personality)}
+      params['personalities'].keys.map {|personality| Personality.find_by_name(personality)}
     else
       return []
     end

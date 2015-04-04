@@ -12,8 +12,11 @@ Given /the following dogs exist/ do |dogs_table|
     new_dog.name = dog[:name]
     new_dog.gender = dog[:gender]
     new_dog.size = Size.find_by_range(dog[:size])
-    new_dog.save
+    new_dog.dob = DateTime.new(2012, 3, 3)
+    new_dog.mixes << Mix.new(:name => "Labrador")
+    new_dog.save!
   end
+end
 
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field, match: :first)
