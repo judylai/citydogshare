@@ -24,7 +24,7 @@
   <!-- </div> -->
 
   <div class="field"><label>Birthdate</label>
-    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year} %>
+    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year, :default => DateTime.new(Date.today.year, 1, 1)} %>
   </div>
 
   <div class="field"><label>Gender</label>
