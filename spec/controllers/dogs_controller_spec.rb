@@ -199,21 +199,14 @@ describe DogsController, :type => :controller do
       controller.get_energy_object({'energy_level' => '1'}).should be_kind_of(EnergyLevel)
     end
 
-    it 'get_likes_array should return an array' do
-      controller.get_likes_array({'likes' => {'cats' => '1'}}).should == [Like.find_by_thing('cats')]
+    it 'get_attributes_array should return an array' do
+      controller.get_attribute_array({'likes' => {'cats' => '1'}}, 'likes').should == [Like.find_by_thing('cats')]
     end
 
     it 'should return empty array if blank' do
-      controller.get_likes_array({}).should == []
+      controller.get_attribute_array({}, 'likes').should == []
     end
 
-    it 'should return an array of personalities' do
-      controller.get_personalities_array({"personalities"=>{"curious"=>"1"}}).should == [Personality.find_by_name("curious")]
-    end
-
-    it 'should return empty if blank' do
-      controller.get_personalities_array({}).should == []
-    end
 
     it 'should get a dog birthday' do
       controller.get_birthday({ "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4",}).should == DateTime.new(2010, 4, 4)
