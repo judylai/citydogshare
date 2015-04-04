@@ -42,11 +42,14 @@
   </div>
 
   <div class="field"><label>Personality</label>
-    <% @personalities.each do |personality| %>
-        <%= check_box_tag "personality[#{personality}]", "1", 0 %>  <!-- FIX THIS -->
-        <%= personality %>
-        <br>
+    <div class="ui buttons">
+    <% @personalities.each do |p| %> 
+        <div class="ui button">
+        <%= check_box_tag "personality[#{p}]", 1, false, :class => "check" %>
+        <%= label(:personalities, p.tr(" ", "_"), p) %>
+        </div>
     <% end %>
+    </div>
   </div>
 
   <div class="field"><label>Motto</label>
