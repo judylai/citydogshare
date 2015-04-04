@@ -14,6 +14,10 @@ Background: User and other users are in database
   And I am on the users page for "Batman"
   And I press "Edit"
 
+Scenario: Page shows flash notice when user tries to edit another profile
+  When I am on the edit page for non-existent user
+  Then I should see "You may only edit your own profile."
+
 Scenario: Page shows error when phone number is wrong format
   When I fill in "user_phone_number" with "1235"
   When I press "Save Changes"

@@ -2,28 +2,52 @@ require 'rails_helper'
 
 describe UsersController, :type => :controller do
 
+  describe 'show user profile' do
+    before(:each) do
+      @user = User.create(:id => "1")
+      @user.uid = "12345" 
+      session[:user_id] = "12345"
+      controller.instance_variable_set(:@current_user, @user)
+    end
+    it 'should not let you see profile for user that doesn\'t exist' do
+      get(:show, {:id => "2"})
+      # expect(response).to render_template("show")
+      assert_equal flash[:notice], "The user you entered does not exist."
+    end
+  end
+
   describe 'edit user profile' do
     before(:each) do
       @user = User.create(:id => "1")
       @user.uid = "12345" 
       session[:user_id] = "12345"
+      controller.instance_variable_set(:@current_user, @user)
+      @user2 = User.create(:id => "2")
+      @user2.uid = "67890"
     end
     it 'should render edit if no user params' do
       get(:edit, {:id => "1"}, {:user_id => "12345"})
       expect(response).to render_template("edit")
     end 
+    it 'should not allow you to edit user that exists if not current user' do
+      get(:edit, {:id => "2"}, {:user_id => "67890"})
+      # expect(response).to render_template("show")
+      assert_equal flash[:notice], "You may only edit your own profile."
+    end
+    it 'should not allow you to edit user that does not exist if not current user' do
+      get(:edit, {:id => "3"}, {:user_id => "10296"})
+      # expect(response).to render_template("show")
+      assert_equal flash[:notice], "You may only edit your own profile."
+    end
     it 'should redirect to edit if phone format incorrect' do
-      controller.instance_variable_set(:@current_user, @user)
       get(:edit, {:id => "1", :user => {:phone_number => "abc"}}, {:user_id => "12345"})
       expect(response).to render_template("edit")
     end 
     it 'should redirect to user page if given correct params' do
-      controller.instance_variable_set(:@current_user, @user)
       get(:edit, {:id => "1", :user => {:phone_number => "(510)123-1234"}, :status => "Looking", :availability => "All the time"}, {:user_id => "12345"})
       expect(response).to redirect_to user_path(:id => "1")
     end 
     it 'should update user info if given all params' do
-      controller.instance_variable_set(:@current_user, @user)
       get(:edit, {:id => "1", :user => {:location => "Berkeley, CA", :description => "Hello!", :phone_number => "(510)123-1234", :status => "Looking", :availability => "All the time"}}, {:user_id => "12345"})
       @user = User.find_by_id("1")
       assert_equal @user.location, "Berkeley, CA"
@@ -33,7 +57,6 @@ describe UsersController, :type => :controller do
       assert_equal @user.availability, "All the time"
     end 
     it 'should update user info if given some params' do
-      controller.instance_variable_set(:@current_user, @user)
       get(:edit, {:id => "1", :user => {:description => "Hello!", :phone_number => "(510)123-1234"}}, {:user_id => "12345"})
       @user = User.find_by_id("1")
       assert_equal @user.location, nil

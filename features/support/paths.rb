@@ -19,6 +19,10 @@ module NavigationHelpers
       '/users/1'
     when /^the search dogs page$/
       '/dogs'
+    when /^the edit page for non-existent user$/
+      '/users/5/edit?'
+    when /^the profile page for non-existent user$/
+      '/users/5'
 
 
     # Add more mappings here.

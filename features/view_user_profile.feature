@@ -22,3 +22,7 @@ Scenario: View user profile information
   And I should see "not_batman@wayneenterprises.com"
   And I should see "I love bats"
   And I should see "not nights"
+
+Scenario: Page shows flash notice when trying to view user who does not exist
+  When I am on the profile page for non-existent user
+  Then I should see "The user you entered does not exist."
