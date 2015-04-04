@@ -6,8 +6,8 @@ class DogsController < ApplicationController
 
     @dogs = Dog.all()
     filter_by_gender()
-    filter_by('personality')
-    filter_by('like')
+    filter_by_personality()
+    filter_by_likes()
     filter_by_size()
     filter_by_mix()
     filter_by_energy()
@@ -66,14 +66,21 @@ class DogsController < ApplicationController
     end
   end
 
-   def filter_by(arg)
-    if arg == "like"
-      @all_likes = Like.pluck('DISTINCT thing')
-    elsif arg == "personality"
-      @all_personalities = Personality.pluck('DISTINCT name')
-    end
-    instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg.to_sym))
+  def filter_by_likes
+    @all_likes = Like.pluck('DISTINCT thing')
+    @selected_likes = get_checkbox_selections(:like)
+ 
+    filter_by('like')
+  end
 
+  def filter_by_personality
+    @all_personalities = Personality.pluck('DISTINCT name')
+    @selected_personalities = get_checkbox_selections(:personality)
+
+    filter_by('personality')
+  end
+
+   def filter_by(arg)
     method_name = "readable_#{arg.pluralize}"
     unless instance_variable_get("@" + "selected_#{arg.pluralize}").empty?
       @dogs = @dogs.select do |dog|
