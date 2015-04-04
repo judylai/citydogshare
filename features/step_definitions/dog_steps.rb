@@ -12,15 +12,7 @@ When /^I create a new dog "([^"]*)"$/ do |name|
   FactoryGirl.create(:dog)
 end
 
-
 And /^I push "([^"]*)"$/ do |button|
   DogsController.any_instance.should_receive(:get_mix_array).and_return([Mix.find(1)])
   click_button(button)
-end
-
-  
-
-
-Then /^wait$/ do
-  sleep 2
 end

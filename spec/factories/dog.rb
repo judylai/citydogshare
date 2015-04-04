@@ -9,7 +9,7 @@ FactoryGirl.define do
     fixed false
     health ""
     availability ""
-    size_id { Size.find(1) }
+    size { Size.find(1) }
     energy_level { EnergyLevel.find(1) }
     personalities { [Personality.find(1)] }
     user_id { 1 }

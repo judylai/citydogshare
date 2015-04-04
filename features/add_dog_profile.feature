@@ -46,3 +46,12 @@ Scenario: make sure new dog shows up in user profile
   And I am on the users page for "Batman"
   And I should see "Spock"
 
+Scenario: view dog profile
+  When I create a new dog "Spock"
+  And I am on the users page for "Batman"
+  And I follow "Spock"
+  Then I should see "Hi, I'm Spock"
+  And I should see "Mix: Affenpinscher"
+  And I should see "Age: 5"
+  And I should see "Size: small (0-15)"
+
