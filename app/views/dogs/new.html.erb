@@ -1,0 +1,128 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<%= javascript_include_tag 'tag-it.js' %>
+
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<%= stylesheet_link_tag 'jquery.tagit.css' %>
+
+<!-- move this out of html -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#myTags").tagit({
+      tagSource: function(search, showChoices) {
+        var that = this;
+        $.ajax({
+          url: "/mixes/autocomplete.json",
+          data: {q: search.term},
+          success: function(choices) {
+            showChoices(that._subtractArray(choices, that.assignedTags()));
+          }
+        });
+      },
+
+    });
+  });
+</script>
+
+<% if flash[:notice] %> <!-- what does this need to be? -->
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% flash[:notice].each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
+<h2>Edit Your Dog's Profile</h2>
+
+<%= form_tag({controller: :dogs, action: :create}, method: :post, :multipart => true) do %>
+<div class="ui form">  
+
+  <div class="field"><label>Name</label>
+    <%= text_field(:dog, :name) %>
+  </div>
+
+  <!-- <div class="field"><label>Photo</label> -->
+    <%#= file_field(:dog, :photo) %>
+  <!-- </div> -->
+
+  <div class="field"><label>Birthdate</label>
+    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year} %>
+  </div>
+
+  <div class="field"><label>Gender</label>
+    <%= select :dog, :gender, ["Male", "Female"] %>
+  </div>
+
+  <div class="field"><label>Mix</label>
+    <ul id="myTags">
+    </ul>
+  </div>
+
+  <div class="field"><label>Size</label>
+    <% size_options = options_from_collection_for_select(Size.all, 'id', 'range') %>
+    <%= select :dog, :size, size_options %> 
+  </div>
+
+  <div class="field"><label>Personality</label>
+    <% @personalities.each do |personality| %>
+        <%= check_box_tag "personality[#{personality}]", "1" %>  <!-- FIX THIS -->
+        <%= personality %>
+        <br>
+    <% end %>
+  </div>
+
+  <div class="field"><label>Motto</label>
+    <%= text_field(:dog, :motto) %>
+  </div>
+
+
+  <div class="field"><label>Description</label>
+    <%= text_area(:dog, :description) %>
+  </div>
+
+  <div class="field"><label>Energy Level</label>
+    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'level') %>
+    <%= select :dog, :energy_level, energy_options %>
+  </div>
+  
+  <div class="field"><label>Likes</label>
+    <% @likes.each do |like| %>
+        <%= check_box_tag "likes[#{like}]", "1" %>  <!-- FIX THIS -->
+        <%= like %>
+        <br>
+    <% end %>
+  </div>
+
+  <div class="field"><label>Health Notes</label>
+    <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?") %>
+  </div>
+
+  <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
+    <%= label :fixed, "Yes", :value => "true"  %>
+    <%= radio_button :dog, :fixed, true %>
+    <%= label :fixed, "No", :value => "false" %>
+    <%= radio_button :dog, :fixed, false, :checked => true %>
+  </div>
+
+  <div class="field"><label>Availability</label>
+    <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
+  </div>
+
+
+
+<!-- IMAGE UPLOADING -->
+
+
+
+
+  <div class="field"><label>
+
+
+<div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
+
+<% end %>
+
+<%= button_to "Cancel Changes", root_path, :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
+
+</div>

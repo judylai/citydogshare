@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -10,6 +10,15 @@ class Dog < ActiveRecord::Base
   has_many :personalities, :through => :dog_personality_linkers
   belongs_to :energy_level
   belongs_to :size
+
+
+  validates :name, :presence => {:message => "Name can't be blank"}
+  validates :mixes, :presence => {:message => "Mix can't be blank"}
+  validate :validate_dob
+
+  def validate_dob
+    errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
+  end
 
   def age
     now = Time.now.utc.to_date

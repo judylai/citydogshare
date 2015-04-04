@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(:version => 20150307174800) do
     t.integer  "size_id"
     t.integer  "energy_level_id"
     t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "energy_levels", :force => true do |t|

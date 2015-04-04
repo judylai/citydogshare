@@ -51,4 +51,18 @@
 <% end %>
 
   </div>
+    <ul>
+      <% @current_user.dogs.each do |dog| %>
+        <li>
+          <%#= image_tag dog.photo.url(:small) %>
+          <%= link_to dog.name, dog_path(dog.id), :method => :get %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <p> </p> <br />
+  <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
 </div>
+
+
+
