@@ -1,5 +1,5 @@
 <% if flash[:notice] %>
-         <div class="notice"><%= flash[:notice] %></div>
+  <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 
 <% if @own_profile %>
@@ -52,7 +52,7 @@
 
   </div>
     <ul>
-      <% @current_user.dogs.each do |dog| %>
+      <% @user.dogs.each do |dog| %>
         <li>
           <%#= image_tag dog.photo.url(:small) %>
           <%= link_to dog.name, dog_path(dog.id), :method => :get %>
