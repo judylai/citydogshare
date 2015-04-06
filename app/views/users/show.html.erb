@@ -44,13 +44,6 @@
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @user.availability %></div>
   <p> </p>
   <div id="dogs"><h4 class = "ui teal label">Dogs:</h4>&nbsp;&nbsp;
-  
-<% if @own_profile %>
-  <p> </p> <br />
-  <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
-<% end %>
-
-  </div>
     <ul>
       <% @user.dogs.each do |dog| %>
         <li>
@@ -60,6 +53,12 @@
       <% end %>
     </ul>
   </div>
+
+  <% if @own_profile %>
+    <p> </p> <br />
+    <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
+  <% end %>
+
   <p> </p> <br />
 </div>
 
