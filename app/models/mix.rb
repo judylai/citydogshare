@@ -5,8 +5,7 @@ class Mix < ActiveRecord::Base
 
 
   def self.autocomplete(q)
-    q = "%#{q}%"
-    where("mixes.name LIKE ?", q).order('name ASC').limit(5)
+    where("mixes.name LIKE :q1 OR mixes.name LIKE :q2", {:q1 => "#{q}%", :q2 => "% #{q}%"}).order('name ASC').limit(5)
   end
   
   def self.autocomplete_data(q)
