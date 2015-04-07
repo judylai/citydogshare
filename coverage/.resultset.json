@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/db/seeds.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/db/seeds.rb": [
         null,
         null,
         null,
@@ -572,7 +572,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/support/paths.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/features/support/paths.rb": [
         null,
         null,
         null,
@@ -621,7 +621,7 @@
         null,
         1
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/support/selectors.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/features/support/selectors.rb": [
         null,
         null,
         null,
@@ -667,7 +667,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/auth_steps.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/features/step_definitions/auth_steps.rb": [
         null,
         1,
         1,
@@ -737,7 +737,7 @@
         9,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/dog_steps.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/features/step_definitions/dog_steps.rb": [
         1,
         null,
         1,
@@ -775,7 +775,7 @@
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/web_steps.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/features/step_definitions/web_steps.rb": [
         null,
         null,
         null,
@@ -1032,11 +1032,11 @@
         null
       ]
     },
-    "timestamp": 1428290920
+    "timestamp": 1428389947
   },
   "RSpec": {
     "coverage": {
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/application_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/application_controller.rb": [
         1,
         1,
         1,
@@ -1046,27 +1046,27 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/application_helper.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/home_helper.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/helpers/home_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/layouts_helper.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/helpers/layouts_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/sessions_helper.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/helpers/welcome_helper.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/helpers/welcome_helper.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/dogs_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/dogs_controller.rb": [
         1,
         null,
         1,
@@ -1254,7 +1254,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/dog.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/dog.rb": [
         1,
         1,
         null,
@@ -1308,11 +1308,11 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/layouts_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/layouts_controller.rb": [
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/mixes_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/mixes_controller.rb": [
         1,
         null,
         1,
@@ -1328,28 +1328,28 @@
         0,
         0,
         null,
-        null,
-        null,
-        null
-      ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/mix.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
         null,
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/sessions_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/mix.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/sessions_controller.rb": [
         1,
         null,
         1,
@@ -1405,7 +1405,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/users_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/users_controller.rb": [
         1,
         1,
         null,
@@ -1445,7 +1445,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/user.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/user.rb": [
         1,
         1,
         1,
@@ -1475,7 +1475,7 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/controllers/welcome_controller.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/controllers/welcome_controller.rb": [
         1,
         1,
         null,
@@ -1487,51 +1487,51 @@
         null,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/dog_like_linker.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/dog_like_linker.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/dog_mix_linker.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/dog_mix_linker.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/dog_personality_linker.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/dog_personality_linker.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/energy_level.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/energy_level.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/like.rb": [
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/personality.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/like.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "/Users/michellenguyen/school/spr2015/cs169/citydogshare/app/models/size.rb": [
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/personality.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/alex/WebDev/GitHub/citydogshare/app/models/size.rb": [
         1,
         1,
         1,
         null
       ]
     },
-    "timestamp": 1428290902
+    "timestamp": 1428389974
   }
 }

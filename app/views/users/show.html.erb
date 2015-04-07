@@ -13,16 +13,19 @@
 </div>
 <% end %>
 
-<div class = "small-4 columns">
+<div class="small-12 columns">
+  <div id="name"><h1 style = "color: teal;"><%= @user.full_name %></h1></div>
+</div>
+
+<div class = "small-2 columns">
   <div id="user_info">
   <div id="ui-segment">
-    <img class = "ui medium circular centered image" src=<%= @user.image %>></div>
+    <img class = "ui small circular centered image" src=<%= @user.image %>></div>
   </div>
 </div>
 
-<div class = "small-8 columns">
-  <div id="name"><h1 style = "color: teal;"><%= @user.full_name %></h1></div>
-  <p> </p>
+<div class = "small-5 columns">
+  
   <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @user.gender %></div>
   <p> </p>
   <div id="location"><h4 class = "ui teal label">Location:</h4>&nbsp;&nbsp;<%= @user.location %></div>
@@ -42,24 +45,48 @@
   
   <p> </p>
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @user.availability %></div>
-  <p> </p>
-  <div id="dogs"><h4 class = "ui teal label">Dogs:</h4>&nbsp;&nbsp;
-    <ul>
-      <% @user.dogs.each do |dog| %>
-        <li>
-          <%#= image_tag dog.photo.url(:small) %>
-          <%= link_to dog.name, dog_path(dog.id), :method => :get %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
 
-  <% if @own_profile %>
-    <p> </p> <br />
-    <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
+</div>
+
+<div class="large-5 columns">
+  <div class="row">
+    <h4 class = "ui teal label"><%= @user.first_name %>'s Dogs:</h4>
+    <div class="right">
+      <% if @own_profile %>
+        <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
+      <% end %>
+    </div>
+</div>
+  
+  <div class="ui segment">
+  <!--<% if @no_dogs %>
+    <h1> No Dogs Found </h1>
+  <% end %>-->
+  <% @user.dogs.each do |dog| %>
+  <div class="ui vertical segment">
+
+    <div class="large-3 columns">
+      <span class="image">
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTq-JrbDxIqJCQm0mds0iyAamCDFYdNr1h3_r6Ekt7SNsWMboFE" style="height:100%; width:100%">
+      </span>
+    </div>
+
+    <div class="large-9 columns">
+      <div class="content">
+        <div class="ui medium header">
+          <%= link_to dog.name, dog_path(dog.id), :method => :get %>
+        </div>
+        <div class="description">
+          <%= dog.motto %>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <% end %>
 
-  <p> </p> <br />
+  </div>
+<br />
 </div>
 
 
