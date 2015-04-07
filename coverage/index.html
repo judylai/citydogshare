@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-05T20:28:40-07:00">2015-04-05T20:28:40-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-05T20:45:11-07:00">2015-04-05T20:45:11-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -3123,7 +3123,7 @@
         <li class="missed" data-hits="0" data-linenumber="8">
           
           
-          <code class="ruby">    where(&quot;mixes.name LIKE :q1 OR mixes.name LIKE :q2&quot;, {:q1 =&gt; &quot;#{q}%&quot;, :q2 =&gt; &quot;% #{q}%&quot;}).order('name ASC').limit(5)</code>
+          <code class="ruby">    where(&quot;UPPER(mixes.name) LIKE UPPER(:q1) OR UPPER(mixes.name) LIKE UPPER(:q2)&quot;, {:q1 =&gt; &quot;#{q}%&quot;, :q2 =&gt; &quot;% #{q}%&quot;}).order('name ASC').limit(5)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
