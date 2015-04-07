@@ -14,7 +14,7 @@ describe User do
     assert_equal @user.oauth_expires_at, Time.at(1321747205)
   end
   it 'should update with information from Facebook' do
-    @user.facebook_info_update({:uid => "54321", :extra => {:gender => "male"}, :info => {:first_name => "Bruce", :last_name => "Wayne", :image => "http://tinyurl.com/opnc38n", :location => "Bat Cave, Gotham", :email => "not_batman@wayneenterprises.com"}})
+    @user.facebook_info_update({:uid => "54321", :extra => {:raw_info => {:gender => "male"}}, :info => {:first_name => "Bruce", :last_name => "Wayne", :image => "http://tinyurl.com/opnc38n", :location => "Bat Cave, Gotham", :email => "not_batman@wayneenterprises.com"}})
     assert_equal @user.uid, "54321"
     assert_equal @user.gender, "male"
     assert_equal @user.first_name, "Bruce"
