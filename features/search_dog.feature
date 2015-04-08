@@ -11,9 +11,9 @@ Background: user has been added to the database and logged in
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   |
   
   And the following dogs exist:
-    | name     | mix              | age | size   | status             | gender | health | fixed | description                     | likes                      | energy_level   | location      | zipcode | image       | barks | personality |
-    | Princess | Labrador         | 4   | small (0-15) | I'm a bonehead     | Female | none          |  yes  | Healthy and well-behaved dog.   | Cats, Men                      | high energy    | 1234 Berkeley | 94103   | doggy1.png | not much | whatever |
-    | Spock    | Corgi            | 3   | medium (16-40)  | Treat, Don't Trick | Male   | none          |  no   | Goofy, energetic, and fearless. | Dogs (all) | Zzzzz | 5312 Berkeley | 94103   | doggy2.png | at the door | lover |
+    | name     | mix              | age | size   | gender | likes                      | energy   | personality |
+    | Princess | Labrador         | 4   | small (0-15) | Female | none          |  yes  | Cats                      | high energy    | whatever |
+    | Spock    | Corgi            | 3   | medium (16-40)  | Treat, Don't Trick | Male   | none          |  no   | | Dogs (all) | Zzzzz | 5312 Berkeley | 94103   | doggy2.png | at the door | lover |
 
   And I am on the search dogs page
 
@@ -27,6 +27,8 @@ Scenario: Filter by gender
   And I press "Search Dogs"
   Then I should see "Spock"
   And I should not see "Princess"
+
+Scenario: Filter by Age
 
 Scenario: No dogs match criteria
   When I check "size[large (41-100)]"
