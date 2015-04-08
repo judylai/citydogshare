@@ -146,7 +146,11 @@ class DogsController < ApplicationController
 
   def get_attribute_array(params, things)
     if params[things] != nil
-      params[things].keys.map { |thing| Like.find_by_thing(thing) }
+      if things == "likes"
+        params[things].keys.map { |thing| Like.find_by_thing(thing) }
+      else
+        params[things].keys.map { |thing| Personality.find_by_name(thing) }
+      end
     else
       return []
     end

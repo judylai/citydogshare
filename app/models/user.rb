@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
 
   def facebook_info_update(auth)
     self.uid = auth[:uid]
-    self.gender = auth[:extra][:gender]
+    if(auth[:extra][:raw_info] != nil)
+      self.gender = auth[:extra][:raw_info][:gender]
+    end
     self.first_name = auth[:info][:first_name]
     self.last_name = auth[:info][:last_name]
     self.image = auth[:info][:image][0..-7] + "large"

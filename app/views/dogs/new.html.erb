@@ -45,7 +45,7 @@
     <div class="ui buttons">
     <% @personalities.each do |p| %> 
         <div class="ui button">
-        <%= check_box_tag "personality[#{p}]", 1, false, :class => "check" %>
+        <%= check_box_tag "personalities[#{p}]", 1, false, :class => "check" %>
         <%= label(:personalities, p.tr(" ", "_"), p) %>
         </div>
     <% end %>
@@ -126,7 +126,6 @@
           }
         });
       },
-
     });
   });
 </script>
