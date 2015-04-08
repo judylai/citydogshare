@@ -11,9 +11,9 @@ Background: user has been added to the database and logged in
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   |
   
   And the following dogs exist:
-    | name     | mix              | age | size   | gender | likes                      | energy   | personality |
-    | Princess | Labrador         | 4   | small (0-15) | Female | none          |  yes  | Cats                      | high energy    | whatever |
-    | Spock    | Corgi            | 3   | medium (16-40)  | Treat, Don't Trick | Male   | none          |  no   | | Dogs (all) | Zzzzz | 5312 Berkeley | 94103   | doggy2.png | at the door | lover |
+    | name     | mix              | age | size            | gender | likes      | energy  | personality |
+    | Princess | Labrador         | 1   | small (0-15)    | Female | cats       | high    | whatever    |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       |
 
   And I am on the search dogs page
 
@@ -23,12 +23,45 @@ Scenario: View all dogs
 
 Scenario: Filter by gender
   When I check "gender[Male]"
-  And I uncheck "gender[Female]"
   And I press "Search Dogs"
   Then I should see "Spock"
   And I should not see "Princess"
 
 Scenario: Filter by Age
+  When I check "age[0]"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
+
+Scenario: Filter by Size
+  When I check "size[small (0-15)]"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
+
+Scenario: Filter by Likes
+  When I check "like[cats]"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
+
+Scenario: Filter by Energy
+  When I check "energy[high]"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
+
+Scenario: Filter by Energy
+  When I check "personality[whatever]"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
+
+Scenario: Filter by Mix
+  When I select "Labrador" from "mix"
+  And I press "Search Dogs"
+  Then I should see "Princess"
+  And I should not see "Spock"
 
 Scenario: No dogs match criteria
   When I check "size[large (41-100)]"

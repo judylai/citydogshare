@@ -9,10 +9,12 @@ Given /the following dogs exist/ do |dogs_table|
     new_dog = Dog.create()
     new_dog.name = dog[:name]
     new_dog.gender = dog[:gender]
-    new_dog.size = Size.find_by_range(dog[:size])
-    new_dog.dob = DateTime.new(Time.now.year - dog[:age], 3, 3)
-    new_dog.mixes << Mix.new(:name => dog[:mix])
-    new_dog.energy_level = EnergyLevel.new(:level => dog[:energy])
+    new_dog.size_id = Size.find_by_range(dog[:size]).id
+    new_dog.dob = DateTime.new(Time.now.year - dog[:age].to_i, 3, 3)
+    new_dog.mixes << Mix.find_by_name(dog[:mix])
+    new_dog.personalities << Personality.find_by_name(dog[:personality])
+    new_dog.likes << Like.find_by_thing(dog[:likes])
+    new_dog.energy_level_id = EnergyLevel.find_by_level(dog[:energy]).id
     new_dog.save!
   end
 end
@@ -20,6 +22,7 @@ end
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field, match: :first)
 end
+
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field, match: :first)

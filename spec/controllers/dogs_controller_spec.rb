@@ -21,8 +21,9 @@ describe DogsController, :type => :controller do
       expect(assigns(:dogs)).to match_array(dogs)
     end
     it 'should filter by age' do
+        Time.stub(:now).and_return(Time.mktime(2014,1))
       dog1 = FactoryGirl.create(:dog)
-      dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => DateTime.new(2014, 2))
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => Time.new(2013, 2))
       dogs = [dog2]
       params = {}
       params[:age] = {"0" => 1}

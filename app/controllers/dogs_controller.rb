@@ -53,7 +53,7 @@ class DogsController < ApplicationController
   end
 
   def validate_dog_age?(dog, i)
-    dog.age >- @age_pairs[i][0] && dog.age <= @age_pairs[i][1]
+    dog.age >= @age_pairs[i][0] && dog.age <= @age_pairs[i][1]
   end
 
   

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :dog do
     name "Spock"
     gender "Male"
-    dob Date.new(2010, 2, 3)
+    dob Time.new(2010, 2, 3)
     mixes { [Mix.find(1)] }
     description ""
     motto "Live long and play fetch."
