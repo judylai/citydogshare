@@ -99,7 +99,7 @@ class DogsController < ApplicationController
   end
 
   def filter_by_mix
-    @all_mixes = ['All Mixes'] +  Mix.pluck('DISTINCT name')
+    @all_mixes = ['All Mixes'] +  Mix.order(:name).pluck('DISTINCT name')
     @mix = get_dropdown_selection(:mix, 'All Mixes')
 
     unless @mix == 'All Mixes'
