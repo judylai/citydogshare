@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-07T20:19:45-07:00">2015-04-07T20:19:45-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-09T14:48:30-07:00">2015-04-09T14:48:30-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1380,7 +1380,7 @@
         <li class="covered" data-hits="10" data-linenumber="102">
           <span class="hits">10</span>
           
-          <code class="ruby">    @all_mixes = ['All Mixes'] +  Mix.pluck('DISTINCT name')</code>
+          <code class="ruby">    @all_mixes = ['All Mixes'] +  Mix.order(:name).pluck('DISTINCT name')</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="103">

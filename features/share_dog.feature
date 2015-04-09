@@ -1,3 +1,4 @@
+@facebook_test
 Feature: User should be able to share their dog by adding an event
 
 As a dog parent
