@@ -36,17 +36,24 @@ class DogsController < ApplicationController
     if @dog.save
       redirect_to user_path(current_user)
     else
-      @likes = Like.pluck(:value)  #make this a method: set_vars_for_render
-      @personalities = Personality.pluck(:value)
-      @checked_personalities = params['dog']['personalities'] ? params['dog']['personalities'].keys  : []
-      @checked_likes = params['dog']['likes'] ? params['dog']['likes'].keys : []
-      @size = params['dog']['size']
-      @gender = params['dog']['gender']
-      @energy_level = params['dog']['energy_level']
+      set_vars_for_render
       flash[:notice] = @dog.errors.messages
       render 'new'
     end
   end
+
+  def set_vars_for_render
+    dog_attributes = params['dog']
+    @likes = Like.pluck(:value)  #make this a method: set_vars_for_render
+    @personalities = Personality.pluck(:value)
+    @checked_personalities = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
+    @checked_likes = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
+    @size = dog_attributes['size']
+    @gender = dog_attributes['gender']
+    @energy_level = dog_attributes['energy_level']
+  end
+
+
 
 
   def filter_by(model)
@@ -177,7 +184,7 @@ class DogsController < ApplicationController
   def attributes_list(params)
     dog_attributes = params["dog"]
     new_attrs = {
-      :mixes => get_mix_array(params), 
+      :mixes => get_mix_array(params),
       :size => Size.find(dog_attributes['size']), 
       :energy_level => EnergyLevel.find(dog_attributes['energy_level']), 
       :likes => get_attribute_array(dog_attributes, 'likes'),

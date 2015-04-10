@@ -129,7 +129,7 @@ describe DogsController, :type => :controller do
   before(:each) do
     @dog = FactoryGirl.create(:dog)
     @current_user = User.create(:id => 1)
-      @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
+    @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
                   "availability"=>""}, "item"=>{"tags"=>["Australian Shepherd"]}, "personality"=>{"curious"=>"1"},
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}, "update_dog_button"=>"Save Changes"}
