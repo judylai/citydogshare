@@ -42,6 +42,16 @@ class DogsController < ApplicationController
     end
   end
 
+  def edit
+    @likes = Like.pluck(:value)
+    @personalities = Personality.pluck(:value)
+    @checked_personalities = []
+    @checked_likes = []
+    @size = 1
+    @gender = 1
+    @energy_level = 1
+  end
+
   def set_vars_for_render
     dog_attributes = params['dog']
     @likes = Like.pluck(:value)  #make this a method: set_vars_for_render

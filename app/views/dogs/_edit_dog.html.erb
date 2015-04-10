@@ -1,18 +1,3 @@
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<% javascript_include_tag 'tags.js' %>
-
-
-<% if flash[:notice] %> <!-- what does this need to be? -->
-  <div class="ui warning message"><i class="warning icon"></i>
-    <% flash[:notice].each do |msg| %>
-      <%= msg[1][0] %>
-      <br>
-    <% end %>
-  </div>
-<% end %>
-
-<h2>Edit Your Dog's Profile</h2>
-
 <%= form_tag({controller: :dogs, action: :create}, method: :post, :multipart => true) do %>
 <div class="ui form">  
 
@@ -108,34 +93,3 @@
   <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
 
   <% end %>
-
-  <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-
-  </div>
-
-</div>
-
-<!-- move this out of html -->
-
-
-<!--<script>
-//   $(document).ready(function(){
-//     $.each($(':checked'), function( index, value ) {
-//       $(value).parent().addClass('active');
-//     });
-    
-//     $('.ui.button').click(function(){
-//       $(this).toggleClass('active');
-//       var $this_checkbox = $($(this).children());
-//       if ($this_checkbox.is(':checked')){
-//         $this_checkbox.prop('checked', false);
-//       } else {
-//         $this_checkbox.prop('checked', true);
-//       }
-//     });
-    
-//     $('.check').click(function(){
-//       $(this).parent().toggleClass('active');
-//     });
-//   });
-  </script>-->

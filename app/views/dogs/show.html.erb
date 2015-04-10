@@ -8,6 +8,10 @@
   </div>
 </div>
 
+<p>
+  <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
+</p>
+
 <div class = "small-8 columns">
   <div id="user_info">
     <!-- insert image tag here -->
