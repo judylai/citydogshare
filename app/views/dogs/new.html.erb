@@ -44,8 +44,9 @@
   <div class="field"><label>Personality</label>
     <div class="ui buttons">
     <% @personalities.each do |p| %> 
+        <% @checked_personalities.include?(p) ? bool = true : bool = false %>
         <div class="ui button">
-        <%= check_box_tag "personalities[#{p}]", 1, false, :class => "check" %>
+        <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
         <%= label(:personalities, p.tr(" ", "_"), p) %>
         </div>
     <% end %>
@@ -70,7 +71,8 @@
     <div class="ui buttons">
     <% @likes.each do |like| %> 
         <div class="ui button">
-        <%= check_box_tag "likes[#{like}]", 1, false, :class => "check" %>
+        <% @checked_likes.include?(like) ? bool = true : bool = false %>
+        <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
         <%= label(:likes, like.tr(" ", "_"), like) %>
         </div>
     <% end %>
@@ -83,9 +85,9 @@
 
   <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
     <%= label :fixed, "Yes", :value => "true"  %>
-    <%= radio_button :dog, :fixed, true %>
+    <%= radio_button :dog, :fixed, true, :checked => true %>
     <%= label :fixed, "No", :value => "false" %>
-    <%= radio_button :dog, :fixed, false, :checked => true %>
+    <%= radio_button :dog, :fixed, false  %>
   </div>
 
   <div class="field"><label>Availability</label>

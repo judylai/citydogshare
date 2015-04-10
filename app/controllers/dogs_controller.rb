@@ -16,6 +16,8 @@ class DogsController < ApplicationController
   def new
     @likes = Like.pluck(:value)
     @personalities = Personality.pluck(:value)
+    @checked_personalities = []
+    @checked_likes = []
   end
 
   def show
@@ -23,16 +25,24 @@ class DogsController < ApplicationController
     @dog = Dog.find(id)
   end
 
+
+
   def create
     @dog = Dog.new(attributes_list(params))
     @dog.user_id = current_user.id
     if @dog.save
       redirect_to user_path(current_user)
     else
+      @likes = Like.pluck(:value)  #make this a method: set_vars_for_render
+      @personalities = Personality.pluck(:value)
+      @checked_personalities = params['dog']['personalities'] ? params['dog']['personalities'].keys  : []
+      @checked_likes = params['dog']['likes'] ? params['dog']['likes'].keys : []
+
       flash[:notice] = @dog.errors.messages
-      redirect_to new_dog_path
+      render 'new'
     end
   end
+
 
   def filter_by(model)
     unless model == "age" or model == "gender"
@@ -133,21 +143,10 @@ class DogsController < ApplicationController
     end
   end
 
-  def get_size_object(dog_attributes)
-    Size.find(dog_attributes['size'])
-  end      
-
-  def get_energy_object(dog_attributes)
-    EnergyLevel.find(dog_attributes['energy_level'])
-  end
-
-  def get_attribute_array(params, things)
-    if params[things] != nil
-      if things == "likes"
-        params[things].keys.map { |thing| Like.find_by_value(thing) }
-      else
-        params[things].keys.map { |thing| Personality.find_by_value(thing) }
-      end
+  def get_attribute_array(attributes, trait)
+    if attributes[trait] != nil
+      model_class = trait.classify.constantize
+      attributes[trait].keys.map { |thing| model_class.find_by_value(thing) }
     else
       return []
     end
@@ -172,9 +171,13 @@ class DogsController < ApplicationController
 
   def attributes_list(params)
     dog_attributes = params["dog"]
-    new_attrs = {:mixes => get_mix_array(params), :size => get_size_object(dog_attributes), 
-      :energy_level => get_energy_object(dog_attributes), :likes => get_attribute_array(params, 'likes'),
-      :dob => get_birthday(dog_attributes), :personalities => get_attribute_array(params, 'personalities') }
+    new_attrs = {
+      :mixes => get_mix_array(params), 
+      :size => Size.find(dog_attributes['size']), 
+      :energy_level => EnergyLevel.find(dog_attributes['energy_level']), 
+      :likes => get_attribute_array(dog_attributes, 'likes'),
+      :personalities => get_attribute_array(dog_attributes, 'personalities'),
+      :dob => get_birthday(dog_attributes) }
     dog_attributes.merge(new_attrs)
   end
 

@@ -156,7 +156,7 @@ describe DogsController, :type => :controller do
       @params['dog']['name'] = ""
       controller.stub(:current_user).and_return(@current_user)
       post :create, @params
-      response.should redirect_to new_dog_path
+      response.should render_template 'new'
     end
 
 
@@ -192,13 +192,7 @@ describe DogsController, :type => :controller do
     @dog = FactoryGirl.create(:dog)
     @current_user = User.create(:id => 1)
   end
-    it 'get_size_object should return a size object' do
-      controller.get_size_object({'size' => '1'}).should be_kind_of(Size)
-    end
 
-    it 'get_energy_object should return energy object' do
-      controller.get_energy_object({'energy_level' => '1'}).should be_kind_of(EnergyLevel)
-    end
 
     it 'get_attributes_array should return an array' do
       controller.get_attribute_array({'likes' => {'cats' => '1'}}, 'likes').should == [Like.find_by_value('cats')]
