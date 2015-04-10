@@ -18,6 +18,9 @@ class DogsController < ApplicationController
     @personalities = Personality.pluck(:value)
     @checked_personalities = []
     @checked_likes = []
+    @size = 1
+    @gender = 1
+    @energy_level = 1
   end
 
   def show
@@ -37,7 +40,9 @@ class DogsController < ApplicationController
       @personalities = Personality.pluck(:value)
       @checked_personalities = params['dog']['personalities'] ? params['dog']['personalities'].keys  : []
       @checked_likes = params['dog']['likes'] ? params['dog']['likes'].keys : []
-
+      @size = params['dog']['size']
+      @gender = params['dog']['gender']
+      @energy_level = params['dog']['energy_level']
       flash[:notice] = @dog.errors.messages
       render 'new'
     end
