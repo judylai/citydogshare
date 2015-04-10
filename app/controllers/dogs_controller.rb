@@ -83,31 +83,8 @@ class DogsController < ApplicationController
 
     instance_variable_set("@" + "selected_#{model.pluralize}", selected_values)
   end
-  
-  def filter_by_energy
-    @all_energies = EnergyLevel.pluck('value')
-    @selected_energies = get_checkbox_selections(:energy)
 
-    unless @selected_energies.empty?
-      @dogs = @dogs.select {|dog| @selected_energies.include? dog.energy_level}
-    end
-  end
-
-  def filter_by_likes
-    @all_likes = Like.pluck('value')
-    @selected_likes = get_checkbox_selections(:like)
- 
-    filter_by('like')
-  end
-
-  def filter_by_personality
-    @all_personalities = Personality.pluck('value')
-    @selected_personalities = get_checkbox_selections(:personality)
-
-    filter_by('personality')
-  end
-
-   def filter_multiple_attributes(arg)
+  def filter_multiple_attributes(arg)
     instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg))
 
     method_name = "readable_#{arg.pluralize}"
@@ -117,15 +94,6 @@ class DogsController < ApplicationController
       end
     end
   end 
-
-  def filter_by_size
-    @all_sizes= Size.pluck('value')
-    @selected_sizes = get_checkbox_selections(:size)
-
-    unless @selected_sizes.empty?
-      @dogs = @dogs.select {|dog| @selected_sizes.include? dog.size}
-    end
-  end
 
   def filter_by_mix
     @all_mixes = ['All Mixes'] +  Mix.order(:value).pluck('value')
