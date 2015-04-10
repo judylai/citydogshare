@@ -26,11 +26,11 @@ class Dog < ActiveRecord::Base
   end
 
   def energy_level
-    EnergyLevel.find(self.energy_level_id).level
+    EnergyLevel.find(self.energy_level_id).value
   end
 
   def size
-    Size.find(self.size_id).range
+    Size.find(self.size_id).value
   end
 
   def owner
@@ -38,15 +38,15 @@ class Dog < ActiveRecord::Base
   end
 
   def readable_mixes
-    self.mixes.map {|m| m.name}
+    self.mixes.map {|m| m.value}
   end
 
   def readable_likes
-    self.likes.map {|l| l.thing}
+    self.likes.map {|l| l.value}
   end
 
   def readable_personalities
-    self.personalities.map {|p| p.name}
+    self.personalities.map {|p| p.value}
   end
 
 end

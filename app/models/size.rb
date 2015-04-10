@@ -1,4 +1,4 @@
 class Size < ActiveRecord::Base
-  attr_accessible :range
+  attr_accessible :value
   has_many :dogs
 end

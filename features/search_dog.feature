@@ -46,7 +46,7 @@ Scenario: Filter by Likes
   And I should not see "Spock"
 
 Scenario: Filter by Energy
-  When I check "energy[high]"
+  When I check "energy_level[high]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"

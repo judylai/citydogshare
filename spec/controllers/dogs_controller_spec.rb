@@ -21,7 +21,7 @@ describe DogsController, :type => :controller do
       expect(assigns(:dogs)).to match_array(dogs)
     end
     it 'should filter by age' do
-        Time.stub(:now).and_return(Time.mktime(2014,1))
+      Time.stub(:now).and_return(Time.mktime(2014,1))
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => Time.new(2013, 2))
       dogs = [dog2]
@@ -34,7 +34,7 @@ describe DogsController, :type => :controller do
     it 'should filter by mix' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-      dog2.mixes << Mix.find_by_name("Labrador")
+      dog2.mixes << Mix.find_by_value("Labrador")
       dog2.save!
       dogs = [dog2]
       params = {}
@@ -46,7 +46,7 @@ describe DogsController, :type => :controller do
     it 'should filter by personality' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-      dog2.personalities << Personality.find_by_name("friendly")
+      dog2.personalities << Personality.find_by_value("friendly")
       dog2.save
       dogs = [dog2]
       params = {}
@@ -58,7 +58,7 @@ describe DogsController, :type => :controller do
     it 'should filter by likes' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-      dog2.likes << Like.find_by_thing("cats")
+      dog2.likes << Like.find_by_value("cats")
       dog2.save
       dogs = [dog2]
       params = {}
@@ -72,7 +72,7 @@ describe DogsController, :type => :controller do
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
       dogs = [dog2]
       params = {}
-      params[:energy] = {"high" => 1}
+      params[:energy_level] = {"high" => 1}
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -179,7 +179,7 @@ describe DogsController, :type => :controller do
     @current_user = User.create(:id => 1)
   end
     it 'should return an array of mix objects' do
-      controller.get_mix_array({"item"=>{"tags"=>["Czechoslovak Wolfdog"]}}).should == [Mix.find_by_name("Czechoslovak Wolfdog")]
+      controller.get_mix_array({"item"=>{"tags"=>["Czechoslovak Wolfdog"]}}).should == [Mix.find_by_value("Czechoslovak Wolfdog")]
     end
 
     it 'should return an empty array if no params' do
@@ -201,7 +201,7 @@ describe DogsController, :type => :controller do
     end
 
     it 'get_attributes_array should return an array' do
-      controller.get_attribute_array({'likes' => {'cats' => '1'}}, 'likes').should == [Like.find_by_thing('cats')]
+      controller.get_attribute_array({'likes' => {'cats' => '1'}}, 'likes').should == [Like.find_by_value('cats')]
     end
 
     it 'should return empty array if blank' do

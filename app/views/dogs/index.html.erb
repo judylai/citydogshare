@@ -79,10 +79,10 @@
       Energy Level:
       <br />
       <div class="tiny ui buttons">
-      <% @all_energies.each do |e| %>
+      <% @all_energy_levels.each do |e| %>
       <div class="ui button">
-      <%= check_box_tag "energy[#{e}]", 1, @selected_energies.include?(e), :class => "check" %>
-      <%= label(:energy, e.tr(" ", "_"), e) %>
+      <%= check_box_tag "energy_level[#{e}]", 1, @selected_energy_levels.include?(e), :class => "check" %>
+      <%= label(:energy_level, e.tr(" ", "_"), e) %>
       </div>
       <% end %>
       </div>

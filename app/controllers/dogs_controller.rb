@@ -5,21 +5,17 @@ class DogsController < ApplicationController
   def index
 
     @dogs = Dog.all()
-    filter_by_gender()
-    filter_by_personality()
-    filter_by_likes()
-    filter_by_size()
-    filter_by_mix()
-    filter_by_energy()
-    filter_by_age()
+
+    filter_criteria = ['gender', 'personality', 'like', 'mix', 'size', 'energy_level', 'age']
+    filter_criteria.each {|criteria| filter_by(criteria)} 
 
     @no_dogs = @dogs.empty?
 
   end
 
   def new
-    @likes = Like.pluck(:thing)
-    @personalities = Personality.pluck(:name)
+    @likes = Like.pluck(:value)
+    @personalities = Personality.pluck(:value)
   end
 
   def show
@@ -36,6 +32,26 @@ class DogsController < ApplicationController
       flash[:notice] = @dog.errors.messages
       redirect_to new_dog_path
     end
+  end
+
+  def filter_by(model)
+    unless model == "age" or model == "gender"
+      instance_variable_set("@" + "all_#{model.pluralize}", model.classify.constantize.pluck('value'))
+    end
+
+    case model
+    when "energy_level", "size"
+        filter_single_attributes(model)
+    when "like", "personality"
+        filter_multiple_attributes(model)
+    when "age"
+        filter_by_age()
+    when "mix"
+        filter_by_mix()
+    when "gender"
+        filter_by_gender()
+    end
+
   end
 
   def filter_by_age
@@ -56,9 +72,20 @@ class DogsController < ApplicationController
     dog.age >= @age_pairs[i][0] && dog.age <= @age_pairs[i][1]
   end
 
+
+  def filter_single_attributes(model)
+
+    selected_values = get_checkbox_selections(model)
+
+    unless selected_values.empty?
+        @dogs = @dogs.select {|dog| selected_values.include? dog.send(model)}
+    end
+
+    instance_variable_set("@" + "selected_#{model.pluralize}", selected_values)
+  end
   
   def filter_by_energy
-    @all_energies = EnergyLevel.pluck('DISTINCT level')
+    @all_energies = EnergyLevel.pluck('value')
     @selected_energies = get_checkbox_selections(:energy)
 
     unless @selected_energies.empty?
@@ -67,20 +94,22 @@ class DogsController < ApplicationController
   end
 
   def filter_by_likes
-    @all_likes = Like.pluck('DISTINCT thing')
+    @all_likes = Like.pluck('value')
     @selected_likes = get_checkbox_selections(:like)
  
     filter_by('like')
   end
 
   def filter_by_personality
-    @all_personalities = Personality.pluck('DISTINCT name')
+    @all_personalities = Personality.pluck('value')
     @selected_personalities = get_checkbox_selections(:personality)
 
     filter_by('personality')
   end
 
-   def filter_by(arg)
+   def filter_multiple_attributes(arg)
+    instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg))
+
     method_name = "readable_#{arg.pluralize}"
     unless instance_variable_get("@" + "selected_#{arg.pluralize}").empty?
       @dogs = @dogs.select do |dog|
@@ -90,7 +119,7 @@ class DogsController < ApplicationController
   end 
 
   def filter_by_size
-    @all_sizes= Size.pluck('DISTINCT range')
+    @all_sizes= Size.pluck('value')
     @selected_sizes = get_checkbox_selections(:size)
 
     unless @selected_sizes.empty?
@@ -99,7 +128,7 @@ class DogsController < ApplicationController
   end
 
   def filter_by_mix
-    @all_mixes = ['All Mixes'] +  Mix.order(:name).pluck('DISTINCT name')
+    @all_mixes = ['All Mixes'] +  Mix.order(:value).pluck('value')
     @mix = get_dropdown_selection(:mix, 'All Mixes')
 
     unless @mix == 'All Mixes'
@@ -109,7 +138,7 @@ class DogsController < ApplicationController
 
   def filter_by_gender
     @all_genders = ['Male', 'Female']
-    @selected_genders = get_checkbox_selections(:gender)
+    @selected_genders = get_checkbox_selections('gender')
     
     unless @selected_genders.empty?
       @dogs = @dogs.select {|dog| @selected_genders.include? dog.gender}
@@ -130,7 +159,7 @@ class DogsController < ApplicationController
   def get_mix_array(params)
     if params['item']
       tags = params['item']['tags']
-      tags.map{ |tag| Mix.find_by_name(tag) }
+      tags.map{ |tag| Mix.find_by_value(tag) }
     else
       return []
     end
@@ -147,9 +176,9 @@ class DogsController < ApplicationController
   def get_attribute_array(params, things)
     if params[things] != nil
       if things == "likes"
-        params[things].keys.map { |thing| Like.find_by_thing(thing) }
+        params[things].keys.map { |thing| Like.find_by_value(thing) }
       else
-        params[things].keys.map { |thing| Personality.find_by_name(thing) }
+        params[things].keys.map { |thing| Personality.find_by_value(thing) }
       end
     else
       return []

@@ -16,23 +16,23 @@ class CreateDogs < ActiveRecord::Migration
         end
         
         create_table :mixes do |t|
-            t.string :name
+            t.string :value
         end
         
         create_table :likes do |t|
-            t.string :thing
+            t.string :value
         end
         
         create_table :personalities do |t|
-            t.string :name
+            t.string :value
         end
         
         create_table :energy_levels do |t|
-            t.string :level
+            t.string :value
         end
         
         create_table :sizes do |t|
-            t.string :range
+            t.string :value
         end
         
         create_table :dog_like_linkers do |t|

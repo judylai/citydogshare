@@ -48,23 +48,23 @@ ActiveRecord::Schema.define(:version => 20150403121700) do
   end
 
   create_table "energy_levels", :force => true do |t|
-    t.string "level"
+    t.string "value"
   end
 
   create_table "likes", :force => true do |t|
-    t.string "thing"
+    t.string "value"
   end
 
   create_table "mixes", :force => true do |t|
-    t.string "name"
+    t.string "value"
   end
 
   create_table "personalities", :force => true do |t|
-    t.string "name"
+    t.string "value"
   end
 
   create_table "sizes", :force => true do |t|
-    t.string "range"
+    t.string "value"
   end
 
   create_table "users", :force => true do |t|
