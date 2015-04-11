@@ -170,7 +170,7 @@ $(document).ready(function(){
 
   var geocoder;
   var map;
-  var query = 'San Francisco';
+  var query = ['2523 Ridge Road, Berkeley, CA', 'Berkeley'];
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var mapOptions = {
@@ -182,17 +182,18 @@ $(document).ready(function(){
 
   function codeAddress() {
     var address = query;
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
+    for (i = 0; i < address.length; i++) {
+        geocoder.geocode( { 'address': address[i]}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } 
     });
+    }
+
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);

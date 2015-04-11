@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -11,10 +11,14 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
+  geocoded_by :address
+
 
   validates :name, :presence => {:message => "Name can't be blank"}
   validates :mixes, :presence => {:message => "Mix can't be blank"}
   validate :validate_dob
+
+  after_validation :geocode
 
   def validate_dob
     errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
@@ -47,6 +51,10 @@ class Dog < ActiveRecord::Base
 
   def readable_personalities
     self.personalities.map {|p| p.value}
+  end
+
+  def address
+    "#{owner.address}, #{owner.zipcode}, #{owner.city}, #{owner.country}"
   end
 
 end

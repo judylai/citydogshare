@@ -11,6 +11,7 @@ gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
 gem 'rails_secret_token_env'
+gem 'geocoder'
 
 group :development, :test do
   gem 'sqlite3'
