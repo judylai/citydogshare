@@ -1,4 +1,4 @@
-<% if flash[:notice] %> <!-- what does this need to be? -->
+<% if flash[:notice] %>
   <div class="ui warning message"><i class="warning icon"></i>
     <% flash[:notice].each do |msg| %>
       <%= msg[1][0] %>
@@ -7,111 +7,11 @@
   </div>
 <% end %>
 
-<h2>Edit Your Dog's Profile</h2>
+<h2>Create Your Dog's Profile</h2>
 
-<%= form_tag({controller: :dogs, action: :create}, method: :post, :multipart => true) do %>
-<div class="ui form">  
-
-  <div class="field"><label>Name</label>
-    <%= text_field(:dog, :name) %>
-  </div>
-
-  <!-- <div class="field"><label>Photo</label> -->
-    <%#= file_field(:dog, :photo) %>
-  <!-- </div> -->
-
-  <div class="field"><label>Birthdate</label>
-    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year, :default => DateTime.new(Date.today.year, 1, 1)} %>
-  </div>
-
-  <div class="field"><label>Gender</label>
-    <%= select :dog, :gender, ["Male", "Female"] %>
-  </div>
-
-  <div class="field"><label>Mix</label>
-    <ul id="myTags">
-    </ul>
-  </div>
-
-  <div class="field"><label>Size</label>
-    <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @size) %>
-    <%= select :dog, :size, size_options %> 
-  </div>
-
-  <div class="field"><label>Personality</label>
-    <div class="ui buttons">
-    <% @personalities.each do |p| %> 
-        <% @checked_personalities.include?(p) ? bool = true : bool = false %>
-        <div class="ui button">
-        <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
-        <%= label(:personalities, p.tr(" ", "_"), p) %>
-        </div>
-    <% end %>
-    </div>
-  </div>
-
-  <div class="field"><label>Motto</label>
-    <%= text_field(:dog, :motto) %>
-  </div>
+<%= render 'dog_form' %>
 
 
-  <div class="field"><label>Description</label>
-    <%= text_area(:dog, :description) %>
-  </div>
-
-  <div class="field"><label>Energy Level</label>
-    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value') %>
-    <%= select :dog, :energy_level, energy_options %>
-  </div>
-  
-  <div class="field"><label>Likes</label>
-    <div class="ui buttons">
-    <% @likes.each do |like| %> 
-        <div class="ui button">
-        <% @checked_likes.include?(like) ? bool = true : bool = false %>
-        <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
-        <%= label(:likes, like.tr(" ", "_"), like) %>
-        </div>
-    <% end %>
-    </div>
-  </div>
-
-  <div class="field"><label>Health Notes</label>
-    <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?") %>
-  </div>
-
-  <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
-    <%= label :fixed, "Yes", :value => "true"  %>
-    <%= radio_button :dog, :fixed, true, :checked => true %>
-    <%= label :fixed, "No", :value => "false" %>
-    <%= radio_button :dog, :fixed, false  %>
-  </div>
-
-  <div class="field"><label>Availability</label>
-    <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
-  </div>
-
-
-
-<!-- IMAGE UPLOADING -->
-
-
-
-
-<div class="field"><label>
-
-
-  <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
-
-  <% end %>
-
-  <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-
-  </div>
-
-</div>
-
-<!-- move this out of html -->
 
 
 <!--<script>

@@ -11,7 +11,7 @@ Background: user has been added to the database and logged in
   And I am logged in
   And I am on the users page for "Batman"
   When I press "Add Dog"
-  Then I should see "Edit Your Dog's Profile"
+  Then I should see "Create Your Dog's Profile"
 
 Scenario: page shows error when all required fields are not filled
   When I press "Save Changes"

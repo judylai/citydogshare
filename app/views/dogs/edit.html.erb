@@ -1,3 +1,15 @@
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<% if flash[:notice] %> 
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% flash[:notice].each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
 
-<%= render "dog_form"  %>
+<h2>Edit Your Dog's Profile</h2>
+
+<%= button_to "Delete Dog", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui button red transparent input", :method => :delete %>
+
+<%= render "dog_form"   %>
+

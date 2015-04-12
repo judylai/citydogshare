@@ -3,15 +3,12 @@ class DogsController < ApplicationController
   before_filter :current_user
 
   def index
-
     @dogs = Dog.all()
-
     filter_criteria = ['gender', 'personality', 'like', 'mix', 'size', 'energy_level', 'age']
     filter_criteria.each {|criteria| filter_by(criteria)} 
-
     @no_dogs = @dogs.empty?
-
   end
+
 
   def new
     @likes = Like.pluck(:value)
@@ -19,15 +16,15 @@ class DogsController < ApplicationController
     @checked_personalities = []
     @checked_likes = []
     @size = 1
-    @gender = 1
     @energy_level = 1
+    @action = :create
   end
+
 
   def show
     id = params[:id]
     @dog = Dog.find(id)
   end
-
 
 
   def create
@@ -42,24 +39,43 @@ class DogsController < ApplicationController
     end
   end
 
-  def edit
+  def edit 
+    @dog = Dog.find(params[:id])
     @likes = Like.pluck(:value)
+    @checked_likes = @dog.likes.pluck(:value)
     @personalities = Personality.pluck(:value)
-    @checked_personalities = []
-    @checked_likes = []
-    @size = 1
-    @gender = 1
-    @energy_level = 1
+    @checked_personalities = @dog.personalities.pluck(:value)
+    @size = @dog.size_id
+    @energy_level = @dog.energy_level_id
+    @action = :update
+    @mixes = @dog.mixes.pluck(:value)
+  end
+
+  # def edit #from user profile?
+  #   if  User.exists?(params[:id]) == false || User.find(params[:id]) != @current_user
+  #     flash[:notice] = "You may only edit your own profile."
+  #     redirect_to @current_user
+  #   elsif params[:user] != nil and @current_user.update_attributes(params[:user])
+  #     flash[:notice] = "Profile successfully updated."
+  #     redirect_to @current_user
+  #   else
+  #     render 'edit'
+  #   end
+  # end
+
+  def destroy
+    @dog = Dog.find(params[:id])
+    @dog.delete
+    redirect_to user_path(@current_user)
   end
 
   def set_vars_for_render
     dog_attributes = params['dog']
-    @likes = Like.pluck(:value)  #make this a method: set_vars_for_render
+    @likes = Like.pluck(:value)  
     @personalities = Personality.pluck(:value)
     @checked_personalities = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
     @checked_likes = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
     @size = dog_attributes['size']
-    @gender = dog_attributes['gender']
     @energy_level = dog_attributes['energy_level']
   end
 

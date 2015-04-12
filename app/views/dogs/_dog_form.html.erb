@@ -1,6 +1,7 @@
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <% javascript_include_tag 'tags.js' %>
 
-<%= form_tag({controller: :dogs, action: :create}, method: :post, :multipart => true) do %>
+<%= form_tag({controller: :dogs, action: @action}, method: :post, :multipart => true) do %>
 <div class="ui form">  
 
   <div class="field"><label>Name</label>
@@ -51,7 +52,7 @@
   </div>
 
   <div class="field"><label>Energy Level</label>
-    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value') %>
+    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @energy_level) %>
     <%= select :dog, :energy_level, energy_options %>
   </div>
   
@@ -87,11 +88,16 @@
 <!-- IMAGE UPLOADING -->
 
 
-
+  <% end %>
 
 <div class="field"><label>
 
 
   <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
 
-  <% end %>
+
+  <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
+
+  </div>
+
+</div>
