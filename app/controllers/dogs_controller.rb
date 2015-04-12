@@ -18,6 +18,8 @@ class DogsController < ApplicationController
     @size = 1
     @energy_level = 1
     @action = :create
+    @mixes = ["Shiba Inu"]
+    @submit = ''
   end
 
 
@@ -33,7 +35,7 @@ class DogsController < ApplicationController
     if @dog.save
       redirect_to user_path(current_user)
     else
-      set_vars_for_render
+      set_vars_for_render(@dog)
       flash[:notice] = @dog.errors.messages
       render 'new'
     end
@@ -69,7 +71,7 @@ class DogsController < ApplicationController
     redirect_to user_path(@current_user)
   end
 
-  def set_vars_for_render
+  def set_vars_for_render(dog)
     dog_attributes = params['dog']
     @likes = Like.pluck(:value)  
     @personalities = Personality.pluck(:value)
@@ -77,6 +79,7 @@ class DogsController < ApplicationController
     @checked_likes = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
     @size = dog_attributes['size']
     @energy_level = dog_attributes['energy_level']
+    @mixes = get_mix_array(params)
   end
 
 
