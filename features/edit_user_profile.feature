@@ -7,8 +7,8 @@ I want to edit my profile
 
 Background: User and other users are in database
   Given the following users exist:
-    | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   |
-    | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     |
+    | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   | address       | zipcode | city     | country |
+    | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      |
 
   And I am logged in
   And I am on the users page for "Batman"
@@ -23,40 +23,51 @@ Scenario: Page shows error when phone number is wrong format
   When I press "Save Changes"
   Then I should see "Bad format for phone number."
 
+Scenario: Page shows error when zipcode is wrong format
+  When I fill in "user_zipcode" with "1235"
+  When I press "Save Changes"
+  Then I should see "Bad format for zipcode."
+
 Scenario: Sucessfully update some of profile
   And I select "Sharing" from "user_status"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I press "Save Changes"
   Then I should be on the users page for "Batman"
-  And I should see "Bat Cave, Gotham City"
+  And I should see "387 Soda Hall, Berkeley, 94720, US"
   And I should see "(555)228-6261"
   And I should see "Sharing"
   And I should see "I think I should make City Bat Share."
   And I should see "not nights"
 
 Scenario: Sucessfully update all of profile
-  When I fill in "user_location" with "San Francisco, California"
+  When I fill in "user_address" with "2128 Oxford St"
+  And I fill in "user_city" with "Berkeley"
+  And I fill in "user_zipcode" with "94704"
+  And I fill in "user_country" with "US"
   And I select "Sharing" from "user_status"
   And I fill in "user_phone_number" with "(510)123-1234"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I fill in "user_availability" with "Never"
   And I press "Save Changes"
   Then I should be on the users page for "Batman"
-  And I should see "San Francisco, California"
+  And I should see "2128 Oxford St, Berkeley, 94704"
   And I should see "Sharing"
   And I should see "(510)123-1234"
   And I should see "I think I should make City Bat Share."
   And I should see "Never"
 
 Scenario: No changes made when changes canceled
-  When I fill in "user_location" with "San Francisco, California"
+  When I fill in "user_address" with "2128 Oxford St"
+  And I fill in "user_city" with "Berkeley"
+  And I fill in "user_zipcode" with "94704"
+  And I fill in "user_country" with "US"
   And I select "Sharing" from "user_status"
   And I fill in "user_phone_number" with "(510)123-1234"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I fill in "user_availability" with "Never"
   And I press "Cancel Changes"
   Then I should be on the users page for "Batman"
-  And I should see "Bat Cave, Gotham City"
+  And I should see "387 Soda Hall, Berkeley, 94720, US"
   And I should see "looking"
   And I should see "(555)228-6261"
   And I should see "I love bats"

@@ -2,6 +2,9 @@ require 'rails_helper'
 
 describe DogsController, :type => :controller do
   include Capybara::DSL
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end
 
   describe 'searching/viewing dogs' do
     it 'should display all dogs initially' do

@@ -6,7 +6,8 @@ end
 
 Given /the following dogs exist/ do |dogs_table|
   dogs_table.hashes.each do |dog|
-    new_dog = Dog.create()
+    new_dog = Dog.new()
+    new_dog.user_id = dog[:user_id]
     new_dog.name = dog[:name]
     new_dog.gender = dog[:gender]
     new_dog.size_id = Size.find_by_value(dog[:size]).id

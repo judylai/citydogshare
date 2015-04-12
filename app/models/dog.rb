@@ -54,7 +54,8 @@ class Dog < ActiveRecord::Base
   end
 
   def address
-    "#{owner.address}, #{owner.zipcode}, #{owner.city}, #{owner.country}"
+    user = self.owner
+    "#{user.address}, #{user.zipcode}, #{user.city}, #{user.country}"
   end
 
 end

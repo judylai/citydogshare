@@ -29,11 +29,35 @@
 <%= form_tag(controller: "users", action: "edit", method: "post") do %>
 <div class="ui form">  
 
-  <div class="field"><label>Location</label>
-  <% if current_user.location != nil && current_user.location != ""%>
-  <%= text_field(:user, :location, :value => current_user.location) %>
+  <div class="field"><label>Address</label>
+  <% if current_user.address != nil && current_user.address != ""%>
+  <%= text_field(:user, :address, :value => current_user.address) %>
   <%else%>
-  <%= text_field(:user, :location, :placeholder => 'City, State') %>
+  <%= text_field(:user, :address, :placeholder => 'Street number and street') %>
+  <%end %>
+  </div>
+
+  <div class="field"><label>City</label>
+  <% if current_user.city != nil && current_user.city != ""%>
+  <%= text_field(:user, :city, :value => current_user.city) %>
+  <%else%>
+  <%= text_field(:user, :city, :placeholder => 'City') %>
+  <%end %>
+  </div>
+
+  <div class="field"><label>Zipcode</label>
+  <% if current_user.zipcode != nil && current_user.zipcode != ""%>
+  <%= text_field(:user, :zipcode, :value => current_user.zipcode) %>
+  <%else%>
+  <%= text_field(:user, :zipcode, :placeholder => 'xxxxx') %>
+  <%end %>
+  </div>
+
+  <div class="field"><label>Country</label>
+  <% if current_user.country != nil && current_user.country != ""%>
+  <%= text_field(:user, :country, :value => current_user.country) %>
+  <%else%>
+  <%= text_field(:user, :country, :placeholder => 'Country') %>
   <%end %>
   </div>
 
