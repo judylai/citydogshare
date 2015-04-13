@@ -6,12 +6,21 @@ I want to make a profile for my dog
 
 Background: user has been added to the database and logged in
   Given the following users exist:
-    | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   |
-    | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     |
+    | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   | address       | zipcode | city     | country | id |
+    | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      | 1  |
   And I am logged in
   And I am on the users page for "Batman"
   When I press "Add Dog"
-  Then I should see "Edit Your Dog's Profile"
+
+Scenario: Page redirects to edit user profile if user does not have address
+  And I am on the users page for "Batman"
+  And I press "Edit"
+  And I fill in "user_address" with ""
+  And I press "Save Changes"
+  And I press "Add Dog"
+  Then I should see "Edit Your Profile"
+  And I should see "Please update your address to add a dog."
+  And I should not see "Edit Your Dog's Profile"
 
 Scenario: page shows error when all required fields are not filled
   When I press "Save Changes"
@@ -24,6 +33,7 @@ Scenario: page shows error when some required fields are not filled
   And I should see "Mix can't be blank"
 
 Scenario: create dog profile
+  Then I should see "Edit Your Dog's Profile"
   When I fill in "dog_name" with "Spock"
   And I select "2010" from "dog_dob_1i"
   And I select "December" from "dog_dob_2i"

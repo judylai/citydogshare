@@ -13,5 +13,6 @@ FactoryGirl.define do
     city "Berkeley"
     country "US"
     id 1
+    uid "12345"
   end
 end

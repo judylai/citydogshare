@@ -14,8 +14,13 @@ class DogsController < ApplicationController
   end
 
   def new
-    @likes = Like.pluck(:value)
-    @personalities = Personality.pluck(:value)
+    if current_user.address != nil and current_user.address != "" and current_user.zipcode != nil and current_user.zipcode != "" 
+      @likes = Like.pluck(:value)
+      @personalities = Personality.pluck(:value)
+    else
+      flash[:notice] = "Please update your address to add a dog."
+      redirect_to edit_user_path(current_user)
+    end
   end
 
   def show

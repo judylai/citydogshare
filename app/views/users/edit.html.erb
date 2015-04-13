@@ -6,6 +6,9 @@
     <% end %>
   </div>
 <% end %>
+<% if flash[:notice] %>
+  <div class="ui warning message"><i class="warning icon"></i><%= flash[:notice] %></div>
+<% end %>
 <h2>Edit Your Profile</h2>
 <%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %>
     <div class="field">
@@ -28,14 +31,16 @@
     </div>
 <%= form_tag(controller: "users", action: "edit", method: "post") do %>
 <div class="ui form">  
-
+</br>
   <div class="field"><label>Address</label>
+    Address will be required to share your dog. Your information will not be shown to other users.
   <% if current_user.address != nil && current_user.address != ""%>
   <%= text_field(:user, :address, :value => current_user.address) %>
   <%else%>
   <%= text_field(:user, :address, :placeholder => 'Street number and street') %>
   <%end %>
   </div>
+
 
   <div class="field"><label>City</label>
   <% if current_user.city != nil && current_user.city != ""%>

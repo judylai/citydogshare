@@ -114,8 +114,9 @@ describe DogsController, :type => :controller do
 
   describe 'render new dog page' do
   before(:each) do
+    session[:user_id] = "12345"
     @dog = FactoryGirl.create(:dog)
-    @current_user = User.create(:id => 1)
+
   end
     it "should render the form" do
       get :new
@@ -126,16 +127,24 @@ describe DogsController, :type => :controller do
       get :new
       assigns(:likes).should == ["dogs (all)", "dogs (some or most)", "cats", "men", "women", "children"]
     end
+
+    it 'should redirect to edit user page if no user address' do
+      @user.address = ""
+      @user.save
+      get :new
+      response.should redirect_to edit_user_path(@user)
+    end
   end
 
   describe 'create a new dog' do 
   before(:each) do
+    @current_user = User.find_by_id(1)
+    session[:user_id] = "12345"
     @dog = FactoryGirl.create(:dog)
-    @current_user = User.create(:id => 1)
-      @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
-                  "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>""}, "item"=>{"tags"=>["Australian Shepherd"]}, "personality"=>{"curious"=>"1"},
-                  "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}, "update_dog_button"=>"Save Changes"}
+    @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
+                "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
+                "availability"=>""}, "item"=>{"tags"=>["Australian Shepherd"]}, "personality"=>{"curious"=>"1"},
+                "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}, "update_dog_button"=>"Save Changes"}
     end
 
     it 'should create an array of personalities' do
@@ -161,7 +170,6 @@ describe DogsController, :type => :controller do
       post :create, @params
       response.should redirect_to new_dog_path
     end
-
 
   end
 
