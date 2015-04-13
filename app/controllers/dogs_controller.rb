@@ -58,7 +58,7 @@ class DogsController < ApplicationController
     else
       set_vars_for_render(params['dog'])
       flash[:notice] = @dog.errors.messages
-      render "edit"
+      redirect_to edit_dog_path(@dog.id)
     end
   end
 
