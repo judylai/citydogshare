@@ -12,14 +12,14 @@ Background: user has been added to the database and logged in
   And I am on the users page for "Batman"
   When I press "Add Dog"
 
-Scenario: Page redirects to edit user profile if user does not have address
+Scenario: Page redirects to edit user profile if user does not have zipcode
   And I am on the users page for "Batman"
   And I press "Edit"
-  And I fill in "user_address" with ""
+  And I fill in "user_zipcode" with ""
   And I press "Save Changes"
   And I press "Add Dog"
   Then I should see "Edit Your Profile"
-  And I should see "Please update your address to add a dog."
+  And I should see "Please update your zipcode to add a dog."
   And I should not see "Edit Your Dog's Profile"
 
 Scenario: page shows error when all required fields are not filled

@@ -31,9 +31,7 @@
     </div>
 <%= form_tag(controller: "users", action: "edit", method: "post") do %>
 <div class="ui form">  
-</br>
   <div class="field"><label>Address</label>
-    Address will be required to share your dog. Your information will not be shown to other users.
   <% if current_user.address != nil && current_user.address != ""%>
   <%= text_field(:user, :address, :value => current_user.address) %>
   <%else%>
@@ -49,7 +47,7 @@
   <%= text_field(:user, :city, :placeholder => 'City') %>
   <%end %>
   </div>
-
+Zipcode will be required to share your dog. Your information will not be shown to other users.
   <div class="field"><label>Zipcode</label>
   <% if current_user.zipcode != nil && current_user.zipcode != ""%>
   <%= text_field(:user, :zipcode, :value => current_user.zipcode) %>

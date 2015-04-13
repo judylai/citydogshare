@@ -129,7 +129,7 @@ describe DogsController, :type => :controller do
     end
 
     it 'should redirect to edit user page if no user address' do
-      @user.address = ""
+      @user.zipcode = ""
       @user.save
       get :new
       response.should redirect_to edit_user_path(@user)
