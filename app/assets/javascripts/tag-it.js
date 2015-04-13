@@ -56,7 +56,7 @@
             // on an INPUT element, in which case singleField is automatically
             // set to true, and singleFieldNode is set to that element. This 
             // way, you don't need to fiddle with these options.
-            singleField: false,
+            singleField: true,
 
             singleFieldDelimiter: ',',
 

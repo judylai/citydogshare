@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <% javascript_include_tag 'tags.js' %>
 
-<%= form_tag({controller: :dogs, action: @action}, method: :post, :multipart => true) do %>
+<%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
 <div class="ui form">  
 
   <div class="field"><label>Name</label>
@@ -21,8 +21,7 @@
   </div>
 
   <div class="field"><label>Mix</label>
-    <ul id="myTags">
-    </ul>
+    <%= text_field :dog, :mixes, :value => @mixes.join(", ") %>
   </div>
 
   <div class="field"><label>Size</label>

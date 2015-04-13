@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("#myTags").tagit({
+  $("#dog_mixes").tagit({
     tagSource: function(search, showChoices) {
       var that = this;
       $.ajax({

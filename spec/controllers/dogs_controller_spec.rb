@@ -131,8 +131,8 @@ describe DogsController, :type => :controller do
     @current_user = User.create(:id => 1)
     @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>""}, "item"=>{"tags"=>["Australian Shepherd"]}, "personality"=>{"curious"=>"1"},
-                  "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}, "update_dog_button"=>"Save Changes"}
+                  "availability"=>"", "mixes" =>"Australian Shepherd", "personalities"=>{"curious"=>"1"},
+                  "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
     end
 
     it 'should create an array of personalities' do
@@ -179,11 +179,13 @@ describe DogsController, :type => :controller do
     @current_user = User.create(:id => 1)
   end
     it 'should return an array of mix objects' do
-      controller.get_mix_array({"item"=>{"tags"=>["Czechoslovak Wolfdog"]}}).should == [Mix.find_by_value("Czechoslovak Wolfdog")]
+      mix_string = "Czechoslovak Wolfdog,Akita Inu"
+      controller.get_mix_array(mix_string).should == [Mix.find_by_value("Czechoslovak Wolfdog"), Mix.find_by_value("Akita Inu")]
     end
 
     it 'should return an empty array if no params' do
-      controller.get_mix_array({}).should == []
+      mix_string = ""
+      controller.get_mix_array(mix_string).should == []
     end
   end
 

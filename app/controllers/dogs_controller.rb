@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
-
   before_filter :current_user
+
 
   def index
     @dogs = Dog.all()
@@ -11,15 +11,14 @@ class DogsController < ApplicationController
 
 
   def new
-    @likes = Like.pluck(:value)
-    @personalities = Personality.pluck(:value)
+    set_vars
     @checked_personalities = []
     @checked_likes = []
     @size = 1
     @energy_level = 1
+    @mixes = []
     @action = :create
-    @mixes = ["Shiba Inu"]
-    @submit = ''
+    @method = :post
   end
 
 
@@ -28,14 +27,13 @@ class DogsController < ApplicationController
     @dog = Dog.find(id)
   end
 
-
   def create
     @dog = Dog.new(attributes_list(params))
     @dog.user_id = current_user.id
     if @dog.save
       redirect_to user_path(current_user)
     else
-      set_vars_for_render(@dog)
+      set_vars_for_render(params['dog'])
       flash[:notice] = @dog.errors.messages
       render 'new'
     end
@@ -43,27 +41,26 @@ class DogsController < ApplicationController
 
   def edit 
     @dog = Dog.find(params[:id])
-    @likes = Like.pluck(:value)
-    @checked_likes = @dog.likes.pluck(:value)
-    @personalities = Personality.pluck(:value)
-    @checked_personalities = @dog.personalities.pluck(:value)
+    set_vars
+    @checked_likes = @dog.readable_likes
+    @checked_personalities = @dog.readable_personalities
     @size = @dog.size_id
     @energy_level = @dog.energy_level_id
-    @action = :update
     @mixes = @dog.mixes.pluck(:value)
+    @action = :update
+    @method = :put
   end
 
-  # def edit #from user profile?
-  #   if  User.exists?(params[:id]) == false || User.find(params[:id]) != @current_user
-  #     flash[:notice] = "You may only edit your own profile."
-  #     redirect_to @current_user
-  #   elsif params[:user] != nil and @current_user.update_attributes(params[:user])
-  #     flash[:notice] = "Profile successfully updated."
-  #     redirect_to @current_user
-  #   else
-  #     render 'edit'
-  #   end
-  # end
+  def update
+    @dog = Dog.find(params[:id])
+    if @dog.update_attributes(attributes_list(params))
+      redirect_to dog_path(@dog.id)
+    else
+      set_vars_for_render(params['dog'])
+      flash[:notice] = @dog.errors.messages
+      render "edit"
+    end
+  end
 
   def destroy
     @dog = Dog.find(params[:id])
@@ -71,19 +68,19 @@ class DogsController < ApplicationController
     redirect_to user_path(@current_user)
   end
 
-  def set_vars_for_render(dog)
-    dog_attributes = params['dog']
+  def set_vars
     @likes = Like.pluck(:value)  
     @personalities = Personality.pluck(:value)
+  end
+
+  def set_vars_for_render(dog_attributes)
+    set_vars
     @checked_personalities = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
     @checked_likes = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
     @size = dog_attributes['size']
     @energy_level = dog_attributes['energy_level']
-    @mixes = get_mix_array(params)
+    @mixes = dog_attributes['mixes'].split(',')
   end
-
-
-
 
   def filter_by(model)
     unless model == "age" or model == "gender"
@@ -175,14 +172,11 @@ class DogsController < ApplicationController
   end
 
 
-  def get_mix_array(params)
-    if params['item']
-      tags = params['item']['tags']
-      tags.map{ |tag| Mix.find_by_value(tag) }
-    else
-      return []
-    end
+  def get_mix_array(mix_string)
+    tags = mix_string.split(",")
+    tags.map{ |tag| Mix.find_by_value(tag) }
   end
+
 
   def get_attribute_array(attributes, trait)
     if attributes[trait] != nil
@@ -213,7 +207,7 @@ class DogsController < ApplicationController
   def attributes_list(params)
     dog_attributes = params["dog"]
     new_attrs = {
-      :mixes => get_mix_array(params),
+      :mixes => get_mix_array(dog_attributes['mixes']),
       :size => Size.find(dog_attributes['size']), 
       :energy_level => EnergyLevel.find(dog_attributes['energy_level']), 
       :likes => get_attribute_array(dog_attributes, 'likes'),
@@ -221,7 +215,6 @@ class DogsController < ApplicationController
       :dob => get_birthday(dog_attributes) }
     dog_attributes.merge(new_attrs)
   end
-
 end
 
 
