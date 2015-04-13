@@ -5,11 +5,11 @@ class Mix < ActiveRecord::Base
 
 
   def self.autocomplete(q)
-    where("UPPER(mixes.name) LIKE UPPER(:q1) OR UPPER(mixes.name) LIKE UPPER(:q2)", {:q1 => "#{q}%", :q2 => "% #{q}%"}).order('name ASC').limit(5)
+    where("UPPER(mixes.value) LIKE UPPER(:q1) OR UPPER(mixes.value) LIKE UPPER(:q2)", {:q1 => "#{q}%", :q2 => "% #{q}%"}).order('value ASC').limit(5)
   end
   
   def self.autocomplete_data(q)
-    Mix.autocomplete(q).map(&:name)
+    Mix.autocomplete(q).map(&:value)
   end
 
 end
