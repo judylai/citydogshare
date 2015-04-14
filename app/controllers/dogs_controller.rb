@@ -2,7 +2,13 @@ class DogsController < ApplicationController
   before_filter :current_user
 
   def index
-    @zipcode = params[:zipcode].nil? ? request.safe_location.postal_code : params[:zipcode]
+    if params[:zipcode]
+      @zipcode = params[:zipcode]
+    elsif current_user and current_user.zipcode
+      @zipcode = current_user.zipcode
+    else
+      @zipcode = request.safe_location.postal_code
+    end
     @radius = params[:radius].nil? ? 100 : params[:radius]
     @dogs = Dog.near(@zipcode, params[:radius].to_i, order: :distance)
     filter_criteria = ['gender', 'personality', 'like', 'mix', 'size', 'energy_level', 'age']
