@@ -9,8 +9,8 @@ class DogsController < ApplicationController
     else
       @zipcode = request.safe_location.postal_code
     end
-    @radius = params[:radius].nil? ? 100 : params[:radius]
-    @dogs = Dog.near(@zipcode, params[:radius].to_i, order: :distance)
+    @radius = params[:radius].nil? ? 100 : params[:radius].to_i
+    @dogs = Dog.near(@zipcode, @radius, order: :distance)
     filter_criteria = ['gender', 'personality', 'like', 'mix', 'size', 'energy_level', 'age']
     filter_criteria.each {|criteria| filter_by(criteria)} 
     @no_dogs = @dogs.empty?
