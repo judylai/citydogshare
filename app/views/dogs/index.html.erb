@@ -110,7 +110,7 @@
       <h1> No Dogs Found </h1>
     <% end %>
     <% @dogs.each do |dog| %>
-    <div class="ui vertical segment">
+    <div class="ui vertical segment" id = <%= dog.owner.zipcode %> >
 
       <div class="large-3 columns">
         <span class="image">
@@ -189,7 +189,11 @@ $(document).ready(function(){
           var marker = new google.maps.Marker({
               map: map,
               icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+counts[current]+"%7CFE6256%7C000000",
+              url: "#" + current,
               position: results[0].geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            window.location.href = marker.url;
           });
           bounds.extend(marker.getPosition());
           map.fitBounds(bounds);
