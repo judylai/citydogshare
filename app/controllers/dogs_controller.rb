@@ -1,12 +1,15 @@
 class DogsController < ApplicationController
   before_filter :current_user
 
-
   def index
-    @dogs = Dog.all()
+    @zipcode = params[:zipcode].nil? ? request.safe_location.postal_code : params[:zipcode]
+    @radius = params[:radius].nil? ? 100 : params[:radius]
+    @dogs = Dog.near(@zipcode, params[:radius].to_i, order: :distance)
     filter_criteria = ['gender', 'personality', 'like', 'mix', 'size', 'energy_level', 'age']
     filter_criteria.each {|criteria| filter_by(criteria)} 
     @no_dogs = @dogs.empty?
+    @zipcodes = get_zipcode_from_dogs
+    @counts = get_zipcode_counts.to_json
   end
 
 
@@ -19,6 +22,13 @@ class DogsController < ApplicationController
     @mixes = []
     @action = :create
     @method = :post
+    if current_user.zipcode != nil and current_user.zipcode != "" 
+      @likes = Like.pluck(:value)
+      @personalities = Personality.pluck(:value)
+    else
+      flash[:notice] = "Please update your zipcode to add a dog."
+      redirect_to edit_user_path(current_user)
+    end
   end
 
 
@@ -80,6 +90,16 @@ class DogsController < ApplicationController
     @size = dog_attributes['size']
     @energy_level = dog_attributes['energy_level']
     @mixes = dog_attributes['mixes'].split(',')
+  end
+
+  def get_zipcode_from_dogs
+    @dogs.collect{|dog| dog.address}
+  end
+
+  def get_zipcode_counts
+    wf = Hash.new(0)
+    @zipcodes.each{|word| wf[word] += 1}
+    wf
   end
 
   def filter_by(model)

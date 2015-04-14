@@ -6,7 +6,8 @@ end
 
 Given /the following dogs exist/ do |dogs_table|
   dogs_table.hashes.each do |dog|
-    new_dog = Dog.create()
+    new_dog = Dog.new()
+    new_dog.user_id = dog[:user_id]
     new_dog.name = dog[:name]
     new_dog.gender = dog[:gender]
     new_dog.size_id = Size.find_by_value(dog[:size]).id
@@ -35,4 +36,16 @@ end
 And /^I push "([^"]*)"$/ do |button|
   DogsController.any_instance.should_receive(:get_mix_array).and_return([Mix.find(1)])
   click_button(button)
+end
+
+Given /^my IP address is (\d+\.\d+\.\d+\.\d+)$/ do |ip|
+  ApplicationController.stubbed_request_ip = ip
+end
+
+Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
+  page.body.should =~ /#{first_example}.*#{second_example}/m
+end
+
+After do
+  ApplicationController.stubbed_request_ip = nil
 end

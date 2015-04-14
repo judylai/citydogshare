@@ -87,6 +87,13 @@
       <% end %>
       </div>
 
+      <div>
+        <%= label(:zipcode, "Zipcode") %>
+        <%= text_field_tag(:zipcode, @zipcode) %>
+         <%= label(:radius, "Within") %>
+        <%= text_field_tag(:radius, @radius )%> Miles
+      </div>
+
       <div class="right floated ui primary button transparent input">
         <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "btn info" %>
       </div>
@@ -95,14 +102,15 @@
     </div>
   </div>
   <% end %>
-
+<span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
+  <span id="counts" data-counts="<%= @counts %>"/>
   <div class="large-7 columns">
     <div class="ui segment" id="dog_search_results">
     <% if @no_dogs %>
       <h1> No Dogs Found </h1>
     <% end %>
     <% @dogs.each do |dog| %>
-    <div class="ui vertical segment">
+    <div class="ui vertical segment" id = <%= dog.owner.zipcode %> >
 
       <div class="large-3 columns">
         <span class="image">
@@ -148,51 +156,52 @@ $(document).ready(function(){
     context: '#dog_search_results'
   });
 
-  $('select.dropdown').dropdown();
-
-  // $.each($(':checked'), function( index, value ) {
-  //   $(value).parent().addClass('active');
-  // });
-
-  // $('.ui.button').on('click', function(){
-  //   $(this).toggleClass('active');
-  //   var $this_checkbox = $(this).children();
-  //   if ($this_checkbox.is(':checked')){
-  //     $this_checkbox.prop('checked', false);
-  //   } else {
-  //     $this_checkbox.prop('checked', true);
-  //   }
-  // });
-
-  // $('.check').on('click', function(){
-  //   $(this).parent().toggleClass('active');
-  // });
+  $('select.dropdown').dropdown(); 
 
   var geocoder;
   var map;
-  var query = 'San Francisco';
+  var query = $('#zipcodes').data('zipcodes');
+  var counts = $('#counts').data('counts');
+  //var query = ['2523 Ridge Road, Berkeley, CA', 'Berkeley'];
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var mapOptions = {
       zoom: 8
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    codeAddress();
+    var bounds = new google.maps.LatLngBounds();
+    codeAddress(counts, bounds);
+    
   }
 
-  function codeAddress() {
+//  Fit these bounds to the map
+
+  function codeAddress(counts, bounds) {
     var address = query;
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
+    
+    for (i = 0; i < address.length; i++) {
+
+        geocoder.geocode( { 'address': address[i]}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          //map.setCenter(results[0].geometry.location);
+          var current = results[0].address_components[0].long_name;
+          
+          var marker = new google.maps.Marker({
+              map: map,
+              icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+counts[current]+"%7CFE6256%7C000000",
+              url: "#" + current,
+              position: results[0].geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            window.location.href = marker.url;
+          });
+          bounds.extend(marker.getPosition());
+          map.fitBounds(bounds);
+
+        } 
     });
+    }
+
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
