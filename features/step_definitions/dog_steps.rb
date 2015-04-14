@@ -4,7 +4,8 @@ When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
 end
 
-Given /the following dogs exist/ do |dogs_table|
+Given /the following dogs exist/ do |dogs_table|\
+  Dog.any_instance.stub(:geocode)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
     new_dog.user_id = dog[:user_id]
@@ -16,6 +17,8 @@ Given /the following dogs exist/ do |dogs_table|
     new_dog.personalities << Personality.find_by_value(dog[:personality])
     new_dog.likes << Like.find_by_value(dog[:likes])
     new_dog.energy_level_id = EnergyLevel.find_by_value(dog[:energy]).id
+    new_dog.latitude = dog[:latitude]
+    new_dog.longitude = dog[:longitude]
     new_dog.save!
   end
 end

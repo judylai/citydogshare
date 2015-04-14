@@ -11,10 +11,10 @@ Background: user has been added to the database and logged in
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   | 387 Cory Hall | 12345   | Berkeley | US      | 2  |
   
   And the following dogs exist:
-    | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id |
-    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       |
-    | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       |
+    | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | latitude   | longitude    |
+    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | 37.8611110 | -122.3079169 |
+    | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 30.0506448 | -89.95475610 |
   And my IP address is 136.152.12.191
   And I am on the search dogs page
 
