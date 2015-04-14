@@ -4,22 +4,27 @@ describe DogsController, :type => :controller do
   include Capybara::DSL
   before(:each) do
     @user = FactoryGirl.create(:user)
+    Dog.any_instance.stub(:geocode)
   end
 
   describe 'searching/viewing dogs' do
-    it 'should display all dogs initially' do
+    it 'should display all dogs given big radius' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
+      Dog.stub(:near).and_return(Dog.all)
       dogs = [dog1, dog2]
-      get :index
+      params = {}
+      get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
     it 'should filter by gender' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :gender => "Female")
+      Dog.stub(:near).and_return(Dog.all)
       dogs = [dog2]
       params = {}
       params[:gender] = {"Female" => 1}
+
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -27,6 +32,7 @@ describe DogsController, :type => :controller do
       Time.stub(:now).and_return(Time.mktime(2014,1))
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => Time.new(2013, 2))
+      Dog.stub(:near).and_return(Dog.all)
       dogs = [dog2]
       params = {}
       params[:age] = {"0" => 1}
@@ -39,6 +45,7 @@ describe DogsController, :type => :controller do
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
       dog2.mixes << Mix.find_by_value("Labrador")
       dog2.save!
+      Dog.stub(:near).and_return(Dog.all)
       dogs = [dog2]
       params = {}
       params[:mix] = "Labrador"
@@ -52,6 +59,7 @@ describe DogsController, :type => :controller do
       dog2.personalities << Personality.find_by_value("friendly")
       dog2.save
       dogs = [dog2]
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:personality] = {"friendly" => 1}
       get :index, params
@@ -64,6 +72,7 @@ describe DogsController, :type => :controller do
       dog2.likes << Like.find_by_value("cats")
       dog2.save
       dogs = [dog2]
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:like] = {"cats" => 1}
       get :index, params
@@ -74,6 +83,7 @@ describe DogsController, :type => :controller do
       dog1 = FactoryGirl.create(:dog, :energy_level_id => 2)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
       dogs = [dog2]
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:energy_level] = {"high" => 1}
       get :index, params
@@ -84,6 +94,7 @@ describe DogsController, :type => :controller do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :size_id => 2)
       dogs = [dog1]
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:size] = {"small (0-15)" => 1}
       get :index, params
@@ -94,6 +105,7 @@ describe DogsController, :type => :controller do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :size_id => 2)
       dogs = [dog1]
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:gender] = {"Male" => 1}
       params[:size] = {"small (0-15)" => 1}
@@ -104,6 +116,7 @@ describe DogsController, :type => :controller do
     it 'should report when no results match criteria' do
       dog1 = FactoryGirl.create(:dog)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :size_id => 2)
+      Dog.stub(:near).and_return(Dog.all)
       params = {}
       params[:size] = {"xl(101+)" => 1}
       get :index, params
@@ -115,6 +128,7 @@ describe DogsController, :type => :controller do
   describe 'render new dog page' do
   before(:each) do
     session[:user_id] = "12345"
+    Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
 
   end
@@ -140,6 +154,7 @@ describe DogsController, :type => :controller do
   before(:each) do
     @current_user = User.find_by_id(1)
     session[:user_id] = "12345"
+    Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
     @params = {  "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                 "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
@@ -175,6 +190,7 @@ describe DogsController, :type => :controller do
 
   describe 'should show the correct dog profile' do
   before(:each) do
+    Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
     @current_user = User.create(:id => 1)
   end
@@ -186,6 +202,7 @@ describe DogsController, :type => :controller do
 
   describe 'test get_mix_array' do
   before(:each) do
+    Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
     @current_user = User.create(:id => 1)
   end
@@ -200,6 +217,7 @@ describe DogsController, :type => :controller do
 
   describe 'test other methods' do
   before(:each) do
+    Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
     @current_user = User.create(:id => 1)
   end
