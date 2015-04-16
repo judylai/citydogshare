@@ -9,10 +9,9 @@
 <!-- <link rel="stylesheet" type="text/css" href="../app/assets/stylesheet/jquery.datetimepicker.css"/ > -->
 <!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
 <script>
-$( document ).ready(function() {
   jQuery(function(){
    jQuery('#date_timepicker_start').datetimepicker({
-    format:'m/d/Y',
+    format:'Y/m/d',
     onShow:function( ct ){
      this.setOptions({
       minDate: 0,
@@ -22,7 +21,7 @@ $( document ).ready(function() {
     timepicker:false
    });
    jQuery('#date_timepicker_end').datetimepicker({
-    format:'m/d/Y',
+    format:'Y/m/d',
     onShow:function( ct ){
      this.setOptions({
       minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
@@ -31,7 +30,6 @@ $( document ).ready(function() {
     timepicker:false
    });
   });
-});
 </script>
 
 <h2>Create Event</h2>
