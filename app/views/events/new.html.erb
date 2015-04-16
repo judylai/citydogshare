@@ -35,21 +35,33 @@
 <h2>Create Event</h2>
 
 <p>
+
+  <%= form_tag(controller: :events, action: :create, method: :post) do %>
 	<div class="ui form">
+    <div class="field"><label>Dog</label>
+      <div class="ui buttons">
+        <% @dogs.each do |dog| %>
+          <div class="ui button">
+            <% @checked_times.include?(time) ? bool = true : bool = false %>
+            <%= check_box_tag "event[times[#{time}]]", 1, bool, :class => "check" %>
+            <%= label(:times, time, time) %>
+        </div>
+    <% end %>
+    </div>
+
+
+
+
   	<div class="field">
 			<label>Start</label>
       <input id="date_timepicker_start" type="text">
 		</div>
-	</div>
 
   <br />
-
-  <div class="ui form">
     <div class="field">
       <label>End</label>
       <input id="date_timepicker_end" type="text">
     </div>
-  </div>
 
   <br />
 
@@ -67,15 +79,20 @@
 
   <br />
 
-  <div class="ui buttons">
-    <div class="ui button">
-      <%= radio_button_tag(:location, "mine") %>
-      <%= label_tag(:my_location, "My location") %>
-    </div>
-    <div class="or"></div>
-    <div class="ui button">
-      <%= radio_button_tag(:location, "yours") %>
-      <%= label_tag(:your_location, "Your location") %>
-    </div>
+  <div class="field"><label>Where</label>
+    <%= radio_button_tag(:location, "mine") %>
+     My House
+    <br />
+    <%= radio_button_tag(:location, "yours") %>
+     Your House
+  </div>
+
+  <br />
+
+  <div class="field">
+    <div class="ui primary button transparent input"><input id='update_event_button' type="submit" value="Schedule" name="update_dog_button" class='btn info' /></div>
+  </div>
+
+  <% end %>
   </div>
 </p>
