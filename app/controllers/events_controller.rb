@@ -2,7 +2,11 @@ class EventsController < ApplicationController
   before_filter :current_user
 
   def index
-
+      @events = []
+      @dogs = current_user.dogs.pluck(:name)
+      @dogs.each do |dog|
+        @events.push(Event.find(params[:id]))
+      end
   end
 
   def new
