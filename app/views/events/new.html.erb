@@ -50,18 +50,15 @@
       </div>
     </div>
 
-
-
-
   	<div class="field">
 			<label>Start</label>
-      <input id="date_timepicker_start" type="text">
+      <%= text_field :date_timepicker, :start %>
 		</div>
 
   <br />
     <div class="field">
       <label>End</label>
-      <input id="date_timepicker_end" type="text">
+      <%= text_field :date_timepicker, :end %>
     </div>
 
   <br />
@@ -81,10 +78,10 @@
   <br />
 
   <div class="field"><label>Where</label>
-    <%= radio_button_tag(:location, "mine") %>
+    <%= radio_button_tag(:location, true, :checked => true) %>
      My House
     <br />
-    <%= radio_button_tag(:location, "yours") %>
+    <%= radio_button_tag(:location, false) %>
      Your House
   </div>
 
