@@ -1,13 +1,13 @@
 class Dog < ActiveRecord::Base
   attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude
 
-  scope :has_gender, lambda {|genders| where("gender" => genders) unless genders.empty?}
-  scope :has_personalities, lambda {|personalities| joins(:personalities).where("personalities.value" => personalities) unless personalities.empty?}
-  scope :has_likes, lambda {|likes| joins(:likes).where("likes.value" => likes) unless likes.empty?}
-  scope :has_mix, lambda {|mix| joins(:mixes).where("mixes.value" => mix) unless mix == "All Mixes"}
-  scope :has_energy_level, lambda {|energy_levels| joins(:energy_level).where("energy_levels.value" => energy_levels) unless energy_levels.empty?}
-  scope :has_size, lambda {|sizes| joins(:size).where("sizes.value" => sizes) unless sizes.empty?}
-  scope :in_age_range, lambda {|age_query| where(age_query) unless age_query == ""}
+  scope :has_gender, lambda {|genders| filter_gender(genders)}
+  scope :has_personalities, lambda {|personalities| filter_personality(personalities)}
+  scope :has_likes, lambda {|likes| filter_like(likes)}
+  scope :has_mix, lambda {|mix| filter_mix(mix)}
+  scope :has_energy_level, lambda {|energy_levels| filter_energy_level(energy_levels)}
+  scope :has_size, lambda {|sizes| filter_size(sizes)}
+  scope :in_age_range, lambda {|age_query| filter_age(age_query)}
 
   belongs_to :user
   has_many :dog_mix_linkers
@@ -28,6 +28,7 @@ class Dog < ActiveRecord::Base
 
   after_validation :geocode
 
+  ## Attribute Access Functions
   def validate_dob
     errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
   end
@@ -66,6 +67,8 @@ class Dog < ActiveRecord::Base
     "#{user.zipcode}"
   end
 
+  ## Attribute Possible Values Functions
+  
   def self.genders
     ["Male", "Female"]
   end
@@ -74,18 +77,41 @@ class Dog < ActiveRecord::Base
     ["0-2 years", "2-4 years", "5-8 years", "9+ years"]
   end
 
-  def get_base(i)
-        first = (Time.now - ranges[i][1].years).strftime "%Y-%m-%d %H:%M:%S"
-        second = (Time.now - ranges[i][0].years).strftime "%Y-%m-%d %H:%M:%S"
-        base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
+  ## Filter Functions for Search Results (Dog Index Page)
+
+  def self.filter_gender(genders)
+    where("gender" => genders) unless genders.empty?
   end
 
-  def dob_query
-    ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
+  def self.filter_personality(personalities)
+    joins(:personalities).where("personalities.value" => personalities) unless personalities.empty?
+  end
+
+  def self.filter_like(likes)
+    joins(:likes).where("likes.value" => likes) unless likes.empty?
+  end
+
+  def self.filter_mix(mix)
+    joins(:mixes).where("mixes.value" => mix) unless mix == "All Mixes"
+  end
+
+  def self.filter_energy_level(energy_levels)
+    joins(:energy_level).where("energy_levels.value" => energy_levels) unless energy_levels.empty?
+  end
+
+  def self.filter_size(sizes)
+    joins(:size).where("sizes.value" => sizes) unless sizes.empty?
+  end
+  
+  def self.filter_age(age_query)
+    where(age_query) unless age_query == ""
+  end
+
+  def self.convert_age_ranges_to_dob_query(age_ranges_indices)
+    age_ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
-    criteria[:age].each do |i|
-        # t.strftime "%Y-%m-%d %H:%M:%S %z"
-        base = get_base(i.to_i)
+    age_ranges_indices.each do |i|
+        base = get_base(i.to_i, age_ranges)
         if i.to_i < criteria[:age].length - 1
           age_query += (base + " OR ")
         else
@@ -93,6 +119,12 @@ class Dog < ActiveRecord::Base
         end
     end
     age_query
+  end
+
+  def self.get_base(i, ranges)
+    first = (Time.now - ranges[i][1].years).strftime "%Y-%m-%d %H:%M:%S"
+    second = (Time.now - ranges[i][0].years).strftime "%Y-%m-%d %H:%M:%S"
+    base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
   end
 
   def self.filter_by(criteria)
@@ -103,17 +135,7 @@ class Dog < ActiveRecord::Base
               .has_personalities(criteria[:personalities])
               .has_gender(criteria[:gender])
               .has_energy_level(criteria[:energy_levels])
-              .in_age_range(dob_query)
+              .in_age_range(convert_age_ranges_to_dob_query(criteria[:age]))
   end
-
-    # def filter_multiple_attributes(arg)
-    # instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg))
-
-    # method_name = "readable_#{arg.pluralize}"
-    # unless instance_variable_get("@" + "selected_#{arg.pluralize}").empty?
-    #   @dogs = @dogs.select do |dog|
-    #     (dog.public_send(method_name) - instance_variable_get("@" + "selected_#{arg.pluralize}")).length < dog.public_send(method_name).length  if dog.respond_to? method_name
-    #   end
-    # end
 
 end

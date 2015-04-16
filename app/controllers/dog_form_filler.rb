@@ -1,6 +1,6 @@
-class DogFormFiller
+class DogViewHelper
 
-  attr_accessor :values, :defaults
+  attr_accessor :values
 
   MIXES = Mix.all_values  
   PERSONALITIES = Personality.all_values
@@ -11,47 +11,50 @@ class DogFormFiller
   SIZES = Size.all_values
   RADIUS = 100
 
-  def initialize(current_user, request)
+  def initialize(current_user, ip_zipcode)
     @values = {}
+
+    # Index Dog View
     @values[:mix] = "All Mixes"
-    @values[:personalities] = []
-    @values[:likes] = []
     @values[:gender] = []
     @values[:age] = []
     @values[:energy_levels] = []
     @values[:sizes] = []
     @values[:radius] = RADIUS
-    @values[:zipcode] = current_user ? current_user.zipcode : request.safe_location.postal_code
+    @values[:zipcode] = current_user ? current_user.zipcode : ip_zipcode
 
     # New Dog Form
     @values[:mixes] = []
     @values[:size] = 1
     @values[:energy_level] = 1
+
+    # Overlap for Both
+    @values[:personalities] = []
+    @values[:likes] = []
   end
 
-  def update_values(selected, request, current_user)
+  def update_values(selected, ip_zipcode, current_user)
     @values[:mix] = selected[:mix] if selected[:mix]
     @values[:personalities] = selected[:personality].keys if selected[:personality]
     @values[:likes] = selected[:like].keys if selected[:like]
     @values[:gender] = selected[:gender].keys if selected[:gender]
     @values[:energy_levels] = selected[:energy_level].keys if selected[:energy_level]
     @values[:sizes] = selected[:size].keys if selected[:size]
-    @values[:age] = selected[:age].keys if selected[:age]
+    @values[:age] = selected[:age].keys.to_i if selected[:age]
 
-    if selected[:zipcode]
+    if selected[:zipcode] # Set from Params first
       @values[:zipcode] = selected[:zipcode]
-    elsif current_user and current_user.zipcode
+    elsif current_user and current_user.zipcode # Next default to current user's zipcode
       @values[:zipcode] = current_user.zipcode
-    else
-      @values[:zipcode] = request.safe_location.postal_code
+    else # Otherwise IP address zipcode
+      @values[:zipcode] = ip_zipcode
     end
 
     @values[:radius] = selected[:radius].nil? ? RADIUS : selected[:radius].to_i
 
   end
 
-  def attributes_list(params)
-    dog_attributes = params["dog"]
+  def attributes_list(dog_attributes)
     @values[:personalities] = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
     @values[:likes] = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
     @values[:size] = dog_attributes['size']

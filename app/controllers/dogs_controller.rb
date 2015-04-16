@@ -6,8 +6,10 @@ class DogsController < ApplicationController
 
   def index
 
-    @form_filler = DogFormFiller.new(current_user, request)
-    @form_filler.update_values(params, request, current_user)
+    ip_zipcode = request.safe_location.postal_code
+    @form_filler = DogViewHelper.new(current_user, ip_zipcode)
+    @form_filler.update_values(params, ip_zipcode, current_user)
+
     @dogs = Dog.filter_by @form_filler.values
     @no_dogs = @dogs.empty?
 
@@ -17,7 +19,7 @@ class DogsController < ApplicationController
 
 
   def new
-    @form_filler = DogFormFiller.new(current_user, request)
+    @form_filler = DogViewHelper.new(nil, nil)
     @action = :create
     @method = :post
     unless current_user.zipcode != nil and current_user.zipcode != "" 
@@ -33,8 +35,8 @@ class DogsController < ApplicationController
   end
 
   def create
-    @form_filler = DogFormFiller.new(current_user, request)
-    @dog = Dog.new(@form_filler.attributes_list(params))
+    @form_filler = DogViewHelper.new(nil, nil)
+    @dog = Dog.new(@form_filler.attributes_list(params['dog']))
     @dog.user_id = current_user.id
     if @dog.save
       redirect_to user_path(current_user)
@@ -46,7 +48,7 @@ class DogsController < ApplicationController
   end
 
   def edit 
-    @form_filler = DogFormFiller.new(current_user, request)
+    @form_filler = DogViewHelper.new(nil, nil)
     @dog = Dog.find(params[:id])
     @form_filler.dog_view_update(@dog)
     @action = :update
@@ -54,9 +56,9 @@ class DogsController < ApplicationController
   end
 
   def update
-    @form_filler = DogFormFiller.new(current_user, request)
+    @form_filler = DogViewHelper.new(nil, nil)
     @dog = Dog.find(params[:id])
-    if @dog.update_attributes(@form_filler.attributes_list(params))
+    if @dog.update_attributes(@form_filler.attributes_list(params['dog']))
       redirect_to dog_path(@dog.id)
     else
       # set_vars_for_render(params['dog'])
