@@ -21,18 +21,18 @@
   </div>
 
   <div class="field"><label>Mix</label>
-    <%= text_field :dog, :mixes, :value => @mixes.join(", ") %>
+    <%= text_field :dog, :mixes, :value => @form_filler.values[:mixes].join(", ") %>
   </div>
 
   <div class="field"><label>Size</label>
-    <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @size) %>
+    <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @form_filler.values[:size]) %>
     <%= select :dog, :size, size_options %> 
   </div>
 
   <div class="field"><label>Personality</label>
     <div class="ui buttons">
-    <% @personalities.each do |p| %> 
-        <% @checked_personalities.include?(p) ? bool = true : bool = false %>
+    <% Personality.all_values.each do |p| %> 
+        <% @form_filler.values[:personalities].include?(p) ? bool = true : bool = false %>
         <div class="ui button">
         <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
         <%= label(:personalities, p.tr(" ", "_"), p) %>
@@ -51,15 +51,15 @@
   </div>
 
   <div class="field"><label>Energy Level</label>
-    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @energy_level) %>
+    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @form_filler.values[:energy_level]) %>
     <%= select :dog, :energy_level, energy_options %>
   </div>
   
   <div class="field"><label>Likes</label>
     <div class="ui buttons">
-    <% @likes.each do |like| %> 
+    <% Like.all_values.each do |like| %> 
         <div class="ui button">
-        <% @checked_likes.include?(like) ? bool = true : bool = false %>
+        <% @form_filler.values[:likes].include?(like) ? bool = true : bool = false %>
         <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
         <%= label(:likes, like.tr(" ", "_"), like) %>
         </div>

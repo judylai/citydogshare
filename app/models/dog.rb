@@ -1,6 +1,14 @@
 class Dog < ActiveRecord::Base
   attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude
 
+  scope :has_gender, lambda {|genders| where("gender" => genders) unless genders.empty?}
+  scope :has_personalities, lambda {|personalities| joins(:personalities).where("personalities.value" => personalities) unless personalities.empty?}
+  scope :has_likes, lambda {|likes| joins(:likes).where("likes.value" => likes) unless likes.empty?}
+  scope :has_mix, lambda {|mix| joins(:mixes).where("mixes.value" => mix) unless mix == "All Mixes"}
+  scope :has_energy_level, lambda {|energy_levels| joins(:energy_level).where("energy_levels.value" => energy_levels) unless energy_levels.empty?}
+  scope :has_size, lambda {|sizes| joins(:size).where("sizes.value" => sizes) unless sizes.empty?}
+  scope :in_age_range, lambda {|age_query| where(age_query) unless age_query == ""}
+
   belongs_to :user
   has_many :dog_mix_linkers
   has_many :dog_like_linkers
@@ -57,5 +65,50 @@ class Dog < ActiveRecord::Base
     user = self.owner
     "#{user.zipcode}"
   end
+
+  def self.genders
+    ["Male", "Female"]
+  end
+
+  def self.age_ranges
+    ["0-2 years", "2-4 years", "5-8 years", "9+ years"]
+  end
+
+  def self.filter_by(criteria)
+    ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
+    age_query = ""
+    criteria[:age].each do |i|
+        # t.strftime "%Y-%m-%d %H:%M:%S %z"
+        first = (Time.now - ranges[i.to_i][1].years).strftime "%Y-%m-%d %H:%M:%S"
+        second = (Time.now - ranges[i.to_i][0].years).strftime "%Y-%m-%d %H:%M:%S"
+        base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
+        if i.to_i < criteria[:age].length - 1
+          age_query += (base + " OR ")
+        else
+          age_query += base
+        end
+    end
+
+    dogs = Dog.near(criteria[:zipcode], criteria[:radius].to_i, order: :distance)
+              .has_mix(criteria[:mix])
+              .has_size(criteria[:sizes])
+              .has_likes(criteria[:likes])
+              .has_personalities(criteria[:personalities])
+              .has_gender(criteria[:gender])
+              .has_energy_level(criteria[:energy_levels])
+              .in_age_range(age_query)
+    dogs
+
+  end
+
+    # def filter_multiple_attributes(arg)
+    # instance_variable_set("@" + "selected_#{arg.pluralize}", get_checkbox_selections(arg))
+
+    # method_name = "readable_#{arg.pluralize}"
+    # unless instance_variable_get("@" + "selected_#{arg.pluralize}").empty?
+    #   @dogs = @dogs.select do |dog|
+    #     (dog.public_send(method_name) - instance_variable_get("@" + "selected_#{arg.pluralize}")).length < dog.public_send(method_name).length  if dog.respond_to? method_name
+    #   end
+    # end
 
 end
