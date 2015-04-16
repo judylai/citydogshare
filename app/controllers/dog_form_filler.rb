@@ -41,7 +41,12 @@ class DogViewHelper
     @values[:energy_levels] = selected[:energy_level].keys if selected[:energy_level]
     @values[:sizes] = selected[:size].keys if selected[:size]
     @values[:age] = selected[:age].keys.to_i if selected[:age]
+    @values[:zipcode] = update_zipcode(selected, ip_zipcode, current_user)
+    @values[:radius] = selected[:radius].nil? ? RADIUS : selected[:radius].to_i
 
+  end
+
+  def update_zipcode(selected, ip_zipcode, current_user)
     if selected[:zipcode] # Set from Params first
       @values[:zipcode] = selected[:zipcode]
     elsif current_user and current_user.zipcode # Next default to current user's zipcode
@@ -49,9 +54,6 @@ class DogViewHelper
     else # Otherwise IP address zipcode
       @values[:zipcode] = ip_zipcode
     end
-
-    @values[:radius] = selected[:radius].nil? ? RADIUS : selected[:radius].to_i
-
   end
 
   def attributes_list(dog_attributes)
