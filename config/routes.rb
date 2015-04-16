@@ -17,6 +17,8 @@ Citydogshare::Application.routes.draw do
   ## Dog Routes ##
   resources :dogs
 
+  resources :events, :only => [:new, :create, :edit, :update, :destroy]
+
   resources :mixes, :only => [:index, :show] do
     collection do
       get :autocomplete

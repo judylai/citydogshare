@@ -11,6 +11,8 @@ class Dog < ActiveRecord::Base
   belongs_to :energy_level
   belongs_to :size
 
+  has_many :events, :dependent => :destroy
+
   geocoded_by :address
 
 

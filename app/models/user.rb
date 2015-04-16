@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :phone_number, format: { with: /\(\d{3}\)(\ ?)\d{3}-\d{4}/, message: "Bad format for phone number." }, :allow_blank => true
   validates :zipcode, format: { with: /\d{5}/, message: "Bad format for zipcode."}, :allow_blank => true
   has_many :dogs, :dependent => :destroy
+  has_many :events, :through => :dogs
 
   def update_credentials(credentials)
     self.oauth_token = credentials[:token]

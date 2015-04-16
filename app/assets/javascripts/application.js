@@ -20,3 +20,4 @@
 //= require checkboxes
 //= require tag-it
 //= require jquery-ui
+//= require jquery.datetimepicker

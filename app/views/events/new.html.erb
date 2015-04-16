@@ -1,0 +1,54 @@
+<% if flash[:notice] %>
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% flash[:notice].each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+<!-- <link rel="stylesheet" type="text/css" href="../app/assets/stylesheet/jquery.datetimepicker.css"/ > -->
+<!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
+<script>
+$( document ).ready(function() {
+  jQuery('#date_timepicker').datetimepicker({
+    format:'m/d/Y',
+    inline: true,
+    minDate: '0',
+    timepicker:false
+  });
+});
+</script>
+
+<h2>Create Event</h2>
+
+<p>
+
+  <div id="date_timepicker"></div>
+  <br />
+
+  <div class="field"><label>Time of day</label>
+    <div class="ui buttons">
+    <% @times.each do |time| %> 
+        <div class="ui button">
+        <% @checked_times.include?(time) ? bool = true : bool = false %>
+        <%= check_box_tag "event[times[#{time}]]", 1, bool, :class => "check" %>
+        <%= label(:times, time, time) %>
+        </div>
+    <% end %>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="ui buttons">
+    <div class="ui button">
+      <%= radio_button_tag(:location, "mine") %>
+      <%= label_tag(:my_location, "My location") %>
+    </div>
+    <div class="or"></div>
+    <div class="ui button">
+      <%= radio_button_tag(:location, "yours") %>
+      <%= label_tag(:your_location, "Your location") %>
+    </div>
+  </div>
+</p>

@@ -1,0 +1,13 @@
+<% if flash[:notice] %> 
+  <div class="ui warning message"><i class="warning icon"></i>
+    <% flash[:notice].each do |msg| %>
+      <%= msg[1][0] %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
+<h2>Edit <%= @dog %>'s Event</h2>
+
+<%= button_to "Delete Event", event_path(@event.id), :id => "delete_event_button", :class => "ui button red transparent input", :method => :delete %>
+

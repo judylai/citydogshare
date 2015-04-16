@@ -12,4 +12,5 @@
  *= require jquery.tagit
  *= require_tree .
  *= require checkbox
+ *= require jquery.datetimepicker
  */
