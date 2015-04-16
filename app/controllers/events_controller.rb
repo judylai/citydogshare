@@ -2,6 +2,12 @@ class EventsController < ApplicationController
   before_filter :current_user
 
   def index
+    @events = []
+    @dogs = current_user.dogs
+    @dogs.each do |dog|
+      @events << dog.events
+    end
+
 
   end
 
