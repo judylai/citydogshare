@@ -34,7 +34,11 @@ class Dog < ActiveRecord::Base
 
   def age
     now = Time.now.utc.to_date
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    now.year - dob.year - check_month_and_day
+  end
+
+  def check_month_and_day
+    ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
   def energy_level
@@ -74,7 +78,7 @@ class Dog < ActiveRecord::Base
     ["0-2 years", "2-4 years", "5-8 years", "9+ years"]
   end
 
-  def self.filter_by(criteria)
+  def dob_query
     ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
     criteria[:age].each do |i|
@@ -88,7 +92,10 @@ class Dog < ActiveRecord::Base
           age_query += base
         end
     end
+    age_query
+  end
 
+  def self.filter_by(criteria)
     dogs = Dog.near(criteria[:zipcode], criteria[:radius].to_i, order: :distance)
               .has_mix(criteria[:mix])
               .has_size(criteria[:sizes])
@@ -96,9 +103,7 @@ class Dog < ActiveRecord::Base
               .has_personalities(criteria[:personalities])
               .has_gender(criteria[:gender])
               .has_energy_level(criteria[:energy_levels])
-              .in_age_range(age_query)
-    dogs
-
+              .in_age_range(dob_query)
   end
 
     # def filter_multiple_attributes(arg)
