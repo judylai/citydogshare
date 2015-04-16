@@ -78,14 +78,18 @@ class Dog < ActiveRecord::Base
     ["0-2 years", "2-4 years", "5-8 years", "9+ years"]
   end
 
+  def get_base(i)
+        first = (Time.now - ranges[i.to_i][1].years).strftime "%Y-%m-%d %H:%M:%S"
+        second = (Time.now - ranges[i.to_i][0].years).strftime "%Y-%m-%d %H:%M:%S"
+        base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
+  end
+
   def dob_query
     ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
     criteria[:age].each do |i|
         # t.strftime "%Y-%m-%d %H:%M:%S %z"
-        first = (Time.now - ranges[i.to_i][1].years).strftime "%Y-%m-%d %H:%M:%S"
-        second = (Time.now - ranges[i.to_i][0].years).strftime "%Y-%m-%d %H:%M:%S"
-        base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
+        base = get_base(i)
         if i.to_i < criteria[:age].length - 1
           age_query += (base + " OR ")
         else
