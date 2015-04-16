@@ -10,11 +10,25 @@
 <!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
 <script>
 $( document ).ready(function() {
-  jQuery('#date_timepicker').datetimepicker({
+  jQuery(function(){
+   jQuery('#date_timepicker_start').datetimepicker({
     format:'m/d/Y',
-    inline: true,
-    minDate: '0',
+    onShow:function( ct ){
+     this.setOptions({
+      maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+     })
+    },
     timepicker:false
+   });
+   jQuery('#date_timepicker_end').datetimepicker({
+    format:'m/d/Y',
+    onShow:function( ct ){
+     this.setOptions({
+      minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
+     })
+    },
+    timepicker:false
+   });
   });
 });
 </script>
@@ -22,8 +36,22 @@ $( document ).ready(function() {
 <h2>Create Event</h2>
 
 <p>
+	<div class="ui form">
+  	<div class="field">
+			<label>Start</label>
+      <input id="date_timepicker_start" type="text" readonly="readonly">
+		</div>
+	</div>
 
-  <div id="date_timepicker"></div>
+  <br />
+
+  <div class="ui form">
+    <div class="field">
+      <label>End</label>
+      <input id="date_timepicker_end" type="text" readonly="readonly">
+    </div>
+  </div>
+
   <br />
 
   <div class="field"><label>Time of day</label>
