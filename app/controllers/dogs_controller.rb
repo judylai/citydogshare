@@ -40,15 +40,19 @@ class DogsController < ApplicationController
   end
 
   def edit 
-    @dog = Dog.find(params[:id])
-    set_vars
-    @checked_likes = @dog.readable_likes
-    @checked_personalities = @dog.readable_personalities
-    @size = @dog.size_id
-    @energy_level = @dog.energy_level_id
-    @mixes = @dog.mixes.pluck(:value)
-    @action = :update
-    @method = :put
+    if current_user.id != @dog.user_id
+      flash[:notice] = "You can only edit your dog's profile"
+    else
+      @dog = Dog.find(params[:id])
+      set_vars
+      @checked_likes = @dog.readable_likes
+      @checked_personalities = @dog.readable_personalities
+      @size = @dog.size_id
+      @energy_level = @dog.energy_level_id
+      @mixes = @dog.mixes.pluck(:value)
+      @action = :update
+      @method = :put
+    end
   end
 
   def update
