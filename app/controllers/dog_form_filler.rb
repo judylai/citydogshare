@@ -2,48 +2,32 @@ class DogViewHelper
 
   attr_accessor :values
 
-  MIXES = Mix.all_values  
-  PERSONALITIES = Personality.all_values
-  LIKES = Like.all_values
-  GENDERS = Dog.genders
-  AGE_RANGES = Dog.age_ranges
-  ENERGY_LEVELS = EnergyLevel.all_values
-  SIZES = Size.all_values
-  RADIUS = 100
+  DEFAULT_RADIUS = 100
+  CHECKBOX_CRITERIA = [:gender, :personality, :energy_level, :size, :age, :like]
 
-  def initialize(current_user, ip_zipcode)
+  def initialize(current_user, ip_zipcode, index)
     @values = {}
-
-    # Index Dog View
-    @values[:mix] = "All Mixes"
+    @values[:mix] = index ? "All Mixes" : []
     @values[:gender] = []
     @values[:age] = []
-    @values[:energy_levels] = []
-    @values[:sizes] = []
-    @values[:radius] = RADIUS
+    @values[:energy_level] = index ? [] : 1
+    @values[:size] = index ? [] : 1
+    @values[:radius] = DEFAULT_RADIUS
     @values[:zipcode] = current_user ? current_user.zipcode : ip_zipcode
-
-    # New Dog Form
-    @values[:mixes] = []
-    @values[:size] = 1
-    @values[:energy_level] = 1
-
-    # Overlap for Both
-    @values[:personalities] = []
-    @values[:likes] = []
+    @values[:personality] = []
+    @values[:like] = []
   end
 
   def update_values(selected, ip_zipcode, current_user)
+    CHECKBOX_CRITERIA.each {|criteria| get_checkbox_selections(selected, criteria)}
     @values[:mix] = selected[:mix] if selected[:mix]
-    @values[:personalities] = selected[:personality].keys if selected[:personality]
-    @values[:likes] = selected[:like].keys if selected[:like]
-    @values[:gender] = selected[:gender].keys if selected[:gender]
-    @values[:energy_levels] = selected[:energy_level].keys if selected[:energy_level]
-    @values[:sizes] = selected[:size].keys if selected[:size]
-    @values[:age] = selected[:age].keys.to_i if selected[:age]
     @values[:zipcode] = update_zipcode(selected, ip_zipcode, current_user)
-    @values[:radius] = selected[:radius].nil? ? RADIUS : selected[:radius].to_i
+    @values[:radius] = selected[:radius].nil? ? DEFAULT_RADIUS : selected[:radius].to_i
 
+  end
+
+  def get_checkbox_selections(selected, criteria)
+    @values[criteria] = selected[criteria].keys if selected[criteria]
   end
 
   def update_zipcode(selected, ip_zipcode, current_user)
@@ -57,11 +41,14 @@ class DogViewHelper
   end
 
   def attributes_list(dog_attributes)
-    @values[:personalities] = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
-    @values[:likes] = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
+    # Set form fields with new dog's information
+    @values[:personality] = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
+    @values[:like] = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']
-    @values[:mixes] = dog_attributes['mixes'].split(',')
+    @values[:mix] = dog_attributes['mixes'].split(',')
+
+    ## Return hash with new dog values to create new dog/update existing dog
     new_attrs = {
       :mixes => get_mix_array(dog_attributes['mixes']),
       :size => Size.find(dog_attributes['size']), 
@@ -73,12 +60,13 @@ class DogViewHelper
   end
 
   def dog_view_update(dog)
+    ## Fills edit form with dog's current values
     @dog = Dog.find(dog)
-    @values[:likes] = @dog.readable_likes
-    @values[:personalities] = @dog.readable_personalities
+    @values[:like] = @dog.readable_likes
+    @values[:personality] = @dog.readable_personalities
     @values[:size] = @dog.size_id
     @values[:energy_level] = @dog.energy_level_id
-    @values[:mixes] = @dog.mixes.pluck(:value)
+    @values[:mix] = @dog.mixes.pluck(:value)
 
   end
 

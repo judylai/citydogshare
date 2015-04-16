@@ -68,7 +68,7 @@ class Dog < ActiveRecord::Base
   end
 
   ## Attribute Possible Values Functions
-  
+
   def self.genders
     ["Male", "Female"]
   end
@@ -130,11 +130,11 @@ class Dog < ActiveRecord::Base
   def self.filter_by(criteria)
     dogs = Dog.near(criteria[:zipcode], criteria[:radius], order: :distance)
               .has_mix(criteria[:mix])
-              .has_size(criteria[:sizes])
-              .has_likes(criteria[:likes])
-              .has_personalities(criteria[:personalities])
+              .has_size(criteria[:size])
+              .has_likes(criteria[:like])
+              .has_personalities(criteria[:personality])
               .has_gender(criteria[:gender])
-              .has_energy_level(criteria[:energy_levels])
+              .has_energy_level(criteria[:energy_level])
               .in_age_range(convert_age_ranges_to_dob_query(criteria[:age]))
   end
 

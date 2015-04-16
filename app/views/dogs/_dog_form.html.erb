@@ -21,7 +21,7 @@
   </div>
 
   <div class="field"><label>Mix</label>
-    <%= text_field :dog, :mixes, :value => @form_filler.values[:mixes].join(", ") %>
+    <%= text_field :dog, :mixes, :value => @form_filler.values[:mix].join(", ") %>
   </div>
 
   <div class="field"><label>Size</label>
@@ -32,7 +32,7 @@
   <div class="field"><label>Personality</label>
     <div class="ui buttons">
     <% Personality.all_values.each do |p| %> 
-        <% @form_filler.values[:personalities].include?(p) ? bool = true : bool = false %>
+        <% @form_filler.values[:personality].include?(p) ? bool = true : bool = false %>
         <div class="ui button">
         <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
         <%= label(:personalities, p.tr(" ", "_"), p) %>
@@ -59,7 +59,7 @@
     <div class="ui buttons">
     <% Like.all_values.each do |like| %> 
         <div class="ui button">
-        <% @form_filler.values[:likes].include?(like) ? bool = true : bool = false %>
+        <% @form_filler.values[:like].include?(like) ? bool = true : bool = false %>
         <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
         <%= label(:likes, like.tr(" ", "_"), like) %>
         </div>

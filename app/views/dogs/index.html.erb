@@ -27,7 +27,7 @@
       <div class="tiny ui buttons">
       <% Personality.all_values.each do |p| %>
       <div class="ui button">
-        <%= check_box_tag "personality[#{p}]", 1, @form_filler.values[:personalities].include?(p), :class => "check" %>
+        <%= check_box_tag "personality[#{p}]", 1, @form_filler.values[:personality].include?(p), :class => "check" %>
         <%= label(:personality, p.tr(" ", "_"), p) %>
       </div>
       <% end %>
@@ -42,7 +42,7 @@
       <div class="mini ui vertical buttons">
       <% Size.all_values.each do |s| %>
       <div class="ui button">
-      <%= check_box_tag "size[#{s}]", 1, @form_filler.values[:sizes].include?(s), :class => "check" %>
+      <%= check_box_tag "size[#{s}]", 1, @form_filler.values[:size].include?(s), :class => "check" %>
       <%= label(:size, s.tr(" ", "_"), s) %>
       </div>
       <% end %>
@@ -68,7 +68,7 @@
       <div class="tiny ui buttons">
       <% Like.all_values.each do |l| %>
       <div class="ui button">
-      <%= check_box_tag "like[#{l}]", 1, @form_filler.values[:likes].include?(l), :class => "check" %>
+      <%= check_box_tag "like[#{l}]", 1, @form_filler.values[:like].include?(l), :class => "check" %>
       <%= label(:like, l.tr(" ", "_"), l) %>
       </div>
       <% end %>
@@ -81,7 +81,7 @@
       <div class="tiny ui buttons">
       <% EnergyLevel.all_values.each do |e| %>
       <div class="ui button">
-      <%= check_box_tag "energy_level[#{e}]", 1, @form_filler.values[:energy_levels].include?(e), :class => "check" %>
+      <%= check_box_tag "energy_level[#{e}]", 1, @form_filler.values[:energy_level].include?(e), :class => "check" %>
       <%= label(:energy_level, e.tr(" ", "_"), e) %>
       </div>
       <% end %>
