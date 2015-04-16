@@ -79,8 +79,8 @@ class Dog < ActiveRecord::Base
   end
 
   def get_base(i)
-        first = (Time.now - ranges[i.to_i][1].years).strftime "%Y-%m-%d %H:%M:%S"
-        second = (Time.now - ranges[i.to_i][0].years).strftime "%Y-%m-%d %H:%M:%S"
+        first = (Time.now - ranges[i][1].years).strftime "%Y-%m-%d %H:%M:%S"
+        second = (Time.now - ranges[i][0].years).strftime "%Y-%m-%d %H:%M:%S"
         base = %Q[("dogs"."dob" BETWEEN '#{first}' AND '#{second}')]
   end
 
@@ -89,7 +89,7 @@ class Dog < ActiveRecord::Base
     age_query = ""
     criteria[:age].each do |i|
         # t.strftime "%Y-%m-%d %H:%M:%S %z"
-        base = get_base(i)
+        base = get_base(i.to_i)
         if i.to_i < criteria[:age].length - 1
           age_query += (base + " OR ")
         else
