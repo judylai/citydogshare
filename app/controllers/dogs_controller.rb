@@ -6,7 +6,7 @@ class DogsController < ApplicationController
 
   def index
 
-    ip_zipcode = request.safe_location.postal_code
+    ip_zipcode = get_ip_address_zipcode
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
 
@@ -17,6 +17,9 @@ class DogsController < ApplicationController
     @counts = get_zipcode_counts.to_json
   end
 
+  def get_ip_address_zipcode
+    request.safe_location.postal_code
+  end
 
   def new
     @form_filler = DogViewHelper.new(nil, nil, false)
