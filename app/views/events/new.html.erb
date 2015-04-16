@@ -9,19 +9,19 @@
 <!-- <link rel="stylesheet" type="text/css" href="../app/assets/stylesheet/jquery.datetimepicker.css"/ > -->
 <!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
 <script>
-$( document ).ready(function() {
   jQuery(function(){
    jQuery('#date_timepicker_start').datetimepicker({
-    format:'m/d/Y',
+    format:'Y/m/d',
     onShow:function( ct ){
      this.setOptions({
+      minDate: 0,
       maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
      })
     },
     timepicker:false
    });
    jQuery('#date_timepicker_end').datetimepicker({
-    format:'m/d/Y',
+    format:'Y/m/d',
     onShow:function( ct ){
      this.setOptions({
       minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
@@ -30,7 +30,6 @@ $( document ).ready(function() {
     timepicker:false
    });
   });
-});
 </script>
 
 <h2>Create Event</h2>
@@ -39,7 +38,7 @@ $( document ).ready(function() {
 	<div class="ui form">
   	<div class="field">
 			<label>Start</label>
-      <input id="date_timepicker_start" type="text" readonly="readonly">
+      <input id="date_timepicker_start" type="text">
 		</div>
 	</div>
 
@@ -48,7 +47,7 @@ $( document ).ready(function() {
   <div class="ui form">
     <div class="field">
       <label>End</label>
-      <input id="date_timepicker_end" type="text" readonly="readonly">
+      <input id="date_timepicker_end" type="text">
     </div>
   </div>
 
