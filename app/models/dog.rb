@@ -34,11 +34,7 @@ class Dog < ActiveRecord::Base
 
   def age
     now = Time.now.utc.to_date
-    now.year - dob.year - check_month_and_day
-  end
-
-  def check_month_and_day
-    ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
   def energy_level
@@ -100,7 +96,7 @@ class Dog < ActiveRecord::Base
   end
 
   def self.filter_by(criteria)
-    dogs = Dog.near(criteria[:zipcode], criteria[:radius].to_i, order: :distance)
+    dogs = Dog.near(criteria[:zipcode], criteria[:radius], order: :distance)
               .has_mix(criteria[:mix])
               .has_size(criteria[:sizes])
               .has_likes(criteria[:likes])
