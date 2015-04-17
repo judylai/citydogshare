@@ -17,7 +17,7 @@ Citydogshare::Application.routes.draw do
   ## Dog Routes ##
   resources :dogs
 
-  resources :events, :only => [:index, :new, :create, :edit, :update, :destroy]
+  resources :events, :only => [:index, :new, :create, :edit, :update, :show, :destroy]
 
   resources :mixes, :only => [:index, :show] do
     collection do
