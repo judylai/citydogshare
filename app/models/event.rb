@@ -8,18 +8,9 @@ class Event < ActiveRecord::Base
   validates :dog, :presence => {:message => "Please select the dog you want to share"}
 
   def color
-    if dog_id % 10 == 1
-      'blue'
-    elsif dog_id % 10 == 2
-      'orange'
-    elsif dog_id % 10 == 3
-      'red'
-    elsif dog_id % 10 == 4
-      'green'
-    elsif dog_id % 10 == 5
-      'purple'
-    else
-      'black'
-    end
+    @num = dog_id % 10
+    @colours = Array['blue','orange','green','yellow','brown','pink','purple','gray','cyan','magenta']
+    if @num.between?(0,9) then @colours[@num] else 'black' end
+
   end
 end
