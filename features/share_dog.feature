@@ -14,27 +14,39 @@ Background: user has been added to the database and logged in
   And the following dogs exist:
     | name     | mix              | age | size            | gender | likes      | energy  | personality | user_id |
     | Princess | Labrador         | 1   | small (0-15)    | Female | cats       | high    | whatever    | 1       |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 2       |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 1       |
 
-	And I am logged in
-  And I am the parent of the existing dogs
+  And I am logged in
   And I am on the share dogs page
+  And the date is "2015/04/06"
 
+Scenario: I should see my dogs as options
+  Then I should see "Princess"
+  And I should see "Spock"
 
-Scenario: Share one dog's event 
-  And I choose to share "Princess"
-  And I choose the day "2015/4/8"
-  And I check "Morning, Afternoon"
-  And I click "My location" #radio button
-  And I press "Schedule"
-  Then I should be on the profile for "Princess"
-  And I should see "Your event has been created"
-  And I should see a new event on the dog profile
+Scenario: I create a dog event
+  Given I check "Princess"
+  And I check "Morning"
+  And I fill start_date with "2015/04/07"
+  And I fill end date with "2015/04/09"
+  And I select "My Location"
+  When I press "Share"
+  Then I should be on my calendar page
+  And I should see "Princess"
+  And I should see "Morning"
 
-Scenario: Not all fields filled out for dog event
-  And I choose to share "Princess"
-  And I check "Morning, Afternoon"
-  And I click "My location"
-  And I press "Share"
-  Then I should see "You must fill out all fields for the event."
+Scenario: Event should show up on dog profile
+  Given I have created the above event
+  And I am on my profile
+  When I follow "Princess"
+  Then I should see "4/7/15 - 4/9/15"
+  And I should see "My Location"
+  And I should see "Morning"
+
+Scenario: Event should expire after end date
+  Given I have created the above event
+  And the date is "2015/04/10"
+  And I am on my profile page
+  When I follow "Princess"
+  Then I should not see "4/7/15 - 4/9/15"
 

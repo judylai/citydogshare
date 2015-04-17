@@ -41,8 +41,8 @@ class EventsController < ApplicationController
 
 
   def edit
-    @event = Event.find(params[:id])
-    @dog = @event.dog_id
+   # @event = Event.find(params[:id])
+   # @dog = @event.dog_id
   end
 
   def update
@@ -55,7 +55,7 @@ class EventsController < ApplicationController
 
   def set_flash
     if not create_events
-      flash[:notice] = @event.errors.messages #get error message working
+      flash[:notice] = @event.errors.messages
     elsif @dogs.empty?
       flash[:notice] = {:name => ["Please select a dog to share"]}
     end
