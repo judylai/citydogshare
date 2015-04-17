@@ -624,7 +624,7 @@
         null
       ]
     },
-    "timestamp": 1429291967
+    "timestamp": 1429292913
   },
   "Cucumber Features": {
     "coverage": {
@@ -1366,12 +1366,15 @@
       ],
       "/Users/michellenguyen/school/spr2015/cs169/citydogshare/features/step_definitions/dog_steps.rb": [
         1,
+        1,
         null,
         1,
         0,
         null,
         null,
         1,
+        15,
+        15,
         15,
         15,
         15,
@@ -1407,6 +1410,8 @@
         null,
         1,
         2,
+        2,
+        2,
         null,
         null,
         1,
@@ -1423,6 +1428,8 @@
         2,
         null,
         null,
+        1,
+        1,
         1,
         1,
         1,
@@ -1685,6 +1692,6 @@
         null
       ]
     },
-    "timestamp": 1429267512
+    "timestamp": 1429293020
   }
 }

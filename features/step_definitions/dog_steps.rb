@@ -1,4 +1,5 @@
 require 'cucumber/rspec/doubles'
+require 'aws'
 
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
@@ -6,8 +7,8 @@ end
 
 Given /the following dogs exist/ do |dogs_table|\
   Dog.any_instance.stub(:geocode)
-  AWS::S3::S3Object.stub(:store).and_return(double('response', :success? => true))
-  AWS::S3::S3Object.stub(:copy).and_return(double('response', :success? => true))
+  AWS.stub!
+  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
@@ -41,8 +42,8 @@ When /^(?:|I )check "([^"]*)"$/ do |field|
 end
 
 When /^I create a new dog "([^"]*)"$/ do |name|
-  AWS::S3::S3Object.stub(:store).and_return(double('response', :success? => true))
-  AWS::S3::S3Object.stub(:copy).and_return(double('response', :success? => true))
+  AWS.stub!
+  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
   FactoryGirl.create(:dog)
 end
 
@@ -61,8 +62,8 @@ Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
 end
 
 When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
-  AWS::S3::S3Object.stub(:store).and_return(double('response', :success? => true))
-  AWS::S3::S3Object.stub(:copy).and_return(double('response', :success? => true))
+  AWS.stub!
+  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   attach_file(field, File.expand_path(path))
 end
