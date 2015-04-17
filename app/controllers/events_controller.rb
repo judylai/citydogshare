@@ -2,7 +2,23 @@ class EventsController < ApplicationController
   before_filter :current_user
 
   def index
+    @events = []
+    @dogs = current_user.dogs
+    @dogs.each do |dog|
+      (@events << dog.events).flatten!
+    end
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render :json => @events }
+    # end
+  end
 
+  def show
+    id = params[:id]
+    @event = Event.find(id)
+    respond_to do |format|
+      format.json { render :json => @event }
+    end
   end
 
   def new
