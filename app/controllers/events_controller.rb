@@ -42,9 +42,6 @@ class EventsController < ApplicationController
 
   end
 
-<<<<<<< HEAD
-end
-=======
   def get_dogs(params)
     dog_array = params['event']['dogs'] ? params['event']['dogs'].keys : []
     dog_array.map{ |dog| Dog.find_by_name(dog) }
@@ -60,4 +57,4 @@ end
   end
 
 end
->>>>>>> 2e00c45771cc6e4d8f9b1fb9b175359e486ca4df
+

@@ -14,9 +14,10 @@
       <div class="ui raised segment large menu" style="position:fixed; top:0; left:0; width:100%; z-index:100;">
           <a href ="/" class="header item">City Dog Share</a>
           <a class="item" href="/dogs">Find a Dog</a>
+        <% if current_user %>
           <a class="item" href="/events/new">Share a Dog</a>
-        <% if current_user %> <!-- THIS MAY NOT WORK, FIX IT, SHOULD SHOW USER IS SIGNED IN -->
           <div class="right menu">
+            <%= link_to "My Calendar", events_path, {:class => "item"}%>
             <%= link_to "My Profile", user_path(current_user), {:class => "item"}%>
             <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>
           </div>
