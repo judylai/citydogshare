@@ -1,5 +1,9 @@
 require 'cucumber/rspec/doubles'
 
+Given /^the date is "(\d\d\d\d\/\d\d\/\d\d)"$/ do |date|
+  Time.stub(:now).and_return(date)
+end
+
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
 end
@@ -52,3 +56,9 @@ end
 After do
   ApplicationController.stubbed_request_ip = nil
 end
+
+And /^I press Schedule$/ do
+  DogsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  click_button("Schedule")
+end
+

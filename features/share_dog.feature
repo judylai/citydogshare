@@ -18,22 +18,25 @@ Background: user has been added to the database and logged in
 
   And I am logged in
   And I am on the share dogs page
-  And the date is "2015/04/06"
-
-Scenario: I should see my dogs as options
-  Then I should see "Princess"
-  And I should see "Spock"
 
 Scenario: I create a dog event
-  Given I check "Princess"
-  And I check "Morning"
-  And I fill start_date with "2015/04/07"
-  And I fill end date with "2015/04/09"
-  And I select "My Location"
-  When I press "Share"
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I choose "location_true"
+  When I press Schedule
   Then I should be on my calendar page
-  And I should see "Princess"
-  And I should see "Morning"
+  #And I should see "Princess" not sure how to do this
+  #And I should see "Morning"
+
+Scenario: Not selecting a dog should throw an error
+  Given I press "Schedule"
+  Then I should see "Please select a dog to share"
+
+Scenario: Not selecting a date should throw an error
+  Given I check "dogs_Princess"
+  Given I press "Schedule"
+  Then I should see "Please enter a valid start date"
+  And I should see "Please enter a valid end date"
 
 Scenario: Event should show up on dog profile
   Given I have created the above event
