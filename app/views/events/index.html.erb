@@ -8,6 +8,17 @@
   </style>
 
    <div id='calendar'></div>
+<p> </p>
+  <div id = "dogevents"><h4>Events:</h4>
+<% for dog in @dogs do %>
+      <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
+<% for event in dog.events %>
+   <h4> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %> </h4>
+      <h4> Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %></h4>
+
+      <%end%>
+       <%end%>
+       </div>
 
 
 
