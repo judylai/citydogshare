@@ -6,6 +6,7 @@ end
 
 Given /the following dogs exist/ do |dogs_table|\
   Dog.any_instance.stub(:geocode)
+  allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
     new_dog.user_id = dog[:user_id]
@@ -19,6 +20,7 @@ Given /the following dogs exist/ do |dogs_table|\
     new_dog.energy_level_id = EnergyLevel.find_by_value(dog[:energy]).id
     new_dog.latitude = dog[:latitude]
     new_dog.longitude = dog[:longitude]
+    new_dog.photo = File.new(Rails.root + 'spec/factories/images/dog.jpg')
     new_dog.save!
   end
 end
@@ -52,4 +54,9 @@ end
 
 Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
   page.body.should =~ /#{first_example}.*#{second_example}/m
+end
+
+When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
+  allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
+  attach_file(field, File.expand_path(path))
 end

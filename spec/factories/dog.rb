@@ -14,5 +14,6 @@ FactoryGirl.define do
     energy_level { EnergyLevel.find(1) }
     personalities { [Personality.find(1)] }
     user_id { 1 }
+    photo File.new(Rails.root + 'spec/factories/images/dog.jpg')
   end
 end

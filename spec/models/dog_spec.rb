@@ -3,8 +3,10 @@ require 'rails_helper'
 describe Dog do
   before(:each) do
       Time.stub(:now).and_return(Time.mktime(2014,1))
+      allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
       @user = FactoryGirl.create(:user)
       @dog = FactoryGirl.create(:dog)
+
   end
 
 

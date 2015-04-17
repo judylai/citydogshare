@@ -16,3 +16,5 @@
 
 /config/environments/env.rb
 /config/aws.yml
+/coverage
+.DS_Store

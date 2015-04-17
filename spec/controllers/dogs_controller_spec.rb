@@ -5,6 +5,7 @@ describe DogsController, :type => :controller do
   before(:each) do
     @user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
+    allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   end
 
   describe 'searching/viewing dogs' do
@@ -158,6 +159,7 @@ describe DogsController, :type => :controller do
     end
 
     it 'should call attributes_list' do
+      Dog.any_instance.stub(:valid?).and_return(true) 
       controller.stub(:current_user).and_return(@current_user)
       post :create, @params
       response.should redirect_to user_path(@current_user)

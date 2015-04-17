@@ -5,14 +5,15 @@ $(document).ready(function(){
   });
 
   $('.ui.button').on('click', function(){
-      $(this).toggleClass('black inverted active');
-      var $this_checkbox = $(this).children();
-      if ($this_checkbox.is(':checked')){
-        $this_checkbox.prop('checked', false);
-      } else {
-        $this_checkbox.prop('checked', true);
-      }
-    // }
+      if($(this).children().hasClass("check")){
+        $(this).toggleClass('black inverted active');
+        var $this_checkbox = $(this).children();
+        if ($this_checkbox.is(':checked')){
+          $this_checkbox.prop('checked', false);
+        } else {
+          $this_checkbox.prop('checked', true);
+        }
+    }
   });
 
   $('.check').not( "#dog_search_submit" ).on('click', function(){
