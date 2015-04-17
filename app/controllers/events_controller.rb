@@ -88,10 +88,18 @@ class EventsController < ApplicationController
     dog_array.map{ |dog| Dog.find_by_name(dog) }
   end
 
+  def get_date(date_string)
+    if date_string != ""
+      DateTime.strptime(date_string, "%Y/%m/%d")
+    else
+      ""
+    end
+  end
+
   def attributes_list(params)
     event_params = {
-      :start_date => params["date_timepicker"]["start"] != "" ? DateTime.strptime(params["date_timepicker"]["start"], "%Y/%m/%d") : "",
-      :end_date => params["date_timepicker"]["end"] != "" ? DateTime.strptime(params["date_timepicker"]["end"], "%Y/%m/%d") : "",
+      :start_date => get_date(params["date_timepicker"]["start"]),
+      :end_date => get_date(params["date_timepicker"]["end"]),
       :time_of_day => params["times"] ? params["times"].keys : [],
       :my_location => params['location']
     }

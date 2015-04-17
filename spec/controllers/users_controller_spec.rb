@@ -14,6 +14,12 @@ describe UsersController, :type => :controller do
       # expect(response).to render_template("show")
       assert_equal flash[:notice], "The user you entered does not exist."
     end
+    it 'should show profile for existing user' do
+      get(:show, {:id => "1"})
+      expect(controller.instance_variable_get(:@user)).to eql(@user)
+      expect(controller.instance_variable_get(:@own_profile)).to eql(true)
+      expect(response).to render_template("show")
+    end
   end
 
   describe 'edit user profile' do

@@ -15,7 +15,7 @@ Background: user has been added to the database and logged in
     | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 |
     | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | 37.8611110 | -122.3079169 |
     | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 30.0506448 | -89.95475610 |
-  And my IP address is 136.152.12.191
+  And my zipcode is "94704"
   And I am on the search dogs page
 
 Scenario: Only see dogs within 100 miles by default
@@ -42,48 +42,56 @@ Scenario: Should give dogs in order of closest distance
   And "Bubba" should appear before "Princess"
 
 Scenario: Filter by gender
+  When I do not care about dog location
   When I check "gender[Male]"
   And I press "Search Dogs"
   Then I should see "Spock"
   And I should not see "Princess"
 
 Scenario: Filter by Age
+  When I do not care about dog location
   When I check "age[0]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Size
+  When I do not care about dog location
   When I check "size[small (0-15)]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Likes
+  When I do not care about dog location
   When I check "like[cats]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Energy
+  When I do not care about dog location
   When I check "energy_level[high]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Energy
+  When I do not care about dog location
   When I check "personality[whatever]"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Mix
+  When I do not care about dog location
   When I select "Labrador" from "mix"
   And I press "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: No dogs match criteria
+  When I do not care about dog location
   When I check "size[large (41-100)]"
   And I press "Search Dogs"
   Then I should see "No Dogs Found"

@@ -9,7 +9,9 @@
 </div>
 
 <p>
-  <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
+  <% if @dog.user_id == @current_user.id %>
+    <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
+  <% end %>
 </p>
 
 <div class = "small-8 columns">
@@ -20,6 +22,8 @@
 </div>
 
   <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
+  <p> </p>
+  <div id="photo"><h4 class = "ui teal label"><%= image_tag @dog.photo.url(:medium) %></div>
   <p> </p>
   <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
   <p> </p>

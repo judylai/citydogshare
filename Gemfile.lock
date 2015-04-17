@@ -47,6 +47,11 @@ GEM
     ast (2.0.0)
     autotest-rails (4.2.1)
       ZenTest (~> 4.5)
+    aws-sdk (1.64.0)
+      aws-sdk-v1 (= 1.64.0)
+    aws-sdk-v1 (1.64.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     builder (3.0.4)
     cane (2.6.2)
       parallel
@@ -336,6 +341,7 @@ PLATFORMS
 
 DEPENDENCIES
   autotest-rails
+  aws-sdk (< 2.0)
   codeclimate-test-reporter
   coffee-rails (~> 3.2.1)
   cucumber-rails
