@@ -3,7 +3,8 @@ require 'rails_helper'
 describe Dog do
   before(:each) do
       Time.stub(:now).and_return(Time.mktime(2014,1))
-      AWS::S3::S3Object.stub(method).and_return(double('response', :success? => success))
+      AWS::S3::S3Object.stub(:store).and_return(double('response', :success? => true))
+      AWS::S3::S3Object.stub(:copy).and_return(double('response', :success? => true))
       allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
       @user = FactoryGirl.create(:user)
       @dog = FactoryGirl.create(:dog)
