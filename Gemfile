@@ -13,6 +13,9 @@ gem 'jquery-rails'
 gem 'rails_secret_token_env'
 gem 'geocoder'
 
+gem "paperclip", "~> 4.2"
+gem 'aws-sdk', '< 2.0'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'debugger'

@@ -26,6 +26,19 @@ class Dog < ActiveRecord::Base
   validates :mixes, :presence => {:message => "Mix can't be blank"}
   validate :validate_dob
 
+  #paperclip
+  has_attached_file :photo, 
+                    :styles => { :small    => '150x',
+                                 :medium   => '300x' },
+                    :default_url => "",
+                    :storage => :s3,
+                    :bucket => 'citydogshare'
+
+
+  validates_attachment_presence :photo
+  validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
+
   after_validation :geocode
 
   ## Attribute Access Functions

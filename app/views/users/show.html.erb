@@ -71,9 +71,9 @@
   <% @user.dogs.each do |dog| %>
   <div class="ui vertical segment">
 
-    <div class="large-3 columns">
+    <div class="large-4 columns">
       <span class="image">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTq-JrbDxIqJCQm0mds0iyAamCDFYdNr1h3_r6Ekt7SNsWMboFE" style="height:100%; width:100%">
+        <%= image_tag dog.photo.url(:small) %>
       </span>
     </div>
 
