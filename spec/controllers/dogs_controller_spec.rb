@@ -215,6 +215,7 @@ describe DogsController, :type => :controller do
     end
     it 'should redirect to edit if errors' do
       @params["dog"]["name"] = ""
+      get :update, @params
       redirect_to edit_dog_path("1")
     end
   end
