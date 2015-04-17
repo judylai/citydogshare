@@ -23,6 +23,10 @@ Given /the following dogs exist/ do |dogs_table|\
   end
 end
 
+When /^(?:|I )do not care about dog location/ do
+  Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+end
+
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field, match: :first)
 end

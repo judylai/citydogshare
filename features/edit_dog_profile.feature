@@ -47,7 +47,8 @@ Scenario: User edits his dog's information
   And I should see "Never"
 
 Scenario: User should not be able to edit another user's dog
-  Given I am on the search dogs page
+  Given I do not care about dog location
+  And I am on the search dogs page
   And I should see "Bubba"
   And I follow "Bubba"
   Then I should not see "Edit"
