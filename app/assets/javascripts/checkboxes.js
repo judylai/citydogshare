@@ -5,8 +5,6 @@ $(document).ready(function(){
   });
 
   $('.ui.button').on('click', function(){
-    // if($(this).is('#dog_search_submit')) {
-      // console.log("HEEEEE");
       $(this).toggleClass('black inverted active');
       var $this_checkbox = $(this).children();
       if ($this_checkbox.is(':checked')){
