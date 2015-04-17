@@ -184,4 +184,53 @@ describe DogsController, :type => :controller do
     end
   end
 
+  describe 'dog edit' do
+    before(:each) do
+      Dog.any_instance.stub(:geocode)
+      @dog = FactoryGirl.create(:dog)
+      @current_user = User.create(:id => 1)
+    end
+    it 'should update dog' do 
+      get :edit, {:id => '1'}
+      expect(controller.instance_variable_get(:@dog)).to eql(@dog)
+      expect(controller.instance_variable_get(:@action)).to eql(:update)
+      expect(controller.instance_variable_get(:@method)).to eql(:put)
+    end
+  end
+
+  describe 'dog update' do
+    before(:each) do
+      Dog.any_instance.stub(:geocode)
+      @dog = FactoryGirl.create(:dog)
+      @current_user = User.create(:id => 1)
+      @params = {  "id" => "1", "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
+                  "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
+                  "availability"=>"", "mixes" =>"Australian Shepherd", "personalities"=>{"curious"=>"1"},
+                  "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
+    end
+    it 'redirect to dog profile if no errors' do 
+      get :update, @params
+      expect(controller.instance_variable_get(:@dog)).to eql(@dog)
+      response.should redirect_to dog_path("1")
+    end
+    it 'should redirect to edit if errors' do
+      @params["dog"]["name"] = ""
+      redirect_to edit_dog_path("1")
+    end
+  end
+
+  describe 'delete dog' do
+    before(:each) do
+      Dog.any_instance.stub(:geocode)
+      @dog = FactoryGirl.create(:dog)
+      @current_user = User.create(:id => 1)
+    end
+    it 'should delete dog and if user owns dog' do
+      controller.instance_variable_set(:@current_user, @user)
+      get(:destroy, :id => "1")
+      expect(controller.instance_variable_get(:@dog)).to eql(@dog)
+      assert_equal Dog.all, []
+    end
+  end
+
 end

@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.9.0/application.js' type='text/javascript'></script>    
     <link href='./assets/0.9.0/application.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" type="image/png" href="./assets/0.9.0/favicon_yellow.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.9.0/favicon_green.png" />
     <link rel="icon" type="image/png" href="./assets/0.9.0/favicon.png" />
   </head>
   
@@ -14,18 +14,18 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-16T17:06:33-07:00">2015-04-16T17:06:33-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-16T17:39:58-07:00">2015-04-16T17:39:58-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">87.32%</span></span>
+    (<span class="covered_percent"><span class="green">93.54%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         7.2
+         7.39
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>29</b> files in total.
     <b>418</b> relevant lines. 
-    <span class="green"><b>365</b> lines covered</span> and
-    <span class="red"><b>53</b> lines missed </span>
+    <span class="green"><b>391</b> lines covered</span> and
+    <span class="red"><b>27</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -57,27 +57,27 @@
         <td>5</td>
         <td>5</td>
         <td>0</td>
-        <td>10.8</td>
+        <td>11.6</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#bf32e5931711080976cfdc2a4929307ff83a67e2" class="src_link" title="app/controllers/dog_form_filler.rb">app/controllers/dog_form_filler.rb</a></td>
-        <td class="yellow strong">83.93 %</td>
+        <td class="green strong">94.64 %</td>
         <td>98</td>
         <td>56</td>
-        <td>47</td>
-        <td>9</td>
-        <td>6.9</td>
+        <td>53</td>
+        <td>3</td>
+        <td>7.8</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#9699214b3796607625e59549e57f41606030a670" class="src_link" title="app/controllers/dogs_controller.rb">app/controllers/dogs_controller.rb</a></td>
-        <td class="red strong">74.07 %</td>
+        <td class="green strong">96.3 %</td>
         <td>92</td>
         <td>54</td>
-        <td>40</td>
-        <td>14</td>
-        <td>3.3</td>
+        <td>52</td>
+        <td>2</td>
+        <td>3.5</td>
       </tr>
       
       <tr>
@@ -112,12 +112,12 @@
       
       <tr>
         <td class="strong"><a href="#f41a4abd1db6ce1a5a9145df026e614c4d1b9ca2" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
-        <td class="red strong">70.37 %</td>
+        <td class="green strong">92.59 %</td>
         <td>42</td>
         <td>27</td>
-        <td>19</td>
-        <td>8</td>
-        <td>1.6</td>
+        <td>25</td>
+        <td>2</td>
+        <td>1.9</td>
       </tr>
       
       <tr>
@@ -182,12 +182,12 @@
       
       <tr>
         <td class="strong"><a href="#d1304e93a52a8a8f294df3633b3ee8fac00a42c5" class="src_link" title="app/models/dog.rb">app/models/dog.rb</a></td>
-        <td class="yellow strong">89.47 %</td>
+        <td class="green strong">92.11 %</td>
         <td>141</td>
         <td>76</td>
-        <td>68</td>
-        <td>8</td>
-        <td>4.6</td>
+        <td>70</td>
+        <td>6</td>
+        <td>4.7</td>
       </tr>
       
       <tr>
@@ -400,8 +400,8 @@
           <code class="ruby">  def current_user</code>
         </li>
       
-        <li class="covered" data-hits="50" data-linenumber="6">
-          <span class="hits">50</span>
+        <li class="covered" data-hits="54" data-linenumber="6">
+          <span class="hits">54</span>
           
           <code class="ruby">    @current_user ||= User.find_by_uid(session[:user_id]) if session[:user_id]</code>
         </li>
@@ -431,11 +431,11 @@
         <div class="source_table" id="bf32e5931711080976cfdc2a4929307ff83a67e2">
   <div class="header">
     <h3>app/controllers/dog_form_filler.rb</h3>
-    <h4><span class="yellow">83.93 %</span> covered</h4>
+    <h4><span class="green">94.64 %</span> covered</h4>
     <div>
       <b>56</b> relevant lines. 
-      <span class="green"><b>47</b> lines covered</span> and
-      <span class="red"><b>9</b> lines missed.</span>
+      <span class="green"><b>53</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
   
@@ -490,62 +490,62 @@
           <code class="ruby">  def initialize(current_user, ip_zipcode, index)</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="9">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="9">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values = {}</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="10">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="10">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:mix] = index ? &quot;All Mixes&quot; : []</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="11">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="11">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:gender] = []</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="12">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="12">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:age] = []</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="13">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="13">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:energy_level] = index ? [] : 1</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="14">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="14">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:size] = index ? [] : 1</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="15">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="15">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:radius] = DEFAULT_RADIUS</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="16">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="16">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:zipcode] = current_user ? current_user.zipcode : ip_zipcode</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="17">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="17">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:personality] = []</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="18">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="16" data-linenumber="18">
+          <span class="hits">16</span>
           
           <code class="ruby">    @values[:like] = []</code>
         </li>
@@ -706,32 +706,32 @@
           <code class="ruby">    # Set form fields with new dog's information</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="45">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="45">
+          <span class="hits">3</span>
           
           <code class="ruby">    @values[:personality] = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="46">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="46">
+          <span class="hits">3</span>
           
           <code class="ruby">    @values[:like] = dog_attributes['likes'] ? dog_attributes['likes'].keys : []</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="47">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="47">
+          <span class="hits">3</span>
           
           <code class="ruby">    @values[:size] = dog_attributes['size']</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="48">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="48">
+          <span class="hits">3</span>
           
           <code class="ruby">    @values[:energy_level] = dog_attributes['energy_level']</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="49">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="49">
+          <span class="hits">3</span>
           
           <code class="ruby">    @values[:mix] = dog_attributes['mixes'].split(',')</code>
         </li>
@@ -748,8 +748,8 @@
           <code class="ruby">    ## Return hash with new dog values to create new dog/update existing dog</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="52">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="52">
+          <span class="hits">3</span>
           
           <code class="ruby">    new_attrs = {</code>
         </li>
@@ -790,8 +790,8 @@
           <code class="ruby">      :dob =&gt; get_birthday(dog_attributes) }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="59">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="59">
+          <span class="hits">3</span>
           
           <code class="ruby">    dog_attributes.merge(new_attrs)</code>
         </li>
@@ -820,38 +820,38 @@
           <code class="ruby">    ## Fills edit form with dog's current values</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="64">
-          
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
           
           <code class="ruby">    @dog = Dog.find(dog)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="65">
-          
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
           
           <code class="ruby">    @values[:like] = @dog.readable_likes</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="66">
-          
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
           
           <code class="ruby">    @values[:personality] = @dog.readable_personalities</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="67">
-          
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
           
           <code class="ruby">    @values[:size] = @dog.size_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="68">
-          
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
           
           <code class="ruby">    @values[:energy_level] = @dog.energy_level_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="69">
-          
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
           
           <code class="ruby">    @values[:mix] = @dog.mixes.pluck(:value)</code>
         </li>
@@ -880,20 +880,20 @@
           <code class="ruby">  def get_birthday(dog_attributes)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="74">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="74">
+          <span class="hits">3</span>
           
           <code class="ruby">    year = dog_attributes['dob(1i)'].to_i</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="75">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="75">
+          <span class="hits">3</span>
           
           <code class="ruby">    month = dog_attributes['dob(2i)'].to_i</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="76">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="76">
+          <span class="hits">3</span>
           
           <code class="ruby">    day = dog_attributes['dob(3i)'].to_i</code>
         </li>
@@ -904,8 +904,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="78">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="78">
+          <span class="hits">3</span>
           
           <code class="ruby">    DateTime.new(year, month, day)</code>
         </li>
@@ -928,14 +928,14 @@
           <code class="ruby">  def get_mix_array(mix_string)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="82">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="82">
+          <span class="hits">3</span>
           
           <code class="ruby">    tags = mix_string.split(&quot;,&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="83">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="83">
+          <span class="hits">6</span>
           
           <code class="ruby">    tags.map{ |tag| Mix.find_by_value(tag) }</code>
         </li>
@@ -964,20 +964,20 @@
           <code class="ruby">  def get_attribute_array(attributes, trait)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="88">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="88">
+          <span class="hits">6</span>
           
           <code class="ruby">    if attributes[trait] != nil</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="89">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="89">
+          <span class="hits">6</span>
           
           <code class="ruby">      model_class = trait.classify.constantize</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="90">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="15" data-linenumber="90">
+          <span class="hits">15</span>
           
           <code class="ruby">      attributes[trait].keys.map { |thing| model_class.find_by_value(thing) }</code>
         </li>
@@ -1037,11 +1037,11 @@
         <div class="source_table" id="9699214b3796607625e59549e57f41606030a670">
   <div class="header">
     <h3>app/controllers/dogs_controller.rb</h3>
-    <h4><span class="red">74.07 %</span> covered</h4>
+    <h4><span class="green">96.3 %</span> covered</h4>
     <div>
       <b>54</b> relevant lines. 
-      <span class="green"><b>40</b> lines covered</span> and
-      <span class="red"><b>14</b> lines missed.</span>
+      <span class="green"><b>52</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -1372,32 +1372,32 @@
           <code class="ruby">  def edit </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="55">
-          
+        <li class="covered" data-hits="1" data-linenumber="55">
+          <span class="hits">1</span>
           
           <code class="ruby">    @form_filler = DogViewHelper.new(nil, nil, false)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="56">
-          
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
           
           <code class="ruby">    @dog = Dog.find(params[:id])</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="57">
-          
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
           
           <code class="ruby">    @form_filler.dog_view_update(@dog)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="58">
-          
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
           
           <code class="ruby">    @action = :update</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="59">
-          
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
           
           <code class="ruby">    @method = :put</code>
         </li>
@@ -1420,14 +1420,14 @@
           <code class="ruby">  def update</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="63">
-          
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
           
           <code class="ruby">    @form_filler = DogViewHelper.new(nil, nil, false)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="64">
-          
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
           
           <code class="ruby">    @dog = Dog.find(params[:id])</code>
         </li>
@@ -1438,14 +1438,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="66">
-          
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
           
           <code class="ruby">    if @dog.update_attributes(@form_filler.attributes_list(params['dog']))</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="67">
-          
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
           
           <code class="ruby">      redirect_to dog_path(@dog.id)</code>
         </li>
@@ -1492,20 +1492,20 @@
           <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="75">
-          
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
           
           <code class="ruby">    @dog = Dog.find(params[:id])</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="76">
-          
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
           
           <code class="ruby">    @dog.delete</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="77">
-          
+        <li class="covered" data-hits="1" data-linenumber="77">
+          <span class="hits">1</span>
           
           <code class="ruby">    redirect_to user_path(@current_user)</code>
         </li>
@@ -2057,11 +2057,11 @@
         <div class="source_table" id="f41a4abd1db6ce1a5a9145df026e614c4d1b9ca2">
   <div class="header">
     <h3>app/controllers/users_controller.rb</h3>
-    <h4><span class="red">70.37 %</span> covered</h4>
+    <h4><span class="green">92.59 %</span> covered</h4>
     <div>
       <b>27</b> relevant lines. 
-      <span class="green"><b>19</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <span class="green"><b>25</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -2092,8 +2092,8 @@
           <code class="ruby">  def show</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="5">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="5">
+          <span class="hits">2</span>
           
           <code class="ruby">    if User.exists?(params[:id]) == false</code>
         </li>
@@ -2116,32 +2116,32 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="9">
-          
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
           
           <code class="ruby">      id = params[:id]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="10">
-          
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
           
           <code class="ruby">      @own_profile = false</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="11">
-          
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
           
           <code class="ruby">      @user = User.find(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="12">
-          
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
           
           <code class="ruby">      if @user == @current_user</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="13">
-          
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
           
           <code class="ruby">        @own_profile = true</code>
         </li>
@@ -2152,8 +2152,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="15">
-          
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
           
           <code class="ruby">      render 'show'</code>
         </li>
@@ -2555,11 +2555,11 @@
         <div class="source_table" id="d1304e93a52a8a8f294df3633b3ee8fac00a42c5">
   <div class="header">
     <h3>app/models/dog.rb</h3>
-    <h4><span class="yellow">89.47 %</span> covered</h4>
+    <h4><span class="green">92.11 %</span> covered</h4>
     <div>
       <b>76</b> relevant lines. 
-      <span class="green"><b>68</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <span class="green"><b>70</b> lines covered</span> and
+      <span class="red"><b>6</b> lines missed.</span>
     </div>
   </div>
   
@@ -2758,8 +2758,8 @@
           <code class="ruby">  def validate_dob</code>
         </li>
       
-        <li class="covered" data-hits="41" data-linenumber="33">
-          <span class="hits">41</span>
+        <li class="covered" data-hits="46" data-linenumber="33">
+          <span class="hits">46</span>
           
           <code class="ruby">    errors.add(:dob, &quot;Dog's birthday can't be in the future.&quot;) if (!dob.nil? and dob &gt; Date.today)</code>
         </li>
@@ -2908,8 +2908,8 @@
           <code class="ruby">  def readable_likes</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="58">
-          
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
           
           <code class="ruby">    self.likes.map {|l| l.value}</code>
         </li>
@@ -2932,8 +2932,8 @@
           <code class="ruby">  def readable_personalities</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="62">
-          
+        <li class="covered" data-hits="2" data-linenumber="62">
+          <span class="hits">2</span>
           
           <code class="ruby">    self.personalities.map {|p| p.value}</code>
         </li>
