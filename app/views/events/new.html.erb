@@ -38,15 +38,16 @@
 
   <%= form_tag(controller: :events, action: :create, method: :post) do %>
 	<div class="ui form">
-    <div class="field"><label>Dog</label>
+    <div class="field"><label>Dog to Share</label>
       <div class="ui buttons">
         <% @dogs.each do |dog| %>
           <div class="ui button">
-            <% @checked_times.include?(time) ? bool = true : bool = false %>
-            <%= check_box_tag "event[times[#{time}]]", 1, bool, :class => "check" %>
-            <%= label(:times, time, time) %>
-        </div>
-    <% end %>
+            <% @checked_dogs.include?(dog) ? bool = true : bool = false %>
+            <%= check_box_tag "event[dogs[#{dog}]]", 1, bool, :class => "check" %>
+            <%= label(:dogs, dog, dog) %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
 

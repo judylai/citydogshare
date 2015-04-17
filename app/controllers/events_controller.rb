@@ -8,6 +8,8 @@ class EventsController < ApplicationController
   def new
     @times = ["Morning", "Afternoon", "Evening", "Overnight"]
     @checked_times = []
+    @dogs = current_user.dogs.pluck(:name)
+    @checked_dogs = []
   end
 
   def create
