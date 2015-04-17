@@ -37,18 +37,15 @@ When /^I create a new dog "([^"]*)"$/ do |name|
 end
 
 And /^I push "([^"]*)"$/ do |button|
-  DogsController.any_instance.should_receive(:get_mix_array).and_return([Mix.find(1)])
+  DogViewHelper.any_instance.should_receive(:get_mix_array).and_return([Mix.find(1)])
   click_button(button)
 end
 
-Given /^my IP address is (\d+\.\d+\.\d+\.\d+)$/ do |ip|
-  ApplicationController.stubbed_request_ip = ip
+Given /^my zipcode is "(.*)"$/ do |zip|
+  DogsController.any_instance.stub(:get_ip_address_zipcode).and_return(zip)
+
 end
 
 Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
   page.body.should =~ /#{first_example}.*#{second_example}/m
-end
-
-After do
-  ApplicationController.stubbed_request_ip = nil
 end

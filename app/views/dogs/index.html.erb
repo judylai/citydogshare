@@ -6,9 +6,9 @@
       Gender:
       <br />
       <div class="tiny ui vertical buttons">
-      <% @all_genders.each do |gender| %>
+      <% Dog.genders.each do |gender| %>
       <div class="ui button">
-      <%= check_box_tag "gender[#{gender}]", 1, @selected_genders.include?(gender), :class => "check" %>
+      <%= check_box_tag "gender[#{gender}]", 1, @form_filler.values[:gender].include?(gender), :class => "check" %>
       <%= label(:gender, gender.tr(" ", "_"), gender) %>
       </div>
       <% end %>
@@ -17,7 +17,7 @@
 
     <div class="large-10 columns">
       Mix:
-      <%= select_tag 'mix', options_for_select(@all_mixes, @mix) %>
+      <%= select_tag 'mix', options_for_select(["All Mixes"] + Mix.all_values, @form_filler.values[:mix]) %>
 
 
       <br />
@@ -25,9 +25,9 @@
       Personality:
       <br />
       <div class="tiny ui buttons">
-      <% @all_personalities.each do |p| %>
+      <% Personality.all_values.each do |p| %>
       <div class="ui button">
-        <%= check_box_tag "personality[#{p}]", 1, @selected_personalities.include?(p), :class => "check" %>
+        <%= check_box_tag "personality[#{p}]", 1, @form_filler.values[:personality].include?(p), :class => "check" %>
         <%= label(:personality, p.tr(" ", "_"), p) %>
       </div>
       <% end %>
@@ -40,9 +40,9 @@
       Size:
       <br />
       <div class="mini ui vertical buttons">
-      <% @all_sizes.each do |s| %>
+      <% Size.all_values.each do |s| %>
       <div class="ui button">
-      <%= check_box_tag "size[#{s}]", 1, @selected_sizes.include?(s), :class => "check" %>
+      <%= check_box_tag "size[#{s}]", 1, @form_filler.values[:size].include?(s), :class => "check" %>
       <%= label(:size, s.tr(" ", "_"), s) %>
       </div>
       <% end %>
@@ -53,10 +53,10 @@
       Age:
       <br />
       <div class="mini ui vertical buttons">
-      <% 4.times do |i| %>
+      <% Dog.age_ranges.each_with_index do |a, i| %>
       <div class="ui button">
-      <%= check_box_tag "age[#{i}]", 1, @selected_ranges.include?(i.to_s), :class => "check" %>
-      <%= label(:age, i, @age_ranges[i]) %>
+      <%= check_box_tag "age[#{i}]", 1, @form_filler.values[:age].include?(i.to_s), :class => "check" %>
+      <%= label(:age, i, a) %>
       </div>
       <% end %>
       </div>
@@ -66,9 +66,9 @@
       Likes:
       <br />
       <div class="tiny ui buttons">
-      <% @all_likes.each do |l| %>
+      <% Like.all_values.each do |l| %>
       <div class="ui button">
-      <%= check_box_tag "like[#{l}]", 1, @selected_likes.include?(l), :class => "check" %>
+      <%= check_box_tag "like[#{l}]", 1, @form_filler.values[:like].include?(l), :class => "check" %>
       <%= label(:like, l.tr(" ", "_"), l) %>
       </div>
       <% end %>
@@ -79,9 +79,9 @@
       Energy Level:
       <br />
       <div class="tiny ui buttons">
-      <% @all_energy_levels.each do |e| %>
+      <% EnergyLevel.all_values.each do |e| %>
       <div class="ui button">
-      <%= check_box_tag "energy_level[#{e}]", 1, @selected_energy_levels.include?(e), :class => "check" %>
+      <%= check_box_tag "energy_level[#{e}]", 1, @form_filler.values[:energy_level].include?(e), :class => "check" %>
       <%= label(:energy_level, e.tr(" ", "_"), e) %>
       </div>
       <% end %>
@@ -89,9 +89,9 @@
 
       <div>
         <%= label(:zipcode, "Zipcode") %>
-        <%= text_field_tag(:zipcode, @zipcode) %>
+        <%= text_field_tag(:zipcode, @form_filler.values[:zipcode]) %>
          <%= label(:radius, "Within") %>
-        <%= text_field_tag(:radius, @radius )%> Miles
+        <%= text_field_tag(:radius, @form_filler.values[:radius] )%> Miles
       </div>
 
       <div class="right floated ui primary button transparent input">
