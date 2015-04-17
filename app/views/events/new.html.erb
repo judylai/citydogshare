@@ -1,7 +1,7 @@
 <% if flash[:notice] %>
   <div class="ui warning message"><i class="warning icon"></i>
-    <% flash[:notice].each do |msg| %>
-      <%= msg[1][0] %>
+    <% flash[:notice].values.each do |msg| %>
+      <%= msg[0] %>
       <br>
     <% end %>
   </div>
@@ -47,7 +47,7 @@
         <% @dogs.each do |dog| %>
           <div class="ui button">
             <% @checked_dogs.include?(dog) ? bool = true : bool = false %>
-            <%= check_box_tag "event[dogs[#{dog}]]", 1, bool, :class => "check" %>
+            <%= check_box_tag "dogs[#{dog}]", 1, bool, :class => "check" %>
             <%= label(:dogs, dog, dog) %>
           </div>
         <% end %>
@@ -56,13 +56,13 @@
 
   	<div class="field">
 			<label>Start</label>
-      <%= text_field :date_timepicker, :start %>
+      <%= text_field :date_timepicker, :start, :readonly => true %>
 		</div>
 
   <br />
     <div class="field">
       <label>End</label>
-      <%= text_field :date_timepicker, :end %>
+      <%= text_field :date_timepicker, :end, :readonly => true %>
     </div>
 
   <br />
@@ -72,7 +72,7 @@
     <% @times.each do |time| %> 
         <div class="ui button">
         <% @checked_times.include?(time) ? bool = true : bool = false %>
-        <%= check_box_tag "event[times[#{time}]]", 1, bool, :class => "check" %>
+        <%= check_box_tag "times[#{time}]", 1, bool, :class => "check" %>
         <%= label(:times, time, time) %>
         </div>
     <% end %>

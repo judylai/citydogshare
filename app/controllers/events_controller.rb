@@ -14,21 +14,15 @@ class EventsController < ApplicationController
 
   def create
     @dogs = get_dogs(params)
-    @dogs.each do |dog|
-      event_attr = attributes_list(params)
-      event_attr[:dog] = dog
-      event = Event.new(event_attr)
-
-      if not event.valid?
-        set_vars_for_render
-        flash[:notice] = event.errors.messages
-        render 'new' and return
-      else
-        event.save
-      end
+    set_flash
+    if flash[:notice]
+      set_vars_for_render
+      render 'new'
+    else
+      redirect_to events_path
     end
-    redirect_to events_path
   end
+
 
   def edit
     @event = Event.find(params[:id])
@@ -43,23 +37,46 @@ class EventsController < ApplicationController
 
   end
 
+  def set_flash
+    if not create_events
+      flash[:notice] = @event.errors.messages #get error message working
+    elsif @dogs.empty?
+      flash[:notice] = {:name => ["Please select a dog to share"]}
+    end
+  end
+
+
+  def create_events
+    @dogs.each do |dog|
+      event_attr = attributes_list(params)
+      event_attr[:dog] = dog
+      @event = Event.new(event_attr)
+      if not @event.valid?
+        return false
+      else
+        @event.save
+      end
+    end
+  end
+
+
   def set_vars_for_render
     @times = ["Morning", "Afternoon", "Evening", "Overnight"]
     @dogs = current_user.dogs.pluck(:name)
-    @checked_times = params["event"]["times"] ? params["event"]["times"].keys : []
-    @checked_dogs = params['event']['dogs'] ? params['event']['dogs'].keys : []
+    @checked_times = params['times'] ? params["times"].keys : []
+    @checked_dogs = params['dogs'] ? params['dogs'].keys : []
   end
 
   def get_dogs(params)
-    dog_array = params['event']['dogs'] ? params['event']['dogs'].keys : []
+    dog_array = params['dogs'] ? params['dogs'].keys : []
     dog_array.map{ |dog| Dog.find_by_name(dog) }
   end
 
   def attributes_list(params)
     event_params = {
-      :start_date => params["date_timepicker"]["end"] != "" ? DateTime.strptime(params["date_timepicker"]["start"], "%Y/%m/%d") : "",
+      :start_date => params["date_timepicker"]["start"] != "" ? DateTime.strptime(params["date_timepicker"]["start"], "%Y/%m/%d") : "",
       :end_date => params["date_timepicker"]["end"] != "" ? DateTime.strptime(params["date_timepicker"]["end"], "%Y/%m/%d") : "",
-      :time_of_day => params["event"]["times"] ? params["event"]["times"].keys : [],
+      :time_of_day => params["times"] ? params["times"].keys : [],
       :my_location => params['location']
     }
   end
