@@ -20,8 +20,9 @@ class EventsController < ApplicationController
       event = Event.new(event_attr)
 
       if not event.valid?
-        flash[:notice] = @event.errors.messages
-        render 'new'
+        set_vars_for_render
+        flash[:notice] = event.errors.messages
+        render 'new' and return
       else
         event.save
       end
@@ -42,6 +43,13 @@ class EventsController < ApplicationController
 
   end
 
+  def set_vars_for_render
+    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
+    @dogs = current_user.dogs.pluck(:name)
+    @checked_times = params["event"]["times"] ? params["event"]["times"].keys : []
+    @checked_dogs = params['event']['dogs'] ? params['event']['dogs'].keys : []
+  end
+
   def get_dogs(params)
     dog_array = params['event']['dogs'] ? params['event']['dogs'].keys : []
     dog_array.map{ |dog| Dog.find_by_name(dog) }
@@ -49,8 +57,8 @@ class EventsController < ApplicationController
 
   def attributes_list(params)
     event_params = {
-      :start_date => DateTime.strptime(params["date_timepicker"]["start"], "%Y/%m/%d"),
-      :end_date => DateTime.strptime(params["date_timepicker"]["end"], "%Y/%m/%d"),
+      :start_date => params["date_timepicker"]["end"] != "" ? DateTime.strptime(params["date_timepicker"]["start"], "%Y/%m/%d") : "",
+      :end_date => params["date_timepicker"]["end"] != "" ? DateTime.strptime(params["date_timepicker"]["end"], "%Y/%m/%d") : "",
       :time_of_day => params["event"]["times"] ? params["event"]["times"].keys : [],
       :my_location => params['location']
     }

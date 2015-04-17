@@ -20,17 +20,13 @@ Background: user has been added to the database and logged in
   And I am the parent of the existing dogs
   And I am on the share dogs page
 
-Scenario: Choose dog to share
-  And I open the dropdown to choose a dog
-  And I click on "Princess"
-  Then I should see "Princess" as the chosen dog
 
-Scenario: Share one dog's event
+Scenario: Share one dog's event 
   And I choose to share "Princess"
-  And I choose the day "4/8/15"
+  And I choose the day "2015/4/8"
   And I check "Morning, Afternoon"
-  And I click "My location"
-  And I press "Share"
+  And I click "My location" #radio button
+  And I press "Schedule"
   Then I should be on the profile for "Princess"
   And I should see "Your event has been created"
   And I should see a new event on the dog profile
