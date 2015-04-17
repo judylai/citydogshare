@@ -6,6 +6,7 @@ end
 
 Given /the following dogs exist/ do |dogs_table|\
   Dog.any_instance.stub(:geocode)
+  AWS::S3::S3Object.stub(method).and_return(double('response', :success? => success))
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
@@ -57,6 +58,7 @@ Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
 end
 
 When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
+  AWS::S3::S3Object.stub(method).and_return(double('response', :success? => success))
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   attach_file(field, File.expand_path(path))
 end

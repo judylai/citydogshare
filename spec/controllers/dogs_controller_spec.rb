@@ -3,6 +3,7 @@ require 'rails_helper'
 describe DogsController, :type => :controller do
   include Capybara::DSL
   before(:each) do
+    AWS::S3::S3Object.stub(method).and_return(double('response', :success? => success))
     @user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
     allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
