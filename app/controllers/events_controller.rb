@@ -27,6 +27,10 @@ class EventsController < ApplicationController
     @checked_times = []
     @dogs = current_user.dogs.pluck(:name)
     @checked_dogs = []
+    if @dogs == []
+      flash[:notice] = "Please create a dog to share"
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def create
