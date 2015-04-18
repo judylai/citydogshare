@@ -6,6 +6,7 @@ class EventsController < ApplicationController
     @dogs = current_user.dogs
     @dogs.each do |dog|
       (@events << dog.events).flatten!
+
     end
     # respond_to do |format|
     #   format.html # index.html.erb

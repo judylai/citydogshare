@@ -73,7 +73,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
 end
 
 And /^I press Schedule$/ do
-  DogsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  EventsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
   click_button("Schedule")
 end
 

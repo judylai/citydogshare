@@ -92,16 +92,29 @@ describe EventsController, :type => :controller do
         :time_of_day => ["Morning"], :my_location => "true"})
       controller.create_events.should == false
     end
+  end
 
-    # it 'should set the flash if event is not valid' do
-    #   controller.stub(:create_events).and_return(false)
-    #   controller.instance_variable_set(:@dogs, [Dog.find_by_name('Spock')])
-    #   controller.instance_variable_set(:@event, Event.new().save)
-    #   :@event.save
-    #   controller.set_flash
-    #   expect(flash[:notice]).to eq({:name => ["Please select a dog to share"]})
-    # end
+  describe 'show dog events' do
+    before (:each) do
+      @event1 = Event.new(:dog => Dog.find(1), :start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
+        :time_of_day => "---\n- Morning\n", :my_location => "true")
+      @event1.save
+    end
 
+    it 'should get the correct dog' do
+      get :index
+      assigns(:dog) == Dog.find(1)
+    end
+
+    it 'should get all dog events' do
+      get :index
+      assigns(:events).should == [@event1]
+    end
+
+    it 'should get the right event on show' do
+      get :show, {:id => 1}
+      assigns(:event).should == @event1
+    end
   end
 
 
