@@ -25,7 +25,7 @@ Scenario: I create a dog event
   And I choose "location_true"
   When I press Schedule
   Then I should be on my calendar page
-  #And I should see "Princess" not sure how to do this
+  And I should see the event for "Princess"
   #And I should see "Morning"
 
 Scenario: Not selecting a dog should throw an error
