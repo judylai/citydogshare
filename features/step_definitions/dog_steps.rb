@@ -73,12 +73,12 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
 end
 
 And /^I press Schedule$/ do
-  DogsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  EventsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
   click_button("Schedule")
 end
 
-And /^I should see the event for "(.*)"$/ do |dog_name|
-  all('span.fc-event-title').count.should == 1
-  find('.fc-event-title').should have_content(dog_name)
-end
+# And /^I should see "(.*)" in the calendar$/ do |dog_name|
+#   all('span.fc-event-title').count.should == 1
+#   find('.fc-event-title').should have_content(dog_name)
+# end
 
