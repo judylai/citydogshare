@@ -77,3 +77,8 @@ And /^I press Schedule$/ do
   click_button("Schedule")
 end
 
+# And /^I should see "(.*)" in the calendar$/ do |dog_name|
+#   all('span.fc-event-title').count.should == 1
+#   find('.fc-event-title').should have_content(dog_name)
+# end
+

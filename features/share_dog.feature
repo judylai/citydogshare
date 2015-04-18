@@ -25,8 +25,8 @@ Scenario: I create a dog event
   And I choose "location_true"
   When I press Schedule
   Then I should be on my calendar page
-  #And I should see "Princess" not sure how to do this
-  #And I should see "Morning"
+  And I should see "Princess"
+  And I should see "Morning"
 
 Scenario: Not selecting a dog should throw an error
   Given I press "Schedule"
@@ -38,18 +38,23 @@ Scenario: Not selecting a date should throw an error
   Then I should see "Please enter a valid start date"
   And I should see "Please enter a valid end date"
 
-Scenario: Event should show up on dog profile
-  Given I have created the above event
-  And I am on my profile
-  When I follow "Princess"
-  Then I should see "4/7/15 - 4/9/15"
-  And I should see "My Location"
-  And I should see "Morning"
+Scenario: Not selecting a date should throw an error
+  Given I check "dogs_Princess"
+  Given I press Schedule
+  Then I should see "Please enter a time of day"
 
-Scenario: Event should expire after end date
-  Given I have created the above event
-  And the date is "2015/04/10"
-  And I am on my profile page
-  When I follow "Princess"
-  Then I should not see "4/7/15 - 4/9/15"
+#Scenario: Event should show up on dog profile
+#  Given I have created the above event
+#  And I am on my profile
+#  When I follow "Princess"
+#  Then I should see "4/7/15 - 4/9/15"
+#  And I should see "My Location"
+#  And I should see "Morning"
+
+#Scenario: Event should expire after end date
+#  Given I have created the above event
+#  And the date is "2015/04/10"
+#  And I am on my profile page
+#  When I follow "Princess"
+#  Then I should not see "4/7/15 - 4/9/15"
 
