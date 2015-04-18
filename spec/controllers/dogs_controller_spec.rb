@@ -238,4 +238,12 @@ describe DogsController, :type => :controller do
     end
   end
 
+  describe 'test edit' do
+    before(:each) do
+      @dog = FactoryGirl.create(:dog)
+      @current_user = User.create(:id => 1)
+    end
+  end
+
+
 end
