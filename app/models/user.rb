@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description
+  attr_accessible :first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country
   validates :phone_number, format: { with: /\(\d{3}\)(\ ?)\d{3}-\d{4}/, message: "Bad format for phone number." }, :allow_blank => true
-
+  validates :zipcode, format: { with: /\d{5}/, message: "Bad format for zipcode."}, :allow_blank => true
   has_many :dogs, :dependent => :destroy
 
   def update_credentials(credentials)

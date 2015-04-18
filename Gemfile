@@ -11,6 +11,10 @@ gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
 gem 'rails_secret_token_env'
+gem 'geocoder'
+
+gem "paperclip", "~> 4.2"
+gem 'aws-sdk', '< 2.0'
 
 group :development, :test do
   gem 'sqlite3'
@@ -24,7 +28,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'metric_fu'
   gem 'minitest', '~>4.7.5'
-  gem 'paperclip', "~> 4.2"
   #gem 'rmagick'
 end
 

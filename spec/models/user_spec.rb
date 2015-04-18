@@ -44,4 +44,16 @@ describe User do
     @user.valid?
     @user.errors.should be_empty
   end
+
+  it 'should not save on invalid zipcode formats' do
+    @user.zipcode= "abcd"
+    @user.valid?
+    @user.errors.should have_key(:zipcode)
+  end
+
+  it 'should save on valid zipcode format' do
+    @user.zipcode = "12345"
+    @user.valid?
+    @user.errors.should be_empty
+  end
 end

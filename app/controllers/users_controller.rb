@@ -21,6 +21,10 @@ class UsersController < ApplicationController
       flash[:notice] = "You may only edit your own profile."
       redirect_to @current_user
     elsif params[:user] != nil and @current_user.update_attributes(params[:user])
+      @current_user.dogs.each do |dog|
+        dog.geocode
+        dog.save
+      end
       flash[:notice] = "Profile successfully updated."
       redirect_to @current_user
     else
