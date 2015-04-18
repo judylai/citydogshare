@@ -49,6 +49,8 @@ group :assets do
   gem 'sass', '~> 3.2.0'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
+  gem 'fullcalendar-rails'
+  gem 'momentjs-rails'
 
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -61,7 +63,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'

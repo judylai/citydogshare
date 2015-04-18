@@ -13,16 +13,22 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
+
     when /^the home\s?page$/
       '/'
     when /^the users page for "Batman"$/
       '/users/1'
     when /^the search dogs page$/
       '/dogs'
+    when /^the share dogs page$/
+      '/events/new'
     when /^the edit page for non-existent user$/
       '/users/5/edit?'
     when /^the profile page for non-existent user$/
       '/users/5'
+    when /^my calendar page$/
+      '/events'
+
 
 
     # Add more mappings here.

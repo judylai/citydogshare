@@ -1,6 +1,10 @@
 require 'cucumber/rspec/doubles'
 require 'aws'
 
+Given /^the date is "(\d\d\d\d\/\d\d\/\d\d)"$/ do |date|
+  Time.stub(:now).and_return(date)
+end
+
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
 end
@@ -67,3 +71,14 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   attach_file(field, File.expand_path(path))
 end
+
+And /^I press Schedule$/ do
+  EventsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  click_button("Schedule")
+end
+
+# And /^I should see "(.*)" in the calendar$/ do |dog_name|
+#   all('span.fc-event-title').count.should == 1
+#   find('.fc-event-title').should have_content(dog_name)
+# end
+

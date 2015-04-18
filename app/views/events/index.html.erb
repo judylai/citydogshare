@@ -1,0 +1,30 @@
+
+  <style type="text/css">
+    #calendar
+    {
+      width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+
+   <div id='calendar'></div>
+<p> </p>
+  <div id = "dogevents"><h4>Events:</h4>
+<% for dog in @dogs do %>
+      <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
+<% for event in dog.events %>
+   <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %> <br />
+       Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %></p>
+
+      <%end%>
+       <%end%>
+       </div>
+
+
+
+
+
+
+
+
+

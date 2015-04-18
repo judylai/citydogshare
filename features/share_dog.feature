@@ -14,31 +14,47 @@ Background: user has been added to the database and logged in
   And the following dogs exist:
     | name     | mix              | age | size            | gender | likes      | energy  | personality | user_id |
     | Princess | Labrador         | 1   | small (0-15)    | Female | cats       | high    | whatever    | 1       |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 2       |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 1       |
 
-	And I am logged in
-  And I am the parent of the existing dogs
+  And I am logged in
   And I am on the share dogs page
 
-Scenario: Choose dog to share
-  And I open the dropdown to choose a dog
-  And I click on "Princess"
-  Then I should see "Princess" as the chosen dog
+Scenario: I create a dog event
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I choose "location_true"
+  When I press Schedule
+  Then I should be on my calendar page
+  And I should see "Princess"
+  And I should see "Morning"
 
-Scenario: Share one dog's event
-  And I choose to share "Princess"
-  And I choose the day "4/8/15"
-  And I check "Morning, Afternoon"
-  And I click "My location"
-  And I press "Share"
-  Then I should be on the profile for "Princess"
-  And I should see "Your event has been created"
-  And I should see a new event on the dog profile
+Scenario: Not selecting a dog should throw an error
+  Given I press "Schedule"
+  Then I should see "Please select a dog to share"
 
-Scenario: Not all fields filled out for dog event
-  And I choose to share "Princess"
-  And I check "Morning, Afternoon"
-  And I click "My location"
-  And I press "Share"
-  Then I should see "You must fill out all fields for the event."
+Scenario: Not selecting a date should throw an error
+  Given I check "dogs_Princess"
+  Given I press "Schedule"
+  Then I should see "Please enter a valid start date"
+  And I should see "Please enter a valid end date"
+
+Scenario: Not selecting a date should throw an error
+  Given I check "dogs_Princess"
+  Given I press Schedule
+  Then I should see "Please enter a time of day"
+
+#Scenario: Event should show up on dog profile
+#  Given I have created the above event
+#  And I am on my profile
+#  When I follow "Princess"
+#  Then I should see "4/7/15 - 4/9/15"
+#  And I should see "My Location"
+#  And I should see "Morning"
+
+#Scenario: Event should expire after end date
+#  Given I have created the above event
+#  And the date is "2015/04/10"
+#  And I am on my profile page
+#  When I follow "Princess"
+#  Then I should not see "4/7/15 - 4/9/15"
 
