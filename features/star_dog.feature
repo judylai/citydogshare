@@ -22,11 +22,6 @@ Scenario: User must be logged in to star a dog from search results
   And I am on the search dogs page
   Then I should not see a star 
 
-Scenario: User must be logged in to star a dog from dog profile
-  And I am on the search dogs page
-  And I follow "Princess"
-  Then I should not see a star
-
 Scenario: User can star dog from search results
   And I am logged in
   And I am on the search dogs page
