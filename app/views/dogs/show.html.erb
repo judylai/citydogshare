@@ -57,5 +57,11 @@
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
   <p> </p>
 
+  <div id="parent">
+    <h4 class = "ui teal label">Parent:</h4>&nbsp;&nbsp;<%= link_to @parent.first_name, user_path(@parent.id) %>
+    <img class = "ui small circular image" style="display: inline" src=<%= @parent.image %>>
+
+  </div>
+
 
 </div>

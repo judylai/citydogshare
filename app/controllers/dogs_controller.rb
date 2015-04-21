@@ -36,6 +36,7 @@ class DogsController < ApplicationController
   def show
     id = params[:id]
     @dog = Dog.find(id)
+    @parent = User.find(@dog.user_id)
   end
 
   def create
