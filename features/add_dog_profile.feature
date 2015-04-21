@@ -84,4 +84,12 @@ Scenario: view dog profile
   And I should see "Mix: Affenpinscher"
   And I should see "Age: 5"
   And I should see "Size: small (0-15)"
+  And I should see "Bruce"
+
+Scenario: get back to user profile
+  When I create a new dog "Spock"
+  And I am on the users page for "Batman"
+  And I follow "Spock"
+  And I follow "Bruce"
+  Then I should be on the users page for "Batman"
 
