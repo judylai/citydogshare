@@ -13,6 +13,20 @@
     <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
   <% end %>
 </p>
+<% if not current_user.nil? %>
+  <div class="stars">
+  <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
+  <%= link_to starred_dogs_path(dog_id: @dog), method: :post do%>
+  <i class="empty star icon yellow large"></i>
+  <%end%>
+  <%- else -%>
+  <%= link_to starred_dogs_path(dog_id: @dog), method: :delete do%>
+  <i class="star icon yellow large"></i>
+  <%end%>
+  <%- end -%>
+  <%= @dog.name %> has <%= @dog.stars.count %> stars.
+  </div>
+<%end%>
 
 <div class = "small-8 columns">
   <div id="user_info">
@@ -56,7 +70,7 @@
   <p> </p>
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
   <p> </p>
-  <% if not @dog.video.nil? %>
+  <% if not @dog.video.nil? and not @dog.video == "" %>
   <div id="video"><h4 class = "ui teal label">Video:</h4><br/><div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div></div>
   <% end %>
 

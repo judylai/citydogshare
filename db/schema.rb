@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150425015527) do
+ActiveRecord::Schema.define(:version => 20150425100332) do
 
   create_table "dog_like_linkers", :force => true do |t|
     t.integer "dog_id"
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(:version => 20150425015527) do
   create_table "sizes", :force => true do |t|
     t.string "value"
   end
+
+  create_table "stars", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "dog_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "stars", ["user_id"], :name => "index_stars_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"

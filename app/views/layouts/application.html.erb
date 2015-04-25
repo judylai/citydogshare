@@ -18,6 +18,7 @@
           <a class="item" href="/events/new">Share a Dog</a>
           <div class="right menu">
             <%= link_to "My Calendar", events_path, {:class => "item"}%>
+            <%= link_to "Starred Dogs", stars_user_path(current_user), {:class => "item"}%>
             <%= link_to "My Profile", user_path(current_user), {:class => "item"}%>
             <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>
           </div>
