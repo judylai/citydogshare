@@ -9,7 +9,7 @@
 </div>
 
 <p>
-  <% if @dog.user_id == @current_user.id %>
+  <% if not @current_user.nil? and @dog.user_id == @current_user.id %>
     <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
   <% end %>
 </p>
@@ -56,6 +56,13 @@
   <p> </p>
   <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
   <p> </p>
-
+  <% if not @dog.video.nil? %>
+  <div id="video"><h4 class = "ui teal label">Video:</h4><br/><div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div></div>
+  <% end %>
 
 </div>
+<script>
+$(document).ready(function(){
+  $('.ui.video').video();
+});
+</script>
