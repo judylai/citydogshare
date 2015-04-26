@@ -131,11 +131,11 @@
           <span class="right floated stars">
             <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
               <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
-              <i class="empty icon yellow large"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>
+              <i class="empty icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>
               <%end%>
             <%- else -%>
               <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}" do%>
-              <i class="icon yellow large"><%= dog.stars.count %></i><i class="star icon yellow large"></i>
+              <i class="icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="star icon yellow large"></i>
               <%end%>
             <%- end -%>
           </span>
