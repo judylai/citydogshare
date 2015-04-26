@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+  require 'event_form_filler'
+
   before_filter :current_user
 
   def index
@@ -22,25 +25,56 @@ class EventsController < ApplicationController
     end
   end
 
+  # def new
+  #   @times = ["Morning", "Afternoon", "Evening", "Overnight"]
+  #   @checked_times = []
+  #   @dogs = current_user.dogs.pluck(:name)
+  #   @checked_dogs = @dogs.length == 1 ? @dogs : [] 
+  #   if @dogs == []
+  #     flash[:notice] = "Please create a dog to share"
+  #     redirect_to user_path(current_user.id)
+  #   end
+  # end
+
+
   def new
-    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
-    @checked_times = []
-    @dogs = current_user.dogs.pluck(:name)
-    @checked_dogs = []
-    if @dogs == []
+    @form_filler = EventViewHelper.new(current_user)
+    #@dogs = @form_filler.dogs
+    raise @form_filler.dogs.inspect
+    @action = :create
+    @method = :post
+
+    unless @dogs != []
       flash[:notice] = "Please create a dog to share"
       redirect_to user_path(current_user.id)
     end
   end
 
+  # def create
+  #   @dogs = get_dogs(params)
+  #   set_flash #this has a side effect that creates the event
+  #   if flash[:notice]
+  #     set_vars_for_render
+  #     render 'new'
+  #   else
+  #     redirect_to events_path
+  #   end
+  # end
+
+
   def create
-    @dogs = get_dogs(params)
+    @form_filler = EventViewHelper.new(current_user)
+    @dog = @form_filler.dog
+    @dog.user_id = current_user.id
+    raise @dog.inspect
     set_flash
-    if flash[:notice]
-      set_vars_for_render
-      render 'new'
+
+
+    if @event.save
+      redirect_to user_path(current_user)
     else
-      redirect_to events_path
+      flash[:notice] = @dog.errors.messages
+      render 'new'
     end
   end
 
@@ -81,33 +115,17 @@ class EventsController < ApplicationController
   end
 
 
-  def set_vars_for_render
+  def set_vars_for_render #persist start date and radio button checks
     @times = ["Morning", "Afternoon", "Evening", "Overnight"]
     @dogs = current_user.dogs.pluck(:name)
     @checked_times = params['times'] ? params["times"].keys : []
     @checked_dogs = params['dogs'] ? params['dogs'].keys : []
+    @location = params['location']
   end
 
   def get_dogs(params)
     dog_array = params['dogs'] ? params['dogs'].keys : []
     dog_array.map{ |dog| Dog.find_by_name(dog) }
-  end
-
-  def get_date(date_string)
-    if date_string != ""
-      DateTime.strptime(date_string, "%Y/%m/%d")
-    else
-      ""
-    end
-  end
-
-  def attributes_list(params)
-    event_params = {
-      :start_date => get_date(params["date_timepicker"]["start"]),
-      :end_date => get_date(params["date_timepicker"]["end"]),
-      :time_of_day => params["times"] ? params["times"].keys : [],
-      :my_location => params['location']
-    }
   end
 
 end

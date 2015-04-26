@@ -6,7 +6,7 @@
 
 require 'cucumber/rails'
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails'
 
 load "#{Rails.root}/db/seeds.rb"
 # Capybara defaults to CSS3 selectors rather than XPath.

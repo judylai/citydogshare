@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :start_date, :end_date, :time_of_day, :my_location, :dog
+  attr_accessible :start_date, :end_date, :time_of_day, :my_location, :dog, :description
   belongs_to :dog
 
   validates :start_date, :presence => {:message => "Please enter a valid start date"}

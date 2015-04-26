@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150414202034) do
+ActiveRecord::Schema.define(:version => 20150420195800) do
 
   create_table "dog_like_linkers", :force => true do |t|
     t.integer "dog_id"
@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(:version => 20150414202034) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "time_of_day"
-    t.boolean  "my_location"
+    t.string   "my_location"
     t.integer  "dog_id"
+    t.string   "description"
   end
 
   create_table "likes", :force => true do |t|

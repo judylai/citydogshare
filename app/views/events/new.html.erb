@@ -56,13 +56,13 @@
 
   	<div class="field">
 			<label>Start</label>
-      <%= text_field :date_timepicker, :start, :readonly => true %>
+      <%= text_field :date_timepicker, :start, :readonly => true, :value => @start_date %>
 		</div>
 
   <br />
     <div class="field">
       <label>End</label>
-      <%= text_field :date_timepicker, :end, :readonly => true %>
+      <%= text_field :date_timepicker, :end, :readonly => true, :value => @end_date %>
     </div>
 
   <br />
@@ -82,14 +82,22 @@
   <br />
 
   <div class="field"><label>Where</label>
-    <%= radio_button_tag(:location, true, :checked => true) %>
+    <%= radio_button_tag(:location, "My House", @location == "My House" ? checked = true : checked = false) %>
      My House
     <br />
-    <%= radio_button_tag(:location, false) %>
+    <%= radio_button_tag(:location, "Your House", @location == "Your House" ? checked = true : checked = false) %>
      Your House
+    <br />
+    <%= radio_button_tag(:location, "Other", @location == "Other" ? checked = true : checked = false) %> <!-- change this when you migrate the DB -->
+      Other
   </div>
 
   <br />
+
+  <div class="field">
+    <label>Description</label>
+    <%= text_area_tag :description %>
+  </div>
 
   <div class="field">
     <div class="ui primary button transparent input"><input id='update_event_button' type="submit" value="Schedule" name="update_dog_button" class='btn info' /></div>
