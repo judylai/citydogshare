@@ -22,11 +22,11 @@ Background: user has been added to the database and logged in
 Scenario: I create a dog event
   Given I check "dogs_Princess"
   And I check "times_Morning"
-  And I choose "location_true"
-  When I press "Schedule"
-  Then I should be on my calendar page
+  And I choose "my_location_My_House"
+  When I press Schedule
+  Then I should not see "Create Event"
   And I should see "Princess"
-  And I should see "Morning"
+  And I should see "Time: Morning"
 
 Scenario: Not selecting a dog should throw an error
   Given I press "Schedule"
@@ -43,13 +43,17 @@ Scenario: Not selecting a date should throw an error
   Given I press Schedule
   Then I should see "Please enter a time of day"
 
-#Scenario: Event should show up on dog profile
-#  Given I have created the above event
-#  And I am on my profile
-#  When I follow "Princess"
-#  Then I should see "4/7/15 - 4/9/15"
-#  And I should see "My Location"
-#  And I should see "Morning"
+Scenario: Event should show up on dog profile
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I choose "my_location_My_House"
+  When I press Schedule
+  Then I should not see "Create Event"
+  When I am on my profile page
+  When I follow "Princess"
+  Then I should see today's date
+  #And I should see "My House"
+  And I should see "Time: Morning"
 
 #Scenario: Event should expire after end date
 #  Given I have created the above event

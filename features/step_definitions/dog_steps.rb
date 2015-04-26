@@ -73,7 +73,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
 end
 
 And /^I press Schedule$/ do
-  EventsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  EventViewHelper.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
   click_button("Schedule")
 end
 
@@ -82,8 +82,8 @@ And /^I click a star for dog with dog id "(.)"/ do |id|
 end
 
 And /^I should not see a star$/ do
-    all('div.stars').count.should == 0
-    all('span.stars').count.should == 0
+  all('div.stars').count.should == 0
+  all('span.stars').count.should == 0
 end
 
 When /^(?:|I )follow the dog named "([^"]*)"$/ do |link|
@@ -91,3 +91,8 @@ When /^(?:|I )follow the dog named "([^"]*)"$/ do |link|
     click_link(link)
   end
 end
+
+Then /^I should see today's date$/ do
+  page.should have_content(DateTime.now.strftime('%v').upcase)
+end
+
