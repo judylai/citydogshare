@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#dog_mixes").tagit({tagSource:function(t,a){var s=this;$.ajax({url:"/mixes/autocomplete.json",data:{q:t.term},success:function(t){a(s._subtractArray(t,s.assignedTags()))}})}})});
