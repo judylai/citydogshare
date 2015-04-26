@@ -123,7 +123,7 @@
         <!-- </span> -->
       </div>
 
-      <div class="large-9 columns">
+      <div class="large-9 columns" style="padding-right: 0">
         <div class="content">
           <div class="ui medium header" style="margin-bottom: 0">
             <%= link_to dog.name, dog_path(dog) %>  
@@ -229,7 +229,7 @@ $(document).ready(function(){
               position: results[0].geometry.location
           });
           google.maps.event.addListener(marker, 'click', function() {
-            $('body').animate({scrollTop: $(marker.url).offset().top - 65}, 'slow');
+            $('body').animate({scrollTop: $(marker.url).offset().top - 50}, 'slow');
           });
           bounds.extend(marker.getPosition());
           map.fitBounds(bounds);
