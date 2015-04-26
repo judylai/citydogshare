@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20150425100332) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "video"
+    t.string   "token"
   end
 
   create_table "energy_levels", :force => true do |t|
@@ -72,6 +73,19 @@ ActiveRecord::Schema.define(:version => 20150425100332) do
 
   create_table "personalities", :force => true do |t|
     t.string "value"
+  end
+
+  create_table "pictures", :force => true do |t|
+    t.string   "description"
+    t.string   "image"
+    t.integer  "dog_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "dogs_token"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "sizes", :force => true do |t|

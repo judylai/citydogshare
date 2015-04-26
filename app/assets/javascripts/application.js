@@ -23,5 +23,10 @@
 //= require jquery-ui
 //= require jquery.datetimepicker
 //= require cal
+<<<<<<< HEAD
 //= require nav-dropdown
 
+=======
+//= require galleria-1.4.2
+//= require galleria.classic
+>>>>>>> 53ce71b9f35f354f7919d7821005ff76e62d9646
