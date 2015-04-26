@@ -39,12 +39,10 @@ class EventsController < ApplicationController
 
   def new
     @form_filler = EventViewHelper.new(current_user)
-    #@dogs = @form_filler.dogs
-    raise @form_filler.dogs.inspect
     @action = :create
     @method = :post
 
-    unless @dogs != []
+    unless @all_dogs != []
       flash[:notice] = "Please create a dog to share"
       redirect_to user_path(current_user.id)
     end
@@ -64,17 +62,16 @@ class EventsController < ApplicationController
 
   def create
     @form_filler = EventViewHelper.new(current_user)
-    @dog = @form_filler.dog
-    @dog.user_id = current_user.id
-    raise @dog.inspect
+    @event_attr = @form_filler.event_info(params)
+    raise @form_filler.date_string.inspect
+    @dogs = @form_filler.dogs
     set_flash
 
-
-    if @event.save
-      redirect_to user_path(current_user)
-    else
-      flash[:notice] = @dog.errors.messages
+    if flash[:notice]
+      #set_vars_for_render
       render 'new'
+    else
+      redirect_to events_path
     end
   end
 
@@ -93,19 +90,18 @@ class EventsController < ApplicationController
   end
 
   def set_flash
-    if not create_events
-      flash[:notice] = @event.errors.messages
-    elsif @dogs.empty?
+    if @dogs.empty?
       flash[:notice] = {:name => ["Please select a dog to share"]}
+    elsif not create_events
+      flash[:notice] = @event.errors.messages
     end
   end
 
 
   def create_events
     @dogs.each do |dog|
-      event_attr = attributes_list(params)
-      event_attr[:dog] = dog
-      @event = Event.new(event_attr)
+      @event_attr[:dog] = current_user.dogs.find_by_name(dog)
+      @event = Event.new(@event_attr)
       if not @event.valid?
         return false
       else
@@ -121,11 +117,6 @@ class EventsController < ApplicationController
     @checked_times = params['times'] ? params["times"].keys : []
     @checked_dogs = params['dogs'] ? params['dogs'].keys : []
     @location = params['location']
-  end
-
-  def get_dogs(params)
-    dog_array = params['dogs'] ? params['dogs'].keys : []
-    dog_array.map{ |dog| Dog.find_by_name(dog) }
   end
 
 end

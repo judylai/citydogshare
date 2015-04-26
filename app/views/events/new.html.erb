@@ -44,9 +44,9 @@
 	<div class="ui form">
     <div class="field"><label>Dog to Share</label>
       <div class="ui buttons">
-        <% @dogs.each do |dog| %>
+        <% @form_filler.all_dogs.each do |dog| %>
           <div class="ui button">
-            <% @checked_dogs.include?(dog) ? bool = true : bool = false %>
+            <% @form_filler.dogs.include?(dog) ? bool = true : bool = false %>
             <%= check_box_tag "dogs[#{dog}]", 1, bool, :class => "check" %>
             <%= label(:dogs, dog, dog) %>
           </div>
@@ -56,7 +56,7 @@
 
   	<div class="field">
 			<label>Start</label>
-      <%= text_field :date_timepicker, :start, :readonly => true, :value => @start_date %>
+      <%= text_field :date_timepicker, :start, :readonly => true, :value => @form_filler.date_string(@values[:start_time]) %>
 		</div>
 
   <br />
@@ -69,9 +69,9 @@
 
   <div class="field"><label>Time of day</label>
     <div class="ui buttons">
-    <% @times.each do |time| %> 
+    <% @form_filler.times.each do |time| %> 
         <div class="ui button">
-        <% @checked_times.include?(time) ? bool = true : bool = false %>
+        <% @form_filler.values[:time_of_day].include?(time) ? bool = true : bool = false %>
         <%= check_box_tag "times[#{time}]", 1, bool, :class => "check" %>
         <%= label(:times, time, time) %>
         </div>
@@ -82,14 +82,11 @@
   <br />
 
   <div class="field"><label>Where</label>
-    <%= radio_button_tag(:location, "My House", @location == "My House" ? checked = true : checked = false) %>
-     My House
-    <br />
-    <%= radio_button_tag(:location, "Your House", @location == "Your House" ? checked = true : checked = false) %>
-     Your House
-    <br />
-    <%= radio_button_tag(:location, "Other", @location == "Other" ? checked = true : checked = false) %> <!-- change this when you migrate the DB -->
-      Other
+    <% @form_filler.places.each do |place| %>
+      <%= radio_button_tag(:my_location, place , @form_filler.values[:my_location] == place ? checked = true : checked = false) %>
+      <%= place %>
+      <br />
+    <% end %>
   </div>
 
   <br />
