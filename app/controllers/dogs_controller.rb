@@ -26,6 +26,12 @@ class DogsController < ApplicationController
     @action = :create
     @method = :post
 
+    if params[:no_dog] == "true"
+      @first_dog = true
+      flash[:notice] = "Add your first dog"
+      render 'new'
+    end
+
     unless current_user.zipcode != nil and current_user.zipcode != "" 
       flash[:notice] = "Please update your zipcode to add a dog."
       redirect_to edit_user_path(current_user)
@@ -87,7 +93,4 @@ class DogsController < ApplicationController
     @zipcodes.each{|word| wf[word] += 1}
     wf
   end
-
 end
-
-
