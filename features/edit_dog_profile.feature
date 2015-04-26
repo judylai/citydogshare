@@ -20,7 +20,7 @@ Background: User and dog is in database
 
 Scenario: User edits his dog's information
   And I am on the users page for "Batman"
-  And I follow "Princess"
+  And I follow the dog named "Princess"
   And I press "Edit"
   And I fill in "dog_name" with "Prince"
   And I select "Male" from "dog_gender"

@@ -40,7 +40,7 @@ Scenario: User can star dog from dog profile
 Scenario: User should be able to star their own dog
   And I am logged in
   And I am on the users page for "Batman"
-  And I follow "Princess"
+  And I follow the dog named "Princess"
   And I click a star for dog with dog id "1"
   Then I should see "1"
   And I follow "Starred Dogs"
