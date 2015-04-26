@@ -24,4 +24,5 @@
 //= require jquery-ui
 //= require jquery.datetimepicker
 //= require cal
-
+//= require galleria-1.4.2
+//= require galleria.classic

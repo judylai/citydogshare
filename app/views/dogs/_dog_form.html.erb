@@ -8,8 +8,12 @@
     <%= text_field(:dog, :name) %>
   </div>
 
-  <div class="field"><label>Photo</label>
+  <div class="field"><label>Avatar</label>
     <%= file_field(:dog, :photo) %>
+  </div>
+
+  <div class="field"><label>Pictures</label>
+    <%= file_field_tag "images[]", type: :file, multiple: true %>
   </div>
 
   <div class="field"><label>Birthdate</label>

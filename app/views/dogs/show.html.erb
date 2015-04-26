@@ -1,3 +1,4 @@
+<script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>
 <% if flash[:notice] %>
          <div class="notice"><%= flash[:notice] %></div>
 <% end %>
@@ -23,8 +24,23 @@
 
   <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
   <p> </p>
-  <div id="photo"><h4 class = "ui teal label"><%= image_tag @dog.photo.url(:medium) %></div>
+  <div id="photo"><h4 class = "ui teal label"><%= image_tag @dog.photo.url(:small) %></div>
   <p> </p>
+
+  <div class="galleria">
+    <% unless @pictures.empty? %>
+      <% @pictures.each do |pic| %>
+        <%= image_tag pic.image.url %>               
+      <% end %>
+    <% end %>
+  </div>
+  <script>
+    Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
+    Galleria.run('.galleria' , { height: 0.6,  } );
+  </script>
+  <p> </p>
+
+
   <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
   <p> </p>
   <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @dog.gender %></div>

@@ -25,6 +25,8 @@ Citydogshare::Application.routes.draw do
     end
   end
 
+  #dog multiple pictures
+  resources :pictures
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   match 'dashboard' => 'welcome#dashboard'
