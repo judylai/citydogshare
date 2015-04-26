@@ -10,12 +10,12 @@
 <div id='calendar'></div>
 
 <p> </p>
-<% if current_user.events.count > 0 %>
-  <div id = "dogevents"><h4>Events:</h4>
+<% if current_user.future_events? %>
+  <div id = "dogevents"><h4>Future Events:</h4>
   <% for dog in @dogs do %>
-    <% if dog.events.count > 0 %>
+    <% if dog.future_events? %>
       <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
-      <% for event in dog.events %>
+      <% for event in dog.future_events %>
         <% if event.start_date == event.end_date %>
           <p> Date: <%= event.start_date.strftime('%v') %>
         <% else %>

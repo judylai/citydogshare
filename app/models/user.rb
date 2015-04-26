@@ -31,4 +31,9 @@ class User < ActiveRecord::Base
     return "#{self.first_name} #{self.last_name}"
   end
 
+  def future_events?
+    # for all events, if at least one comes after yesterday, return true
+    events.where("start_date > ?", 1.day.ago.midnight).pluck('start_date') != []
+  end
+
 end

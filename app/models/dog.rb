@@ -161,4 +161,13 @@ class Dog < ActiveRecord::Base
               .in_age_range(convert_age_ranges_to_dob_query(criteria[:age]))
   end
 
+  def future_events?
+    # for all events, if at least one comes after yesterday, return true
+    events.where("start_date > ?", 1.day.ago.midnight).pluck('start_date') != []
+  end
+
+  def future_events
+    events.where("start_date > ?", 1.day.ago.midnight)
+  end
+
 end
