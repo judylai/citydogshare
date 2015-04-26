@@ -163,11 +163,11 @@ class Dog < ActiveRecord::Base
 
   def future_events?
     # for all events, if at least one comes after yesterday, return true
-    events.where("start_date > ?", 1.day.ago.midnight).pluck('start_date') != []
+    events.where("end_date > ?", 1.day.ago.midnight).pluck('end_date') != []
   end
 
   def future_events
-    events.where("start_date > ?", 1.day.ago.midnight)
+    events.where("end_date > ?", 1.day.ago.midnight)
   end
 
 end
