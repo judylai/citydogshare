@@ -115,7 +115,7 @@
       <!-- </div> -->
       <!-- <div class="large-8 columns"> -->
         <div class="content">
-          Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %>
+          Time: <%= event.time_of_day.join(", ") %>
         </div>
       <!-- </div> -->
     </div>
