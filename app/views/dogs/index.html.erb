@@ -104,7 +104,6 @@
     
     </div>
   <% end %>
-
 <span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
   <span id="counts" data-counts="<%= @counts %>"/>
   <div class="large-7 columns" >
@@ -191,7 +190,9 @@ $(document).ready(function(){
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var mapOptions = {
-      zoom: 8
+      zoom: 8, 
+      streetViewControl: false,
+      zoomControl: true
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     var bounds = new google.maps.LatLngBounds();

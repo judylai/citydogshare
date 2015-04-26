@@ -17,3 +17,6 @@
  *= require fullcalendar.print
  *= require galleria.classic
  */
+ .gmnoprint img {
+    max-width: none; 
+}
