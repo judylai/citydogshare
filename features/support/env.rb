@@ -6,10 +6,11 @@ CodeClimate::TestReporter.start
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'cucumber/rails'
+ENV["RAILS_ENV"] ||= 'test'
 require 'simplecov'
 SimpleCov.start
-
+require File.expand_path("../../../config/environment", __FILE__)
+require 'cucumber/rails'
 load "#{Rails.root}/db/seeds.rb"
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
