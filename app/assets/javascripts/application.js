@@ -24,4 +24,5 @@
 //= require jquery.datetimepicker
 //= require cal
 //= require nav-dropdown
-
+//= require galleria-1.4.2
+//= require galleria.classic
