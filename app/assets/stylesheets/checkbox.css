@@ -19,11 +19,8 @@ input[type=checkbox] + label {
     /*border-color: #ddd;*/
 }
 
-#map-canvas { 
-    height: 500px;
-    max-width:none; 
-}
-
 .gmnoprint img {
     max-width: none; 
 }
+
+#map-canvas { height: 35em; }

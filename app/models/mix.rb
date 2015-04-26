@@ -13,7 +13,7 @@ class Mix < ActiveRecord::Base
   end
 
   def self.all_values
-    Mix.pluck('Distinct value')
+    Mix.order(:value).pluck('Distinct value')
   end
 
 end

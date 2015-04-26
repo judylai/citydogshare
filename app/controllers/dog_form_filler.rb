@@ -42,8 +42,8 @@ class DogViewHelper
 
   def attributes_list(dog_attributes)
     # Set form fields with new dog's information
-    @values[:personality] = dog_attributes['personalities'] ? dog_attributes['personalities'].keys  : []
-    @values[:like] = dog_attributes['likes'] ? dog_attributes['likes'].keys : []
+    @values[:personality] = dog_attributes['personalities'] ? get_attribute_array(dog_attributes, 'personalities')  : []
+    @values[:like] = dog_attributes['likes'] ? get_attribute_array(dog_attributes, 'likes') : []
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']
     @values[:mix] = dog_attributes['mixes'].split(',')
