@@ -75,8 +75,8 @@ class EventsController < ApplicationController
 
 
   def edit
-   # @event = Event.find(params[:id])
-   # @dog = @event.dog_id
+   @event = Event.find(params[:id])
+   @dog = @event.dog_id
   end
 
   def update

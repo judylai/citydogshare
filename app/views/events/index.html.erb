@@ -15,7 +15,7 @@
 <% for event in dog.events %>
    <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %> <br />
        Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %></p>
-
+       <%= link_to "Edit", edit_event_path(event.id) %>
       <%end%>
        <%end%>
        </div>
