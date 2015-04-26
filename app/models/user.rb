@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :dogs, :dependent => :destroy
   has_many :events, :through => :dogs
 
-  has_many :stars
+  has_many :stars, :dependent => :destroy
   has_many :starred_dogs, through: :stars, :source => :dog
 
   def update_credentials(credentials)

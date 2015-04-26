@@ -10,7 +10,7 @@ class Dog < ActiveRecord::Base
   scope :in_age_range, lambda {|age_query| filter_age(age_query)}
 
   belongs_to :user
-  has_many :stars
+  has_many :stars, :dependent => :destroy
   has_many :dog_mix_linkers
   has_many :dog_like_linkers
   has_many :dog_personality_linkers
