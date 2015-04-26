@@ -29,17 +29,20 @@ class Dog < ActiveRecord::Base
   validates :mixes, :presence => {:message => "Mix can't be blank"}
   validate :validate_dob
 
-  #paperclip
+  #paperclip avatar
   has_attached_file :photo, 
                     :styles => { :small    => '150x',
                                  :medium   => '300x' },
                     :default_url => "",
                     :storage => :s3,
-                    :bucket => 'citydogshare'
-
+                    :bucket => 'citydogshare',
+                    :path => "/:class/:images/:id/:style/:basename.:extension"
 
   validates_attachment_size :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
+
+  #paperclip dog multiple pictures
+  has_many :pictures, :dependent => :destroy
 
   after_validation :geocode
 

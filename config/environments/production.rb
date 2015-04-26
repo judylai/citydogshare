@@ -15,6 +15,8 @@ Citydogshare::Application.configure do
   config.assets.compress = true
 
   config.assets.precompile += %w( tags.js )
+  config.assets.precompile << %w( galleria-1.4.2.js )
+  config.assets.precompile << '*.css'
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
 
@@ -73,7 +75,6 @@ Citydogshare::Application.configure do
       :access_key_id => ENV['s3_access_key_id'],
       :secret_access_key => ENV['s3_secret_access_key']
     },
-    :url => ':s3_domain_url',
-    :path => "/:class/:images/:id/:style/:basename.:extension"
+    :url => ':s3_domain_url'
   }
 end

@@ -18,6 +18,24 @@
           <a class="item" href="/events/new">Share a Dog</a>
           <div class="right menu">
             <%= link_to "My Calendar", events_path, {:class => "item"}%>
+            <% if current_user.dogs.count > 0 %>
+              <% if current_user.dogs.count == 1 %>
+                <%= link_to "My Dogs", dog_path(current_user.dogs.first), {:class => "item"}%>
+              <% else %>
+                <div class="ui simple dropdown item">
+                  My Dogs
+                  <div class="menu">
+                    <% current_user.dogs.all.each do |dog| %>
+                    <div class="item">
+                      <%= link_to dog.name, dog_path(dog.id), {:method => :get} %>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <%= link_to "My Dogs", new_dog_path(:no_dog => 'true'), {:method => :get, :class => "item"}%>
+            <% end %>
             <%= link_to "Starred Dogs", stars_user_path(current_user), {:class => "item"}%>
             <%= link_to "My Profile", user_path(current_user), {:class => "item"}%>
             <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>

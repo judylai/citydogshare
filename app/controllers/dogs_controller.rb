@@ -26,6 +26,12 @@ class DogsController < ApplicationController
     @action = :create
     @method = :post
 
+    if params[:no_dog] == "true"
+      @first_dog = true
+      flash[:notice] = "Add your first dog"
+      render 'new'
+    end
+
     unless current_user.zipcode != nil and current_user.zipcode != "" 
       flash[:notice] = "Please update your zipcode to add a dog."
       redirect_to edit_user_path(current_user)
@@ -36,14 +42,21 @@ class DogsController < ApplicationController
   def show
     id = params[:id]
     @dog = Dog.find(id)
+    @pictures = @dog.pictures
   end
 
   def create
     @form_filler = DogViewHelper.new(nil, nil, false)
-    @dog = Dog.new(@form_filler.attributes_list(params['dog']))
+    @dog = Dog.new(@form_filler.attributes_list(dog_params))
     @dog.user_id = current_user.id
 
     if @dog.save
+      if params[:images]
+        #===== The magic is here ;)
+        params[:images].each { |image|
+          @dog.pictures.create(image: image)
+        }
+      end
       redirect_to user_path(current_user)
     else
       flash[:notice] = @dog.errors.messages
@@ -54,6 +67,7 @@ class DogsController < ApplicationController
   def edit 
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
+    @pictures = @dog.pictures
     @form_filler.dog_view_update(@dog)
     @action = :update
     @method = :put
@@ -63,7 +77,13 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
 
-    if @dog.update_attributes(@form_filler.attributes_list(params['dog']))
+     if @dog.update_attributes(@form_filler.attributes_list(dog_params))
+      if params[:images]
+        #===== The magic is here ;)
+        params[:images].each { |image|
+          @dog.pictures.create(image: image)
+        }
+      end
       redirect_to dog_path(@dog.id)
     else
       flash[:notice] = @dog.errors.messages
@@ -88,6 +108,9 @@ class DogsController < ApplicationController
     wf
   end
 
+  def dog_params
+    #params.require(:dog).permit(:description, :name, :pictures)
+    params[:dog]
+  end
+
 end
-
-
