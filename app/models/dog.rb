@@ -65,11 +65,7 @@ class Dog < ActiveRecord::Base
   end
 
   def tags
-    unless readable_personalities.empty?
-      energy_level + ", " + readable_personalities.join(", ") 
-    else
-      energy_level
-    end
+    readable_personalities.join(", ") 
   end
 
 
