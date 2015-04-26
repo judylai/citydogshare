@@ -28,12 +28,11 @@
   </div>
 <%end%>
 
-<div class = "small-8 columns">
+<div class = "large-7 columns">
   <div id="user_info">
     <!-- insert image tag here -->
-  <div id="ui-segment">
+    <div id="ui-segment"></div>
   </div>
-</div>
 
   <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
   <p> </p>
@@ -89,7 +88,45 @@
   <div id="video"><h4 class = "ui teal label">Video:</h4><br/><div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div></div>
   <% end %>
 
+</div>  <!-- end half of page div -->
+
+
+<div class="large-5 columns">
+  <div class="row">
+    <h4 class = "ui teal label"><%= @dog.name %>'s Events:</h4>
+  </div>
+  <div class="ui segment">
+    <% if @dog.events.count == 0 %>
+      <h1> No Dogs Found </h1>
+    <% end %>
+    <% @dog.events.each do |event| %>
+    <div class="ui vertical segment">
+      <!-- <div class="large-4 columns"> -->
+        <h3>  
+          <% if event.start_date == event.end_date %>
+            <%= event.start_date.strftime('%v') %>
+          <% else %>
+            <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
+          <% end %>
+        </h3>
+      <!-- </div> -->
+      <!-- <div class="large-8 columns"> -->
+        <div class="content">
+          Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %>
+        </div>
+      <!-- </div> -->
+    </div>
+    <% end %>
+
+    <br />
+  </div>
 </div>
+
+
+
+
+
+
 <script>
 $(document).ready(function(){
   $('.ui.video').video();
