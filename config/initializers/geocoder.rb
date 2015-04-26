@@ -1,6 +1,6 @@
 # config/initializers/geocoder.rb
 Geocoder.configure(
-  :timeout => 15,
+  :timeout => 20,
   :ip_lookup => :telize
 
 )

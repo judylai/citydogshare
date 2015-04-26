@@ -1,0 +1,43 @@
+<h2>Starred Dogs</h2>
+<% if not @dogs.nil? %>
+  <% @dogs.each do |dog| %>
+  <div class="ui vertical segment" id = <%= dog.owner.zipcode %> >
+
+    <div class="large-3 columns">
+      <span class="image">
+        <div id="photo"><h4 class = "ui teal label"><%= image_tag dog.photo.url(:small) %></div>
+      </span>
+    </div>
+
+    <div class="large-9 columns">
+      <div class="content">
+        <div class="ui medium header">
+          <%= link_to dog.name, dog_path(dog) %>  
+        <% if not current_user.nil? %>
+        <span class="right floated stars">
+          <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
+            <%= link_to starred_dogs_path(dog_id: dog), method: :post do%>
+            <i class="empty star icon yellow large"></i>
+            <%end%>
+          <%- else -%>
+            <%= link_to starred_dogs_path(dog_id: dog), method: :delete do%>
+            <i class="star icon yellow large"></i>
+            <%end%>
+          <%- end -%>
+        </span>
+        <%end%>
+        </div>
+        <div class="description">
+          <%= dog.motto %> 
+        </div>
+      </div>
+      <div class="extra content">
+        <i class="wait icon"></i>
+        <%= dog.availability %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  No starred dogs.
+<%end%>

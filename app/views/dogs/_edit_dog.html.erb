@@ -9,6 +9,11 @@
     <%= file_field(:dog, :photo) %>
   </div>
 
+  <div class="field"><label>Video</label>
+   Please enter a Youtube link.
+    <%= text_field(:dog, :video, :placeholder => "https://www.youtube.com/watch?v=NONlkKMGFeA") %>
+  </div>
+
   <div class="field"><label>Birthdate</label>
     <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year, :default => DateTime.new(Date.today.year, 1, 1)} %>
   </div>

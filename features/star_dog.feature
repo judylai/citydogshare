@@ -25,35 +25,34 @@ Scenario: User must be logged in to star a dog from search results
 Scenario: User can star dog from search results
   And I am logged in
   And I am on the search dogs page
-  And I click a star for "Bubba"
-  And I click "Starred Dogs"
+  And I click a star for dog with dog id "3"
+  And I follow "Starred Dogs"
   Then I should see "Bubba"
 
 Scenario: User can star dog from dog profile
   And I am logged in
   And I am on the search dogs page
   And I follow "Bubba"
-  And I click a star for "Bubba"
-  Then I should see "1 person has starred Bubba"
-  And I click "Starred Dogs"
+  And I click a star for dog with dog id "3"
+  And I follow "Starred Dogs"
   Then I should see "Bubba"
 
 Scenario: User should be able to star their own dog
   And I am logged in
   And I am on the users page for "Batman"
   And I follow "Princess"
-  And I click a star for "Princess"
-  Then I should see "1 person has starred Princess"
-  And I click "Starred Dogs"
+  And I click a star for dog with dog id "1"
+  Then I should see "1"
+  And I follow "Starred Dogs"
   Then I should see "Princess"
 
 Scenario: User should be able to unstar a dog from search results
   And I am logged in
   And I am on the search dogs page
-  And I click a star for "Bubba"
-  And I click a star for "Spock"
-  And I click a star for "Bubba"
-  And I click "Starred Dogs"
+  And I click a star for dog with dog id "3"
+  And I click a star for dog with dog id "2"
+  And I click a star for dog with dog id "3"
+  And I follow "Starred Dogs"
   Then I should not see "Bubba"
   And I should see "Spock"
 
@@ -61,10 +60,10 @@ Scenario: User should be able to unstar a dog from dog profile
   And I am logged in
   And I am on the search dogs page
   And I follow "Bubba"
-  And I click a star for "Bubba"
-  Then I should see "1 person has starred Bubba"
-  And I click a star for "Bubba"
-  Then I should see "0 people have starred Bubba"
-  And I click "Starred Dogs"
+  And I click a star for dog with dog id "3"
+  Then I should see "1"
+  And I click a star for dog with dog id "3"
+  Then I should see "0"
+  And I follow "Starred Dogs"
   Then I should not see "Bubba"
 

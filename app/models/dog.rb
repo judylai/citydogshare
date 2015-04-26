@@ -1,5 +1,5 @@
 class Dog < ActiveRecord::Base
-  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude
+  attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude, :video
 
   scope :has_gender, lambda {|genders| filter_gender(genders)}
   scope :has_personalities, lambda {|personalities| filter_personality(personalities)}
@@ -10,6 +10,7 @@ class Dog < ActiveRecord::Base
   scope :in_age_range, lambda {|age_query| filter_age(age_query)}
 
   belongs_to :user
+  has_many :stars, :dependent => :destroy
   has_many :dog_mix_linkers
   has_many :dog_like_linkers
   has_many :dog_personality_linkers
@@ -37,7 +38,6 @@ class Dog < ActiveRecord::Base
                     :bucket => 'citydogshare'
 
 
-  validates_attachment_presence :photo, :message => "Photo can't be blank"
   validates_attachment_size :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
@@ -80,6 +80,11 @@ class Dog < ActiveRecord::Base
   def address
     user = self.owner
     "#{user.zipcode}"
+  end
+
+  def youtube_id
+    video.split(%r{v=|&})[1]
+
   end
 
   ## Attribute Possible Values Functions

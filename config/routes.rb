@@ -25,6 +25,12 @@ Citydogshare::Application.routes.draw do
     end
   end
 
+  resource :starred_dogs, only: [:create, :destroy]
+  resources :users do
+    member do
+      get 'stars'
+    end
+  end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   match 'dashboard' => 'welcome#dashboard'
