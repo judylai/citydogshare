@@ -61,7 +61,7 @@ module Citydogshare
     config.assets.version = '1.0'
     
     config.assets.precompile << %w( galleria-1.4.2.js )
-    config.assets.precomile << %w( galleria.classic.js )
+    config.assets.precompile << %w( galleria.classic.js )
     config.assets.precompile << %w( *.js ) 
 
   end
