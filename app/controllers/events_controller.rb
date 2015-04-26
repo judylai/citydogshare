@@ -11,10 +11,6 @@ class EventsController < ApplicationController
       (@events << dog.events).flatten!
 
     end
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render :json => @events }
-    # end
   end
 
   def show
@@ -22,18 +18,6 @@ class EventsController < ApplicationController
     @event = Event.find(id)
     redirect_to dog_path(@event.dog_id)
   end
-
-  # def new
-  #   @times = ["Morning", "Afternoon", "Evening", "Overnight"]
-  #   @checked_times = []
-  #   @dogs = current_user.dogs.pluck(:name)
-  #   @checked_dogs = @dogs.length == 1 ? @dogs : [] 
-  #   if @dogs == []
-  #     flash[:notice] = "Please create a dog to share"
-  #     redirect_to user_path(current_user.id)
-  #   end
-  # end
-
 
   def new
     @form_filler = EventViewHelper.new(current_user)
@@ -45,17 +29,6 @@ class EventsController < ApplicationController
       redirect_to user_path(current_user.id)
     end
   end
-
-  # def create
-  #   @dogs = get_dogs(params)
-  #   set_flash #this has a side effect that creates the event
-  #   if flash[:notice]
-  #     set_vars_for_render
-  #     render 'new'
-  #   else
-  #     redirect_to events_path
-  #   end
-  # end
 
 
   def create
@@ -73,20 +46,36 @@ class EventsController < ApplicationController
 
 
   def edit
-   @event = Event.find(params[:id])
-   @dog = Dog.find(@event.dog_id)
-   @form_filler = EventViewHelper.new(current_user)
-   
-
+    @event = Event.find(params[:id])
+    @dog = Dog.find(@event.dog_id)
+    @form_filler = EventViewHelper.new(current_user)
+    @form_filler.event_view_update(@event)
+    @action = :update
+    @method = :put
   end
+
+
 
   def update
+    @event = Event.find(params[:id])
+    @dog = Dog.find(@event.dog_id)    ##FIX THIS GETTING PLEASE SELECT A DOG TO SHARE ERROR
 
+    @form_filler = EventViewHelper.new(current_user)
+    @event_attr = @form_filler.event_info(params)
+    @event_attr[:dog] = @dog
+    if @event.update_attributes(@event_attr)
+      #not even getting here?
+      redirect_to events_path
+    else
+      flash[:notice] = @event.errors.messages
+      redirect_to edit_event_path(params[:id])
+    end
   end
+
 
   def destroy
-
   end
+
 
   def set_flash
     if @dogs.empty?

@@ -30,8 +30,9 @@
 
 <p>
 
-  <%= form_tag(controller: :events, action: @action, method: @methon, :multipart => true) do %>
+  <%= form_tag({controller: :events, action: @action}, method: @method, :multipart => true) do %>
   <div class="ui form">
+    <% if @action == :create %>
     <div class="field"><label>Dog to Share</label>
       <div class="ui buttons">
         <% @form_filler.all_dogs.each do |dog| %>
@@ -43,6 +44,7 @@
         <% end %>
       </div>
     </div>
+    <% end %>
 
     <div class="field">
       <label>Start</label>

@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
   validates :time_of_day, :presence => {:message => "Please enter a time of day"}
   validates :dog, :presence => {:message => "Please select the dog you want to share"}
 
+  serialize :time_of_day
+
   def color
     @num = dog_id % 10
     @colours = Array['blue','orange','green','yellow','brown','pink','purple','gray','cyan','magenta']

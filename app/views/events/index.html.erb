@@ -22,7 +22,7 @@
           <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
         <% end %>
         <br />
-        Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %>
+        Time: <%= event.time_of_day.join(", ") %>
         <br />
         <%= link_to "Edit", edit_event_path(event.id) %></p>
       <%end%>

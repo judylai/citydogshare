@@ -19,7 +19,6 @@ class EventViewHelper
     # Set form fields with new event info
     @dogs = info['dogs'] ? info['dogs'].keys : []
 
-
     @values[:start_date] = get_date(info["date_timepicker"]["start"])
     @values[:end_date] = get_date(info["date_timepicker"]["end"])
     @values[:time_of_day] = info["times"] ? info["times"].keys : []
@@ -30,14 +29,13 @@ class EventViewHelper
     @values
   end
 
-  def dog_view_update(dog)
-    ## Fills edit form with dog's current values
-    @dog = Dog.find(dog)
-    @values[:like] = @dog.readable_likes
-    @values[:personality] = @dog.readable_personalities
-    @values[:size] = @dog.size_id
-    @values[:energy_level] = @dog.energy_level_id
-    @values[:mix] = @dog.mixes.pluck(:value)
+  def event_view_update(event)
+    ## Fills edit form with event's current values
+    @values[:start_date] = event.start_date
+    @values[:end_date] = event.end_date
+    @values[:description] = event.description
+    @values[:my_location] = event.my_location
+    @values[:time_of_day] = event.time_of_day
 
   end
 
