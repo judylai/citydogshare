@@ -56,13 +56,13 @@
 
   	<div class="field">
 			<label>Start</label>
-      <%= text_field :date_timepicker, :start, :readonly => true, :value => @form_filler.date_string(@values[:start_time]) %>
+      <%= text_field :date_timepicker, :start, :readonly => true, :value => @form_filler.start_date_string %>
 		</div>
 
   <br />
     <div class="field">
       <label>End</label>
-      <%= text_field :date_timepicker, :end, :readonly => true, :value => @end_date %>
+      <%= text_field :date_timepicker, :end, :readonly => true, :value => @form_filler.end_date_string %>
     </div>
 
   <br />
@@ -93,7 +93,7 @@
 
   <div class="field">
     <label>Description</label>
-    <%= text_area_tag :description %>
+    <%= text_area_tag :description, @form_filler.values[:description] %>
   </div>
 
   <div class="field">

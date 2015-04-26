@@ -17,7 +17,9 @@ class EventViewHelper
 
   def event_info(info)
     # Set form fields with new event info
-    @dogs = get_dogs(info)
+    @dogs = info['dogs'] ? info['dogs'].keys : []
+
+
     @values[:start_date] = get_date(info["date_timepicker"]["start"])
     @values[:end_date] = get_date(info["date_timepicker"]["end"])
     @values[:time_of_day] = info["times"] ? info["times"].keys : []
@@ -36,18 +38,22 @@ class EventViewHelper
     end
   end
 
-  def get_dogs(params)
-    dog_array = params['dogs'] ? params['dogs'].keys : []
-    dog_array.map{ |dog| Dog.find_by_name(dog) }
-  end
-
   def date_string(date)
     if date == ""
-      return date
+      return ""
     else
       date.strftime("%Y/%m/%d")
     end
   end
+
+  def start_date_string
+    date_string(@values[:start_date])
+  end
+
+  def end_date_string
+    date_string(@values[:end_date])
+  end
+
 
 
 

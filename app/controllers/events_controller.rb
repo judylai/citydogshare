@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     @action = :create
     @method = :post
 
-    unless @all_dogs != []
+    unless @form_filler.all_dogs != []
       flash[:notice] = "Please create a dog to share"
       redirect_to user_path(current_user.id)
     end
@@ -63,12 +63,10 @@ class EventsController < ApplicationController
   def create
     @form_filler = EventViewHelper.new(current_user)
     @event_attr = @form_filler.event_info(params)
-    raise @form_filler.date_string.inspect
     @dogs = @form_filler.dogs
     set_flash
 
     if flash[:notice]
-      #set_vars_for_render
       render 'new'
     else
       redirect_to events_path
@@ -110,14 +108,6 @@ class EventsController < ApplicationController
     end
   end
 
-
-  def set_vars_for_render #persist start date and radio button checks
-    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
-    @dogs = current_user.dogs.pluck(:name)
-    @checked_times = params['times'] ? params["times"].keys : []
-    @checked_dogs = params['dogs'] ? params['dogs'].keys : []
-    @location = params['location']
-  end
 
 end
 
