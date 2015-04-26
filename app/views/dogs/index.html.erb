@@ -97,7 +97,7 @@
         </div>
         <br>
         <br>
-      <div class="ui primary button large transparent input" style="margin-left: -6em">
+      <div class="ui primary button large transparent input" style="margin-left: -6em; color: white">
         <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "btn info" %>
       </div>
     </div>
@@ -114,10 +114,10 @@
       <h1> No Dogs Found </h1>
     <% end %>
     <% @dogs.each do |dog| %>
-    <div class="ui vertical segment" id = <%= dog.owner.zipcode %> >
+    <div class="ui vertical segment" >
 
       <div class="large-3 columns">
-        <span class="image">
+        <span class="image" id = <%= dog.owner.zipcode %>>
           <div id="photo"><h4 class = "ui blue label"><%= image_tag dog.photo.url(:small) %></div>
         </span>
       </div>
