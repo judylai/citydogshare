@@ -20,13 +20,55 @@
   <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
   <i class="empty icon yellow large"><%= @dog.stars.count %></i><i class="empty star icon yellow large"></i>
   <%end%>
-  <%- else -%>
+  <% else %>
   <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
   <i class="icon yellow large"><%= @dog.stars.count %></i><i class="star icon yellow large"></i>
   <%end%>
-  <%- end -%>
+  <% end %>
   </div>
 <%end%>
+
+<div class="large-12 columns">
+  <br />
+  <div class="large-6 columns">
+    
+
+    <div class="galleria">
+      <% unless @pictures.empty? %>
+        <% @pictures.each do |pic| %>
+          <%= image_tag pic.image.url %>               
+        <% end %>
+      <% end %>
+    </div>
+    <script>
+      Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
+      Galleria.run('.galleria' , { height: 0.6,  } );
+    </script>
+    <p> </p>
+
+    <% if not @dog.video.nil? and not @dog.video == "" %>
+    <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>
+    <% end %>
+
+  </div>
+  <div class="large-6 columns">
+    <div class="ui blue inverted top attached segment">
+      <div id="name">
+        <h1><%= image_tag @dog.photo.url(:small), :class => "ui avatar image" %> <%= @dog.name %></h1>
+      </div>
+    </div>
+    <div class="ui bottom attached segment">
+      <h3 class = "ui ribbon label"> <%= @dog.motto %> </h3>
+      <p>
+        <strong>Mix:</strong> <%= @dog.readable_mixes.join(', ') %> <br />
+        <strong>Stats:</strong> <%= @dog.gender %>, <%= @dog.age %> years old, <%= @dog.size %> <br />
+        <strong>Energy Level:</strong> <%= @dog.energy_level %> <br />
+        <strong>Personality:</strong> <%= @dog.readable_personalities.join(', ') %>
+      </p>
+    </div>
+
+  </div>
+</div>
 
 <div class = "large-7 columns">
   <div id="user_info">
@@ -34,62 +76,31 @@
     <div id="ui-segment"></div>
   </div>
 
-  <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
+  <p> </p>  <p> </p>  <p> </p>  <p> </p>  <p> </p>
   <p> </p>
-  <div id="photo"><h4 class = "ui teal label"><%= image_tag @dog.photo.url(:small) %></div>
+  <div id="personality"><h4 class = "ui  label">Personality:</h4>&nbsp;&nbsp;<%= @dog.readable_personalities.join(', ') %></div>
   <p> </p>
-
-  <div class="galleria">
-    <% unless @pictures.empty? %>
-      <% @pictures.each do |pic| %>
-        <%= image_tag pic.image.url %>               
-      <% end %>
-    <% end %>
-  </div>
-  <script>
-    Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
-    Galleria.run('.galleria' , { height: 0.6,  } );
-  </script>
+  <div id="description"><h4 class = "ui  label">Health Notes:</h4>&nbsp;&nbsp;<%= @dog.health %></div>
   <p> </p>
-
-
-  <div id="motto"><h4 class = "ui teal label">Motto:</h4>&nbsp;&nbsp;<%= @dog.motto %></div>
+  <div id="fixed"><h4 class = "ui  label">Fixed:</h4>&nbsp;&nbsp;<%= @dog.fixed %></div>
   <p> </p>
-  <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @dog.gender %></div>
-  <p> </p>
-  <div id="mix"><h4 class = "ui teal label">Mix:</h4>&nbsp;&nbsp;<%= @dog.readable_mixes.join(', ') %></div>
-  <p> </p>
-  <div id="birthday"><h4 class = "ui teal label">Age:</h4>&nbsp;&nbsp;<%= @dog.age %></div>
-  <p> </p>
-  <div id="size"><h4 class = "ui teal label">Size:</h4>&nbsp;&nbsp;<%= @dog.size %></div>
-  <p> </p>
-  <div id="energy"><h4 class = "ui teal label">Energy Level:</h4>&nbsp;&nbsp;<%= @dog.energy_level %></div>
-  <p> </p>
-  <div id="personality"><h4 class = "ui teal label">Personality:</h4>&nbsp;&nbsp;<%= @dog.readable_personalities.join(', ') %></div>
-  <p> </p>
-  <div id="description"><h4 class = "ui teal label">Health Notes:</h4>&nbsp;&nbsp;<%= @dog.health %></div>
-  <p> </p>
-  <div id="fixed"><h4 class = "ui teal label">Fixed:</h4>&nbsp;&nbsp;<%= @dog.fixed %></div>
-  <p> </p>
-  <div id="likes"><h4 class = "ui teal label">Likes:</h4>&nbsp;&nbsp;<%= @dog.readable_likes.join(', ') %></div>
+  <div id="likes"><h4 class = "ui  label">Likes:</h4>&nbsp;&nbsp;<%= @dog.readable_likes.join(', ') %></div>
   <p> </p>
 
 
   <div id="dog_description">
     <div id="description">
-      <h4 class = "ui teal label">Description:</h4>&nbsp;&nbsp;<%= @dog.description %>
+      <h4 class = "ui  label">Description:</h4>&nbsp;&nbsp;<%= @dog.description %>
     </div>
   </div>
 
   <p> </p>
-  <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
+  <div id="availability"><h4 class = "ui  label">Availability:</h4>&nbsp;&nbsp;<%= @dog.availability %></div>
   <p> </p>
-  <% if not @dog.video.nil? and not @dog.video == "" %>
-  <div id="video"><h4 class = "ui teal label">Video:</h4><br/><div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div></div>
-  <% end %>
+  
 
   <div id="parent">
-    <h4 class = "ui teal label">Parent:</h4>&nbsp;&nbsp;<%= link_to @parent.first_name, user_path(@parent.id) %>
+    <h4 class = "ui  label">Parent:</h4>&nbsp;&nbsp;<%= link_to @parent.first_name, user_path(@parent.id) %>
     <img class = "ui small circular image" style="display: inline" src=<%= @parent.image %>>
 
   </div>
@@ -97,7 +108,7 @@
 
 <div class="large-5 columns">
   <div class="row">
-    <h4 class = "ui teal label"><%= @dog.name %>'s Events:</h4>
+    <h4 class = "ui  label"><%= @dog.name %>'s Events:</h4>
   </div>
   <div class="ui segment">
     <% if @dog.future_events? == false || @dog.events.count == 0 %>
