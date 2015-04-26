@@ -17,6 +17,8 @@
 <div id='calendar'></div>
 
 <p> </p>
+ <%= link_to "Add Event", new_event_path, :class => "ui primary button" %>
+<p></p>
 <% if current_user.future_events? %>
   <div id = "dogevents"><h4>Future Events:</h4>
   <% for dog in @dogs do %>
@@ -30,6 +32,10 @@
         <% end %>
         <br />
         Time: <%= event.time_of_day.join(", ") %>
+        <br />
+        Location: <%= event.my_location %>
+        <br />
+        Description: <%= event.description %>
         <br />
         <%= link_to "Edit", edit_event_path(event.id) %></p>
       <%end%>

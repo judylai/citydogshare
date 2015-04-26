@@ -14,55 +14,55 @@
 <% end %>
 
 <div class="small-12 columns">
-  <div id="name"><h1 style = "color: teal;"><%= @user.full_name %></h1></div>
+  <div id="name"><h1><%= @user.full_name %></h1></div>
 </div>
 
 <div class = "small-2 columns">
   <div id="user_info">
   <div id="ui-segment">
-    <img class = "ui small circular centered image" src=<%= @user.image %>></div>
+    <img class = "ui small centered image" src=<%= @user.image %>></div>
   </div>
 </div>
 
 <div class = "small-5 columns">
   
-  <div id="gender"><h4 class = "ui teal label">Gender:</h4>&nbsp;&nbsp;<%= @user.gender %></div>
+  <div id="gender"><h4 class = "ui  label">Gender:</h4>&nbsp;&nbsp;<%= @user.gender %></div>
   <p> </p>
   <% if @user.address != nil && @user.address != ""%>
-  <div id="location"><h4 class = "ui teal label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
+  <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
   <%else%>
-    <div id="location"><h4 class = "ui teal label">Location:</h4>&nbsp;&nbsp;<%= "" %></div>
+    <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "" %></div>
   <%end%>
   <p> </p>
-  <div id="zipcode"><h4 class = "ui teal label">Zipcode:</h4>&nbsp;&nbsp;<%= @user.zipcode %></div>
+  <div id="zipcode"><h4 class = "ui  label">Zipcode:</h4>&nbsp;&nbsp;<%= @user.zipcode %></div>
   <p> </p>
-  <div id="status"><h4 class = "ui teal label">Status:</h4>&nbsp;&nbsp;<%= @user.status %></div>
+  <div id="status"><h4 class = "ui  label">Status:</h4>&nbsp;&nbsp;<%= @user.status %></div>
   <p> </p>
-  <div id="email"><h4 class = "ui teal label">Email:</h4>&nbsp;&nbsp;<%= @user.email %></div>
+  <div id="email"><h4 class = "ui  label">Email:</h4>&nbsp;&nbsp;<%= @user.email %></div>
   <p> </p>
-  <div id="phone_number"><h4 class = "ui teal label">Phone Number:</h4>&nbsp;&nbsp;<%= @user.phone_number %></div>
+  <div id="phone_number"><h4 class = "ui  label">Phone Number:</h4>&nbsp;&nbsp;<%= @user.phone_number %></div>
   <p> </p>
 
   <div id="user_description">
     <div id="description">
-      <h4 class = "ui teal label">Description:</h4>&nbsp;&nbsp;<%= @user.description %>
+      <h4 class = "ui  label">Description:</h4>&nbsp;&nbsp;<%= @user.description %>
     </div>
   </div>
   
   <p> </p>
-  <div id="availability"><h4 class = "ui teal label">Availability:</h4>&nbsp;&nbsp;<%= @user.availability %></div>
+  <div id="availability"><h4 class = "ui  label">Availability:</h4>&nbsp;&nbsp;<%= @user.availability %></div>
 
 </div>
 
 <div class="large-5 columns">
   <div class="row">
-    <h4 class = "ui teal label"><%= @user.first_name %>'s Dogs:</h4>
+    <h4 class = "ui  label"><%= @user.first_name %>'s Dogs:</h4>
     <div class="right">
       <% if @own_profile %>
         <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
       <% end %>
     </div>
-</div>
+  </div>
   
   <div class="ui segment" id="dog-name-link">
   <!--<% if @no_dogs %>
@@ -73,7 +73,7 @@
 
     <div class="large-4 columns">
       <span class="image">
-        <h4 class = "ui teal label"><%= image_tag dog.photo.url(:small) %>
+        <%= image_tag dog.photo.url(:small) %>
       </span>
     </div>
 

@@ -5,7 +5,7 @@
 .galleria-theme-classic {
     position: relative;
     overflow: hidden;
-    background: rgba(0,181,173,1.0);
+    background: #E8E8E8;
 }
 .galleria-theme-classic img {
     -moz-user-select: none;
@@ -133,7 +133,7 @@
 }
 .galleria-theme-classic .galleria-image-nav-left,
 .galleria-theme-classic .galleria-image-nav-right {
-    opacity: .3;
+    opacity: 1;
     filter: alpha(opacity=30);
     cursor: pointer;
     width: 62px;
