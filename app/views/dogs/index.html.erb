@@ -142,11 +142,14 @@
           <div class="age">
             <b><%= dog.age_caption %></b>
           </div>
+          <span class="right floated" style="margin-right: 5%">
+            <%= dog.owner.zipcode %>
+          </span>
           <div class="attributes">
             <b><%= dog.tags %></b>
           </div>
           <div class="description">
-            <%= dog.motto %> 
+            "<%= dog.motto %>"
           </div>
         </div>
         <div class="extra content">

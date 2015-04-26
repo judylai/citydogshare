@@ -22,4 +22,4 @@ input[type=checkbox] + label {
 .gmnoprint img {
     max-width: none; 
 }
-#map-canvas { height: 35em; }
+#map-canvas { height: 40em; }
