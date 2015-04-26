@@ -212,6 +212,7 @@ $(document).ready(function(){
     for (i = 0; i < address.length; i++) {
 
         geocoder.geocode( { 'address': address[i]}, function(results, status) {
+            console.log(status)
         if (status == google.maps.GeocoderStatus.OK) {
           //map.setCenter(results[0].geometry.location);
           var current = results[0].address_components[0].long_name;
