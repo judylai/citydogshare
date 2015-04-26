@@ -36,7 +36,7 @@
             <% else %>
               <%= link_to "My Dogs", new_dog_path(:no_dog => 'true'), {:method => :get, :class => "item"}%>
             <% end %>
-            <%= link_to "Starred Dogs", stars_user_path(current_user), {:class => "item"}%>
+            <%= link_to "My Favorites", stars_user_path(current_user), {:class => "item"}%>
             <%= link_to "My Profile", user_path(current_user), {:class => "item"}%>
             <%= link_to "Sign Out", signout_path, {:method => :delete, :class => "item"} %>
           </div>

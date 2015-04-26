@@ -162,8 +162,10 @@
           </div>
         </div>
         <div class="extra content">
+          <% unless dog.availability == "" %>
           <i class="wait icon"></i>
           <%= dog.availability %>
+          <% end %>
         </div>
       </div>
 
