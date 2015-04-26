@@ -59,7 +59,10 @@ module Citydogshare
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
+    
     config.assets.precompile << %w( galleria-1.4.2.js )
+    config.assets.precompile << %w( galleria.classic.js )
+    config.assets.precompile << %w( *.js ) 
+
   end
 end
