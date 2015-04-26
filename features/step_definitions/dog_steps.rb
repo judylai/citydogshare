@@ -77,6 +77,10 @@ And /^I press Schedule$/ do
   click_button("Schedule")
 end
 
+And /^I click a star for dog with dog id "(.)"/ do |id|
+    click_link("star_#{id}")
+end
+
 And /^I should not see a star$/ do
     all('div.stars').count.should == 0
     all('span.stars').count.should == 0
