@@ -77,8 +77,17 @@ And /^I press Schedule$/ do
   click_button("Schedule")
 end
 
-# And /^I should see "(.*)" in the calendar$/ do |dog_name|
-#   all('span.fc-event-title').count.should == 1
-#   find('.fc-event-title').should have_content(dog_name)
-# end
+And /^I click a star for dog with dog id "(.)"/ do |id|
+    click_link("star_#{id}")
+end
 
+And /^I should not see a star$/ do
+    all('div.stars').count.should == 0
+    all('span.stars').count.should == 0
+end
+
+When /^(?:|I )follow the dog named "([^"]*)"$/ do |link|
+  within "#dog-name-link" do
+    click_link(link)
+  end
+end

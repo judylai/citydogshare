@@ -39,4 +39,8 @@ class UsersController < ApplicationController
     redirect_to root_path()
   end
 
+  def stars
+    @dogs = User.find_by_id(params[:id]).starred_dogs
+  end
+
 end
