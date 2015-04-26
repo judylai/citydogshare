@@ -1,11 +1,14 @@
 $(document).ready(function() {
     $('#calendar').fullCalendar({
-        events: '/events.json',
+        events: 
+	{
+	    url: '/events.json'
+         
+	},
 	eventClick: function(event){
-	    if (event.url){
-		return false;
-}	
-}
+	    window.location.replace("/dogs/1");
+	}
+	
     });
   
 });

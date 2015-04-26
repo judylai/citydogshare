@@ -8,12 +8,23 @@
   </style>
 
    <div id='calendar'></div>
+  <div id="eventContent" title="Event Details" style="display:none;">
+    Start: <span id="startTime"></span><br>
+    End: <span id="endTime"></span><br><br>
+    <p id="eventInfo"></p>
+    <p><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>
+</div>
 <p> </p>
   <div id = "dogevents"><h4>Events:</h4>
 <% for dog in @dogs do %>
       <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
 <% for event in dog.events %>
-   <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %> <br />
+   <% if event.start_date == event.end_date %>
+    <p> Date: <%= event.start_date.strftime('%v') %>
+    <% else %>
+   <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
+       <% end %>
+<br />
        Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %></p>
 
       <%end%>

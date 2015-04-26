@@ -17,9 +17,7 @@ class EventsController < ApplicationController
   def show
     id = params[:id]
     @event = Event.find(id)
-    respond_to do |format|
-      format.json { render :json => @event }
-    end
+    redirect_to dog_path(@event.dog_id)
   end
 
   def new
