@@ -75,7 +75,7 @@ class EventsController < ApplicationController
   def edit
    @event = Event.find(params[:id])
    @dog = Dog.find(@event.dog_id)
-   @form_filler = DogViewHelper.new(current_user)
+   @form_filler = EventViewHelper.new(current_user)
    
 
   end
