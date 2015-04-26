@@ -30,6 +30,17 @@ class EventViewHelper
     @values
   end
 
+  def dog_view_update(dog)
+    ## Fills edit form with dog's current values
+    @dog = Dog.find(dog)
+    @values[:like] = @dog.readable_likes
+    @values[:personality] = @dog.readable_personalities
+    @values[:size] = @dog.size_id
+    @values[:energy_level] = @dog.energy_level_id
+    @values[:mix] = @dog.mixes.pluck(:value)
+
+  end
+
   def get_date(date_string)
     if date_string != ""
       DateTime.strptime(date_string, "%Y/%m/%d")
