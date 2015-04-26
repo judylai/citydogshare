@@ -53,6 +53,23 @@ class Dog < ActiveRecord::Base
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
+  def age_caption
+    y = age
+    out = "< 1 year old" if y == 0
+    out = "1 year old" if y == 1
+    out = "#{y} years old" if y > 1
+    out
+  end
+
+  def tags
+    unless readable_personalities.empty?
+      energy_level + ", " + readable_personalities.join(", ") 
+    else
+      energy_level
+    end
+  end
+
+
   def energy_level
     EnergyLevel.find(self.energy_level_id).value
   end
