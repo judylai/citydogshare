@@ -1,24 +1,35 @@
 
-  <style type="text/css">
-    #calendar
-    {
-      width: 900px;
-      margin: 0 auto;
-    }
-  </style>
+<style type="text/css">
+  #calendar
+  {
+  width: 900px;
+  margin: 0 auto;
+  }
+</style>
 
-   <div id='calendar'></div>
+<div id='calendar'></div>
+
 <p> </p>
+<% if current_user.events.count > 0 %>
   <div id = "dogevents"><h4>Events:</h4>
-<% for dog in @dogs do %>
+  <% for dog in @dogs do %>
+    <% if dog.events.count > 0 %>
       <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
-<% for event in dog.events %>
-   <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %> <br />
-       Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %></p>
-       <%= link_to "Edit", edit_event_path(event.id) %>
+      <% for event in dog.events %>
+        <% if event.start_date == event.end_date %>
+          <p> Date: <%= event.start_date.strftime('%v') %>
+        <% else %>
+          <p> Date: <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
+        <% end %>
+        <br />
+        Time: <%= event.time_of_day.gsub(/[^0-9a-z ]/i,'') %>
+        <br />
+        <%= link_to "Edit", edit_event_path(event.id) %></p>
       <%end%>
-       <%end%>
-       </div>
+    <% end %>
+  <%end%>
+  </div>
+<%end%>
 
 
 

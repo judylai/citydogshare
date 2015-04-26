@@ -23,7 +23,7 @@ Scenario: I create a dog event
   Given I check "dogs_Princess"
   And I check "times_Morning"
   And I choose "location_true"
-  When I press Schedule
+  When I press "Schedule"
   Then I should be on my calendar page
   And I should see "Princess"
   And I should see "Morning"

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :dogs, :dependent => :destroy
   has_many :events, :through => :dogs
 
+  has_many :stars, :dependent => :destroy
+  has_many :starred_dogs, through: :stars, :source => :dog
+
   def update_credentials(credentials)
     self.oauth_token = credentials[:token]
     self.oauth_expires_at = Time.at(credentials[:expires_at].to_i)

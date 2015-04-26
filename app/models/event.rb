@@ -11,6 +11,14 @@ class Event < ActiveRecord::Base
     @num = dog_id % 10
     @colours = Array['blue','orange','green','yellow','brown','pink','purple','gray','cyan','magenta']
     if @num.between?(0,9) then @colours[@num] else 'black' end
-
   end
+
+  def text_color
+    if color == 'yellow' || color == 'pink' || color == 'orange' || color == 'cyan' || color == 'magenta'
+      'black'
+    else
+      'white'
+    end
+  end
+
 end

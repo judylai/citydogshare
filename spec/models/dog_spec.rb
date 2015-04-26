@@ -45,4 +45,16 @@ describe Dog do
     @dog.save
     @dog.errors.should have_key(:mixes)
   end
+
+  it 'should parse simple youtube URL correctly' do
+    @dog.video = "https://www.youtube.com/watch?v=to0JYZJxXOc"
+    @dog.save
+    expect(@dog.youtube_id).to eq("to0JYZJxXOc")
+  end
+
+  it 'should parse youtube URL with & correctly' do
+    @dog.video = "https://www.youtube.com/watch?v=to0JYZJxXOc&something"
+    @dog.save
+    expect(@dog.youtube_id).to eq("to0JYZJxXOc")
+  end
 end
