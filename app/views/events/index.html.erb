@@ -10,7 +10,7 @@
    <div id='calendar'></div>
 
 <p> </p>
-<% if current_user.events > 0 %>
+<% if current_user.events.count > 0 %>
   <div id = "dogevents"><h4>Events:</h4>
 <% for dog in @dogs do %>
       <h4 class = "ui ribbon label"> <%= dog.name %> </h4>
