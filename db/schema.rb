@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20150425100332) do
     t.datetime "photo_updated_at"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "video"
     t.string   "token"
+    t.string   "video"
   end
 
   create_table "energy_levels", :force => true do |t|

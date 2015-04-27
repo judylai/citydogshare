@@ -50,13 +50,8 @@ class DogsController < ApplicationController
     @dog = Dog.new(@form_filler.attributes_list(dog_params))
     @dog.user_id = current_user.id
 
-    if @dog.save
-      if params[:images]
-        #===== The magic is here ;)
-        params[:images].each { |image|
-          @dog.pictures.create(image: image)
-        }
-      end
+    if @dog.save      
+      add_multiple_pictures(@dog)
       redirect_to user_path(current_user)
     else
       flash[:notice] = @dog.errors.messages
@@ -76,14 +71,11 @@ class DogsController < ApplicationController
   def update
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
+    @pictures = @dog.pictures
 
      if @dog.update_attributes(@form_filler.attributes_list(dog_params))
-      if params[:images]
-        #===== The magic is here ;)
-        params[:images].each { |image|
-          @dog.pictures.create(image: image)
-        }
-      end
+      delete_checked_pictures        
+      add_multiple_pictures(@dog)
       redirect_to dog_path(@dog.id)
     else
       flash[:notice] = @dog.errors.messages
@@ -111,6 +103,27 @@ class DogsController < ApplicationController
   def dog_params
     #params.require(:dog).permit(:description, :name, :pictures)
     params[:dog]
+  end
+
+  def add_multiple_pictures(myDog)
+    if params[:images]        
+      params[:images].each { |image|
+        myDog.pictures.create(image: image)
+      }
+    end
+  end
+
+  def delete_checked_pictures
+    activated_ids = params[:activated].collect {|id| id.to_i} if params[:activated]
+    seen_ids = params[:seen].collect {|id| id.to_i} if params[:seen]
+
+    if activated_ids
+      seen_ids.each do |id|          
+        checked = activated_ids.include?(id)
+        pic = Picture.find_by_id(id)
+        pic.destroy if checked
+      end
+    end  
   end
 
 end

@@ -37,7 +37,13 @@
 
   <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
   <p> </p>
-  <div id="photo"><h4 class = "ui teal label"><%= image_tag @dog.photo.url(:small) %></div>
+  <div id="photo"><h4 class = "ui teal label">
+    <% if @dog.photo.file? %>
+      <%= image_tag @dog.photo.url(:small) %>
+    <% else %>
+      <%= image_tag "default_dog.jpg" %>
+    <% end %>  
+  </div>
   <p> </p>
 
   <div class="galleria">

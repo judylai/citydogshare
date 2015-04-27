@@ -9,10 +9,28 @@
   </div>
 
   <div class="field"><label>Change Avatar</label>
+    <% if @dog.photo.file? %>
+      <%= image_tag @dog.photo.url(:small) %>
+    <% else %>
+      <%= image_tag "default_dog.jpg" %>
+    <% end %>
     <%= file_field(:dog, :photo) %>
   </div>
 
-    
+  <div class="field"><label>Delete Pictures</label></div>
+  <% unless @pictures.empty? %>
+    <% @pictures.each do |pic| %>
+      <div class="field"> <%= image_tag pic.image.url(:small) %>  </div> 
+      <div class="css-checkbox">
+        <%= hidden_field_tag('seen[]', pic.id) -%>
+        <%= check_box_tag 'activated[]', pic.id -%>        
+      </div>
+    <% end %>
+  <% end %>
+
+<input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" />
+
+
   <div class="field"><label>Add More Pictures</label>
     <%= file_field_tag "images[]", type: :file, multiple: true %>
   </div>
