@@ -26,6 +26,7 @@ Scenario: I create a dog event
   When I press Schedule
   Then I should not see "Create Event"
   And I should see "Princess"
+  And I should see "Location: My House"
   And I should see "Time: Morning"
 
 Scenario: Not selecting a dog should throw an error
@@ -34,11 +35,12 @@ Scenario: Not selecting a dog should throw an error
 
 Scenario: Not selecting a date should throw an error
   Given I check "dogs_Princess"
-  Given I press "Schedule"
+  And I check "times_Morning"
+  And I press "Schedule"
   Then I should see "Please enter a valid start date"
   And I should see "Please enter a valid end date"
 
-Scenario: Not selecting a date should throw an error
+Scenario: Not selecting a time of day should throw an error
   Given I check "dogs_Princess"
   Given I press Schedule
   Then I should see "Please enter a time of day"
@@ -52,13 +54,12 @@ Scenario: Event should show up on dog profile
   When I am on my profile page
   When I follow "Princess"
   Then I should see today's date
-  #And I should see "My House"
+  #And I should see "Location: My House"
   And I should see "Time: Morning"
 
-#Scenario: Event should expire after end date
-#  Given I have created the above event
-#  And the date is "2015/04/10"
-#  And I am on my profile page
-#  When I follow "Princess"
-#  Then I should not see "4/7/15 - 4/9/15"
+Scenario: Event should not display past events
+  Given I have created an event for "Princess" 3 days ago
+  And I am on my profile page
+  When I follow "Princess"
+  Then I should not see "Time: Morning"
 
