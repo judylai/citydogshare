@@ -49,7 +49,7 @@ mix_list = [
   "Australian Kelpie",
   "Australian Shepherd",
   "Australian Silky Terrier",
-  "Australian Stumpy Tail Cattle Dog[10]",
+  "Australian Stumpy Tail Cattle Dog",
   "Australian Terrier",
   "Austrian Black and Tan Hound",
   "Austrian Pinscher",
@@ -61,8 +61,8 @@ mix_list = [
   "Basset Artésien Normand",
   "Basset Bleu de Gascogne",
   "Basset Fauve de Bretagne",
-  "Basset Griffon Vendéen, Grand",
-  "Basset Griffon Vendéen, Petit",
+  "Basset Griffon Vendéen Grand",
+  "Basset Griffon Vendéen Petit",
   "Basset Hound",
   "Bavarian Mountain Hound",
   "Beagle",
@@ -88,8 +88,8 @@ mix_list = [
   "Black Norwegian Elkhound",
   "Black Russian Terrier",
   "Blackmouth Cur",
-  "Bleu de Gascogne, Grand",
-  "Bleu de Gascogne, Petit",
+  "Bleu de Gascogne Grand",
+  "Bleu de Gascogne Petit",
   "Bloodhound",
   "Blue Lacy",
   "Blue Paul Terrier",
@@ -327,8 +327,8 @@ mix_list = [
   "Mucuchies",
   "Mudhol Hound",
   "Mudi",
-  "Münsterländer, Large",
-  "Münsterländer, Small",
+  "Münsterländer Large",
+  "Münsterländer Small",
   "Neapolitan Mastiff Newfoundland",
   "New Zealand Heading Dog",
   "Norfolk Spaniel",
@@ -485,8 +485,8 @@ mix_list = [
   "Vizsla",
   "Volpino Italiano",
   "Weimaraner",
-  "Welsh Corgi, Cardigan",
-  "Welsh Corgi, Pembroke",
+  "Welsh Corgi Cardigan",
+  "Welsh Corgi Pembroke",
   "Welsh Sheepdog",
   "Welsh Springer Spaniel",
   "Welsh Terrier",
@@ -499,12 +499,33 @@ mix_list = [
   "White Shepherd",
   "Wirehaired Pointing Griffon",
   "Wirehaired Vizsla",
-  "Yorkshire Terrier"
+  "Yorkshire Terrier",
+  "Mutt",
+  "I don't know",
+  "Rescue",
+  "Miscellaneous",
+  "Unknown"
 ]
 
+mix_delete_list = [
+"Australian Stumpy Tail Cattle Dog[10]",
+"Welsh Corgi, Cardigan",
+  "Welsh Corgi, Pembroke",
+    "Münsterländer, Large",
+  "Münsterländer, Small",
+    "Bleu de Gascogne, Grand",
+  "Bleu de Gascogne, Petit",
+    "Basset Griffon Vendéen, Grand",
+  "Basset Griffon Vendéen, Petit"
+]
 
 mix_list.each do |name|
   Mix.find_or_create_by_value(name)
+end
+
+mix_delete_list.each do |name|
+  m = Mix.find_by_value(name)
+  m.destroy if m
 end
 
 energy_list = [
