@@ -21,8 +21,7 @@ Background: User and dog is in database
 Scenario: Users deletes his dog's profile
   And I am on the users page for "Batman"
   And I follow the dog named "Princess"
-  And I press "Edit"
-  When I press "Delete Dog"
+  When I press "Delete"
   Then I should be on the users page for "Batman"
   And I should not see "Princess"
 
