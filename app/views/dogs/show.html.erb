@@ -5,14 +5,19 @@
 
 <p>
   <% if not @current_user.nil? and @dog.user_id == @current_user.id %>
-    <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
+    <div class="large-1 columns">
+      <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
+    </div>
+    <div class="large-1 columns">
+      <%= button_to "Delete", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui inverted red button input", :method => :delete %>
+    </div>
   <% end %>
 </p>
 
 <div class="large-12 columns">
   <br />
   <!-- THIS IS DOG INFO -->
-  <div class="large-6 columns">
+  <div class="large-6 columns" id ="dog_info_stats">
     <div class="ui blue inverted top attached segment" style="overflow:hidden">
       <div class="ui blue top right attached label">
         
@@ -49,27 +54,29 @@
         <strong>Mix:</strong> <%= @dog.readable_mixes.join(', ') %> <br />
         <strong>Stats:</strong> <%= @dog.gender %>, <%= @dog.age %> years old, <%= @dog.size %>,
         <% if @dog.fixed %> fixed<% else %> not fixed<% end %> <br />
-        <strong>Energy Level:</strong> <%= @dog.energy_level %> <br />
-        <strong>Personality:</strong> <%= @dog.readable_personalities.join(', ') %>
+        <strong>Energy Level:</strong> <%= @dog.energy_level %>
+        <% if not @dog.personalities.empty? %><br /><strong>Personality:</strong> <%= @dog.readable_personalities.join(', ') %><% end %>
       </p>
+      <% if not @dog.likes.empty? %>
       <p>
-        <i class="smile icon"></i> <%= @dog.readable_likes.join(', ') %>
+        <i class="thumbs outline up icon"></i> <%= @dog.readable_likes.join(', ') %>
       </p>
+      <% end %>
+      <% if not @dog.health.nil? and not @dog.health == ""  %>
       <p>
         <i class="first aid icon"></i> <%= @dog.health %>
       </p>
+      <% end %>
+      <% if not @dog.availability.nil? and not @dog.availability == ""  %>
       <p>
         <i class="wait icon"></i> <%= @dog.availability %>
       </p>
+      <% end %>
       <br />
       <div class="ui bottom right attached label">My parent is <%= link_to @parent.first_name, user_path(@parent.id) %> <%= image_tag @parent.image, :class => "ui avatar image" %></div>
     </div>
 
 <!-- THIS IS THE EVENTS LISTING -->
-    <!-- <div class="large-12 columns"> -->
-<!--       <div class="row">
-        <h4 class = "ui  label"><%= @dog.name %>'s Events:</h4>
-      </div> -->
       <div class="ui blue inverted top attached segment">
         <strong><%= @dog.name %>'s Events:</strong>
       </div>
@@ -91,37 +98,39 @@
           <div class="large-3 columns">
             <%= link_to "Edit", edit_event_path(event.id) %></p>
           </div>
-          <!-- <div class="large-8 columns"> -->
             <div class="large-12 columns content">
               <p>Time: <%= event.time_of_day.join(", ") %></p>
               <p><%= event.description %></p>
             </div>
-          <!-- </div> -->
         </div>
         <% end %>
       </div>
-    <!-- </div> -->
+    <br />
   </div>
 
 <!-- THIS IS DOG PHOTOS AND VIDEO -->
-  <div class="large-6 columns">
-    <div class="galleria">
-      <% unless @pictures.empty? %>
-        <% @pictures.each do |pic| %>
-          <%= image_tag pic.image.url %>               
-        <% end %>
-      <% end %>
-    </div>
-    <script>
-      Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
-      Galleria.run('.galleria' , { height: 0.6,  } );
-    </script>
-    <p> </p>
+  <!-- <div class="ui rail"> -->
+    <div class="ui sticky">
+      <div class="large-6 columns">
+        <div class="galleria">
+          <% unless @pictures.empty? %>
+            <% @pictures.each do |pic| %>
+              <%= image_tag pic.image.url %>               
+            <% end %>
+          <% end %>
+        </div>
+        <script>
+          Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
+          Galleria.run('.galleria' , { height: 0.6,  } );
+        </script>
+        <p> </p>
 
-    <% if not @dog.video.nil? and not @dog.video == "" %>
-    <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>
-    <% end %>
-  </div>
+        <% if not @dog.video.nil? and not @dog.video == "" %>
+        <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>
+        <% end %>
+      </div>
+    </div>
+  <!-- </div> -->
 </div>
 
 
@@ -132,5 +141,11 @@
 <script>
 $(document).ready(function(){
   $('.ui.video').video();
+
+  $('.ui.sticky')
+  .sticky({
+    offset: 50,
+    context: '#dog_info_stats'
+  });
 });
 </script>
