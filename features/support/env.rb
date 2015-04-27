@@ -11,7 +11,6 @@ require 'simplecov'
 SimpleCov.start
 require File.expand_path("../../../config/environment", __FILE__)
 require 'cucumber/rails'
->>>>>>> origin/master
 load "#{Rails.root}/db/seeds.rb"
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
