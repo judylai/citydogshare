@@ -7,6 +7,7 @@ describe EventsController, :type => :controller do
     @user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
+    @form_filler = EventViewHelper.new(@user)
   end
 
   describe 'render the events page' do
@@ -16,11 +17,13 @@ describe EventsController, :type => :controller do
       expect(response).to render_template('new')
     end
 
-    it 'should get all available times' do
+    it 'should redirect if no dogs' do
+      @dog.delete
       get :new
-      assigns(:times).should == ["Morning", "Afternoon", "Evening", "Overnight"]
+      response.should redirect_to user_path(@user.id)
     end
   end
+
 
   describe 'create a new dog event' do
     before (:each) do 
@@ -45,42 +48,29 @@ describe EventsController, :type => :controller do
       response.should render_template 'new'
     end
 
-    it 'should call set_vars_for_render' do
-      @params["dogs"] = {}
-      controller.should_receive(:set_vars_for_render)
-      post :create, @params
-    end
 
   end
+
 
   describe 'check other methods' do
     before (:each) do 
       @params = {"dogs"=>{"Spock"=>"1"}, "date_timepicker"=>{"start"=>"2015/04/17", "end"=>"2015/04/24"}, 
-      "times"=>{"Morning"=>"1"}, "location"=>"true", "update_dog_button"=>"Schedule", 
+      "times"=>{"Morning"=>"1"}, "my_location"=>"My House", "description" => "", "update_dog_button"=>"Schedule", 
       "method"=>"post", "action"=>"create", "controller"=>"events"}
     end
 
-    it 'should return an array of dogs names' do
-      controller.get_dogs(@params).should == [Dog.find_by_name("Spock")]
-    end
-
-    it 'should return an empty array if no dogs' do
-      @params.delete('dogs')
-      controller.get_dogs(@params).should == []
-    end
-
-    it 'should return an new hash for the dog' do
-      controller.attributes_list(@params).should == {:start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
-        :time_of_day => ["Morning"], :my_location => "true"}
+    it 'should return the hash' do
+      @form_filler.event_info(@params).should == {:start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
+        :time_of_day => ["Morning"], :my_location => "My House", :description => ""}
     end
 
     it 'should return stuff when empty' do
-      @params = {"date_timepicker"=>{"start"=>"", "end"=>""}, "location"=>"true"}
-      controller.attributes_list(@params).should == {:start_date => "", :end_date => "", :time_of_day => [], :my_location => "true"}
+      @params = {"date_timepicker"=>{"start"=>"", "end"=>""}, "my_location"=>"My House", "description" => ""}
+      @form_filler.event_info(@params).should == {:start_date => "", :end_date => "", :time_of_day => [], :my_location => "My House", :description=> ""}
     end
 
+
     it 'should set the flash if dogs is empty' do
-      controller.stub(:create_events).and_return(true)
       controller.instance_variable_set(:@dogs, [])
       controller.set_flash
       expect(flash[:notice]).to eq({:name => ["Please select a dog to share"]})
@@ -88,8 +78,8 @@ describe EventsController, :type => :controller do
 
     it 'should return false if event is invalid' do
       controller.instance_variable_set(:@dogs, [Dog.find_by_name("Spock")])
-      controller.stub(:attributes_list).and_return({:start_date => "", :end_date => DateTime.new(2015, 4, 24),
-        :time_of_day => ["Morning"], :my_location => "true"})
+      controller.instance_variable_set(:@event_attr, {:start_date => "", :end_date => DateTime.new(2015, 4, 24),
+        :time_of_day => ["Morning"], :my_location => "My House", :description => ""})
       controller.create_events.should == false
     end
   end
@@ -97,7 +87,7 @@ describe EventsController, :type => :controller do
   describe 'show dog events' do
     before (:each) do
       @event1 = Event.new(:dog => Dog.find(1), :start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
-        :time_of_day => "---\n- Morning\n", :my_location => "true")
+        :time_of_day => ["Morning"], :my_location => "true", :description => "")
       @event1.save
     end
 
@@ -118,6 +108,74 @@ describe EventsController, :type => :controller do
   end
 
 
+  describe 'edit dog events' do
+    before (:each) do
+      @event1 = Event.new(:dog => Dog.find(1), :start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
+        :time_of_day => ["Morning"], :my_location => "true", :description => "")
+      @event1.save
+    end
+
+    it 'should find the right event' do
+      get :edit, {:id => 1}
+      expect(controller.instance_variable_get(:@dog)).to eql(Dog.find(1))
+      expect(controller.instance_variable_get(:@action)).to eql(:update)
+      expect(controller.instance_variable_get(:@method)).to eql(:put)
+    end
+
+  end
+
+
+  describe 'update event' do
+    before (:each) do
+      @event1 = Event.new(:dog => Dog.find(1), :start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
+        :time_of_day => ["Morning"], :my_location => "true", :description => "")
+      @event1.save
+      @params = {"method"=>"put", "date_timepicker"=>{"start"=>"2015/04/29", "end"=>"2015/04/29"}, 
+      "times"=>{"Afternoon"=>"1"}, "my_location"=>"Your House", "description"=>"", 
+      "update_dog_button"=>"Schedule", "action"=>"update", "controller"=>"events", "id"=>"1"}
+    end
+
+    it 'should redirect with good inputs' do
+      get :update, @params
+      expect(controller.instance_variable_get(:@event)).to eql(@event1)
+      response.should redirect_to events_path
+    end
+
+    it 'should redirect back to edit if bad' do
+      @params.delete("times")
+      get :update, @params
+      response.should redirect_to edit_event_path('1')
+    end
+
+    #it 'should change the event info' do
+
+
+  end
+
+  describe 'delete event' do
+    before (:each) do
+      @event1 = Event.new(:dog => Dog.find(1), :start_date => DateTime.new(2015, 4, 17), :end_date => DateTime.new(2015, 4, 24),
+          :time_of_day => ["Morning"], :my_location => "true", :description => "")
+      @event1.save
+    end
+
+    it 'should delete the event' do
+      get :destroy, :id => "1"
+      expect(controller.instance_variable_get(:@event)).to eql(@event1)
+      assert_equal Event.all, []
+    end
+
+
+
+
+  end
+
+
+
+
+
+
 end
+
 
 

@@ -58,13 +58,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @dog = Dog.find(@event.dog_id)    ##FIX THIS GETTING PLEASE SELECT A DOG TO SHARE ERROR
+    @dog = Dog.find(@event.dog_id)    
 
     @form_filler = EventViewHelper.new(current_user)
     @event_attr = @form_filler.event_info(params)
     @event_attr[:dog] = @dog
     if @event.update_attributes(@event_attr)
-      #not even getting here?
       redirect_to events_path
     else
       flash[:notice] = @event.errors.messages
