@@ -1,102 +1,100 @@
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<% javascript_include_tag 'tags.js' %>
+<!-- <link rel="stylesheet" type="text/css" href="../app/assets/stylesheet/jquery.datetimepicker.css"/ > -->
+<!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
+<script>
+  jQuery(function(){
+   jQuery('#date_timepicker_start').datetimepicker({
+    format:'Y/m/d',
+    onShow:function( ct ){
+     this.setOptions({
+      minDate: 0,
+      maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false,
+      scrollMonth: false
+     })
+    },
+    timepicker:false, 
+    scrollInput: false
+   });
+   jQuery('#date_timepicker_end').datetimepicker({
+    format:'Y/m/d',
+    onShow:function( ct ){
+     this.setOptions({
+      minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false,
+      scrollMonth: false
+     })
+    },
+    timepicker:false,
+    scrollInput: false
+   });
+  });
+</script>
 
-<%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
-<div class="ui form">  
+<p>
 
-  <div class="field"><label>Name</label>
-    <%= text_field(:dog, :name) %>
-  </div>
+  <%= form_tag({controller: :events, action: @action}, method: @method, :multipart => true) do %>
+  <div class="ui form">
+    <% if @action == :create %>
+    <div class="field"><label>Dog to Share</label>
+      <div class="ui buttons">
+        <% @form_filler.all_dogs.each do |dog| %>
+          <div class="ui button">
+            <% @form_filler.dogs.include?(dog) ? bool = true : bool = false %>
+            <%= check_box_tag "dogs[#{dog}]", 1, bool, :class => "check" %>
+            <%= label(:dogs, dog, dog) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
 
-  <!-- <div class="field"><label>Photo</label> -->
-    <%#= file_field(:dog, :photo) %>
-  <!-- </div> -->
+    <div class="field">
+      <label>Start</label>
+      <%= text_field :date_timepicker, :start, :readonly => true, :value => @form_filler.start_date_string %>
+    </div>
 
-  <div class="field"><label>Birthdate</label>
-    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year, :default => DateTime.new(Date.today.year, 1, 1)} %>
-  </div>
+  <br />
+    <div class="field">
+      <label>End</label>
+      <%= text_field :date_timepicker, :end, :readonly => true, :value => @form_filler.end_date_string %>
+    </div>
 
-  <div class="field"><label>Gender</label>
-    <%= select :dog, :gender, ["Male", "Female"] %>
-  </div>
+  <br />
 
-  <div class="field"><label>Mix</label>
-    <%= text_field :dog, :mixes, :value => @mixes.join(", ") %>
-  </div>
-
-  <div class="field"><label>Size</label>
-    <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @size) %>
-    <%= select :dog, :size, size_options %> 
-  </div>
-
-  <div class="field"><label>Personality</label>
+  <div class="field"><label>Time of day</label>
     <div class="ui buttons">
-    <% @personalities.each do |p| %> 
-        <% @checked_personalities.include?(p) ? bool = true : bool = false %>
+    <% @form_filler.times.each do |time| %> 
         <div class="ui button">
-        <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
-        <%= label(:personalities, p.tr(" ", "_"), p) %>
+        <% @form_filler.values[:time_of_day].include?(time) ? bool = true : bool = false %>
+        <%= check_box_tag "times[#{time}]", 1, bool, :class => "check" %>
+        <%= label(:times, time, time) %>
         </div>
     <% end %>
     </div>
   </div>
 
-  <div class="field"><label>Motto</label>
-    <%= text_field(:dog, :motto) %>
-  </div>
+  <br />
 
-
-  <div class="field"><label>Description</label>
-    <%= text_area(:dog, :description) %>
-  </div>
-
-  <div class="field"><label>Energy Level</label>
-    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @energy_level) %>
-    <%= select :dog, :energy_level, energy_options %>
-  </div>
-  
-  <div class="field"><label>Likes</label>
-    <div class="ui buttons">
-    <% @likes.each do |like| %> 
-        <div class="ui button">
-        <% @checked_likes.include?(like) ? bool = true : bool = false %>
-        <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
-        <%= label(:likes, like.tr(" ", "_"), like) %>
-        </div>
+  <div class="field"><label>Where</label>
+    <% @form_filler.places.each do |place| %>
+      <%= radio_button_tag(:my_location, place , @form_filler.values[:my_location] == place ? checked = true : checked = false) %>
+      <%= place %>
+      <br />
     <% end %>
-    </div>
   </div>
 
-  <div class="field"><label>Health Notes</label>
-    <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?") %>
+  <br />
+
+  <div class="field">
+    <label>Description</label>
+    <%= text_area_tag :description, @form_filler.values[:description] %>
   </div>
-
-  <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
-    <%= label :fixed, "Yes", :value => "true"  %>
-    <%= radio_button :dog, :fixed, true, :checked => true %>
-    <%= label :fixed, "No", :value => "false" %>
-    <%= radio_button :dog, :fixed, false  %>
-  </div>
-
-  <div class="field"><label>Availability</label>
-    <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
-  </div>
-
-
-
-<!-- IMAGE UPLOADING -->
-
 
   <% end %>
 
-<div class="field"><label>
+  <div class="field">
+    <div class="ui primary button transparent input"><input id='update_event_button' type="submit" value="Schedule" name="update_dog_button" class='btn info' /></div>
 
 
-  <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
-
-
-  <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-
+    <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
+    </div>
   </div>
-
-</div>
+</p>

@@ -42,6 +42,7 @@ class DogsController < ApplicationController
   def show
     id = params[:id]
     @dog = Dog.find(id)
+    @parent = User.find(@dog.user_id)
     @pictures = @dog.pictures
   end
 
@@ -79,7 +80,7 @@ class DogsController < ApplicationController
       redirect_to dog_path(@dog.id)
     else
       flash[:notice] = @dog.errors.messages
-      redirect_to edit_dog_path(@dog.id)
+      redirect_to edit_dog_path(@dog.id) 
     end
   end
 

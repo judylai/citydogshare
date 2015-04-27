@@ -28,6 +28,8 @@ module NavigationHelpers
       '/users/5'
     when /^my calendar page$/
       '/events'
+    when /^the edit event page$/
+      '/events/1/edit'
 
 
 

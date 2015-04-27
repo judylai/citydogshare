@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20150425100332) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "time_of_day"
-    t.boolean  "my_location"
+    t.string   "my_location"
     t.integer  "dog_id"
+    t.string   "description"
   end
 
   create_table "likes", :force => true do |t|

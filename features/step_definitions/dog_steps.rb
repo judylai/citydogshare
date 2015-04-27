@@ -73,7 +73,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
 end
 
 And /^I press Schedule$/ do
-  EventsController.any_instance.stub(:get_date).and_return(DateTime.now.to_date)
+  EventViewHelper.any_instance.stub(:get_date).and_return(DateTime.current.to_date)
   click_button("Schedule")
 end
 
@@ -82,12 +82,45 @@ And /^I click a star for dog with dog id "(.)"/ do |id|
 end
 
 And /^I should not see a star$/ do
-    all('div.stars').count.should == 0
-    all('span.stars').count.should == 0
+  all('div.stars').count.should == 0
+  all('span.stars').count.should == 0
 end
 
 When /^(?:|I )follow the dog named "([^"]*)"$/ do |link|
   within "#dog-name-link" do
     click_link(link)
   end
+end
+
+Then /^I should see (today|yesterday)'s date$/ do |time|
+  if time == 'today'
+    page.should have_content(DateTime.current.strftime('%v').upcase)
+  else
+    page.should have_content(DateTime.yesterday.strftime('%v').upcase)
+  end
+end
+
+Then /^I should not see (today|yesterday)'s date$/ do |time|
+  if time == 'today'
+    page.should_not have_content(DateTime.current.strftime('%v').upcase)
+  else
+    page.should_not have_content(DateTime.yesterday.strftime('%v').upcase)
+  end
+end
+
+
+And /^I have created an event for "([^"]*)" (today|3 days ago)$/ do |dog, time|
+  new_event = Event.new()
+  if time == "today"
+    new_event.start_date = DateTime.current.to_date
+    new_event.end_date = DateTime.current.to_date
+  else
+    new_event.start_date = 3.days.ago
+    new_event.end_date = 3.days.ago
+  end
+  new_event.time_of_day = ["Morning"]
+  new_event.my_location = "My House"
+  new_event.description = "Princess needs a walk"
+  new_event.dog = Dog.find_by_name(dog)
+  new_event.save!
 end

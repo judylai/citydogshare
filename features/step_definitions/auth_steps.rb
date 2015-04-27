@@ -54,6 +54,7 @@ Then /^(?:|I )should not see "([^"]*)"$/ do |text|
     assert page.has_content?(text)
   end
 end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should

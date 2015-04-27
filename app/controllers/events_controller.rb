@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+  require 'event_form_filler'
+
   before_filter :current_user
 
   def index
@@ -8,10 +11,6 @@ class EventsController < ApplicationController
       (@events << dog.events).flatten!
 
     end
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render :json => @events }
-    # end
   end
 
   def show
@@ -21,21 +20,24 @@ class EventsController < ApplicationController
   end
 
   def new
-    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
-    @checked_times = []
-    @dogs = current_user.dogs.pluck(:name)
-    @checked_dogs = []
-    if @dogs == []
+    @form_filler = EventViewHelper.new(current_user)
+    @action = :create
+    @method = :post
+
+    unless @form_filler.all_dogs != []
       flash[:notice] = "Please create a dog to share"
       redirect_to user_path(current_user.id)
     end
   end
 
+
   def create
-    @dogs = get_dogs(params)
+    @form_filler = EventViewHelper.new(current_user)
+    @event_attr = @form_filler.event_info(params)
+    @dogs = @form_filler.dogs
     set_flash
+
     if flash[:notice]
-      set_vars_for_render
       render 'new'
     else
       redirect_to events_path
@@ -44,32 +46,53 @@ class EventsController < ApplicationController
 
 
   def edit
-   # @event = Event.find(params[:id])
-   # @dog = @event.dog_id
+    @event = Event.find(params[:id])
+    @dog = Dog.find(@event.dog_id)
+    @form_filler = EventViewHelper.new(current_user)
+    @form_filler.event_view_update(@event)
+    @action = :update
+    @method = :put
   end
+
+
 
   def update
+    @event = Event.find(params[:id])
+    @dog = Dog.find(@event.dog_id)    
 
+    @form_filler = EventViewHelper.new(current_user)
+    @event_attr = @form_filler.event_info(params)
+    @event_attr[:dog] = @dog
+    if @event.update_attributes(@event_attr)
+      redirect_to events_path
+    else
+      flash[:notice] = @event.errors.messages
+      redirect_to edit_event_path(params[:id])
+    end
   end
+
 
   def destroy
-
+    @event = Event.find(params[:id])
+    @event.delete
+    flash[:notice] = "Your event has been deleted."
+    redirect_to events_path
   end
 
+
   def set_flash
-    if not create_events
-      flash[:notice] = @event.errors.messages
-    elsif @dogs.empty?
+    if @dogs.empty?
       flash[:notice] = {:name => ["Please select a dog to share"]}
+    elsif not create_events
+      flash[:notice] = @event.errors.messages
     end
   end
 
 
   def create_events
     @dogs.each do |dog|
-      event_attr = attributes_list(params)
-      event_attr[:dog] = dog
-      @event = Event.new(event_attr)
+      @event_attr[:dog] = current_user.dogs.find_by_name(dog)
+      @event = Event.new(@event_attr)
       if not @event.valid?
         return false
       else
@@ -78,35 +101,6 @@ class EventsController < ApplicationController
     end
   end
 
-
-  def set_vars_for_render
-    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
-    @dogs = current_user.dogs.pluck(:name)
-    @checked_times = params['times'] ? params["times"].keys : []
-    @checked_dogs = params['dogs'] ? params['dogs'].keys : []
-  end
-
-  def get_dogs(params)
-    dog_array = params['dogs'] ? params['dogs'].keys : []
-    dog_array.map{ |dog| Dog.find_by_name(dog) }
-  end
-
-  def get_date(date_string)
-    if date_string != ""
-      DateTime.strptime(date_string, "%Y/%m/%d")
-    else
-      ""
-    end
-  end
-
-  def attributes_list(params)
-    event_params = {
-      :start_date => get_date(params["date_timepicker"]["start"]),
-      :end_date => get_date(params["date_timepicker"]["end"]),
-      :time_of_day => params["times"] ? params["times"].keys : [],
-      :my_location => params['location']
-    }
-  end
 
 end
 

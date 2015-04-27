@@ -173,7 +173,7 @@ class Dog < ActiveRecord::Base
               .has_energy_level(criteria[:energy_level])
               .in_age_range(convert_age_ranges_to_dob_query(criteria[:age]))
   end
-
+  
   # Event Methods
   def future_events?
     # for all events, if at least one comes after yesterday, return true
