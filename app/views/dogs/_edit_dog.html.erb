@@ -20,8 +20,9 @@
   <div class="field"><label>Delete Pictures</label></div>
   <% unless @pictures.empty? %>
     <% @pictures.each do |pic| %>
-      <div class="field"> <%= image_tag pic.image.url(:small) %>  </div> 
-      <div class="css-checkbox">
+      <div class="delete-pics">
+       <%= image_tag pic.image.url(:small) %>
+      
         <%= hidden_field_tag('seen[]', pic.id) -%>
         <%= check_box_tag 'activated[]', pic.id -%>        
       </div>

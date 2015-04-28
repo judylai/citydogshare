@@ -2,57 +2,40 @@
   Hide checkbox button (the round disc)
   we will use just the label to create pushbutton effect
 */
-/*
 input[type=checkbox] {
     display:none; 
     margin:10px;
 }
-*/
  
 /*
   Change the look'n'feel of labels (which are adjacent to checkboxbuttons).
   Add some margin, padding to label
 */
-/*
 input[type=checkbox] + label {
     display:inline-block;
-    cursor: pointer;*/
-    /*margin:-2px; background-color: #e7e7e7; border-color: #ddd;*/
-/*}*/
-/*
+    cursor: pointer;
+    /*margin:-2px;*/
+    /*background-color: #e7e7e7;*/
+    /*border-color: #ddd;*/
+}
+
+#activated_ {
+  display: block;
+  margin: 0px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+ 
+}
+
+.delete-pics{
+  position: relative;
+  float: left;
+  margin-left: 10px;
+}
+
 .gmnoprint img {
     max-width: none; 
 }
 
 #map-canvas { height: 30em; }
-*/
-
-input[type=checkbox].css-checkbox {
-  position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
-}
-
-input[type=checkbox].css-checkbox + label.css-label {
-  adding-left:26px;
-  height:21px; 
-  display:inline-block;
-  line-height:21px;
-  background-repeat:no-repeat;
-  background-position: 0 0;
-  font-size:21px;
-  vertical-align:middle;
-  cursor:pointer;
-}
-
-input[type=checkbox].css-checkbox:checked + label.css-label {
-  background-position: 0 -21px;
-}
-
-label.css-label {
-  background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_60ea9f838cf158f85ef0ef8be44f7d02.png);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}

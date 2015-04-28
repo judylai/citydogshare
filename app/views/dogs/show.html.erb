@@ -37,21 +37,13 @@
         <%end%>
 
 
-  <div id="name"><h1 style = "color: teal;"><%= @dog.name %></h1></div>
-  <p> </p>
-  <div id="photo"><h4 class = "ui teal label">
-    <% if @dog.photo.file? %>
-      <%= image_tag @dog.photo.url(:small) %>
-    <% else %>
-      <%= image_tag "default_dog.jpg" %>
-    <% end %>  
-  </div>
-  <p> </p>
-
-
       </div>
       <div id="name">
+        <% if @dog.photo.file? %> 
         <h1><%= image_tag @dog.photo.url(:small), :class => "ui avatar image" %> <%= @dog.name %></h1>
+        <% else %>
+        <h1><%= image_tag "default_dog.jpg", :class => "ui avatar image" %> <%= @dog.name %></h1>
+        <% end %>
       </div>
     </div>
     <div class="ui bottom attached segment">
