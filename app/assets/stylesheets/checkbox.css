@@ -19,6 +19,21 @@ input[type=checkbox] + label {
     /*border-color: #ddd;*/
 }
 
+#activated_ {
+  display: block;
+  margin: 0px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+ 
+}
+
+.delete-pics{
+  position: relative;
+  float: left;
+  margin-left: 10px;
+}
+
 .gmnoprint img {
     max-width: none; 
 }

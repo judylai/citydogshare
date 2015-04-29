@@ -39,7 +39,11 @@
 
       </div>
       <div id="name">
+        <% if @dog.photo.file? %> 
         <h1><%= image_tag @dog.photo.url(:small), :class => "ui avatar image" %> <%= @dog.name %></h1>
+        <% else %>
+        <h1><%= image_tag "default_dog.jpg", :class => "ui avatar image" %> <%= @dog.name %></h1>
+        <% end %>
       </div>
     </div>
     <div class="ui bottom attached segment">

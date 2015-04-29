@@ -126,7 +126,11 @@
 
       <div class="large-3 columns" style="padding: 0">
         <!-- <span class="image"> -->
-          <div id="photo"><%= image_tag dog.photo.url(:medium) %></div>
+          <div id="photo"><% if dog.photo.file? %>
+          <%= image_tag dog.photo.url(:medium) %>
+        <% else %>
+          <%= image_tag "default_dog.jpg" %>
+        <% end %></div>
         <!-- </span> -->
       </div>
 
