@@ -12,9 +12,14 @@
   </div>
 </div>
 <% end %>
+  
 
 <div class="small-12 columns">
-  <div id="name"><h1><%= @user.full_name %></h1></div>
+  <% if @current_user != nil %>
+    <div id="name"><h1><%= @user.full_name  %></h1></div>
+  <% else %>
+    <div id="name"><h1><%= @user.first_name + " " + @user.last_name[0] %></h1></div>
+  <% end %>
 </div>
 
 <div class = "small-2 columns">
