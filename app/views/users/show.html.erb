@@ -28,7 +28,7 @@
   
   <div id="gender"><h4 class = "ui  label">Gender:</h4>&nbsp;&nbsp;<%= @user.gender %></div>
   <p> </p>
-  <% if @user.address != nil && @user.address != ""%>
+  <% if @user.address != nil && @user.address != "" && @current_user != nil%>
   <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
   <%else%>
     <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "" %></div>
