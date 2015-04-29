@@ -28,20 +28,24 @@
   
   <div id="gender"><h4 class = "ui  label">Gender:</h4>&nbsp;&nbsp;<%= @user.gender %></div>
   <p> </p>
-  <% if @user.address != nil && @user.address != "" && @current_user != nil%>
-  <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
-  <%else%>
-    <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "" %></div>
-  <%end%>
-  <p> </p>
-  <div id="zipcode"><h4 class = "ui  label">Zipcode:</h4>&nbsp;&nbsp;<%= @user.zipcode %></div>
-  <p> </p>
+  <% if @current_user != nil %>
+    <% if @user.address != nil && @user.address != ""%>
+    <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
+    <%else%>
+      <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "" %></div>
+    <%end%>
+    <p> </p>
+    <div id="zipcode"><h4 class = "ui  label">Zipcode:</h4>&nbsp;&nbsp;<%= @user.zipcode %></div>
+    <p> </p>
+  <% end %>
   <div id="status"><h4 class = "ui  label">Status:</h4>&nbsp;&nbsp;<%= @user.status %></div>
   <p> </p>
-  <div id="email"><h4 class = "ui  label">Email:</h4>&nbsp;&nbsp;<%= @user.email %></div>
-  <p> </p>
-  <div id="phone_number"><h4 class = "ui  label">Phone Number:</h4>&nbsp;&nbsp;<%= @user.phone_number %></div>
-  <p> </p>
+  <% if @current_user != nil %>
+    <div id="email"><h4 class = "ui  label">Email:</h4>&nbsp;&nbsp;<%= @user.email %></div>
+    <p> </p>
+    <div id="phone_number"><h4 class = "ui  label">Phone Number:</h4>&nbsp;&nbsp;<%= @user.phone_number %></div>
+    <p> </p>
+  <% end %>
 
   <div id="user_description">
     <div id="description">
@@ -73,12 +77,7 @@
 
     <div class="large-4 columns">
       <span class="image">
-        <h4 class = "ui teal label">
-        <% if dog.photo.file? %>
-          <%= image_tag dog.photo.url(:small) %>
-        <% else %>
-          <%= image_tag "default_dog.jpg" %>
-        <% end %>
+        <%= image_tag dog.photo.url(:small) %>
       </span>
     </div>
 
