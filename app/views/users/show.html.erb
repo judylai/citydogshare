@@ -25,7 +25,7 @@
   <div id="gender"><strong>Gender:</strong>&nbsp;&nbsp;<%= @user.gender %></div>
 
   <% if @user.address != nil && @user.address != ""%>
-  <div id="location"><h4 class = "ui  label">Location:</h4>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
+  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
   <%else%>
     <div id="location"><strong>Location:</strong>&nbsp;&nbsp;<%= "" %></div>
   <%end%>
