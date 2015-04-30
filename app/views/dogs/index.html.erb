@@ -97,8 +97,8 @@
         </div>
         <br>
         <br>
-      <div class="ui primary button large transparent input" style="margin-left: -6em; color: white">
-        <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "btn info" %>
+      <div style="margin-left: -6em">
+        <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "ui primary button large transparent input" %>
       </div>
     </div>
     
@@ -171,6 +171,9 @@
           <%= dog.availability %>
           <% end %>
         </div>
+        <% if dog.future_events? %>
+        <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>
+        <% end %>
       </div>
 
     </div>

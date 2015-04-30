@@ -21,11 +21,12 @@
 <p></p>
 
 <% if current_user.future_events? %>
-  <div id = "dogevents"><h4>Future Events:</h4>
-
+  <div id = "dogevents"><h3>Future Events:</h3>
+ <div class = "large-12 columns">
   <% for dog in @dogs do %>
     <% if dog.future_events? %>
-     <div class = "large-12 columns">
+     
+     <div class="row">
           <h3 class = "ui ribbon label"> <%= dog.name %> </h3>
 
   <% for event in dog.future_events %>
@@ -57,9 +58,13 @@
 
 
     <% end %>
+
    </div>
+</br>
   <%end%>
+
   </div>
+
 </br>
 </div>
 

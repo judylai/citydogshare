@@ -56,6 +56,9 @@
           <%= dog.availability %>
           <% end %>
         </div>
+        <% if dog.future_events? %>
+        <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>
+        <% end %>
       </div>
 
     </div>

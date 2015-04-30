@@ -181,7 +181,7 @@ class Dog < ActiveRecord::Base
   end
 
   def future_events
-    events.where("end_date > ?", 1.day.ago.midnight)
+    events.where("end_date > ?", 1.day.ago.midnight).order("start_date ASC")
   end
 
 end
