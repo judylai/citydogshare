@@ -11,7 +11,7 @@ Background: User and other users are in database
     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     |
   And I am logged in
   And I am on the users page for "Batman"
-  And I press "Edit"
+  And I press "Edit Profile"
 
 Scenario: Users deletes profile
   When I press "Delete User"

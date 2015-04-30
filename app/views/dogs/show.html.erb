@@ -3,17 +3,6 @@
          <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 
-<p>
-  <% if not @current_user.nil? and @dog.user_id == @current_user.id %>
-    <div class="large-1 columns">
-      <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui inverted green button", :method => :get %>
-    </div>
-    <div class="large-1 columns">
-      <%= button_to "Delete", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui inverted red button input", :method => :delete %>
-    </div>
-  <% end %>
-</p>
-
 <div class="large-12 columns">
   <br />
   <!-- THIS IS DOG INFO -->
@@ -135,6 +124,19 @@
         <% end %>
       </div>
     </div>
+    <p>
+  <% if not @current_user.nil? and @dog.user_id == @current_user.id %>
+    <div class ="float right">
+     <%= button_to "Delete", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui button red transparent input", :method => :delete %>
+  </div>
+  <div class = "float right">
+      <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui primary button", :method => :get %>
+
+  </div>
+
+  <% end %>
+
+</p>
   <!-- </div> -->
 </div>
 

@@ -69,14 +69,6 @@
     </div>
   </div>
 
-  <div class="field"><label>Motto</label>
-    <%= text_field(:dog, :motto) %>
-  </div>
-
-
-  <div class="field"><label>Description</label>
-    <%= text_area(:dog, :description) %>
-  </div>
 
   <div class="field"><label>Energy Level</label>
     <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @form_filler.values[:energy_level]) %>
@@ -93,6 +85,15 @@
         </div>
     <% end %>
     </div>
+  </div>
+
+  <div class="field"><label>Motto</label>
+    <%= text_field(:dog, :motto) %>
+  </div>
+
+
+  <div class="field"><label>Description</label>
+    <%= text_area(:dog, :description) %>
   </div>
 
   <div class="field"><label>Health Notes</label>
@@ -120,7 +121,7 @@
 <div class="field"><label>
 
 
-  <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' /></div>
+  <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' style="text-align:center" /></div>
 
 
   <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
