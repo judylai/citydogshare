@@ -89,7 +89,7 @@
             </strong>
           </div>
           <div class="large-3 columns">
-            <% if @current_user.id == @dog.user_id %>
+            <% if not @current_user.nil? and @current_user.id == @dog.user_id %>
               <%= link_to "Edit", edit_event_path(event.id) %></p>
             <% end %>
           </div>
