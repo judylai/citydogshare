@@ -21,7 +21,7 @@
 <p></p>
 
 <% if current_user.future_events? %>
-  <div id = "dogevents"><h3>Future Events:</h3>
+  <div id = "dogevents"><h3>Upcoming Events:</h3>
  <div class = "large-12 columns">
   <% for dog in @dogs do %>
     <% if dog.future_events? %>
@@ -32,28 +32,29 @@
   <% for event in dog.future_events %>
 <p></p>
  <div class = "large-6 columns">
-<div class = "ui blue inverted top attached segment" style = "overflow:hidden">
+  <div class = "ui blue inverted top attached segment" style = "overflow:hidden">
 
-        <% if event.start_date == event.end_date %>
-           <%= event.start_date.strftime('%v') %>
-        <% else %>
-           <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
-        <% end %>
-       </div>
-       <div class = "ui bottom attached segment">
-        <p>
-        Time: <%= event.time_of_day.join(", ") %>
-        <br />
-        Location: <%= event.my_location %>
-        <br />
-        Description: <%= event.description %>
-        <br />
-                <br />
-        <%= link_to "Edit", edit_event_path(event.id) %></p>
+          <% if event.start_date == event.end_date %>
+             <%= event.start_date.strftime('%v') %>
+          <% else %>
+             <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
+          <% end %>
+         </div>
+         <div class = "ui bottom attached segment">
+          <p>
+          Time: <%= event.time_of_day.join(", ") %>
+          <br />
+          Location: <%= event.my_location %>
+          <br />
+          Description: <%= event.description %>
+          <br />
+                  <br />
+          <%= link_to "Edit", edit_event_path(event.id) %></p>
 
+        </div>
       </div>
-</div>
-                <%end%>
+
+    <%end%>
 
 
 
@@ -67,6 +68,9 @@
 
 </br>
 </div>
+
+<% else %>
+<div id="dogevents"><h3>No upcoming events</h3></div>
 
 <%end%>
 
