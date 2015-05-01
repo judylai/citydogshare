@@ -89,7 +89,9 @@
             </strong>
           </div>
           <div class="large-3 columns">
-            <%= link_to "Edit", edit_event_path(event.id) %></p>
+            <% if @current_user.id == @dog.user_id %>
+              <%= link_to "Edit", edit_event_path(event.id) %></p>
+            <% end %>
           </div>
             <div class="large-12 columns content">
               <p>Time: <%= event.time_of_day.join(", ") %></p>

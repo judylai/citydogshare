@@ -15,7 +15,7 @@ Background: user has been added to the database and logged in
   And the following dogs exist:
     | name     | mix              | age | size            | gender | likes      | energy  | personality | user_id |
     | Princess | Labrador         | 1   | small (0-15)    | Female | cats       | high    | whatever    | 1       |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 1       |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 2       |
 
   And I have created an event for "Princess" today
   And I am logged in
@@ -44,5 +44,9 @@ Scenario: User should not be able to save an incomplete event
   And I press "Schedule"
   Then I should see "Please enter a time of day"
 
-
+Scenario: I should not be able to edit another users event
+  When I do not care about dog location
+  And I follow "Find a Dog"
+  And I should see "Spock"
+  Then I should not see "Edit"
 
