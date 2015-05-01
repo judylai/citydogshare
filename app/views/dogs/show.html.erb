@@ -94,8 +94,11 @@
             <% end %>
           </div>
             <div class="large-12 columns content">
-              <p>Time: <%= event.time_of_day.join(", ") %></p>
-              <p><%= event.description %></p>
+              Time: <%= event.time_of_day.join(", ") %></br>
+              Where: <%= event.my_location %></br>
+              <% if event.description != "" %>
+                Description: <%= event.description %>
+              <% end %>
             </div>
         </div>
         <% end %>
