@@ -15,6 +15,20 @@
 <div class = "ui bottom attached segment">
 
 
+
+  <% if not @user.description.nil? and not @user.description == ""  %>
+  <div id="user_description">
+    <div id="description">
+      <p>
+        <em><%= @user.description %></em>
+      </p>
+    </div>
+  </div>
+  <%end%>
+
+
+<br />
+
   <div id="gender"><strong>Gender:</strong>&nbsp;&nbsp;<%= @user.gender %></div>
 
   <% if @user.address != nil && @user.address != ""%>
@@ -27,14 +41,16 @@
 
   <div id="status"><strong>Status:</strong>&nbsp;&nbsp;<%= @user.status %></div>
 
+<br />
+
   <% if current_user %>
-    <p>
+    <p id="email">
       <i class="mail icon"></i> <%= @user.email %>
     </p>
   <!-- <div id="email"><strong>Email:</strong>&nbsp;&nbsp;<%= @user.email %></div> -->
 
   <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
-    <p>
+    <p id="phone_number">
       <i class="call icon"></i> <%= @user.phone_number %>
     </p>
   <!-- <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;<%= @user.phone_number %></div> -->
@@ -42,26 +58,18 @@
 
   <%else%>
 
-  <div id="email"><strong>Email:</strong>&nbsp;&nbsp;You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+  <p id="email"><i class="mail icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>
 
   <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
-  <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+  <p id="phone_number"><i class="call icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
   <%end%>
 
-  <%end%>
-
-  <% if not @user.description.nil? and not @user.description == ""  %>
-  <div id="user_description">
-    <div id="description">
-      <strong>Description:</strong>&nbsp;&nbsp;<%= @user.description %>
-    </div>
-  </div>
   <%end%>
 
   <% if not @user.availability.nil? and not @user.availability == ""  %>
-  <p>
-    <i class="wait icon"></i> <%= @user.availability %>
-  </p>
+    <p id="availability">
+      <i class="wait icon"></i> <%= @user.availability %>
+    </p>
   <%end%>
 
   </div>
