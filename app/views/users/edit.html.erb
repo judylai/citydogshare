@@ -12,7 +12,7 @@
 <h2>Edit Your Profile</h2>
 <div class="float right"><%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %></div>
     <div class="field">
-      <div id="picture" class="ui medium circular centered image"><img src=<%="#{current_user.image}"%>></div>
+      <div id="picture" class="ui medium centered image"><img src=<%="#{current_user.image}"%>></div>
     </div>
 
  <div class="field">

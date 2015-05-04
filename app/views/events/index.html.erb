@@ -42,11 +42,11 @@
          </div>
          <div class = "ui bottom attached segment">
           <p>
-          Time: <%= event.time_of_day.join(", ") %>
+          <strong>Time:</strong> <%= event.time_of_day.join(", ") %>
           <br />
-          Location: <%= event.my_location %>
+          <strong>Location:</strong> <%= event.my_location %>
           <br />
-          Description: <%= event.description %>
+          <strong>Description:</strong> <%= event.description %>
           <br />
                   <br />
           <%= link_to "Edit", edit_event_path(event.id) %></p>
