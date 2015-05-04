@@ -12,7 +12,7 @@
       </div>
     </div>
 
-<div class = "ui bottom attached segment">
+<div class="ui bottom attached segment">
 
 
 
@@ -61,7 +61,7 @@
   <p id="email"><i class="mail icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>
 
   <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
-  <p id="phone_number"><i class="call icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+  <p id="phone_number"><i class="call icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>
   <%end%>
 
   <%end%>
@@ -72,8 +72,7 @@
     </p>
   <%end%>
 
-  </div>
-</div>
+</div></div>
 
 <div class="large-5 columns">    
    <div class="ui blue inverted top attached segment" style="overflow:hidden">
