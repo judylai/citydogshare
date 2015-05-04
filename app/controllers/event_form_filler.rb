@@ -4,7 +4,7 @@ class EventViewHelper
 
   def initialize(current_user)
     @all_dogs = current_user.dogs.pluck(:name)
-    @times = ["Morning", "Afternoon", "Evening", "Overnight"]
+    @times = ["Morning", "Afternoon", "Evening", "Overnight", "(Any)"]
     @places = ["My House", "Your House", "Other"]
     @dogs = current_user.dogs.length == 1 ? @all_dogs : []
     @values = {}
