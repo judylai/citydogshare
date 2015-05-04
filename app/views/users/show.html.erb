@@ -31,10 +31,6 @@
 
   <div id="gender"><strong>Gender:</strong>&nbsp;&nbsp;<%= @user.gender %></div>
 
-  <% if @user.address != nil && @user.address != ""%>
-  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
-  <%end%>
-
   <% if not @user.zipcode.nil? and not @user.zipcode == ""  %>
   <div id="zipcode"><strong>Zipcode:</strong>&nbsp;&nbsp;<%= @user.zipcode %></div>
   <%end%>
