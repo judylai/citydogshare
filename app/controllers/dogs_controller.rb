@@ -5,8 +5,7 @@ class DogsController < ApplicationController
   before_filter :current_user
 
   def index
-
-    ip_zipcode = get_ip_address_zipcode
+    ip_zipcode = '94704'
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
 
@@ -48,9 +47,10 @@ class DogsController < ApplicationController
 
   def create
     @form_filler = DogViewHelper.new(nil, nil, false)
+    byebug
     @dog = Dog.new(@form_filler.attributes_list(dog_params))
     @dog.user_id = current_user.id
-
+    
     if @dog.save      
       add_multiple_pictures(@dog)
       redirect_to user_path(current_user)
@@ -74,7 +74,7 @@ class DogsController < ApplicationController
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
 
-     if @dog.update_attributes(@form_filler.attributes_list(dog_params))
+    if @dog.update_attributes(@form_filler.attributes_list(dog_params))
       delete_checked_pictures        
       add_multiple_pictures(@dog)
       redirect_to dog_path(@dog.id)
@@ -101,9 +101,10 @@ class DogsController < ApplicationController
     wf
   end
 
+
   def dog_params
-    #params.require(:dog).permit(:description, :name, :pictures)
-    params[:dog]
+    params.require(:dog).permit(:description, :name, :pictures)
+    # params[:dog]
   end
 
   def add_multiple_pictures(myDog)
