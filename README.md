@@ -1,6 +1,6 @@
 # CityDogShare
 
-### [CityDogShare](http://www.citydogshare.org) uses its free dog-sitting co-op network to grow a base that can be mobilized for the good of the community. They are looking for an integrated website (featuring user, dog, and business profiles) in order to complete and implement a monetization strategy.
+#### [CityDogShare](http://www.citydogshare.org) uses its free dog-sitting co-op network to grow a base that can be mobilized for the good of the community. They are looking for an integrated website (featuring user, dog, and business profiles) in order to complete and implement a monetization strategy.
 
 
 [Heroku](https://salty-brushlands-32658.herokuapp.com/)
