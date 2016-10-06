@@ -85,8 +85,9 @@ class DogsController < ApplicationController
 
   def destroy
     @dog = Dog.find(params[:id])
+    # byebug
     @dog.photo.destroy
-    @dog.delete
+    @dog.remove
     redirect_to user_path(@current_user)
   end
 

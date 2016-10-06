@@ -39,9 +39,9 @@ OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
 })
 
 
-require 'aws'
-AWS.stub!
-AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+require 'aws-sdk'
+Aws.stub!
+Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
 
 
 RSpec.configure do |config|

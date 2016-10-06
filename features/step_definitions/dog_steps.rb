@@ -1,5 +1,5 @@
 require 'cucumber/rspec/doubles'
-require 'aws'
+require 'aws-sdk'
 
 Given /^the date is "(\d\d\d\d\/\d\d\/\d\d)"$/ do |date|
   Time.stub(:now).and_return(date)
@@ -11,8 +11,14 @@ end
 
 Given /the following dogs exist/ do |dogs_table|\
   Dog.any_instance.stub(:geocode)
-  AWS.stub!
-  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  # Aws.stub!
+  buckets_as_hashes = [ { :access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET" } ]
+  Aws.config[:s3] = {
+        stub_responses: {
+          list_buckets: { buckets: buckets_as_hashes }
+        }
+      }
+  # Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
@@ -46,8 +52,14 @@ When /^(?:|I )check "([^"]*)"$/ do |field|
 end
 
 When /^I create a new dog "([^"]*)"$/ do |name|
-  AWS.stub!
-  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  # Aws.stub!
+  # Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  buckets_as_hashes = [ { :access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET" } ]
+  Aws.config[:s3] = {
+    stub_responses: {
+      list_buckets: { buckets: buckets_as_hashes }
+    }
+  }
   FactoryGirl.create(:dog)
 end
 
@@ -66,8 +78,8 @@ Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
 end
 
 When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
-  AWS.stub!
-  AWS.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  Aws.stub!
+  Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   attach_file(field, File.expand_path(path))
 end

@@ -20,7 +20,9 @@ class UsersController < ApplicationController
     if  User.exists?(params[:id]) == false || User.find(params[:id]) != @current_user
       flash[:notice] = "You may only edit your own profile."
       redirect_to @current_user
-    elsif params[:user] != nil and @current_user.update_attributes(params[:user])
+    # elsif params[:user] != nil and User.update(@current_user.id, params[:user])
+    elsif params[:user] != nil and @current_user.update_attributes!(params.require(:user).permit(:first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country))
+      # byebug
       @current_user.dogs.each do |dog|
         dog.geocode
         dog.save
