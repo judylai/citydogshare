@@ -520,11 +520,11 @@ mix_delete_list = [
 ]
 
 mix_list.each do |name|
-  Mix.find_or_create_by_value(name)
+  Mix.find_or_create_by(value: name)
 end
 
 mix_delete_list.each do |name|
-  m = Mix.find_by_value(name)
+  m = Mix.find_or_create_by(value: name)
   m.destroy if m
 end
 
@@ -538,7 +538,7 @@ energy_list = [
 ]
 
 energy_list.each do |level|
-  EnergyLevel.find_or_create_by_value(level)
+  EnergyLevel.find_or_create_by(value: level)
 end
 
 personality_list = [
@@ -553,7 +553,7 @@ personality_list = [
 ]
 
 personality_list.each do |type|
-  Personality.find_or_create_by_value(type)
+  Personality.find_or_create_by(value: type)
 end
 
 
@@ -567,7 +567,7 @@ likes_list = [
 ]
 
 likes_list.each do |item|
-  Like.find_or_create_by_value(item)
+  Like.find_or_create_by(value: item)
 end
 
 sizes_list = [
@@ -578,7 +578,7 @@ sizes_list = [
 ]
 
 sizes_list.each do |size|
-  Size.find_or_create_by_value(size)
+  Size.find_or_create_by(value: size)
 end
 
 #dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1}, {:name => "Fido", :gender => "Male", :size_id => 3}, {:name => "Batman", :gender => "Female", :size_id => 2}]
