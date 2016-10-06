@@ -1,7 +1,7 @@
 class Picture < ActiveRecord::Base
 
   belongs_to :movie
-  attr_accessible :image
+  # attr_accessible :image
 
   #paperclip multiple pictures
   has_attached_file :image, 
