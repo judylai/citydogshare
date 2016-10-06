@@ -1,24 +1,24 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '1.9.3'
 gem 'rails', '3.2.16'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'omniauth-facebook' #, '~> 1.4.1'
+gem 'omniauth-facebook', '~> 1.4.1'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
 gem 'rails_secret_token_env'
 gem 'geocoder'
-gem "paperclip" #, "~> 4.2"
-gem 'aws-sdk' #, '< 2.0'
+
+gem "paperclip", "~> 4.2"
+gem 'aws-sdk', '< 2.0'
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'byebug'
-  # gem 'debugger'
+  gem 'debugger'
   gem 'jasmine-rails'
   gem 'rspec-rails', '~> 3.2.0'
   gem 'cucumber-rails', :require => false

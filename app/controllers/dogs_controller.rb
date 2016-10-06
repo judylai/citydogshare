@@ -47,7 +47,6 @@ class DogsController < ApplicationController
 
   def create
     @form_filler = DogViewHelper.new(nil, nil, false)
-    byebug
     @dog = Dog.new(@form_filler.attributes_list(dog_params))
     @dog.user_id = current_user.id
     
