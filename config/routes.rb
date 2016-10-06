@@ -35,5 +35,5 @@ Citydogshare::Application.routes.draw do
   resources :pictures
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-  # get 'dashboard' => 'welcome#dashboard'
+  get 'dashboard' => 'welcome#dashboard'
 end
