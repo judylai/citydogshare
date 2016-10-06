@@ -63,6 +63,6 @@ module Citydogshare
     config.assets.precompile << %w( galleria-1.4.2.js )
     config.assets.precompile << %w( galleria.classic.js )
     config.assets.precompile << %w( *.js ) 
-
+    config.assets.initialize_on_precompile = false
   end
 end

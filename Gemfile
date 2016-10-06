@@ -1,33 +1,33 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-gem 'rails', '3.2.16'
+ruby '2.3.0'
+gem 'rails', '~> 4.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'omniauth-facebook', '~> 1.4.1'
+gem 'omniauth-facebook'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
 gem 'rails_secret_token_env'
 gem 'geocoder'
 
-gem "paperclip", "~> 4.2"
-gem 'aws-sdk', '< 2.0'
+gem "paperclip"
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'debugger'
+  gem 'byebug'
   gem 'jasmine-rails'
-  gem 'rspec-rails', '~> 3.2.0'
+  gem 'rspec-rails'
   gem 'cucumber-rails', :require => false
   gem 'autotest-rails'
   gem 'simplecov', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'factory_girl_rails'
   gem 'metric_fu'
-  gem 'minitest', '~>4.7.5'
+  gem 'minitest'
   #gem 'rmagick'
 end
 
@@ -45,9 +45,9 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '~> 3.2.6'
-  gem 'sass', '~> 3.2.0'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'sass'
+  gem 'coffee-rails'
   gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
   gem 'fullcalendar-rails'
   gem 'momentjs-rails'
