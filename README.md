@@ -13,5 +13,5 @@
 2015 stuff (update)
 
 [![Build Status](https://travis-ci.org/sfstanley/citydogshare.svg?branch=master)](https://travis-ci.org/sfstanley/citydogshare)
-[![Code Climate](https://codeclimate.com/github/sfstanley/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
-[![Test Coverage](https://codeclimate.com/github/sfstanley/citydogshare/badges/coverage.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
+[![Code Climate](https://codeclimate.com/github/angelakuo/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/angelakuo/citydogshare)
+[![Test Coverage](https://codeclimate.com/github/angelakuo/citydogshare/badges/coverage.svg)](https://codeclimate.com/github/angelakuo/citydogshare)
