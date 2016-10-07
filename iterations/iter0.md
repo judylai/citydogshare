@@ -4,7 +4,7 @@
 
 #SCREENCASTS
 
-Angela Kuo -> [youtube link here]
+Angela Kuo -> https://www.youtube.com/watch?v=8Cro2dETJUM&feature=em-upload_owner
 
 Jacen Sherman ->
 
