@@ -1,16 +1,3 @@
 language: ruby
 rvm:
-  - 1.9.3
-env:
-  - DB=sqlite
-before_script:
-  - bundle exec rake db:migrate
-  - bundle exec rake db:test:prepare
-script:
-  - bundle exec rake cucumber
-  - bundle exec rake spec
-addons:
-  code_climate:
-    repo_token: 1e30b11f64e44b2c54ad00ebcd0387535e5c616856f4e614302631784e55b1fe bundle exec rake
-notifications:  
-  email: false
+  - 2.2.2
