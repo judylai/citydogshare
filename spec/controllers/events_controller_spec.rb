@@ -4,6 +4,8 @@ describe EventsController, :type => :controller do
   include Capybara::DSL
   before(:each) do
     session[:user_id] = "12345"
+    s3_client = Aws::S3::Client.new(stub_responses: true)
+    allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
     @user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
