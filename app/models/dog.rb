@@ -1,4 +1,6 @@
 class Dog < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   # attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude, :video
 
   scope :has_gender, lambda {|genders| filter_gender(genders)}
@@ -164,7 +166,7 @@ class Dog < ActiveRecord::Base
   end
 
   def self.filter_by(criteria)
-    dogs = Dog.near(criteria[:zipcode], criteria[:radius], order: :distance)
+    dogs = Dog.near(criteria[:zipcode], criteria[:radius])
               .has_mix(criteria[:mix])
               .has_size(criteria[:size])
               .has_likes(criteria[:like])

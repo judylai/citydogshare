@@ -38,11 +38,9 @@ OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
   :extra => { :gender => "Male"}
 })
 
-
 require 'aws-sdk'
-Aws.stub!
-Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
-
+# s3_client = Aws::S3::Client.new(stub_responses: true)
+# allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
 
 RSpec.configure do |config|
   # ## Mock Framework

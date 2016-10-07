@@ -3,7 +3,7 @@ FactoryGirl.define do
     name "Spock"
     gender "Male"
     photo_file_name "fido.jpg"
-    dob Time.new(2010, 2, 3)
+    dob Time.new(2011, 2, 3)
     mixes { [Mix.find(1)] }
     description ""
     motto "Live long and play fetch."

@@ -3,8 +3,9 @@ require 'rails_helper'
 describe DogsController, :type => :controller do
   include Capybara::DSL
   before(:each) do
-    AWS::S3::S3Object.stub(:store).and_return(double('response', :success? => true))
-    AWS::S3::S3Object.stub(:copy).and_return(double('response', :success? => true))
+    
+    s3_client = Aws::S3::Client.new(stub_responses: true)
+    allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
     @user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
     allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
@@ -180,10 +181,10 @@ describe DogsController, :type => :controller do
   before(:each) do
     Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
-    @current_user = User.create(:id => 1)
+    @current_user = User.create()
   end
     it 'render the html' do
-      get :show, {:id => '1'}
+      get :show, {:id => @dog.id}
       expect(response).to render_template('show')
     end
   end
@@ -192,10 +193,10 @@ describe DogsController, :type => :controller do
     before(:each) do
       Dog.any_instance.stub(:geocode)
       @dog = FactoryGirl.create(:dog)
-      @current_user = User.create(:id => 1)
+      @current_user = User.create()
     end
     it 'should update dog' do 
-      get :edit, {:id => '1'}
+      get :edit, {:id => @dog.id}
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
       expect(controller.instance_variable_get(:@action)).to eql(:update)
       expect(controller.instance_variable_get(:@method)).to eql(:put)
@@ -206,8 +207,8 @@ describe DogsController, :type => :controller do
     before(:each) do
       Dog.any_instance.stub(:geocode)
       @dog = FactoryGirl.create(:dog)
-      @current_user = User.create(:id => 1)
-      @params = {  "id" => "1", "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
+      @current_user = User.create()
+      @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
                   "availability"=>"", "mixes" =>"Australian Shepherd", "personalities"=>{"curious"=>"1"},
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
@@ -228,11 +229,11 @@ describe DogsController, :type => :controller do
     before(:each) do
       Dog.any_instance.stub(:geocode)
       @dog = FactoryGirl.create(:dog)
-      @current_user = User.create(:id => 1)
+      @current_user = User.create()
     end
     it 'should delete dog and if user owns dog' do
       controller.instance_variable_set(:@current_user, @user)
-      get(:destroy, :id => "1")
+      get(:destroy, :id => @dog.id)
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
       assert_equal Dog.all, []
     end

@@ -49,7 +49,6 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.new(@form_filler.attributes_list(dog_params))
     @dog.user_id = current_user.id
-    
     if @dog.save      
       add_multiple_pictures(@dog)
       redirect_to user_path(current_user)
@@ -72,7 +71,6 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
-
     if @dog.update_attributes(@form_filler.attributes_list(dog_params))
       delete_checked_pictures        
       add_multiple_pictures(@dog)
@@ -85,14 +83,13 @@ class DogsController < ApplicationController
 
   def destroy
     @dog = Dog.find(params[:id])
-    # byebug
     @dog.photo.destroy
-    @dog.remove
+    @dog.delete
     redirect_to user_path(@current_user)
   end
 
   def get_zipcode_from_dogs
-    @dogs.collect{|dog| dog.address}
+    @dogs.all.collect{|dog| dog.address}
   end
 
   def get_zipcode_counts
@@ -101,10 +98,12 @@ class DogsController < ApplicationController
     wf
   end
 
-
   def dog_params
-    params.require(:dog).permit(:description, :name, :pictures)
-    # params[:dog]
+    params.require(:dog).permit(:name, :image, :dob, :gender, :description, 
+    :motto, :fixed, :health, :comments, :contact, :availability, :mixes, 
+    {:likes =>["dogs (all)", :cats, :men, :women, :children]}, :energy_level,
+    :size, :photo, :latitude, :longitude, :video, "dob(1i)", "dob(2i)", "dob(3i)", 
+    {:personalities =>[:anxious, :curious, :timid, :whatever, :friendly, :fetcher, :lover, "still a puppy"]})
   end
 
   def add_multiple_pictures(myDog)
@@ -127,5 +126,4 @@ class DogsController < ApplicationController
       end
     end  
   end
-
 end

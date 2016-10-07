@@ -11,14 +11,9 @@ end
 
 Given /the following dogs exist/ do |dogs_table|\
   Dog.any_instance.stub(:geocode)
-  # Aws.stub!
-  buckets_as_hashes = [ { :access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET" } ]
-  Aws.config[:s3] = {
-        stub_responses: {
-          list_buckets: { buckets: buckets_as_hashes }
-        }
-      }
-  # Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  s3_client = Aws::S3::Client.new(stub_responses: true)
+  allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
+
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   dogs_table.hashes.each do |dog|
     new_dog = Dog.new()
@@ -52,14 +47,8 @@ When /^(?:|I )check "([^"]*)"$/ do |field|
 end
 
 When /^I create a new dog "([^"]*)"$/ do |name|
-  # Aws.stub!
-  # Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
-  buckets_as_hashes = [ { :access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET" } ]
-  Aws.config[:s3] = {
-    stub_responses: {
-      list_buckets: { buckets: buckets_as_hashes }
-    }
-  }
+  s3_client = Aws::S3::Client.new(stub_responses: true)
+  allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
   FactoryGirl.create(:dog)
 end
 
@@ -69,8 +58,7 @@ And /^I push "([^"]*)"$/ do |button|
 end
 
 Given /^my zipcode is "(.*)"$/ do |zip|
-  DogsController.any_instance.stub(:get_ip_address_zipcode).and_return(zip)
-
+  allow_any_instance_of(DogsController).to receive(:get_ip_address_zipcode).and_return(zip)
 end
 
 Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
@@ -78,8 +66,9 @@ Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
 end
 
 When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
-  Aws.stub!
-  Aws.config(:access_key_id => "TESTKEY", :secret_access_key => "TESTSECRET")
+  s3_client = Aws::S3::Client.new(stub_responses: true)
+  allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
+
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   attach_file(field, File.expand_path(path))
 end
