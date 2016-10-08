@@ -4,9 +4,9 @@
 
 #SCREENCASTS
 
-Angela Kuo -> https://www.youtube.com/watch?v=8Cro2dETJUM
+Angela Kuo -> https://youtu.be/8Cro2dETJUM
 
-Jacen Sherman ->
+Jacen Sherman -> https://youtu.be/aNgbATVH2Ec
 
 Jennifer Tang ->
 
